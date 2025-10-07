@@ -59,10 +59,10 @@ section {
     text-align: center;
 }
 .portfolio .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-items: center;
 }
 .portfolio img {
     width: 300px;
