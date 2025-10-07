@@ -58,11 +58,47 @@ section {
     padding: 80px 20px;
     text-align: center;
 }
+/* Limita a largura da secção do portefólio e centra */
+.portfolio {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Grelha responsiva: 3/2/1 colunas */
 .portfolio .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-items: center;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+/* Tablet: 2 colunas */
+@media (max-width: 992px) {
+  .portfolio .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Telemóvel: 1 coluna */
+@media (max-width: 600px) {
+  .portfolio .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Imagens mais certinhas e com sombra */
+.portfolio img {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #222;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.portfolio img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
 }
 .portfolio img {
     width: 300px;
