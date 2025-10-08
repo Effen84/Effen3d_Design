@@ -145,3 +145,26 @@ footer {
     padding: 20px;
     border-top: 1px solid #c00;
 }
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0 30px;
+}
+
+.filter-btn {
+  border: 1px solid #333;
+  background: #111;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s, transform .2s, border-color .2s;
+}
+
+.filter-btn:hover { transform: translateY(-1px); }
+.filter-btn.active, .filter-btn:focus { background: #f00; border-color: #f00; }
+
+.gallery .item { display: block; }     /* visível por defeito */
+.gallery .item.hide { display: none; } /* escondida quando filtrada */
