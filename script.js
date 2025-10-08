@@ -88,3 +88,46 @@ lightbox.addEventListener('click', (e) => {
     }
   });
 })();
+// --- Orçamento: abrir/fechar modal
+(function(){
+  const openers = [document.getElementById('openQuote'), document.getElementById('openQuote2')].filter(Boolean);
+  const backdrop = document.getElementById('quoteBackdrop');
+  const closeBtn = document.getElementById('closeQuote');
+  const form = document.getElementById('quoteForm');
+
+  const open = (e)=>{ e?.preventDefault(); backdrop.classList.add('open'); document.body.style.overflow='hidden'; };
+  const close = ()=>{ backdrop.classList.remove('open'); document.body.style.overflow=''; };
+
+  openers.forEach(btn => btn.addEventListener('click', open));
+  closeBtn?.addEventListener('click', close);
+  backdrop?.addEventListener('click', (e)=>{ if(e.target===backdrop) close(); });
+
+  // --- Submit: gera mailto
+  form?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name = document.getElementById('qName').value.trim();
+    const email = document.getElementById('qEmail').value.trim();
+    const cat = document.getElementById('qCategory').value;
+    const desc = document.getElementById('qDesc').value.trim();
+    const deadline = document.getElementById('qDeadline').value.trim();
+
+    if(!name || !email || !desc){ alert('Preenche Nome, Email e Descrição.'); return; }
+
+    const subject = encodeURIComponent(`Pedido de orçamento — ${cat}`);
+    const bodyLines = [
+      `Nome: ${name}`,
+      `Email: ${email}`,
+      `Categoria: ${cat}`,
+      `Prazo: ${deadline || 'N/A'}`,
+      '',
+      'Descrição do projeto:',
+      desc,
+      '',
+      'Podes responder a este email. Se necessário, envio imagens anexas.'
+    ];
+    const body = encodeURIComponent(bodyLines.join('\n'));
+
+    window.location.href = `mailto:effen3d_design@outlook.com?subject=${subject}&body=${body}`;
+    close();
+  });
+})();
