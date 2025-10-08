@@ -15,39 +15,22 @@
   <button class="close" aria-label="Fechar (Esc)">&times;</button>
   <img class="lightbox-content" id="lightbox-img" alt="">
 </div>
-    <!-- Modal Orçamento -->
-<div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
+    <!-- Modal Orçamento --><div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
   <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
     <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
     <h3 id="quoteTitle">Pedir orçamento</h3>
     <p>Responde em 24–48h. Envia imagens pelo Instagram ou anexa no email após abrir.</p>
     <form id="quoteForm">
-      <label>
-        Nome*
-        <input type="text" id="qName" required placeholder="O teu nome">
-      </label>
-      <label>
-        Email*
-        <input type="email" id="qEmail" required placeholder="o.teu@email.com">
-      </label>
-      <label>
-        Categoria
+      <label>Nome*<input type="text" id="qName" required></label>
+      <label>Email*<input type="email" id="qEmail" required></label>
+      <label>Categoria
         <select id="qCategory">
-          <option value="Acessórios">Acessórios</option>
-          <option value="Brinquedos">Brinquedos</option>
-          <option value="Gaming">Gaming</option>
-          <option value="Racing">Racing</option>
-          <option value="Outro">Outro</option>
+          <option>Acessórios</option><option>Brinquedos</option>
+          <option>Gaming</option><option>Racing</option><option>Outro</option>
         </select>
       </label>
-      <label>
-        Descrição do projeto*
-        <textarea id="qDesc" rows="5" required placeholder="Dimensões, material (PLA/Resina), cor, prazo..."></textarea>
-      </label>
-      <label>
-        Prazo (opcional)
-        <input type="text" id="qDeadline" placeholder="Ex.: 2 semanas">
-      </label>
+      <label>Descrição do projeto*<textarea id="qDesc" rows="5" required></textarea></label>
+      <label>Prazo (opcional)<input type="text" id="qDeadline"></label>
       <button type="submit" class="btn">Enviar pedido</button>
       <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
     </form>
@@ -63,14 +46,14 @@
             <a href="#portfolio">Portefólio</a>
             <a href="#servicos">Serviços</a>
             <a href="#contacto">Contacto</a>
-            <a href="#" class="btn-quote" id="openQuote">Pedir orçamento</a>
+            <button type="button" class="btn-quote" id="openQuote">Pedir orçamento</button>
         </nav>
     </header>
 
     <section id="inicio" class="hero">
         <h1>Criação e impressão 3D personalizada em Portugal</h1>
         <a href="#portfolio" class="btn">Ver Portefólio</a>
-        <a href="#" class="btn btn-outline" id="openQuote2">Pedir orçamento</a>
+        <button type="button" class="btn btn-outline" id="openQuote2">Pedir orçamento</button>
     </section>
 
    <section id="portfolio" class="portfolio">
