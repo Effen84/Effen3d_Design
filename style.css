@@ -310,3 +310,32 @@ footer {
 }
 #quoteForm .btn{ width:100%; margin-top:14px; }
 .quote-note{ opacity:.7; font-size:.85rem; margin-top:8px; }
+/* Reset e estilo consistente para botões */
+button.btn, .btn-quote {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  background: #111;          /* fundo escuro (igual ao site) */
+  color: #fff;               /* texto branco */
+  border: 1px solid #f00;    /* contorno vermelho */
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .25s ease, border-color .25s ease, transform .2s;
+}
+
+button.btn:hover,
+.btn-quote:hover {
+  background: #f00;          /* hover vermelho */
+  border-color: #f00;
+  transform: translateY(-1px);
+}
+
+/* Variante "outline" (se estiveres a usar a classe) */
+.btn.btn-outline, button.btn.btn-outline {
+  background: transparent;   /* sem fundo, só contorno */
+  color: #fff;
+}
+.btn.btn-outline:hover, button.btn.btn-outline:hover {
+  background: #f00;
+}
