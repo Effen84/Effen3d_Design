@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Effen3D Design — Acessórios</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <a href="index.html" style="color:#f00;text-decoration:none;font-weight:700">EFFEN3D DESIGN</a>
+    </div>
+    <nav>
+      <a href="index.html#inicio">Início</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#contacto">Contacto</a>
+      <button type="button" class="btn-quote" id="openQuote">Pedir orçamento</button>
+    </nav>
+  </header>
+
+  <section class="portfolio" style="padding-top:120px">
+    <h2>Acessórios</h2>
+    <div class="gallery">
+      <!-- SÓ imagens de Acessórios -->
+      <img src="images/acessorios/caixa-joias/cj1.png" alt="Caixa de Jóias 1" loading="lazy" class="item">
+      <img src="images/acessorios/caixa-joias/cj2.png" alt="Caixa de Jóias 2" loading="lazy" class="item">
+      <img src="images/acessorios/porta-chaves/pc1.png" alt="Porta-chaves 1" loading="lazy" class="item">
+      <!-- adiciona mais conforme precisares -->
+    </div>
+
+    <p style="margin-top:26px">
+      <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
+    </p>
+  </section>
+
+  <!-- Lightbox + Modal de orçamento (reutiliza o mesmo do index) -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="close" aria-label="Fechar (Esc)">&times;</button>
+    <img class="lightbox-content" id="lightbox-img" alt="">
+  </div>
+
+  <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
+    <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
+      <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
+      <h3 id="quoteTitle">Pedir orçamento</h3>
+      <p>Responde em 24–48h. Envia imagens pelo Instagram ou anexa no email após abrir.</p>
+      <form id="quoteForm">
+        <label>Nome* <input type="text" id="qName" required></label>
+        <label>Email* <input type="email" id="qEmail" required></label>
+        <label>Categoria
+          <select id="qCategory">
+            <option>Acessórios</option><option>Brinquedos</option>
+            <option>Gaming</option><option>Racing</option><option>Outro</option>
+          </select>
+        </label>
+        <label>Descrição do projeto* <textarea id="qDesc" rows="5" required></textarea></label>
+        <label>Prazo (opcional) <input type="text" id="qDeadline"></label>
+        <button type="submit" class="btn">Enviar pedido</button>
+        <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
