@@ -339,3 +339,11 @@ button.btn:hover,
 .btn.btn-outline:hover, button.btn.btn-outline:hover {
   background: #f00;
 }
+.portfolio h3 {
+  color: #f00;               /* vermelho da tua marca */
+  font-size: 1.8rem;         /* aumenta o tamanho */
+  text-transform: uppercase; /* tudo em maiúsculas */
+  letter-spacing: 1px;       /* espaçamento entre letras */
+  margin: 10px 0 20px;
+  text-align: center;        /* centra o texto */
+}
