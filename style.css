@@ -347,3 +347,41 @@ button.btn:hover,
   margin: 10px 0 20px;
   text-align: center;        /* centra o texto */
 }
+/* Corrigir layout hero no desktop */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Texto centralizado e mais compacto */
+.hero h1 {
+  font-size: 2.6rem;
+  max-width: 700px;
+  line-height: 1.2;
+  margin-bottom: 30px;
+}
+
+/* Botões lado a lado e centrados */
+.hero .btn,
+.hero .btn-outline {
+  display: inline-block;
+  margin: 8px 10px;
+  padding: 10px 24px;
+}
+
+/* Ajuste para telemóvel */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .hero .btn,
+  .hero .btn-outline {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
