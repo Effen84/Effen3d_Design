@@ -14,7 +14,23 @@
 <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="style.css"/>
 </head>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <span class="close">×</span>
+  <img id="lightboxImg" src="" alt="">
+</div>
 
+<script>
+function openLightbox(imgElement) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  lightbox.style.display = 'flex';
+  lightboxImg.src = imgElement.src;
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
 <body>
   <!-- ======= HEADER ======= -->
   <header>
