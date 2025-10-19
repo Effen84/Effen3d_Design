@@ -8,15 +8,13 @@ body {
     color: #fff;
 }
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: rgba(0,0,0,0.9);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    border-bottom: 1px solid #c00;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  z-index: 9999;
+  padding: 10px 0;
 }
 header .logo {
     font-weight: bold;
