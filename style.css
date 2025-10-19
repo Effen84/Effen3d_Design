@@ -414,7 +414,7 @@ button.btn:hover,
   padding: 12px 28px;
 }
 .hero-visual {
-  height: 300px; /* aumenta ou diminui conforme o tamanho do logo */
+  height: 500px; /* aumenta ou diminui conforme o tamanho do logo */
   width: auto;
   border-radius: 16px;
   border: none;
@@ -484,7 +484,7 @@ button.btn:hover,
   text-decoration: underline;
 }
 .logo-top {
-  height: 90px;
+  height: 150px;
   width: auto;
   display: block;
   margin: 5px 0 0 10px;
