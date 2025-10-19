@@ -497,29 +497,39 @@ button.btn:hover,
 /* ===== CONTACTO ===== */
 .contact-links {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+  flex-wrap: wrap;
 }
 
 .contact-item {
   color: #f00;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
   display: flex;
   align-items: center;
   gap: 10px;
+  background: none;
+  border: none;
+  padding: 0;
   transition: all 0.3s ease;
 }
 
 .contact-item:hover {
   color: #fff;
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
 .icon {
-  width: 22px;
-  height: 22px;
-  filter: brightness(1.2);
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 4px;
+  filter: drop-shadow(0 0 6px rgba(255,0,0,0.6));
+  transition: filter 0.3s;
+}
+
+.contact-item:hover .icon {
+  filter: drop-shadow(0 0 12px rgba(255,0,0,0.9));
 }
