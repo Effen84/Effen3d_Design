@@ -545,3 +545,7 @@ button.btn:hover,
 .contact-item:hover .icon {
   filter: drop-shadow(0 0 12px rgba(255,0,0,0.9));
 }
+/* ===== CORREÇÃO DO CABEÇALHO NAS CATEGORIAS ===== */
+.portfolio {
+  padding-top: 120px; /* afasta o conteúdo do topo para não ficar atrás do menu */
+}
