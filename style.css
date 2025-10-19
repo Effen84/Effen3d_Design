@@ -414,16 +414,20 @@ button.btn:hover,
   padding: 12px 28px;
 }
 .hero-visual {
-  width: 100%;
-  max-width: 520px;
-  border-radius: 12px;
-  border: 1px solid #222;
-  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  height: 260px; /* aumenta ou diminui conforme o tamanho do logo */
+  width: auto;
+  border-radius: 16px;
+  border: none;
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 25px rgba(255,0,0,0.6));
+  transition: all 0.4s ease;
 }
-@media (max-width: 800px){
-  .hero-inner { grid-template-columns: 1fr; text-align:center; }
-  .hero-visual { display:none; }
-  .hero-copy h1 { font-size: 2rem; }
+
+.hero-visual:hover {
+  filter: drop-shadow(0 0 40px rgba(255,0,0,0.9));
+  transform: scale(1.05);
 }
 
 /* ===== PORTFÓLIO ===== */
