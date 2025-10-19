@@ -545,5 +545,5 @@ button.btn:hover,
 }
 /* ===== CORREÇÃO DO CABEÇALHO NAS CATEGORIAS ===== */
 .portfolio {
-  padding-top: 150px; /* afasta o conteúdo do topo para não ficar atrás do menu */
+  padding-top: 80px; /* afasta o conteúdo do topo para não ficar atrás do menu */
 }
