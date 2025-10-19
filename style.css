@@ -385,3 +385,97 @@ button.btn:hover,
     margin: 10px 0;
   }
 }
+.hero {
+  background: linear-gradient(90deg, #000 0%, #a30000 100%);
+  color: #fff;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  padding: 40px 20px;
+}
+.hero-inner {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 40px;
+}
+.hero-copy h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  margin-bottom: 25px;
+}
+.hero .btn, .hero .btn-outline {
+  display: inline-block;
+  margin: 8px 10px 0 0;
+  padding: 12px 28px;
+}
+.hero-visual {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  border: 1px solid #222;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+@media (max-width: 800px){
+  .hero-inner { grid-template-columns: 1fr; text-align:center; }
+  .hero-visual { display:none; }
+  .hero-copy h1 { font-size: 2rem; }
+}
+
+/* ===== PORTFÓLIO ===== */
+.portfolio h3 {
+  color: #f00;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 20px 0;
+}
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+}
+.gallery .item {
+  background: #111;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.gallery .item:hover { transform: scale(1.03); }
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #222;
+}
+.gallery .desc {
+  color: #ddd;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+/* Preços ocultos por agora */
+.gallery .price {
+  color: #f00;
+  font-weight: bold;
+  display: none; /* ativar quando começares a vender oficialmente */
+}
+
+/* ===== CONTACTO ===== */
+.contact {
+  background: #000;
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+.contact a {
+  color: #f00;
+  text-decoration: none;
+}
+.contact a:hover {
+  text-decoration: underline;
+}
