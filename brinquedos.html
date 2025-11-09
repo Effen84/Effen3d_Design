@@ -23,29 +23,33 @@
 <section class="portfolio" style="padding-top:120px">
   <h2>Brinquedos</h2>
 
-  <!-- Produto 1 - Cinnamoroll -->
-  <div class="flex justify-center mt-12">
-    <div class="product" onclick="openPopup('popupCinnamoroll')">
-      <img src="images/cinnamoroll1.png" alt="Cinnamoroll" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105 cursor-pointer">
+  <!-- Grelha de produtos (4 por linha) -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center mt-8">
+    
+    <!-- Produto 1 - Cinnamoroll -->
+    <div class="product text-center" onclick="openPopup('popupCinnamoroll')">
+      <img src="images/cinnamoroll1.png" alt="Cinnamoroll" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
       <p class="text-lg mt-2">5 €</p>
     </div>
+
+    <!-- Produto 2 - Kuromi -->
+    <div class="product text-center" onclick="openPopup('popupKuromi')">
+      <img src="images/kuromi1.png" alt="Kuromi" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+      <p class="text-lg mt-2">10 €</p>
+    </div>
+
+    <!-- Produto 3 - 3 Super Mario -->
+    <div class="product text-center" onclick="openPopup('popupSuperMario')">
+      <img src="images/supermario1.png" alt="3 Super Mario" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+      <p class="text-lg mt-2">23 €</p>
+    </div>
+
   </div>
 
-  <!-- Produto - Kuromi -->
-<div class="flex justify-center mt-12">
-  <div class="product" onclick="openPopup('popupKuromi')">
-    <img src="images/kuromi1.png" alt="Kuromi" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105 cursor-pointer">
-    <p class="text-lg mt-2">10 €</p>
-  </div>
-</div>
-
-  <!-- Produto - 3 Super Mario -->
-<div class="flex justify-center mt-12">
-  <div class="product" onclick="openPopup('popupSuperMario')">
-    <img src="images/supermario1.png" alt="3 Super Mario" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105 cursor-pointer">
-    <p class="text-lg mt-2">23 €</p>
-  </div>
-</div>
+  <p style="margin-top:26px">
+    <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
+  </p>
+</section>
   
   <!-- POPUP - Cinnamoroll -->
   <div id="popupCinnamoroll" class="popup hidden">
