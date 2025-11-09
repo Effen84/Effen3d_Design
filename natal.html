@@ -13,7 +13,7 @@
 <body>
   <header>
     <div class="logo">
-      <a href="index.html" style="color:#f80;text-decoration:none;font-weight:700;">EFFEN3D DESIGN</a>
+      <a href="index.html" style="color:#f8f8f8;text-decoration:none;font-weight:700;">EFFEN3D DESIGN</a>
     </div>
     <nav>
       <a href="index.html#inicio">Início</a>
@@ -23,14 +23,18 @@
     </nav>
   </header>
 
-  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+  <!-- ======= CONTEÚDO PRINCIPAL ======= -->
   <section class="portfolio" style="padding-top:120px">
-    <h2>🎄 Natal 🎅</h2>
+    <h2>Natal 🎄</h2>
 
-    <!-- Grelha de produtos (fica vazia por enquanto) -->
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
-      <!-- Aqui vais adicionar os produtos mais tarde -->
-      <p style="grid-column: 1 / -1; text-align:center; font-size:1.2rem; opacity:0.8;">✨ Em breve disponíveis as criações de Natal da Effen3D Design! ✨</p>
+      
+      <!-- Produto 1 - Natal -->
+      <div class="product text-center" onclick="openPopup('popupNatal1')">
+        <img src="images/Natal11.png" alt="Natal 1" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <p class="text-sm mt-2">2 €</p>
+      </div>
+
     </div>
 
     <p style="margin-top:26px; text-align:center;">
@@ -38,11 +42,23 @@
     </p>
   </section>
 
-  <!-- ===== SCRIPT POPUPS (mantém estrutura igual às outras páginas) ===== -->
+  <!-- ======= POPUP - NATAL ======= -->
+  <div id="popupNatal1" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupNatal1')">&times;</span>
+      <div class="popup-images">
+        <img src="images/Natal11.png" alt="Natal - Foto 1">
+        <img src="images/Natal12.png" alt="Natal - Foto 2">
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= SCRIPT POPUPS ======= -->
   <script>
     function openPopup(id) {
       document.getElementById(id).classList.remove("hidden");
     }
+
     function closePopup(id) {
       document.getElementById(id).classList.add("hidden");
     }
