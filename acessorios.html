@@ -27,9 +27,9 @@
 <section class="portfolio" style="padding-top:120px">
   <h2>Acessórios</h2>
 
-  <!-- Grelha de produtos (4 por linha) -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center mt-8">
-    
+  <!-- Grelha de produtos -->
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
+
     <!-- Produto 1 -->
     <div class="product text-center" onclick="openPopup('popupCaixa')">
       <img src="images/acessorio5.png" alt="Caixa Bijuteria" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
@@ -52,12 +52,6 @@
     <div class="product text-center" onclick="openPopup('popupAcessorio4')">
       <img src="images/acessorio8.png" alt="Acessório 4" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
       <p class="text-lg mt-2">3 €</p>
-    </div>
-
-    <!-- Produto 5 -->
-    <div class="product text-center" onclick="openPopup('popupCaixaChiclas')">
-      <img src="images/caixachiclas1.png" alt="Caixa Chiclas" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
-      <p class="text-lg mt-2">5,50 €</p>
     </div>
 
   </div>
