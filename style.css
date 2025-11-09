@@ -708,3 +708,10 @@ button.btn:hover,
 .arrow.right {
   right: 5%;
 }
+.grid-produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  justify-items: center;
+  margin-top: 2rem;
+}
