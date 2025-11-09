@@ -31,6 +31,14 @@
     </div>
   </div>
 
+  <!-- Produto - Kuromi -->
+<div class="flex justify-center mt-12">
+  <div class="product" onclick="openPopup('popupKuromi')">
+    <img src="images/kuromi1.png" alt="Kuromi" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105 cursor-pointer">
+    <p class="text-lg mt-2">10 €</p>
+  </div>
+</div>
+  
   <!-- POPUP - Cinnamoroll -->
   <div id="popupCinnamoroll" class="popup hidden">
     <div class="popup-content">
@@ -42,6 +50,16 @@
     </div>
   </div>
 
+  <!-- Popup do Kuromi -->
+<div id="popupKuromi" class="popup hidden">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('popupKuromi')">&times;</span>
+    <div class="popup-images">
+      <img src="images/kuromi1.png" alt="Kuromi - Foto 1">
+      <img src="images/kuromi2.png" alt="Kuromi - Foto 2">
+    </div>
+  </div>
+</div>
   <p style="margin-top:26px">
     <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
   </p>
