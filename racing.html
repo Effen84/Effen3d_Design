@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Effen3D Design – Racing</title>
   <meta name="author" content="Effen3D Design" />
-  <meta name="keywords" content="impressão 3D, racing, Effen3D Design, suportes, tuning, acessórios 3D" />
+  <meta name="keywords" content="impressão 3D, racing, Effen3D Design, tuning, acessórios 3D, personalização" />
   <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -27,12 +27,21 @@
   <section class="portfolio" style="padding-top:120px">
     <h2>Racing</h2>
 
+    <!-- Grelha 4 colunas -->
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
+
       <!-- Produto 1 -->
       <div class="product text-center" onclick="openPopup('popupRacing1')">
-        <img src="images/racing1.png" alt="Racing Suporte" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <img src="images/racing1.png" alt="Racing Produto 1" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
         <p class="text-lg mt-2">5,5 €</p>
       </div>
+
+      <!-- Produto 2 -->
+      <div class="product text-center" onclick="openPopup('popupRacing2')">
+        <img src="images/racing2.png" alt="Racing Produto 2" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <p class="text-lg mt-2">14 €</p>
+      </div>
+
     </div>
 
     <p style="margin-top:26px; text-align:center;">
@@ -40,13 +49,29 @@
     </p>
   </section>
 
-  <!-- ===== POPUP ===== -->
+  <!-- ===== POPUPS ===== -->
+
+  <!-- Produto 1 -->
   <div id="popupRacing1" class="popup hidden">
     <div class="popup-content">
       <span class="close" onclick="closePopup('popupRacing1')">&times;</span>
       <div class="popup-images">
-        <img src="images/racing1.png" alt="Racing - Foto 1">
-        <img src="images/racing7.png" alt="Racing - Foto 2">
+        <img src="images/racing1.png" alt="Racing 1 - Foto 1">
+        <img src="images/racing7.png" alt="Racing 1 - Foto 2">
+      </div>
+    </div>
+  </div>
+
+  <!-- Produto 2 -->
+  <div id="popupRacing2" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupRacing2')">&times;</span>
+      <div class="popup-images">
+        <img src="images/racing2.png" alt="Racing 2 - Foto 1">
+        <img src="images/racing3.png" alt="Racing 2 - Foto 2">
+        <img src="images/racing4.png" alt="Racing 2 - Foto 3">
+        <img src="images/racing5.png" alt="Racing 2 - Foto 4">
+        <img src="images/racing6.png" alt="Racing 2 - Foto 5">
       </div>
     </div>
   </div>
