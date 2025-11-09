@@ -78,29 +78,32 @@
       </form>
     </div>
   </div>
+<!-- JavaScript -->
 <script>
 function openPopup(id) {
   document.getElementById(id).classList.remove("hidden");
 }
-
 function closePopup(id) {
   document.getElementById(id).classList.add("hidden");
 }
 
 // === Abrir imagem em grande dentro do popup ===
-document.addEventListener("click", function (e) {
-  if (e.target.matches(".popup-images img")) {
-    const src = e.target.getAttribute("src");
-    const zoom = document.createElement("div");
-    zoom.classList.add("zoom-overlay");
-    zoom.innerHTML = `
-      <div class="zoom-content">
-        <img src="${src}" alt="Imagem Grande">
-      </div>
-    `;
-    document.body.appendChild(zoom);
-    zoom.addEventListener("click", () => zoom.remove());
-  }
+window.addEventListener("DOMContentLoaded", () => {
+  const popupImages = document.querySelectorAll(".popup-images img");
+  popupImages.forEach(img => {
+    img.addEventListener("click", () => {
+      const src = img.getAttribute("src");
+      const zoom = document.createElement("div");
+      zoom.classList.add("zoom-overlay");
+      zoom.innerHTML = `
+        <div class="zoom-content">
+          <img src="${src}" alt="Imagem Grande">
+        </div>
+      `;
+      document.body.appendChild(zoom);
+      zoom.addEventListener("click", () => zoom.remove());
+    });
+  });
 });
 </script>
 
