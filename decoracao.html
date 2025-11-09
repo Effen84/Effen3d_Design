@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Effen3D Design – Decoração</title>
   <meta name="author" content="Effen3D Design" />
-  <meta name="keywords" content="impressão 3D, decoração, Effen3D Design, vasos, objetos decorativos, design 3D" />
+  <meta name="keywords" content="impressão 3D, decoração, Effen3D Design, vasos, jarras, objetos decorativos, design 3D" />
   <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -30,10 +30,18 @@
     <!-- Grelha (4 por linha adaptável) -->
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
 
-      <!-- Produto 1 -->
+      <!-- Produto 1: Vaso Decorativo -->
       <div class="product text-center" onclick="openPopup('popupDecoracao1')">
         <img src="images/vaso decorativo.png" alt="Vaso Decorativo" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
-        <p class="text-lg mt-2">14 €</p>
+        <h3 class="text-xl font-semibold mt-2">Vaso Decorativo</h3>
+        <p class="text-lg mt-1">14 €</p>
+      </div>
+
+      <!-- Produto 2: Jarra Moderna -->
+      <div class="product text-center" onclick="openPopup('popupDecoracao2')">
+        <img src="images/jarra moderna.png" alt="Jarra Moderna" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <h3 class="text-xl font-semibold mt-2">Jarra Moderna</h3>
+        <p class="text-lg mt-1">14 €</p>
       </div>
 
     </div>
@@ -43,13 +51,26 @@
     </p>
   </section>
 
-  <!-- ===== POPUP ===== -->
+  <!-- ===== POPUPS ===== -->
+
+  <!-- Popup 1 -->
   <div id="popupDecoracao1" class="popup hidden">
     <div class="popup-content">
       <span class="close" onclick="closePopup('popupDecoracao1')">&times;</span>
       <div class="popup-images">
         <img src="images/vaso decorativo.png" alt="Vaso Decorativo - Foto 1">
         <img src="images/vaso decorativo1.png" alt="Vaso Decorativo - Foto 2">
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup 2 -->
+  <div id="popupDecoracao2" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupDecoracao2')">&times;</span>
+      <div class="popup-images">
+        <img src="images/jarra moderna.png" alt="Jarra Moderna - Foto 1">
+        <img src="images/jarra moderna1.png" alt="Jarra Moderna - Foto 2">
       </div>
     </div>
   </div>
@@ -66,4 +87,3 @@
 
 </body>
 </html>
-
