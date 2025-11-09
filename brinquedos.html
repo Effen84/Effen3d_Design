@@ -38,6 +38,14 @@
     <p class="text-lg mt-2">10 €</p>
   </div>
 </div>
+
+  <!-- Produto - 3 Super Mario -->
+<div class="flex justify-center mt-12">
+  <div class="product" onclick="openPopup('popupSuperMario')">
+    <img src="images/supermario1.png" alt="3 Super Mario" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105 cursor-pointer">
+    <p class="text-lg mt-2">23 €</p>
+  </div>
+</div>
   
   <!-- POPUP - Cinnamoroll -->
   <div id="popupCinnamoroll" class="popup hidden">
@@ -65,6 +73,20 @@
   </p>
 </section>
 
+  <!-- Popup - 3 Super Mario -->
+<div id="popupSuperMario" class="popup hidden">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('popupSuperMario')">&times;</span>
+    <div class="popup-images">
+      <img src="images/supermario1.png" alt="Super Mario - Foto 1">
+      <img src="images/supermario2.png" alt="Super Mario - Foto 2">
+      <img src="images/supermario3.png" alt="Super Mario - Foto 3">
+      <img src="images/supermario4.png" alt="Super Mario - Foto 4">
+      <img src="images/supermario5.png" alt="Super Mario - Foto 5">
+    </div>
+  </div>
+</div>
+  
 <!-- ====== LIGHTBOX E MODAL ORÇAMENTO (herdado do index) ====== -->
 <div id="lightbox" class="lightbox" aria-hidden="true">
   <button class="close" aria-label="Fechar (Esc)">&times;</button>
