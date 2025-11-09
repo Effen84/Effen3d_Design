@@ -124,7 +124,7 @@
   </div>
 
   <!-- ======= SCRIPT POPUPS ======= -->
-  <script>
+ <script>
     function openPopup(id) {
       document.getElementById(id).classList.remove("hidden");
     }
@@ -132,52 +132,144 @@
     function closePopup(id) {
       document.getElementById(id).classList.add("hidden");
     }
+
+    // ======= ZOOM com setas =======
+    window.addEventListener("DOMContentLoaded", () => {
+      const popupImages = document.querySelectorAll(".popup-images img");
+      let currentIndex = 0;
+      let zoom = null;
+
+      popupImages.forEach((img, index) => {
+        img.addEventListener("click", () => {
+          currentIndex = index;
+          openZoom(img.src);
+        });
+      });
+
+      function openZoom(src) {
+        zoom = document.createElement("div");
+        zoom.classList.add("zoom-overlay");
+        zoom.innerHTML = `
+          <div class="zoom-content">
+            <span class="arrow left">&#10094;</span>
+            <img src="${src}" alt="Imagem Grande">
+            <span class="arrow right">&#10095;</span>
+          </div>`;
+        document.body.appendChild(zoom);
+
+        const arrows = zoom.querySelectorAll(".arrow");
+        arrows[0].addEventListener("click", () => changeImage(-1));
+        arrows[1].addEventListener("click", () => changeImage(1));
+        zoom.addEventListener("click", (e) => {
+          if (e.target === zoom) zoom.remove();
+        });
+      }
+
+      function changeImage(direction) {
+        const images = Array.from(document.querySelectorAll(".popup-images img"));
+        currentIndex = (currentIndex + direction + images.length) % images.length;
+        const newSrc = images[currentIndex].src;
+        zoom.querySelector("img").src = newSrc;
+      }
+    });
   </script>
-</body>
-</html>
 
-// Zoom com setas
-window.addEventListener("DOMContentLoaded", () => {
-  const popupImages = document.querySelectorAll(".popup-images img");
-  let currentIndex = 0;
-  let zoom = null;
+  <!-- ======= ESTILO ZOOM ======= -->
+  <style>
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
 
-  popupImages.forEach((img, index) => {
-    img.addEventListener("click", () => {
-      currentIndex = index;
-      openZoom(img.src);
-    });
-  });
+    .popup.hidden {
+      display: none;
+    }
 
-  function openZoom(src) {
-    zoom = document.createElement("div");
-    zoom.classList.add("zoom-overlay");
-    zoom.innerHTML = `
-      <div class="zoom-content">
-        <span class="arrow left">&#10094;</span>
-        <img src="${src}" alt="Imagem Grande">
-        <span class="arrow right">&#10095;</span>
-      </div>
-    `;
-    document.body.appendChild(zoom);
+    .popup-content {
+      background: #111;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-    const arrows = zoom.querySelectorAll(".arrow");
-    arrows[0].addEventListener("click", () => changeImage(-1));
-    arrows[1].addEventListener("click", () => changeImage(1));
-    zoom.addEventListener("click", (e) => {
-      if (e.target === zoom) zoom.remove();
-    });
-  }
+    .popup-images {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-  function changeImage(direction) {
-    const images = Array.from(document.querySelectorAll(".popup-images img"));
-    currentIndex = (currentIndex + direction + images.length) % images.length;
-    const newSrc = images[currentIndex].src;
-    zoom.querySelector("img").src = newSrc;
-  }
-});
-</script>
+    .popup-images img {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
 
-<script src="script.js"></script>
+    .popup-images img:hover {
+      transform: scale(1.05);
+    }
+
+    .zoom-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.95);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+
+    .zoom-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .zoom-content img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    .zoom-content .arrow {
+      position: absolute;
+      top: 50%;
+      font-size: 3rem;
+      color: white;
+      cursor: pointer;
+      transform: translateY(-50%);
+      user-select: none;
+    }
+
+    .zoom-content .left {
+      left: -60px;
+    }
+
+    .zoom-content .right {
+      right: -60px;
+    }
+  </style>
+
 </body>
 </html>
