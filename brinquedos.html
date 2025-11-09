@@ -23,10 +23,9 @@
 <section class="portfolio" style="padding-top:120px">
   <h2>Brinquedos</h2>
 
-  <!-- Grelha de produtos (4 por linha) -->
+  <!-- Grelha com várias filas (4 por linha) -->
   <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
 
-    
     <!-- Produto 1 - Cinnamoroll -->
     <div class="product text-center" onclick="openPopup('popupCinnamoroll')">
       <img src="images/cinnamoroll1.png" alt="Cinnamoroll" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
@@ -39,31 +38,33 @@
       <p class="text-lg mt-2">10 €</p>
     </div>
 
-    <!-- Produto 3 - 3 Super Mario -->
+    <!-- Produto 3 - Super Mario -->
     <div class="product text-center" onclick="openPopup('popupSuperMario')">
-      <img src="images/supermario1.png" alt="3 Super Mario" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+      <img src="images/supermario1.png" alt="Super Mario" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
       <p class="text-lg mt-2">23 €</p>
     </div>
 
   </div>
 
-  <p style="margin-top:26px">
+  <p style="margin-top:26px; text-align:center;">
     <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
   </p>
 </section>
-  
-  <!-- POPUP - Cinnamoroll -->
-  <div id="popupCinnamoroll" class="popup hidden">
-    <div class="popup-content">
-      <span class="close" onclick="closePopup('popupCinnamoroll')">&times;</span>
-      <div class="popup-images">
-        <img src="images/cinnamoroll1.png" alt="Cinnamoroll - Foto 1">
-        <img src="images/cinnamoroll2.png" alt="Cinnamoroll - Foto 2">
-      </div>
+
+<!-- ===== POPUPS ===== -->
+
+<!-- Popup Cinnamoroll -->
+<div id="popupCinnamoroll" class="popup hidden">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('popupCinnamoroll')">&times;</span>
+    <div class="popup-images">
+      <img src="images/cinnamoroll1.png" alt="Cinnamoroll - Foto 1">
+      <img src="images/cinnamoroll2.png" alt="Cinnamoroll - Foto 2">
     </div>
   </div>
+</div>
 
-  <!-- Popup do Kuromi -->
+<!-- Popup Kuromi -->
 <div id="popupKuromi" class="popup hidden">
   <div class="popup-content">
     <span class="close" onclick="closePopup('popupKuromi')">&times;</span>
@@ -73,12 +74,8 @@
     </div>
   </div>
 </div>
-  <p style="margin-top:26px">
-    <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
-  </p>
-</section>
 
-  <!-- Popup - 3 Super Mario -->
+<!-- Popup Super Mario -->
 <div id="popupSuperMario" class="popup hidden">
   <div class="popup-content">
     <span class="close" onclick="closePopup('popupSuperMario')">&times;</span>
@@ -91,6 +88,7 @@
     </div>
   </div>
 </div>
+
   
 <!-- ====== LIGHTBOX E MODAL ORÇAMENTO (herdado do index) ====== -->
 <div id="lightbox" class="lightbox" aria-hidden="true">
