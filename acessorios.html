@@ -34,7 +34,12 @@
       <p class="text-lg mt-2">12,50 €</p>
     </div>
   </div>
-
+<div class="flex justify-center mt-12">
+  <div class="product" onclick="openPopup('popupAcessorio2')">
+    <img src="images/acessorio10.png" alt="Acessório 2" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105 cursor-pointer">
+    <p class="text-lg mt-2">9 €</p>
+  </div>
+</div>
   <!-- Popup escondido (só aparece ao clicar) -->
   <div id="popupCaixa" class="popup hidden">
     <div class="popup-content">
@@ -46,7 +51,15 @@
       </div>
     </div>
   </div>
-
+<div id="popupAcessorio2" class="popup hidden">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('popupAcessorio2')">&times;</span>
+    <div class="popup-images">
+      <img src="images/acessorio10.png" alt="Acessório 2 - Foto 1">
+      <img src="images/acessorio11.png" alt="Acessório 2 - Foto 2">
+    </div>
+  </div>
+</div>
   <p style="margin-top:26px">
     <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
   </p>
