@@ -25,34 +25,32 @@
   </header>
 
   <section class="portfolio" style="padding-top:120px">
-    <h2>Acessórios</h2>
-   <!-- Galeria com popup simples -->
-<div class="flex justify-center">
-  <div class="product" onclick="openPopup('popupCaixa')">
-    <img src="images/acessorio5.png" alt="Caixa Bijuteria" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105">
-    <h3 class="mt-4 text-xl font-semibold">Caixa Bijuteria</h3>
-    <p class="text-lg">12,50 €</p>
-  </div>
-</div>
+  <h2>Acessórios</h2>
 
-<!-- Popup -->
-<div id="popupCaixa" class="popup hidden">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('popupCaixa')">&times;</span>
-    <h3 class="text-2xl font-bold mb-4">Caixa Bijuteria</h3>
-    <div class="popup-images">
-      <img src="images/acessorio5.png" alt="Caixa Bijuteria 1">
-      <img src="images/acessorio6.png" alt="Caixa Bijuteria 2">
-      <img src="images/acessorio7.png" alt="Caixa Bijuteria 3">
+  <!-- Cartão do produto -->
+  <div class="flex justify-center">
+    <div class="product" onclick="openPopup('popupCaixa')">
+      <img src="images/acessorio5.png" alt="Caixa Bijuteria" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105">
+      <p class="text-lg mt-2">12,50 €</p>
     </div>
   </div>
-</div>
 
+  <!-- Popup com as imagens -->
+  <div id="popupCaixa" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupCaixa')">&times;</span>
+      <div class="popup-images">
+        <img src="images/acessorio5.png" alt="Caixa Bijuteria 1">
+        <img src="images/acessorio6.png" alt="Caixa Bijuteria 2">
+        <img src="images/acessorio7.png" alt="Caixa Bijuteria 3">
+      </div>
+    </div>
+  </div>
 
-    <p style="margin-top:26px">
-      <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
-    </p>
-  </section>
+  <p style="margin-top:26px">
+    <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
+  </p>
+</section>
 
   <!-- Lightbox + Modal de orçamento (reutiliza o mesmo do index) -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
