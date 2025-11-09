@@ -26,23 +26,28 @@
 
   <section class="portfolio" style="padding-top:120px">
     <h2>Acessórios</h2>
-    <div class="gallery">
-      <!-- SÓ imagens de Acessórios -->
-      <img src="images/trex1.png" alt="Trex 1" loading="lazy">
-      <img src="images/acessorio3.png" alt="Acessório 3" loading="lazy">
-      <img src="images/acessorio4.png" alt="Acessório 4" loading="lazy">
-      <img src="images/acessorio5.png" alt="Acessório 5" loading="lazy">
-      <img src="images/acessorio6.png" alt="Acessório 6" loading="lazy">
-      <img src="images/acessorio7.png" alt="Acessório 7" loading="lazy">
-      <img src="images/acessorio8.png" alt="Acessório 8" loading="lazy">
-      <img src="images/acessorio9.png" alt="Acessório 9" loading="lazy">
-      <img src="images/acessorio10.png" alt="Acessório 10" loading="lazy">
-      <img src="images/acessorio11.png" alt="Acessório 11" loading="lazy">
-      <img src="images/acessorio12.png" alt="Acessório 12" loading="lazy">
-      <img src="images/acessorio13.png" alt="Acessório 13" loading="lazy"> 
-      <img src="images/acessorio14.png" alt="Acessório 14" loading="lazy">
-      <!-- adiciona mais conforme precisares -->
+   <!-- Galeria com popup simples -->
+<div class="flex justify-center">
+  <div class="product" onclick="openPopup('popupCaixa')">
+    <img src="images/acessorio5.png" alt="Caixa Bijuteria" class="rounded-2xl shadow-lg w-80 mx-auto transition-transform duration-300 hover:scale-105">
+    <h3 class="mt-4 text-xl font-semibold">Caixa Bijuteria</h3>
+    <p class="text-lg">12,50 €</p>
+  </div>
+</div>
+
+<!-- Popup -->
+<div id="popupCaixa" class="popup hidden">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('popupCaixa')">&times;</span>
+    <h3 class="text-2xl font-bold mb-4">Caixa Bijuteria</h3>
+    <div class="popup-images">
+      <img src="images/acessorio5.png" alt="Caixa Bijuteria 1">
+      <img src="images/acessorio6.png" alt="Caixa Bijuteria 2">
+      <img src="images/acessorio7.png" alt="Caixa Bijuteria 3">
     </div>
+  </div>
+</div>
+
 
     <p style="margin-top:26px">
       <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
@@ -76,6 +81,18 @@
       </form>
     </div>
   </div>
+<script>
+function openPopup(id) {
+  document.getElementById(id).classList.remove("hidden");
+}
+function closePopup(id) {
+  document.getElementById(id).classList.add("hidden");
+}
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
 
   <script src="script.js"></script>
 </body>
