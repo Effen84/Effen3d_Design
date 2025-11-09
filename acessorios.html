@@ -87,23 +87,46 @@ function closePopup(id) {
   document.getElementById(id).classList.add("hidden");
 }
 
-// === Abrir imagem em grande dentro do popup ===
+// === Abrir imagem em grande com setas de navegação ===
 window.addEventListener("DOMContentLoaded", () => {
   const popupImages = document.querySelectorAll(".popup-images img");
-  popupImages.forEach(img => {
+  let currentIndex = 0;
+  let zoom = null;
+
+  popupImages.forEach((img, index) => {
     img.addEventListener("click", () => {
-      const src = img.getAttribute("src");
-      const zoom = document.createElement("div");
-      zoom.classList.add("zoom-overlay");
-      zoom.innerHTML = `
-        <div class="zoom-content">
-          <img src="${src}" alt="Imagem Grande">
-        </div>
-      `;
-      document.body.appendChild(zoom);
-      zoom.addEventListener("click", () => zoom.remove());
+      currentIndex = index;
+      openZoom(img.src);
     });
   });
+
+  function openZoom(src) {
+    zoom = document.createElement("div");
+    zoom.classList.add("zoom-overlay");
+    zoom.innerHTML = `
+      <div class="zoom-content">
+        <span class="arrow left">&#10094;</span>
+        <img src="${src}" alt="Imagem Grande">
+        <span class="arrow right">&#10095;</span>
+      </div>
+    `;
+    document.body.appendChild(zoom);
+
+    const arrows = zoom.querySelectorAll(".arrow");
+    arrows[0].addEventListener("click", () => changeImage(-1));
+    arrows[1].addEventListener("click", () => changeImage(1));
+
+    zoom.addEventListener("click", (e) => {
+      if (e.target === zoom) zoom.remove();
+    });
+  }
+
+  function changeImage(direction) {
+    const images = Array.from(document.querySelectorAll(".popup-images img"));
+    currentIndex = (currentIndex + direction + images.length) % images.length;
+    const newSrc = images[currentIndex].src;
+    zoom.querySelector("img").src = newSrc;
+  }
 });
 </script>
 
