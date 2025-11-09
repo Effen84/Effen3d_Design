@@ -2,19 +2,18 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Effen3D Design — Gaming</title>
-  <meta name="author" content="Effen3D Design">
-<meta name="keywords" content="impressão 3D, impressão 3D personalizada, impressão 3D Portugal, Effen3D Design, criação 3D, modelação 3D, acessórios 3D, brinquedos 3D, gaming 3D, racing 3D, decoração 3D, impressão 3D por medida, peças personalizadas">
-<meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png">
-<meta property="og:url" content="https://effen84.github.io/Effen3d_Design/">
-<meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Effen3D Design – Gaming</title>
+  <meta name="author" content="Effen3D Design" />
+  <meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, gaming, suporte PS5, acessórios de gaming, impressão em Portugal" />
+  <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <header>
     <div class="logo">
-      <a href="index.html" style="color:#f00;text-decoration:none;font-weight:700">EFFEN3D DESIGN</a>
+      <a href="index.html" style="color:#f80;text-decoration:none;font-weight:700;">EFFEN3D DESIGN</a>
     </div>
     <nav>
       <a href="index.html#inicio">Início</a>
@@ -24,56 +23,37 @@
     </nav>
   </header>
 
+  <!-- ===== CONTEÚDO PRINCIPAL ===== -->
   <section class="portfolio" style="padding-top:120px">
     <h2>Gaming</h2>
-    <div class="gallery">
-      <!-- SÓ imagens de Acessórios -->
-      <img src="images/gaming1.png" alt="Gaming 1" loading="lazy">
-      <img src="images/gaming2.png" alt="Gaming 2" loading="lazy">
-      <img src="images/gaming3.png" alt="Gaming 3" loading="lazy">
-      <img src="images/gaming4.png" alt="Gaming 4" loading="lazy">
-      <img src="images/gaming5.png" alt="Gaming 5" loading="lazy">
-      <img src="images/gaming6.png" alt="Gaming 6" loading="lazy">
-      <img src="images/gaming7.png" alt="Gaming 7" loading="lazy">
-      <img src="images/gaming8.png" alt="Gaming 8" loading="lazy">
-      <img src="images/gaming9.png" alt="Gaming 9" loading="lazy">
-      <img src="images/gaming10.png" alt="Gaming 10" loading="lazy">
-      <!-- adiciona mais conforme precisares -->
+
+    <!-- Grelha (4 por linha) -->
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
+
+      <!-- Produto Único -->
+      <div class="product text-center" onclick="openPopup('popupGaming')">
+        <img src="images/gaming1.png" alt="Suporte Gaming" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <p class="text-lg mt-2">10 €</p>
+      </div>
+
     </div>
 
-    <p style="margin-top:26px">
+    <p style="margin-top:26px; text-align:center;">
       <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
     </p>
   </section>
 
-  <!-- Lightbox + Modal de orçamento (reutiliza o mesmo do index) -->
-  <div id="lightbox" class="lightbox" aria-hidden="true">
-    <button class="close" aria-label="Fechar (Esc)">&times;</button>
-    <img class="lightbox-content" id="lightbox-img" alt="">
-  </div>
-
-  <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
-    <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
-      <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
-      <h3 id="quoteTitle">Pedir orçamento</h3>
-      <p>Responde em 24–48h. Envia imagens pelo Instagram ou anexa no email após abrir.</p>
-      <form id="quoteForm">
-        <label>Nome* <input type="text" id="qName" required></label>
-        <label>Email* <input type="email" id="qEmail" required></label>
-        <label>Categoria
-          <select id="qCategory">
-            <option>Acessórios</option><option>Brinquedos</option>
-            <option>Gaming</option><option>Racing</option><option>Outro</option>
-          </select>
-        </label>
-        <label>Descrição do projeto* <textarea id="qDesc" rows="5" required></textarea></label>
-        <label>Prazo (opcional) <input type="text" id="qDeadline"></label>
-        <button type="submit" class="btn">Enviar pedido</button>
-        <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
-      </form>
+  <!-- ===== POPUP ===== -->
+  <div id="popupGaming" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupGaming')">&times;</span>
+      <div class="popup-images">
+        <img src="images/gaming1.png" alt="Gaming - Foto 1">
+        <img src="images/gaming2.png" alt="Gaming - Foto 2">
+      </div>
     </div>
   </div>
 
-  <script src="script.js"></script>
 </body>
 </html>
+
