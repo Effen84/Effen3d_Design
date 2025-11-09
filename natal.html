@@ -29,10 +29,28 @@
 
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
       
-      <!-- Produto 1 - Natal -->
-      <div class="product text-center" onclick="openPopup('popupNatal')">
-        <img src="images/Natal1.png" alt="Natal" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+      <!-- Produto 1 -->
+      <div class="product text-center" onclick="openPopup('popupNatal1')">
+        <img src="images/Natal1.png" alt="Natal Produto 1" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
         <p class="text-sm mt-2">6 €</p>
+      </div>
+
+      <!-- Produto 2 -->
+      <div class="product text-center" onclick="openPopup('popupNatal2')">
+        <img src="images/Natal3.png" alt="Natal Produto 2" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <p class="text-sm mt-2">1 €</p>
+      </div>
+
+      <!-- Produto 3 -->
+      <div class="product text-center" onclick="openPopup('popupNatal3')">
+        <img src="images/Natal5.png" alt="Natal Produto 3" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <p class="text-sm mt-2">3 €</p>
+      </div>
+
+      <!-- Produto 4 -->
+      <div class="product text-center" onclick="openPopup('popupNatal4')">
+        <img src="images/Natal11.png" alt="Natal Produto 4" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <p class="text-sm mt-2">2 €</p>
       </div>
 
     </div>
@@ -42,10 +60,11 @@
     </p>
   </section>
 
-  <!-- ======= POPUP ======= -->
-  <div id="popupNatal" class="popup hidden">
+  <!-- ======= POPUPS ======= -->
+  <!-- Produto 1 -->
+  <div id="popupNatal1" class="popup hidden">
     <div class="popup-content">
-      <span class="close" onclick="closePopup('popupNatal')">&times;</span>
+      <span class="close" onclick="closePopup('popupNatal1')">&times;</span>
       <div class="popup-images">
         <img src="images/Natal1.png" alt="Natal - Foto 1">
         <img src="images/Natal2.png" alt="Natal - Foto 2">
@@ -53,7 +72,40 @@
     </div>
   </div>
 
-  <!-- ======= SCRIPTS ======= -->
+  <!-- Produto 2 -->
+  <div id="popupNatal2" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupNatal2')">&times;</span>
+      <div class="popup-images">
+        <img src="images/Natal3.png" alt="Natal - Foto 3">
+        <img src="images/Natal4.png" alt="Natal - Foto 4">
+      </div>
+    </div>
+  </div>
+
+  <!-- Produto 3 -->
+  <div id="popupNatal3" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupNatal3')">&times;</span>
+      <div class="popup-images">
+        <img src="images/Natal5.png" alt="Natal - Foto 5">
+        <img src="images/Natal6.png" alt="Natal - Foto 6">
+      </div>
+    </div>
+  </div>
+
+  <!-- Produto 4 -->
+  <div id="popupNatal4" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupNatal4')">&times;</span>
+      <div class="popup-images">
+        <img src="images/Natal11.png" alt="Natal - Foto 11">
+        <img src="images/Natal12.png" alt="Natal - Foto 12">
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= SCRIPT POPUPS + ZOOM ======= -->
   <script>
     function openPopup(id) {
       document.getElementById(id).classList.remove("hidden");
@@ -63,7 +115,7 @@
       document.getElementById(id).classList.add("hidden");
     }
 
-    // ======= ZOOM com setas (igual aos brinquedos) =======
+    // ======= ZOOM com setas =======
     window.addEventListener("DOMContentLoaded", () => {
       const popupImages = document.querySelectorAll(".popup-images img");
       let currentIndex = 0;
@@ -203,3 +255,4 @@
 
 </body>
 </html>
+
