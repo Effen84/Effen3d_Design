@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Effen3D Design – Gaming</title>
   <meta name="author" content="Effen3D Design" />
-  <meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, gaming, suporte PS5, base gaming, impressão em Portugal" />
+  <meta name="keywords" content="impressão 3D, gaming, suporte PS5, Effen3D Design, impressão personalizada" />
   <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -27,7 +27,7 @@
   <section class="portfolio" style="padding-top:120px">
     <h2>Gaming</h2>
 
-    <!-- Grelha 4 colunas -->
+    <!-- Grelha 4 por linha -->
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
 
       <!-- Produto 1 -->
@@ -42,6 +42,12 @@
         <p class="text-lg mt-2">20 €</p>
       </div>
 
+      <!-- Produto 3 -->
+      <div class="product text-center" onclick="openPopup('popupGaming3')">
+        <img src="images/gaming5.png" alt="Suporte Gaming 3" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
+        <p class="text-lg mt-2">10 €</p>
+      </div>
+
     </div>
 
     <p style="margin-top:26px; text-align:center;">
@@ -49,7 +55,9 @@
     </p>
   </section>
 
-  <!-- Popup Produto 1 -->
+  <!-- ===== POPUPS ===== -->
+
+  <!-- Produto 1 -->
   <div id="popupGaming1" class="popup hidden">
     <div class="popup-content">
       <span class="close" onclick="closePopup('popupGaming1')">&times;</span>
@@ -60,7 +68,7 @@
     </div>
   </div>
 
-  <!-- Popup Produto 2 -->
+  <!-- Produto 2 -->
   <div id="popupGaming2" class="popup hidden">
     <div class="popup-content">
       <span class="close" onclick="closePopup('popupGaming2')">&times;</span>
@@ -71,15 +79,27 @@
     </div>
   </div>
 
+  <!-- Produto 3 -->
+  <div id="popupGaming3" class="popup hidden">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup('popupGaming3')">&times;</span>
+      <div class="popup-images">
+        <img src="images/gaming5.png" alt="Gaming 3 - Foto 1">
+        <img src="images/gaming6.png" alt="Gaming 3 - Foto 2">
+        <img src="images/gaming7.png" alt="Gaming 3 - Foto 3">
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPT POPUPS ===== -->
+  <script>
+    function openPopup(id) {
+      document.getElementById(id).classList.remove("hidden");
+    }
+    function closePopup(id) {
+      document.getElementById(id).classList.add("hidden");
+    }
+  </script>
+
 </body>
 </html>
-
-<script>
-  function openPopup(id) {
-    document.getElementById(id).classList.remove("hidden");
-  }
-
-  function closePopup(id) {
-    document.getElementById(id).classList.add("hidden");
-  }
-</script>
