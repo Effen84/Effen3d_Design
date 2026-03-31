@@ -5,111 +5,178 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Effen3D Design — Impressão 3D Personalizada em Portugal</title>
   <meta name="description" content="Effen3D Design — Impressão 3D personalizada em Portugal. Criação e produção de peças exclusivas, brinquedos, acessórios, gaming, racing e decoração, feitos à medida para ti.">
-<meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, impressão 3D Portugal, criação 3D, modelação 3D, acessórios 3D, brinquedos 3D, decoração 3D, gaming 3D, racing 3D">
-<meta name="author" content="Effen3D Design">
-<meta property="og:title" content="Effen3D Design — Impressão 3D Personalizada em Portugal">
-<meta property="og:description" content="Criação e impressão 3D personalizada — peças únicas, feitas à medida. Descobre os nossos projetos de decoração, gaming, acessórios e muito mais.">
-<meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png">
-<meta property="og:url" content="https://effen84.github.io/Effen3d_Design/">
-<meta name="twitter:card" content="summary_large_image">
+  <meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, impressão 3D Portugal, criação 3D, modelação 3D, acessórios 3D, brinquedos 3D, decoração 3D, gaming 3D, racing 3D, gravação laser">
+  <meta name="author" content="Effen3D Design">
+  <meta property="og:title" content="Effen3D Design — Impressão 3D Personalizada em Portugal">
+  <meta property="og:description" content="Criação e impressão 3D personalizada — peças únicas, feitas à medida. Descobre os nossos projetos de decoração, gaming, acessórios e muito mais.">
+  <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png">
+  <meta property="og:url" content="https://effen84.github.io/Effen3d_Design/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
 </head>
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <span class="close">×</span>
-  <img id="lightboxImg" src="" alt="">
-</div>
-
-<script>
-function openLightbox(imgElement) {
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightboxImg');
-  lightbox.style.display = 'flex';
-  lightboxImg.src = imgElement.src;
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
-}
-</script>
 <body>
+
+  <!-- ======= LIGHTBOX ======= -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">×</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
   <!-- ======= HEADER ======= -->
-  <header>
-   <div class="logo">
-  <a href="#inicio">
-    <img src="images/effen3d.png" alt="Effen3D Design" class="logo-top">
-  </a>
-    <nav>
+  <header id="header">
+    <a href="#inicio" class="header-logo">
+      <img src="images/effen3d.png" alt="Effen3D Design" class="logo-top">
+    </a>
+    <nav class="header-nav">
       <a href="#portfolio">Portefólio</a>
       <a href="#servicos">Serviços</a>
       <a href="#contacto">Contacto</a>
       <button type="button" class="btn-quote" id="openQuote">Pedir orçamento</button>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
   <!-- ======= HERO ======= -->
   <section id="inicio" class="hero">
+    <div class="hero-bg-grid"></div>
     <div class="hero-inner">
       <div class="hero-copy">
-        <h1>Criação e impressão 3D personalizada em Portugal</h1>
-        <a href="#portfolio" class="btn">Ver Portefólio</a>
-        <button type="button" class="btn btn-outline" id="openQuote2">Pedir orçamento</button>
+        <p class="hero-eyebrow">Portugal · Impressão 3D &amp; Gravação Laser</p>
+        <h1 class="hero-title">Criação<br><span class="accent">3D</span> feita<br>à tua medida</h1>
+        <p class="hero-sub">Peças únicas, personalizadas e com qualidade. Do modelo à tua mão.</p>
+        <div class="hero-btns">
+          <a href="#portfolio" class="btn btn-red">Ver Portefólio</a>
+          <button type="button" class="btn btn-ghost" id="openQuote2">Pedir orçamento</button>
+        </div>
+        <div class="hero-badges">
+          <span class="badge">🖨️ Impressão 3D</span>
+          <span class="badge">⚡ Gravação Laser</span>
+          <span class="badge">🎨 Personalizado</span>
+        </div>
       </div>
+      <div class="hero-visual-wrap">
+        <div class="hero-glow"></div>
+        <img src="images/effen3d.png" alt="Effen3D Design Logo" class="hero-visual" loading="eager">
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-      <img src="images/effen3d.png" alt="Effen3D Design Logo" class="hero-visual" loading="eager">
+  <!-- ======= SERVIÇOS ======= -->
+  <section id="servicos" class="services">
+    <div class="section-inner">
+      <p class="section-label">O que fazemos</p>
+      <h2 class="section-title">Serviços</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🖨️</div>
+          <h3>Impressão 3D</h3>
+          <p>Peças em PLA de alta qualidade — decoração, gaming, acessórios, figurines e muito mais. Multicolor e acabamentos metálicos disponíveis.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⚡</div>
+          <h3>Gravação Laser</h3>
+          <p>Gravação em madeira, acrílico, alumínio, couro e outros materiais. Presentes personalizados, tábuas de cozinha, canetas, isqueiros e placas.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Design Personalizado</h3>
+          <p>Tens uma ideia? Nós tornamos realidade. Trabalhamos a partir de imagens, logos ou conceitos, e criamos a peça do zero para ti.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- ======= PORTFÓLIO ======= -->
   <section id="portfolio" class="portfolio">
-    <h2>Portefólio</h2>
+    <div class="section-inner">
+      <p class="section-label">Os nossos trabalhos</p>
+      <h2 class="section-title">Portefólio</h2>
 
-    <nav class="portfolio-nav">
-      <a href="acessorios.html">Acessórios</a>
-      <a href="brinquedos.html">Brinquedos</a>
-      <a href="gaming.html">Gaming</a>
-      <a href="racing.html">Racing</a>
-      <a href="decoracao.html">Decoração</a>
-      <a href="natal.html">Natal</a>
-    </nav>
+      <nav class="portfolio-nav">
+        <a href="acessorios.html">Acessórios</a>
+        <a href="brinquedos.html">Brinquedos</a>
+        <a href="gaming.html">Gaming</a>
+        <a href="racing.html">Racing</a>
+        <a href="decoracao.html">Decoração</a>
+        <a href="natal.html">Natal</a>
+      </nav>
 
-    <h3>Em destaque</h3>
-    <div class="gallery">
-      <!-- Mostra 5 imagens principais -->
-      <div class="item">
-        <img src="images/vaso moderno.png" alt="Destaque 1" onclick="openLightbox(this)">
-        <p class="desc">Vaso Personalizado</p>
-        <!-- <p class="price">5€</p> -->
+      <p class="portfolio-sublabel">Em destaque</p>
+      <div class="gallery">
+        <div class="item">
+          <div class="item-img-wrap">
+            <img src="images/vaso moderno.png" alt="Vaso Personalizado" onclick="openLightbox(this)">
+            <div class="item-overlay"><span>Ver</span></div>
+          </div>
+          <div class="item-info">
+            <p class="desc">Vaso Personalizado</p>
+            <span class="item-tag">Decoração</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-img-wrap">
+            <img src="images/vaso moderno1.png" alt="Vaso Personalizado" onclick="openLightbox(this)">
+            <div class="item-overlay"><span>Ver</span></div>
+          </div>
+          <div class="item-info">
+            <p class="desc">Vaso Personalizado</p>
+            <span class="item-tag">Decoração</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-img-wrap">
+            <img src="images/vaso moderno2.png" alt="Vaso Personalizado" onclick="openLightbox(this)">
+            <div class="item-overlay"><span>Ver</span></div>
+          </div>
+          <div class="item-info">
+            <p class="desc">Vaso Personalizado</p>
+            <span class="item-tag">Decoração</span>
+          </div>
+        </div>
       </div>
-
-      <div class="item">
-        <img src="images/vaso moderno1.png" alt="Destaque 2" onclick="openLightbox(this)">
-        <p class="desc">Vaso Personalizado</p>
-        <!-- <p class="price">12€</p> -->
-      </div>
-
-      <div class="item">
-        <img src="images/vaso moderno2.png" alt="Destaque 3" onclick="openLightbox(this)">
-        <p class="desc">Vaso Personalizado</p>
-        <!-- <p class="price">8€</p> -->
-      </div>
-
     </div>
   </section>
 
   <!-- ======= CONTACTO ======= -->
- <section id="contacto" class="contact">
-  <h2>Contacto</h2>
-  <p>Para pedidos personalizados, parcerias ou orçamentos, usa o botão “Pedir orçamento” acima ou contacta:</p>
-  
-  <div class="contact-links">
-    <a href="mailto:effen3d_design@outlook.com" class="contact-item">
-      <img src="images/icon-email.png" alt="Email" class="icon"> effen3d_design@outlook.com
-    </a>
-    <a href="https://instagram.com/effen3d_design" target="_blank" class="contact-item">
-      <img src="images/icon-instagram.png" alt="Instagram" class="icon"> @effen3d_design
-    </a>
-  </div>
-</section>
+  <section id="contacto" class="contact">
+    <div class="section-inner">
+      <p class="section-label">Fala connosco</p>
+      <h2 class="section-title">Contacto</h2>
+      <p class="contact-sub">Para pedidos personalizados, parcerias ou orçamentos, entra em contacto connosco — respondemos rapidamente!</p>
+      <div class="contact-links">
+        <a href="mailto:effen3d_design@outlook.com" class="contact-item">
+          <img src="images/icon-email.png" alt="Email" class="contact-icon">
+          <span>effen3d_design@outlook.com</span>
+        </a>
+        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener" class="contact-item">
+          <img src="images/icon-instagram.png" alt="Instagram" class="contact-icon">
+          <span>@effen3d_design</span>
+        </a>
+      </div>
+      <button type="button" class="btn btn-red" id="openQuote3" style="margin-top:40px;">Pedir orçamento</button>
+    </div>
+  </section>
+
+  <!-- ======= FOOTER ======= -->
+  <footer>
+    <div class="footer-inner">
+      <img src="images/effen3d.png" alt="Effen3D Design" class="footer-logo">
+      <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
+      <div class="footer-links">
+        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:effen3d_design@outlook.com">Email</a>
+      </div>
+    </div>
+  </footer>
 
   <!-- ======= MODAL ORÇAMENTO ======= -->
   <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
@@ -117,25 +184,84 @@ function closeLightbox() {
       <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
       <h3 id="quoteTitle">Pedir orçamento</h3>
       <form id="quoteForm">
-        <label>Nome* <input type="text" id="qName" required></label>
-        <label>Email* <input type="email" id="qEmail" required></label>
+        <label>Nome* <input type="text" id="qName" required placeholder="O teu nome"></label>
+        <label>Email* <input type="email" id="qEmail" required placeholder="o-teu@email.com"></label>
         <label>Categoria
           <select id="qCategory">
             <option>Acessórios</option>
             <option>Brinquedos</option>
             <option>Gaming</option>
             <option>Racing</option>
+            <option>Decoração</option>
+            <option>Gravação Laser</option>
             <option>Outro</option>
           </select>
         </label>
-        <label>Descrição do projeto* <textarea id="qDesc" rows="5" required></textarea></label>
-        <label>Prazo (opcional) <input type="text" id="qDeadline"></label>
-        <button type="submit" class="btn">Enviar pedido</button>
+        <label>Descrição do projeto* <textarea id="qDesc" rows="5" required placeholder="Descreve o que precisas..."></textarea></label>
+        <label>Prazo (opcional) <input type="text" id="qDeadline" placeholder="ex: 2 semanas"></label>
+        <button type="submit" class="btn btn-red" style="width:100%;margin-top:14px;">Enviar pedido</button>
         <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
       </form>
     </div>
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.header-nav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+
+    // Lightbox
+    function openLightbox(img) {
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightbox').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Quote modal
+    const backdrop = document.getElementById('quoteBackdrop');
+    ['openQuote','openQuote2','openQuote3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', () => {
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    document.getElementById('closeQuote').addEventListener('click', () => {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    backdrop.addEventListener('click', e => {
+      if (e.target === backdrop) {
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Animate on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.service-card, .item, .contact-item').forEach(el => {
+      el.classList.add('fade-up');
+      observer.observe(el);
+    });
+  </script>
 </body>
 </html>
+
