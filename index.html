@@ -1,680 +1,259 @@
-/* =============================================
-   EFFEN3D DESIGN — style.css (versão renovada)
-   ============================================= */
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Effen3D Design — Impressão 3D Personalizada em Portugal</title>
+  <meta name="description" content="Effen3D Design — Impressão 3D personalizada em Portugal. Criação e produção de peças exclusivas, brinquedos, acessórios, gaming, racing e decoração, feitos à medida para ti.">
+  <meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, impressão 3D Portugal, criação 3D, modelação 3D, acessórios 3D, brinquedos 3D, decoração 3D, gaming 3D, racing 3D, gravação laser">
+  <meta name="author" content="Effen3D Design">
+  <meta property="og:title" content="Effen3D Design — Impressão 3D Personalizada em Portugal">
+  <meta property="og:description" content="Criação e impressão 3D personalizada — peças únicas, feitas à medida. Descobre os nossos projetos de decoração, gaming, acessórios e muito mais.">
+  <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d.png">
+  <meta property="og:url" content="https://effen84.github.io/Effen3d_Design/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
 
-/* ── Variáveis ── */
-:root {
-  --red:      #e60000;
-  --red-dark: #a30000;
-  --red-glow: rgba(230,0,0,0.35);
-  --bg:       #080808;
-  --bg2:      #0f0f0f;
-  --bg3:      #141414;
-  --border:   rgba(255,255,255,0.07);
-  --text:     #f0f0f0;
-  --muted:    #888;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body:    'DM Sans', sans-serif;
-  --radius:   14px;
-  --transition: 0.3s ease;
-}
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">×</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
 
-/* ── Reset ── */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font-body);
-  background: var(--bg);
-  color: var(--text);
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-img { max-width: 100%; display: block; }
-a { color: inherit; text-decoration: none; }
+  <!-- HEADER -->
+  <header id="header">
+    <a href="#inicio" class="header-logo">
+      <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
+    </a>
+    <nav class="header-nav">
+      <a href="#portfolio">Portefólio</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#contacto">Contacto</a>
+      <button type="button" class="btn-quote" id="openQuote">Pedir orçamento</button>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
 
-/* ── Utilitários ── */
-.section-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.section-label {
-  font-size: .75rem;
-  font-weight: 600;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 10px;
-}
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5vw, 4rem);
-  letter-spacing: .03em;
-  line-height: 1;
-  margin-bottom: 48px;
-}
-.accent { color: var(--red); }
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">Portugal · Impressão 3D &amp; Gravação Laser</p>
+        <h1 class="hero-title">Onde a<br><span class="accent">Imaginação</span><br>Ganha Forma.</h1>
+        <p class="hero-sub">Peças únicas, personalizadas e com qualidade. Do modelo à tua mão.</p>
+        <div class="hero-btns">
+          <a href="#portfolio" class="btn btn-red">Ver Portefólio</a>
+          <button type="button" class="btn btn-ghost" id="openQuote2">Pedir orçamento</button>
+        </div>
+        <div class="hero-badges">
+          <span class="badge">🖨️ Impressão 3D</span>
+          <span class="badge">⚡ Gravação Laser</span>
+          <span class="badge">🎨 Personalizado</span>
+        </div>
+      </div>
+      <div class="hero-visual-wrap">
+        <div class="hero-glow"></div>
+        <img src="images/effen3d_new.png" alt="Effen3D Design Logo" class="hero-visual" loading="eager">
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
 
-/* ── Botões ── */
-.btn {
-  display: inline-block;
-  padding: 13px 28px;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: .95rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-}
-.btn-red {
-  background: var(--red);
-  color: #fff;
-}
-.btn-red:hover {
-  background: #ff1a1a;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px var(--red-glow);
-}
-.btn-ghost {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.25);
-}
-.btn-ghost:hover {
-  border-color: var(--red);
-  color: var(--red);
-  transform: translateY(-2px);
-}
-.btn-quote {
-  background: transparent;
-  color: #fff;
-  border: 1px solid var(--red);
-  padding: 9px 18px;
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: .9rem;
-  cursor: pointer;
-  transition: background var(--transition), transform var(--transition);
-}
-.btn-quote:hover {
-  background: var(--red);
-  transform: translateY(-1px);
-}
+  <!-- SERVIÇOS -->
+  <section id="servicos" class="services">
+    <div class="section-inner">
+      <p class="section-label">O que fazemos</p>
+      <h2 class="section-title">Serviços</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🖨️</div>
+          <h3>Impressão 3D</h3>
+          <p>Peças em PLA de alta qualidade — decoração, gaming, acessórios, figurines e muito mais. Multicolor e acabamentos metálicos disponíveis.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">⚡</div>
+          <h3>Gravação Laser</h3>
+          <p>Gravação em madeira, acrílico, alumínio, couro e outros materiais. Presentes personalizados, tábuas de cozinha, canetas, isqueiros e placas.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Design Personalizado</h3>
+          <p>Tens uma ideia? Nós tornamos realidade. Trabalhamos a partir de imagens, logos ou conceitos, e criamos a peça do zero para ti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* ── HEADER ── */
-header {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  z-index: 9000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 32px;
-  height: 70px;
-  background: rgba(8,8,8,0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid transparent;
-  transition: background var(--transition), border-color var(--transition);
-}
-header.scrolled {
-  background: rgba(8,8,8,0.97);
-  border-bottom-color: var(--border);
-}
-.header-logo { display: flex; align-items: center; }
-.logo-top {
-  height: 58px;
-  width: auto;
-  transition: filter var(--transition), transform var(--transition);
-  border-radius: 8px;
-}
-.logo-top:hover {
-  filter: brightness(1.15) drop-shadow(0 0 10px rgba(100,160,255,0.4));
-  transform: scale(1.05);
-}
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.header-nav a {
-  padding: 8px 14px;
-  border-radius: 6px;
-  font-size: .9rem;
-  font-weight: 500;
-  color: var(--muted);
-  transition: color var(--transition), background var(--transition);
-}
-.header-nav a:hover { color: #fff; background: rgba(255,255,255,0.05); }
+  <!-- PORTFÓLIO -->
+  <section id="portfolio" class="portfolio">
+    <div class="section-inner">
+      <p class="section-label">Os nossos trabalhos</p>
+      <h2 class="section-title">Portefólio</h2>
+      <nav class="portfolio-nav">
+        <a href="acessorios.html">Acessórios</a>
+        <a href="brinquedos.html">Brinquedos</a>
+        <a href="gaming.html">Gaming</a>
+        <a href="racing.html">Racing</a>
+        <a href="decoracao.html">Decoração</a>
+        <a href="natal.html">Natal</a>
+      </nav>
+      <p class="portfolio-sublabel">Em destaque</p>
+      <div class="gallery">
+        <div class="item">
+          <div class="item-img-wrap">
+            <img src="images/vaso moderno.png" alt="Vaso Personalizado" onclick="openLightbox(this)">
+            <div class="item-overlay"><span>Ver</span></div>
+          </div>
+          <div class="item-info">
+            <p class="desc">Vaso Personalizado</p>
+            <span class="item-tag">Decoração</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-img-wrap">
+            <img src="images/vaso moderno1.png" alt="Vaso Personalizado" onclick="openLightbox(this)">
+            <div class="item-overlay"><span>Ver</span></div>
+          </div>
+          <div class="item-info">
+            <p class="desc">Vaso Personalizado</p>
+            <span class="item-tag">Decoração</span>
+          </div>
+        </div>
+        <div class="item">
+          <div class="item-img-wrap">
+            <img src="images/vaso moderno2.png" alt="Vaso Personalizado" onclick="openLightbox(this)">
+            <div class="item-overlay"><span>Ver</span></div>
+          </div>
+          <div class="item-info">
+            <p class="desc">Vaso Personalizado</p>
+            <span class="item-tag">Decoração</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-/* hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-}
-.hamburger span {
-  display: block;
-  width: 24px; height: 2px;
-  background: #fff;
-  border-radius: 2px;
-  transition: all .3s;
-}
-.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact">
+    <div class="section-inner">
+      <p class="section-label">Fala connosco</p>
+      <h2 class="section-title">Contacto</h2>
+      <p class="contact-sub">Para pedidos personalizados, parcerias ou orçamentos, entra em contacto connosco — respondemos rapidamente!</p>
+      <div class="contact-links">
+        <a href="mailto:effen3d_design@outlook.com" class="contact-item">
+          <img src="images/icon-email.png" alt="Email" class="contact-icon">
+          <span>effen3d_design@outlook.com</span>
+        </a>
+        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener" class="contact-item">
+          <img src="images/icon-instagram.png" alt="Instagram" class="contact-icon">
+          <span>@effen3d_design</span>
+        </a>
+      </div>
+      <button type="button" class="btn btn-red" id="openQuote3" style="margin-top:40px;">Pedir orçamento</button>
+    </div>
+  </section>
 
-@media (max-width: 768px) {
-  header { padding: 0 20px; }
-  .hamburger { display: flex; }
-  .header-nav {
-    display: none;
-    position: absolute;
-    top: 70px; left: 0;
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    background: rgba(8,8,8,0.97);
-    border-top: 1px solid var(--border);
-    padding: 16px;
-    gap: 4px;
-  }
-  .header-nav.open { display: flex; }
-  .header-nav a { padding: 12px 16px; font-size: 1rem; }
-  .btn-quote { width: 100%; margin-top: 8px; text-align: center; }
-}
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
+      <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
+      <div class="footer-links">
+        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:effen3d_design@outlook.com">Email</a>
+      </div>
+    </div>
+  </footer>
 
-/* ── HERO ── */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: var(--bg);
-}
-.hero-bg-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(230,0,0,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(230,0,0,0.04) 1px, transparent 1px);
-  background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
-}
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 100px 32px 60px;
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  align-items: center;
-  gap: 60px;
-}
-.hero-eyebrow {
-  font-size: .75rem;
-  font-weight: 600;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 16px;
-}
-.hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(3.5rem, 7vw, 6.5rem);
-  line-height: .95;
-  letter-spacing: .02em;
-  margin-bottom: 20px;
-}
-.hero-sub {
-  color: var(--muted);
-  font-size: 1.1rem;
-  max-width: 420px;
-  margin-bottom: 36px;
-  line-height: 1.7;
-}
-.hero-btns {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
-}
-.hero-badges {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.badge {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-  padding: 6px 14px;
-  font-size: .8rem;
-  color: var(--muted);
-}
-.hero-visual-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero-glow {
-  position: absolute;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: pulse 4s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1); opacity: .7; }
-  50%       { transform: scale(1.12); opacity: 1; }
-}
-.hero-visual {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 480px;
-  height: auto;
-  border-radius: 20px;
-  filter: drop-shadow(0 20px 60px rgba(0,0,0,0.7));
-  transition: filter var(--transition), transform var(--transition);
-  animation: float 6s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-14px); }
-}
-.hero-visual:hover {
-  filter: drop-shadow(0 20px 60px rgba(0,0,0,0.9)) brightness(1.08);
-}
-.hero-scroll-hint {
-  position: absolute;
-  bottom: 32px; left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  font-size: .7rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-.scroll-line {
-  width: 1px; height: 40px;
-  background: linear-gradient(to bottom, var(--muted), transparent);
-  animation: scrollAnim 2s ease-in-out infinite;
-}
-@keyframes scrollAnim {
-  0%   { transform: scaleY(0); transform-origin: top; }
-  50%  { transform: scaleY(1); transform-origin: top; }
-  51%  { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
-}
+  <!-- MODAL ORÇAMENTO -->
+  <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
+    <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
+      <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
+      <h3 id="quoteTitle">Pedir orçamento</h3>
+      <form id="quoteForm">
+        <label>Nome* <input type="text" id="qName" required placeholder="O teu nome"></label>
+        <label>Email* <input type="email" id="qEmail" required placeholder="o-teu@email.com"></label>
+        <label>Categoria
+          <select id="qCategory">
+            <option>Acessórios</option>
+            <option>Brinquedos</option>
+            <option>Gaming</option>
+            <option>Racing</option>
+            <option>Decoração</option>
+            <option>Gravação Laser</option>
+            <option>Outro</option>
+          </select>
+        </label>
+        <label>Descrição do projeto* <textarea id="qDesc" rows="5" required placeholder="Descreve o que precisas..."></textarea></label>
+        <label>Prazo (opcional) <input type="text" id="qDeadline" placeholder="ex: 2 semanas"></label>
+        <button type="submit" class="btn btn-red" style="width:100%;margin-top:14px;">Enviar pedido</button>
+        <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
+      </form>
+    </div>
+  </div>
 
-@media (max-width: 900px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 40px;
-    padding: 120px 20px 60px;
-  }
-  .hero-sub { margin: 0 auto 36px; }
-  .hero-btns { justify-content: center; }
-  .hero-badges { justify-content: center; }
-  .hero-visual-wrap { order: -1; }
-  .hero-visual { max-width: 280px; }
-  .hero-glow { width: 280px; height: 280px; }
-}
+  <script src="script.js"></script>
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
 
-/* ── SERVIÇOS ── */
-.services {
-  padding: 100px 0;
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.service-card {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 32px 28px;
-  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-.service-card:hover {
-  border-color: rgba(230,0,0,0.4);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
-}
-.service-icon { font-size: 2rem; margin-bottom: 16px; }
-.service-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: .04em;
-  margin-bottom: 10px;
-  color: var(--red);
-}
-.service-card p { color: var(--muted); font-size: .95rem; line-height: 1.7; }
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.header-nav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
 
-@media (max-width: 768px) {
-  .services-grid { grid-template-columns: 1fr; }
-}
+    function openLightbox(img) {
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightbox').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-/* ── PORTFOLIO ── */
-.portfolio {
-  padding: 100px 0;
-  background: var(--bg);
-}
-.portfolio-sublabel {
-  font-size: .75rem;
-  font-weight: 600;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 24px;
-}
-.portfolio-nav {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 56px;
-}
-.portfolio-nav a {
-  padding: 10px 20px;
-  border-radius: 100px;
-  border: 1px solid var(--border);
-  background: var(--bg3);
-  font-size: .875rem;
-  font-weight: 500;
-  color: var(--muted);
-  transition: all var(--transition);
-}
-.portfolio-nav a:hover {
-  background: var(--red);
-  border-color: var(--red);
-  color: #fff;
-  transform: translateY(-2px);
-}
+    const backdrop = document.getElementById('quoteBackdrop');
+    ['openQuote','openQuote2','openQuote3'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', () => {
+        backdrop.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    document.getElementById('closeQuote').addEventListener('click', () => {
+      backdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    backdrop.addEventListener('click', e => {
+      if (e.target === backdrop) {
+        backdrop.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
 
-/* Galeria */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-.item {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-.item:hover {
-  border-color: rgba(230,0,0,0.35);
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-}
-.item-img-wrap {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 4/3;
-}
-.item-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .4s ease;
-  cursor: zoom-in;
-}
-.item:hover .item-img-wrap img { transform: scale(1.06); }
-.item-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-.item:hover .item-overlay { opacity: 1; }
-.item-overlay span {
-  border: 1px solid #fff;
-  border-radius: 100px;
-  padding: 8px 20px;
-  font-size: .85rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.item-info {
-  padding: 16px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.item-info .desc {
-  font-size: .95rem;
-  font-weight: 500;
-}
-.item-tag {
-  font-size: .72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  background: rgba(230,0,0,0.15);
-  color: var(--red);
-  border-radius: 100px;
-  padding: 4px 10px;
-}
-
-/* ── CONTACTO ── */
-.contact {
-  padding: 100px 0;
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  text-align: center;
-}
-.contact-sub {
-  color: var(--muted);
-  max-width: 500px;
-  margin: -24px auto 40px;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-.contact-links {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 28px;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text);
-  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-.contact-item:hover {
-  border-color: var(--red);
-  color: var(--red);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-.contact-icon {
-  width: 24px; height: 24px;
-  border-radius: 4px;
-  object-fit: contain;
-}
-
-/* ── FOOTER ── */
-footer {
-  background: #000;
-  border-top: 1px solid var(--border);
-  padding: 40px 24px;
-}
-.footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.footer-logo { height: 36px; width: auto; opacity: .7; }
-.footer-copy { color: var(--muted); font-size: .8rem; }
-.footer-links { display: flex; gap: 20px; }
-.footer-links a {
-  color: var(--muted);
-  font-size: .85rem;
-  transition: color var(--transition);
-}
-.footer-links a:hover { color: var(--red); }
-
-@media (max-width: 600px) {
-  .footer-inner { justify-content: center; text-align: center; }
-}
-
-/* ── LIGHTBOX ── */
-.lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: rgba(0,0,0,0.92);
-  backdrop-filter: blur(8px);
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.lightbox img {
-  max-width: 90vw;
-  max-height: 85vh;
-  border-radius: 12px;
-  box-shadow: 0 0 60px rgba(230,0,0,0.3);
-}
-.lightbox-close {
-  position: absolute;
-  top: 20px; right: 32px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  line-height: 1;
-  transition: color var(--transition);
-}
-.lightbox-close:hover { color: var(--red); }
-
-/* ── MODAL ORÇAMENTO ── */
-.quote-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 9500;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(6px);
-  overflow-y: auto;
-  padding: 20px;
-}
-.quote-backdrop.open { display: block; }
-.quote-modal {
-  position: relative;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  max-width: 560px;
-  margin: 60px auto;
-  padding: 36px 32px;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.7);
-}
-.quote-close {
-  position: absolute;
-  top: 18px; right: 22px;
-  background: none;
-  border: none;
-  color: var(--muted);
-  font-size: 1.8rem;
-  cursor: pointer;
-  line-height: 1;
-  transition: color var(--transition);
-}
-.quote-close:hover { color: #fff; }
-#quoteTitle {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  letter-spacing: .04em;
-  color: var(--red);
-  margin-bottom: 24px;
-}
-#quoteForm label {
-  display: block;
-  font-size: .875rem;
-  font-weight: 500;
-  color: var(--muted);
-  margin-bottom: 16px;
-}
-#quoteForm input,
-#quoteForm select,
-#quoteForm textarea {
-  width: 100%;
-  margin-top: 6px;
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 11px 14px;
-  font-family: var(--font-body);
-  font-size: .95rem;
-  transition: border-color var(--transition);
-  outline: none;
-}
-#quoteForm input:focus,
-#quoteForm select:focus,
-#quoteForm textarea:focus {
-  border-color: var(--red);
-}
-#quoteForm select option { background: var(--bg3); }
-.quote-note {
-  color: var(--muted);
-  font-size: .8rem;
-  margin-top: 10px;
-  text-align: center;
-}
-
-/* ── ANIMAÇÕES DE ENTRADA ── */
-.fade-up {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .5s ease, transform .5s ease;
-}
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.service-card:nth-child(2).fade-up.visible { transition-delay: .1s; }
-.service-card:nth-child(3).fade-up.visible { transition-delay: .2s; }
-.item:nth-child(2).fade-up.visible { transition-delay: .08s; }
-.item:nth-child(3).fade-up.visible { transition-delay: .16s; }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.service-card, .item, .contact-item').forEach(el => {
+      el.classList.add('fade-up');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
