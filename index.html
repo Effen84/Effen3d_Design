@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Effen3D Design — Impressão 3D Personalizada em Portugal</title>
-  <meta name="description" content="Effen3D Design — Impressão 3D personalizada em Portugal. Criação e produção de peças exclusivas, brinquedos, acessórios, gaming, racing e decoração, feitos à medida para ti.">
-  <meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, impressão 3D Portugal, criação 3D, modelação 3D, acessórios 3D, brinquedos 3D, decoração 3D, gaming 3D, racing 3D, gravação laser">
+  <meta name="description" content="Effen3D Design — Impressão 3D personalizada em Portugal.">
+  <meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, impressão 3D Portugal, gravação laser">
   <meta name="author" content="Effen3D Design">
   <meta property="og:title" content="Effen3D Design — Impressão 3D Personalizada em Portugal">
-  <meta property="og:description" content="Criação e impressão 3D personalizada — peças únicas, feitas à medida. Descobre os nossos projetos de decoração, gaming, acessórios e muito mais.">
+  <meta property="og:description" content="Criação e impressão 3D personalizada — peças únicas, feitas à medida.">
   <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d_new.png">
   <meta property="og:url" content="https://effen84.github.io/Effen3d_Design/">
   <meta name="twitter:card" content="summary_large_image">
@@ -19,13 +19,11 @@
 </head>
 <body>
 
-  <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close">×</span>
     <img id="lightboxImg" src="" alt="">
   </div>
 
-  <!-- HEADER -->
   <header id="header">
     <a href="#inicio" class="header-logo">
       <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
@@ -41,7 +39,6 @@
     </button>
   </header>
 
-  <!-- HERO -->
   <section id="inicio" class="hero">
     <div class="hero-bg-grid"></div>
     <div class="hero-inner">
@@ -70,7 +67,6 @@
     </div>
   </section>
 
-  <!-- SERVIÇOS -->
   <section id="servicos" class="services">
     <div class="section-inner">
       <p class="section-label">O que fazemos</p>
@@ -95,7 +91,6 @@
     </div>
   </section>
 
-  <!-- PARCEIROS / BANNER BPF -->
   <section class="sponsor-section">
     <div class="section-inner">
       <p class="section-label">Patrocínio Oficial</p>
@@ -111,23 +106,17 @@
         <div class="sp-corner tr"></div>
         <div class="sp-corner bl"></div>
         <div class="sp-corner br"></div>
-
         <div class="sp-left">
           <p class="sp-eyebrow">Patrocinador Oficial</p>
           <h3 class="sp-title">Binde Pá Festa<br>Team Race</h3>
           <p class="sp-sub">Gran Turismo 7 · Portugal</p>
         </div>
-
         <div class="sp-center">
-          <span class="sp-x">×</span>
-          <div class="sp-logos">
-            <div class="sp-logo-box">
-              <img src="images/effen3d_new.png" alt="Effen3D Design">
-            </div>
+          <div class="sp-logo-box-wide">
+            <img src="images/effen3d_bpf.png" alt="Effen3D Design x BPF Team Race">
           </div>
           <p class="sp-leagues">3.ª Liga Veteranos · 5.ª Liga BPF.TR</p>
         </div>
-
         <div class="sp-right">
           <span class="sp-btn">
             Visitar BPF.TR
@@ -140,7 +129,6 @@
     </div>
   </section>
 
-  <!-- PORTFÓLIO -->
   <section id="portfolio" class="portfolio">
     <div class="section-inner">
       <p class="section-label">Os nossos trabalhos</p>
@@ -189,7 +177,6 @@
     </div>
   </section>
 
-  <!-- CONTACTO -->
   <section id="contacto" class="contact">
     <div class="section-inner">
       <p class="section-label">Fala connosco</p>
@@ -209,7 +196,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
@@ -222,7 +208,6 @@
     </div>
   </footer>
 
-  <!-- MODAL ORÇAMENTO -->
   <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
     <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
       <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
@@ -252,54 +237,19 @@
   <script src="script.js"></script>
   <script>
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
+    window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 60); });
     const hamburger = document.getElementById('hamburger');
     const nav = document.querySelector('.header-nav');
-    hamburger.addEventListener('click', () => {
-      nav.classList.toggle('open');
-      hamburger.classList.toggle('active');
-    });
-
-    function openLightbox(img) {
-      document.getElementById('lightboxImg').src = img.src;
-      document.getElementById('lightbox').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-      document.body.style.overflow = '';
-    }
+    hamburger.addEventListener('click', () => { nav.classList.toggle('open'); hamburger.classList.toggle('active'); });
+    function openLightbox(img) { document.getElementById('lightboxImg').src = img.src; document.getElementById('lightbox').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.body.style.overflow = ''; }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
     const backdrop = document.getElementById('quoteBackdrop');
-    ['openQuote','openQuote2','openQuote3'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('click', () => {
-        backdrop.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
-    });
-    document.getElementById('closeQuote').addEventListener('click', () => {
-      backdrop.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-    backdrop.addEventListener('click', e => {
-      if (e.target === backdrop) {
-        backdrop.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.service-card, .item, .contact-item').forEach(el => {
-      el.classList.add('fade-up');
-      observer.observe(el);
-    });
+    ['openQuote','openQuote2','openQuote3'].forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('click', () => { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; }); });
+    document.getElementById('closeQuote').addEventListener('click', () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; });
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) { backdrop.classList.remove('open'); document.body.style.overflow = ''; } });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.service-card, .item, .contact-item').forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
   </script>
 </body>
 </html>
