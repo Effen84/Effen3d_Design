@@ -686,7 +686,7 @@ footer {
 .sp-x { font-size: 1.5rem; color: var(--red); font-weight: 500; }
 .sp-logos { display: flex; align-items: center; gap: 16px; }
 .sp-logo-box {
-  width: 36px; height: 36px;
+  width: 15px; height: 15px;
   border-radius: 6px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
@@ -695,7 +695,7 @@ footer {
   transition: border-color 0.3s ease;
 }
 .sponsor-banner:hover .sp-logo-box { border-color: rgba(230,0,0,0.3); }
-.sp-logo-box img { width: 28px; height: 28px; object-fit: contain; }
+.sp-logo-box img { width: 15px; height: 15px; object-fit: contain; }
 .sp-leagues { font-size: 0.7rem; color: #555; letter-spacing: 0.1em; text-transform: uppercase; }
 .sp-right { z-index: 1; flex-shrink: 0; }
 .sp-btn {
