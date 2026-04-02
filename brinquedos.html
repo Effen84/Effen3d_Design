@@ -1,177 +1,151 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Effen3D Design – Brinquedos</title>
-  <meta name="author" content="Effen3D Design">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brinquedos — Effen3D Design</title>
+  <meta name="description" content="Peças de impressão 3D para gaming — acessórios, suportes, figurines e muito mais. Effen3D Design, Portugal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
-<header>
-  <a href="index.html" style="color:#f00;text-decoration:none;font-weight:700">EFFEN3D DESIGN</a>
-  <nav>
-    <a href="index.html#inicio">Início</a>
-    <a href="index.html#servicos">Serviços</a>
-    <a href="index.html#contacto">Contacto</a>
-    <button type="button" class="btn btn-outline" id="openQuote">Pedir orçamento</button>
-  </nav>
-</header>
 
-<!-- ====== CONTEÚDO PRINCIPAL ====== -->
-<section class="portfolio" style="padding-top:120px">
-  <h2>Brinquedos</h2>
-
-  <!-- Grelha com várias filas (4 por linha) -->
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; justify-items:center; margin-top:2rem;">
-
-    <!-- Produto 1 - Cinnamoroll -->
-    <div class="product text-center" onclick="openPopup('popupCinnamoroll')">
-      <img src="images/cinnamoroll1.png" alt="Cinnamoroll" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
-      <p class="text-lg mt-2">5 €</p>
-    </div>
-
-    <!-- Produto 2 - Kuromi -->
-    <div class="product text-center" onclick="openPopup('popupKuromi')">
-      <img src="images/kuromi1.png" alt="Kuromi" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
-      <p class="text-lg mt-2">10 €</p>
-    </div>
-
-    <!-- Produto 3 - Super Mario -->
-    <div class="product text-center" onclick="openPopup('popupSuperMario')">
-      <img src="images/supermario1.png" alt="Super Mario" class="rounded-2xl shadow-lg w-64 h-64 object-cover transition-transform duration-300 hover:scale-105 cursor-pointer">
-      <p class="text-lg mt-2">23 €</p>
-    </div>
-
+  <!-- LIGHTBOX SIMPLES -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">×</span>
+    <img id="lightboxImg" src="" alt="">
   </div>
 
-  <p style="margin-top:26px; text-align:center;">
-    <a href="index.html#portfolio" class="btn">← Voltar ao Portefólio</a>
-  </p>
-</section>
-
-<!-- ===== POPUPS ===== -->
-
-<!-- Popup Cinnamoroll -->
-<div id="popupCinnamoroll" class="popup hidden">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('popupCinnamoroll')">&times;</span>
-    <div class="popup-images">
-      <img src="images/cinnamoroll1.png" alt="Cinnamoroll - Foto 1">
-      <img src="images/cinnamoroll2.png" alt="Cinnamoroll - Foto 2">
-    </div>
-  </div>
-</div>
-
-<!-- Popup Kuromi -->
-<div id="popupKuromi" class="popup hidden">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('popupKuromi')">&times;</span>
-    <div class="popup-images">
-      <img src="images/kuromi1.png" alt="Kuromi - Foto 1">
-      <img src="images/kuromi2.png" alt="Kuromi - Foto 2">
-    </div>
-  </div>
-</div>
-
-<!-- Popup Super Mario -->
-<div id="popupSuperMario" class="popup hidden">
-  <div class="popup-content">
-    <span class="close" onclick="closePopup('popupSuperMario')">&times;</span>
-    <div class="popup-images">
-      <img src="images/supermario1.png" alt="Super Mario - Foto 1">
-      <img src="images/supermario2.png" alt="Super Mario - Foto 2">
-      <img src="images/supermario3.png" alt="Super Mario - Foto 3">
-      <img src="images/supermario4.png" alt="Super Mario - Foto 4">
-      <img src="images/supermario5.png" alt="Super Mario - Foto 5">
-    </div>
-  </div>
-</div>
-
-  
-<!-- ====== LIGHTBOX E MODAL ORÇAMENTO (herdado do index) ====== -->
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <button class="close" aria-label="Fechar (Esc)">&times;</button>
-  <img class="lightbox-content" id="lightbox-img" alt="">
-</div>
-
-<div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
-  <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
-    <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
-    <h3 id="quoteTitle">Pedir orçamento</h3>
-    <form id="quoteForm">
-      <label>Nome <input type="text" id="qName" required></label>
-      <label>Email <input type="email" id="qEmail" required></label>
-      <label>Categoria
-        <select id="qCategory">
-          <option>Acessórios</option>
-          <option>Brinquedos</option>
-          <option>Gaming</option>
-          <option>Racing</option>
-          <option>Decoração</option>
-          <option>Outro</option>
-        </select>
-      </label>
-      <label>Descrição do projeto <textarea id="qDesc" rows="5" required></textarea></label>
-      <label>Prazo (opcional) <input type="text" id="qDeadline"></label>
-      <button type="submit" class="btn">Enviar pedido</button>
-      <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
-    </form>
-  </div>
-</div>
-
-<!-- ====== JAVASCRIPT ====== -->
-<script>
-function openPopup(id) {
-  document.getElementById(id).classList.remove("hidden");
-}
-function closePopup(id) {
-  document.getElementById(id).classList.add("hidden");
-}
-
-// Zoom com setas
-window.addEventListener("DOMContentLoaded", () => {
-  const popupImages = document.querySelectorAll(".popup-images img");
-  let currentIndex = 0;
-  let zoom = null;
-
-  popupImages.forEach((img, index) => {
-    img.addEventListener("click", () => {
-      currentIndex = index;
-      openZoom(img.src);
-    });
-  });
-
-  function openZoom(src) {
-    zoom = document.createElement("div");
-    zoom.classList.add("zoom-overlay");
-    zoom.innerHTML = `
-      <div class="zoom-content">
-        <span class="arrow left">&#10094;</span>
-        <img src="${src}" alt="Imagem Grande">
-        <span class="arrow right">&#10095;</span>
+  <!-- MODAL DE PRODUTO -->
+  <div id="productModal" class="product-modal">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title" id="modalTitle"></span>
+        <button class="product-modal-close" onclick="closeModal()">×</button>
       </div>
-    `;
-    document.body.appendChild(zoom);
+      <div class="product-modal-gallery" id="modalGallery"></div>
+      <div class="product-modal-footer">
+        <p>Clica numa foto para ampliar</p>
+        <a href="https://wa.me/351928372914?text=Ol%C3%A1!%20Tenho%20interesse%20neste%20produto%20da%20Effen3D%20Design." target="_blank" class="btn btn-red">Pedir orçamento</a>
+      </div>
+    </div>
+  </div>
 
-    const arrows = zoom.querySelectorAll(".arrow");
-    arrows[0].addEventListener("click", () => changeImage(-1));
-    arrows[1].addEventListener("click", () => changeImage(1));
-    zoom.addEventListener("click", (e) => {
-      if (e.target === zoom) zoom.remove();
+  <!-- HEADER -->
+  <header id="header">
+    <a href="index.html" class="header-logo">
+      <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
+    </a>
+    <nav class="header-nav">
+      <a href="index.html#portfolio">Portefólio</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#contacto">Contacto</a>
+      <button type="button" class="btn-quote" onclick="window.location='https://wa.me/351928372914'">Pedir orçamento</button>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <section class="cat-page">
+    <div class="section-inner">
+      <p class="section-label"><a href="index.html#portfolio" style="color:var(--red);text-decoration:none;">← Portefólio</a></p>
+      <h1 class="cat-page-title">🧸 Brinquedos</h1>
+      <p class="cat-page-sub">Clica num produto para ver todas as fotos</p>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- Os produtos são gerados pelo JavaScript abaixo -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
+      <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
+      <div class="footer-links">
+        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:effen3d_design@outlook.com">Email</a>
+        <a href="https://wa.me/351928372914" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════════════
+    // PRODUTOS — edita aqui quando adicionares fotos
+    // Cada produto tem: nome e array de imagens
+    // ═══════════════════════════════════════════════
+    const produtos = [
+      // EXEMPLO — substitui pelas tuas fotos reais:
+      // {
+      //   nome: "Suporte de Comando",
+      //   fotos: ["images/gaming/comando1.jpg", "images/gaming/comando2.jpg", "images/gaming/comando3.jpg"]
+      // },
+    ];
+    // ═══════════════════════════════════════════════
+
+    // Renderizar produtos
+    const grid = document.getElementById('productsGrid');
+    if (produtos.length === 0) {
+      grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:60px 0;">Em breve novos produtos! 🚀</p>';
+    } else {
+      produtos.forEach((p, i) => {
+        grid.innerHTML += `
+          <div class="product-card" onclick="openModal(${i})">
+            <div class="product-thumb">
+              <img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">
+              <div class="product-overlay"><span>Ver mais</span></div>
+            </div>
+            <div class="product-info">
+              <p class="product-name">${p.nome}</p>
+              <p class="product-count">${p.fotos.length} foto${p.fotos.length > 1 ? 's' : ''}</p>
+            </div>
+          </div>`;
+      });
+    }
+
+    // Modal
+    function openModal(i) {
+      const p = produtos[i];
+      document.getElementById('modalTitle').textContent = p.nome;
+      document.getElementById('modalGallery').innerHTML = p.fotos.map(f =>
+        `<img src="${f}" alt="${p.nome}" onclick="openLightbox(this)" loading="lazy">`
+      ).join('');
+      document.getElementById('productModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      document.getElementById('productModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('productModal').addEventListener('click', e => {
+      if (e.target === document.getElementById('productModal')) closeModal();
     });
-  }
 
-  function changeImage(direction) {
-    const images = Array.from(document.querySelectorAll(".popup-images img"));
-    currentIndex = (currentIndex + direction + images.length) % images.length;
-    const newSrc = images[currentIndex].src;
-    zoom.querySelector("img").src = newSrc;
-  }
-});
-</script>
+    // Lightbox
+    function openLightbox(img) {
+      document.getElementById('lightboxImg').src = img.src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
 
-<script src="script.js"></script>
+    // Header scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+
+    // Hamburger
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.querySelector('.header-nav').classList.toggle('open');
+      document.getElementById('hamburger').classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
