@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Acessórios — Effen3D Design</title>
-  <meta name="description" content="Peças de impressão 3D para gaming — acessórios, suportes, figurines e muito mais. Effen3D Design, Portugal.">
+  <meta name="description" content="Acessórios em impressão 3D feitos à medida — suportes, organizadores e muito mais. Effen3D Design, Portugal.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,13 +12,11 @@
 </head>
 <body>
 
-  <!-- LIGHTBOX SIMPLES -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close">×</span>
     <img id="lightboxImg" src="" alt="">
   </div>
 
-  <!-- MODAL DE PRODUTO -->
   <div id="productModal" class="product-modal">
     <div class="product-modal-inner">
       <div class="product-modal-header">
@@ -33,7 +31,6 @@
     </div>
   </div>
 
-  <!-- HEADER -->
   <header id="header">
     <a href="index.html" class="header-logo">
       <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
@@ -49,20 +46,15 @@
     </button>
   </header>
 
-  <!-- CONTEÚDO -->
   <section class="cat-page">
     <div class="section-inner">
       <p class="section-label"><a href="index.html#portfolio" style="color:var(--red);text-decoration:none;">← Portefólio</a></p>
       <h1 class="cat-page-title">🔧 Acessórios</h1>
       <p class="cat-page-sub">Clica num produto para ver todas as fotos</p>
-
-      <div class="products-grid" id="productsGrid">
-        <!-- Os produtos são gerados pelo JavaScript abaixo -->
-      </div>
+      <div class="products-grid" id="productsGrid"></div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
@@ -76,40 +68,55 @@
   </footer>
 
   <script>
-    // ═══════════════════════════════════════════════
-    // PRODUTOS — edita aqui quando adicionares fotos
-    // Cada produto tem: nome e array de imagens
-    // ═══════════════════════════════════════════════
     const produtos = [
-      // EXEMPLO — substitui pelas tuas fotos reais:
-      // {
-      //   nome: "Suporte de Comando",
-      //   fotos: ["images/gaming/comando1.jpg", "images/gaming/comando2.jpg", "images/gaming/comando3.jpg"]
-      // },
+      {
+        nome: "Caixinha de Joias",
+        fotos: [
+          "images/acessorios_joelheira_1.png",
+          "images/acessorios_joelheira_2.png",
+          "images/acessorios_joelheira_3.png"
+        ]
+      },
+      {
+        nome: "Suporte Portátil",
+        fotos: [
+          "images/acessorios_portatil_1.png",
+          "images/acessorios_portatil_2.png",
+          "images/acessorios_portatil_3.png"
+        ]
+      },
+      {
+        nome: "Suporte Mesa Headset",
+        fotos: [
+          "images/acessorios_headset_mesa_1.png",
+          "images/acessorios_headset_mesa_2.png",
+          "images/acessorios_headset_mesa_3.png"
+        ]
+      },
+      {
+        nome: "Suporte Headset",
+        fotos: [
+          "images/acessorios_headset_1.png",
+          "images/acessorios_headset_2.png"
+        ]
+      }
     ];
-    // ═══════════════════════════════════════════════
 
-    // Renderizar produtos
     const grid = document.getElementById('productsGrid');
-    if (produtos.length === 0) {
-      grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:60px 0;">Em breve novos produtos! 🚀</p>';
-    } else {
-      produtos.forEach((p, i) => {
-        grid.innerHTML += `
-          <div class="product-card" onclick="openModal(${i})">
-            <div class="product-thumb">
-              <img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">
-              <div class="product-overlay"><span>Ver mais</span></div>
-            </div>
-            <div class="product-info">
-              <p class="product-name">${p.nome}</p>
-              <p class="product-count">${p.fotos.length} foto${p.fotos.length > 1 ? 's' : ''}</p>
-            </div>
-          </div>`;
-      });
-    }
+    produtos.forEach((p, i) => {
+      grid.innerHTML += `
+        <div class="product-card" onclick="openModal(${i})">
+          <div class="product-thumb">
+            <img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">
+            <div class="product-overlay"><span>Ver mais</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">${p.nome}</p>
+            <p class="product-count">${p.fotos.length} foto${p.fotos.length > 1 ? 's' : ''}</p>
+          </div>
+        </div>`;
+    });
 
-    // Modal
     function openModal(i) {
       const p = produtos[i];
       document.getElementById('modalTitle').textContent = p.nome;
@@ -126,8 +133,6 @@
     document.getElementById('productModal').addEventListener('click', e => {
       if (e.target === document.getElementById('productModal')) closeModal();
     });
-
-    // Lightbox
     function openLightbox(img) {
       document.getElementById('lightboxImg').src = img.src;
       document.getElementById('lightbox').style.display = 'flex';
@@ -136,12 +141,8 @@
       document.getElementById('lightbox').style.display = 'none';
     }
     document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
-
-    // Header scroll
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
-
-    // Hamburger
     document.getElementById('hamburger').addEventListener('click', () => {
       document.querySelector('.header-nav').classList.toggle('open');
       document.getElementById('hamburger').classList.toggle('active');
