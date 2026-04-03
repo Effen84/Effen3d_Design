@@ -1,39 +1,235 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Lightbox/Trabalhos — Effen3D Design</title>
-  <meta name="description" content="Peças de impressão 3D para gaming — acessórios, suportes, figurines e muito mais. Effen3D Design, Portugal.">
+  <title>Lightbox & Trabalhos — Effen3D Design</title>
+  <meta name="description" content="Lightboxes e trabalhos personalizados em impressão 3D — Effen3D Design Portugal.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
+  <style>
+    /* ── Hero banner da categoria ── */
+    .cat-hero {
+      position: relative;
+      height: 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #050505;
+      margin-bottom: 0;
+    }
+    .cat-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      opacity: 0.35;
+      filter: blur(2px) saturate(1.2);
+    }
+    .cat-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.85) 100%);
+    }
+    .cat-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .cat-hero-content .section-label {
+      margin-bottom: 12px;
+    }
+    .cat-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      letter-spacing: .06em;
+      line-height: 1;
+      color: #fff;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+    }
+    .cat-hero-title span { color: var(--red); }
+    .cat-hero-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-top: 14px;
+      letter-spacing: .02em;
+    }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      padding: 20px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .breadcrumb a { color: var(--muted); transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--red); }
+    .breadcrumb span { color: #fff; }
+
+    /* ── Página principal ── */
+    .cat-page { padding: 0 0 100px; background: var(--bg); min-height: 100vh; }
+    .cat-page .section-inner { padding-top: 40px; }
+
+    /* ── Grelha de produtos ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    /* ── Modal de produto ── */
+    .product-modal {
+      display: none;
+      position: fixed; inset: 0;
+      z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      overflow-y: auto;
+      padding: 20px;
+    }
+    .product-modal.open { display: block; }
+    .product-modal-inner {
+      max-width: 1000px;
+      margin: 60px auto;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      animation: modalIn .3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .product-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(230,0,0,0.04);
+    }
+    .product-modal-title {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      letter-spacing: .05em;
+      color: var(--red);
+    }
+    .product-modal-close {
+      background: none; border: none;
+      color: var(--muted); font-size: 2rem;
+      cursor: pointer; line-height: 1;
+      transition: color var(--transition);
+      padding: 4px 8px;
+    }
+    .product-modal-close:hover { color: #fff; }
+
+    .product-modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      padding: 20px;
+    }
+    .product-modal-gallery img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: zoom-in;
+      transition: transform var(--transition), box-shadow var(--transition);
+      border: 1px solid var(--border);
+    }
+    .product-modal-gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    .product-modal-footer {
+      padding: 16px 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: rgba(0,0,0,0.2);
+    }
+    .product-modal-footer p { color: var(--muted); font-size: .85rem; }
+
+    /* ── Lightbox de imagem individual ── */
+    .img-lightbox {
+      display: none;
+      position: fixed; inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.97);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .img-lightbox.open { display: flex; }
+    .img-lightbox img {
+      max-width: 90vw;
+      max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 0 80px rgba(230,0,0,0.2);
+      object-fit: contain;
+    }
+    .img-lightbox-close {
+      position: absolute;
+      top: 20px; right: 32px;
+      font-size: 2.5rem;
+      color: #fff;
+      cursor: pointer;
+      line-height: 1;
+      transition: color var(--transition);
+      background: none; border: none;
+    }
+    .img-lightbox-close:hover { color: var(--red); }
+
+    /* Nav do lightbox */
+    .lb-nav {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 1.8rem;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+      z-index: 1;
+    }
+    .lb-nav:hover { background: var(--red); border-color: var(--red); }
+    .lb-nav.prev { left: 20px; }
+    .lb-nav.next { right: 20px; }
+    .lb-counter {
+      position: absolute;
+      bottom: 20px; left: 50%; transform: translateX(-50%);
+      color: var(--muted);
+      font-size: .8rem;
+      letter-spacing: .1em;
+    }
+
+    @media (max-width: 600px) {
+      .cat-hero { height: 260px; }
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .product-modal-gallery { grid-template-columns: 1fr 1fr; }
+      .lb-nav { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- LIGHTBOX SIMPLES -->
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">×</span>
-    <img id="lightboxImg" src="" alt="">
-  </div>
-
-  <!-- MODAL DE PRODUTO -->
-  <div id="productModal" class="product-modal">
-    <div class="product-modal-inner">
-      <div class="product-modal-header">
-        <span class="product-modal-title" id="modalTitle"></span>
-        <button class="product-modal-close" onclick="closeModal()">×</button>
-      </div>
-      <div class="product-modal-gallery" id="modalGallery"></div>
-      <div class="product-modal-footer">
-        <p>Clica numa foto para ampliar</p>
-        <a href="https://wa.me/351928372914?text=Ol%C3%A1!%20Tenho%20interesse%20neste%20produto%20da%20Effen3D%20Design." target="_blank" class="btn btn-red">Pedir orçamento</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- HEADER -->
+  <!-- ── Header ── -->
   <header id="header">
     <a href="index.html" class="header-logo">
       <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
@@ -42,105 +238,368 @@
       <a href="index.html#portfolio">Portefólio</a>
       <a href="index.html#servicos">Serviços</a>
       <a href="index.html#contacto">Contacto</a>
-      <button type="button" class="btn-quote" onclick="window.location='https://wa.me/351928372914'">Pedir orçamento</button>
+      <button type="button" class="btn-quote" id="openQuote">Pedir orçamento</button>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </header>
 
-  <!-- CONTEÚDO -->
+  <!-- ── Hero da categoria ── -->
+  <div class="cat-hero">
+    <img src="images/lightbox1.png" alt="Lightbox Effen3D Design" class="cat-hero-img">
+    <div class="cat-hero-overlay"></div>
+    <div class="cat-hero-content">
+      <p class="section-label">Portefólio</p>
+      <h1 class="cat-hero-title">💡 <span>Lightbox</span> & Trabalhos</h1>
+      <p class="cat-hero-sub">Peças personalizadas com identidade — logos, nomes e marcas em 3D</p>
+    </div>
+  </div>
+
+  <!-- ── Conteúdo ── -->
   <section class="cat-page">
     <div class="section-inner">
-      <p class="section-label"><a href="index.html#portfolio" style="color:var(--red);text-decoration:none;">← Portefólio</a></p>
-      <h1 class="cat-page-title">💡 Lightbox/Trabalhos</h1>
-      <p class="cat-page-sub">Clica num produto para ver todas as fotos</p>
 
-      <div class="products-grid" id="productsGrid">
-        <!-- Os produtos são gerados pelo JavaScript abaixo -->
+      <div class="breadcrumb">
+        <a href="index.html">Início</a>
+        <span>›</span>
+        <a href="index.html#portfolio">Portefólio</a>
+        <span>›</span>
+        <span>Lightbox & Trabalhos</span>
       </div>
+
+      <div class="products-grid" style="margin-top: 40px;">
+
+        <!-- Produto 1: Neto's Barbershop -->
+        <div class="product-card" onclick="openModal('netos')">
+          <div class="product-thumb">
+            <img src="images/lightbox2.png" alt="Neto's Barbershop" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Neto's Barbershop</p>
+            <p class="product-count">2 fotos</p>
+          </div>
+        </div>
+
+        <!-- Produto 2: Mercearia M -->
+        <div class="product-card" onclick="openModal('mercearia')">
+          <div class="product-thumb">
+            <img src="images/lightbox4.png" alt="Mercearia M" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Mercearia M</p>
+            <p class="product-count">3 fotos</p>
+          </div>
+        </div>
+
+        <!-- Produto 3: L.M.Oliveira #223 -->
+        <div class="product-card" onclick="openModal('lmoliveira')">
+          <div class="product-thumb">
+            <img src="images/lightbox7.png" alt="L.M.Oliveira #223" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">L.M.Oliveira #223</p>
+            <p class="product-count">3 fotos</p>
+          </div>
+        </div>
+
+        <!-- Produto 4: Andre Tempest -->
+        <div class="product-card" onclick="openModal('tempest')">
+          <div class="product-thumb">
+            <img src="images/lightbox10.png" alt="Andre Tempest" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Andre Tempest</p>
+            <p class="product-count">2 fotos</p>
+          </div>
+        </div>
+
+        <!-- Produto 5: Matilda -->
+        <div class="product-card" onclick="openModal('matilda')">
+          <div class="product-thumb">
+            <img src="images/lightbox12.png" alt="Matilda" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Matilda</p>
+            <p class="product-count">4 fotos</p>
+          </div>
+        </div>
+
+      </div><!-- /products-grid -->
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ══ MODAIS DE PRODUTO ══ -->
+
+  <!-- Neto's Barbershop -->
+  <div class="product-modal" id="modal-netos">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">Neto's Barbershop</span>
+        <button class="product-modal-close" onclick="closeModal('netos')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/lightbox2.png" alt="Neto's Barbershop 1" onclick="openLB(this, 'netos', 0)">
+        <img src="images/lightbox3.png" alt="Neto's Barbershop 2" onclick="openLB(this, 'netos', 1)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Lightbox personalizado · Impressão 3D multicolor</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal1">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mercearia M -->
+  <div class="product-modal" id="modal-mercearia">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">Mercearia M</span>
+        <button class="product-modal-close" onclick="closeModal('mercearia')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/lightbox4.png" alt="Mercearia M 1" onclick="openLB(this, 'mercearia', 0)">
+        <img src="images/lightbox5.png" alt="Mercearia M 2" onclick="openLB(this, 'mercearia', 1)">
+        <img src="images/lightbox6.png" alt="Mercearia M 3" onclick="openLB(this, 'mercearia', 2)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Lightbox personalizado · Impressão 3D multicolor</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal2">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- L.M.Oliveira #223 -->
+  <div class="product-modal" id="modal-lmoliveira">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">L.M.Oliveira #223</span>
+        <button class="product-modal-close" onclick="closeModal('lmoliveira')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/lightbox7.png" alt="L.M.Oliveira 1" onclick="openLB(this, 'lmoliveira', 0)">
+        <img src="images/lightbox8.png" alt="L.M.Oliveira 2" onclick="openLB(this, 'lmoliveira', 1)">
+        <img src="images/lightbox9.png" alt="L.M.Oliveira 3" onclick="openLB(this, 'lmoliveira', 2)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Placa de piloto personalizada · Impressão 3D multicolor</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal3">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Andre Tempest -->
+  <div class="product-modal" id="modal-tempest">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">Andre Tempest</span>
+        <button class="product-modal-close" onclick="closeModal('tempest')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/lightbox10.png" alt="Andre Tempest 1" onclick="openLB(this, 'tempest', 0)">
+        <img src="images/lightbox11.png" alt="Andre Tempest 2" onclick="openLB(this, 'tempest', 1)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Lightbox de piloto personalizado · Impressão 3D multicolor</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal4">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Matilda -->
+  <div class="product-modal" id="modal-matilda">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">Matilda</span>
+        <button class="product-modal-close" onclick="closeModal('matilda')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/lightbox12.png" alt="Matilda 1" onclick="openLB(this, 'matilda', 0)">
+        <img src="images/lightbox13.png" alt="Matilda 2" onclick="openLB(this, 'matilda', 1)">
+        <img src="images/lightbox14.png" alt="Matilda 3" onclick="openLB(this, 'matilda', 2)">
+        <img src="images/lightbox15.png" alt="Matilda 4" onclick="openLB(this, 'matilda', 3)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Nome 3D personalizado · Impressão 3D bicolor</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal5">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ IMAGE LIGHTBOX ══ -->
+  <div class="img-lightbox" id="imgLightbox">
+    <button class="img-lightbox-close" onclick="closeLB()">×</button>
+    <button class="lb-nav prev" onclick="lbNav(-1)">‹</button>
+    <img id="lbImg" src="" alt="">
+    <button class="lb-nav next" onclick="lbNav(1)">›</button>
+    <span class="lb-counter" id="lbCounter"></span>
+  </div>
+
+  <!-- ── Footer ── -->
   <footer>
     <div class="footer-inner">
       <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
       <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
       <div class="footer-links">
         <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
-        <a href="/cdn-cgi/l/email-protection#01646767646f32655e65647268666f416e74756d6e6e6a2f626e6c">Email</a>
+        <a href="mailto:effen3d_design@outlook.com">Email</a>
         <a href="https://wa.me/351928372914" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ═══════════════════════════════════════════════
-    // PRODUTOS — edita aqui quando adicionares fotos
-    // Cada produto tem: nome e array de imagens
-    // ═══════════════════════════════════════════════
-    const produtos = [
-      // EXEMPLO — substitui pelas tuas fotos reais:
-      // {
-      //   nome: "Suporte de Comando",
-      //   fotos: ["images/gaming/comando1.jpg", "images/gaming/comando2.jpg", "images/gaming/comando3.jpg"]
-      // },
-    ];
-    // ═══════════════════════════════════════════════
+  <!-- ── Modal de orçamento ── -->
+  <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
+    <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
+      <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
+      <h3 id="quoteTitle">Pedir orçamento</h3>
+      <form id="quoteForm">
+        <label>Nome* <input type="text" id="qName" required placeholder="O teu nome"></label>
+        <label>Email* <input type="email" id="qEmail" required placeholder="o-teu@email.com"></label>
+        <label>Categoria
+          <select id="qCategory">
+            <option selected>Lightbox / Trabalhos</option>
+            <option>Acessórios</option>
+            <option>Brinquedos</option>
+            <option>Gaming</option>
+            <option>Racing</option>
+            <option>Decoração</option>
+            <option>Gravação Laser</option>
+            <option>Outro</option>
+          </select>
+        </label>
+        <label>Descrição do projeto* <textarea id="qDesc" rows="5" required placeholder="Descreve o que precisas..."></textarea></label>
+        <label>Prazo (opcional) <input type="text" id="qDeadline" placeholder="ex: 2 semanas"></label>
+        <button type="submit" class="btn btn-red" style="width:100%;margin-top:14px;">Enviar pedido</button>
+        <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
+      </form>
+    </div>
+  </div>
 
-    // Renderizar produtos
-    const grid = document.getElementById('productsGrid');
-    if (produtos.length === 0) {
-      grid.innerHTML = '<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:60px 0;">Em breve novos produtos! 🚀</p>';
-    } else {
-      produtos.forEach((p, i) => {
-        grid.innerHTML += `
-          <div class="product-card" onclick="openModal(${i})">
-            <div class="product-thumb">
-              <img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">
-              <div class="product-overlay"><span>Ver mais</span></div>
-            </div>
-            <div class="product-info">
-              <p class="product-name">${p.nome}</p>
-              <p class="product-count">${p.fotos.length} foto${p.fotos.length > 1 ? 's' : ''}</p>
-            </div>
-          </div>`;
-      });
-    }
-
-    // Modal
-    function openModal(i) {
-      const p = produtos[i];
-      document.getElementById('modalTitle').textContent = p.nome;
-      document.getElementById('modalGallery').innerHTML = p.fotos.map(f =>
-        `<img src="${f}" alt="${p.nome}" onclick="openLightbox(this)" loading="lazy">`
-      ).join('');
-      document.getElementById('productModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal() {
-      document.getElementById('productModal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    document.getElementById('productModal').addEventListener('click', e => {
-      if (e.target === document.getElementById('productModal')) closeModal();
+  <script src="script.js"></script>
+  <script>
+    // ── Header scroll ──
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // Lightbox
-    function openLightbox(img) {
-      document.getElementById('lightboxImg').src = img.src;
-      document.getElementById('lightbox').style.display = 'flex';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
+    // ── Hamburger ──
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('.header-nav');
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
 
-    // Header scroll
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+    // ── Modais de produto ──
+    let activeModal = null;
+    function openModal(id) {
+      const m = document.getElementById('modal-' + id);
+      if (!m) return;
+      m.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      activeModal = id;
+    }
+    function closeModal(id) {
+      const m = document.getElementById('modal-' + id);
+      if (!m) return;
+      m.classList.remove('open');
+      document.body.style.overflow = '';
+      activeModal = null;
+    }
+    // Fechar modal ao clicar fora
+    document.querySelectorAll('.product-modal').forEach(m => {
+      m.addEventListener('click', e => {
+        if (e.target === m) {
+          m.classList.remove('open');
+          document.body.style.overflow = '';
+          activeModal = null;
+        }
+      });
+    });
 
-    // Hamburger
-    document.getElementById('hamburger').addEventListener('click', () => {
-      document.query
+    // ── Lightbox de imagem ──
+    const galleries = {
+      netos:      ['images/lightbox2.png','images/lightbox3.png'],
+      mercearia:  ['images/lightbox4.png','images/lightbox5.png','images/lightbox6.png'],
+      lmoliveira: ['images/lightbox7.png','images/lightbox8.png','images/lightbox9.png'],
+      tempest:    ['images/lightbox10.png','images/lightbox11.png'],
+      matilda:    ['images/lightbox12.png','images/lightbox13.png','images/lightbox14.png','images/lightbox15.png']
+    };
+    let lbGallery = [], lbIndex = 0;
+
+    function openLB(img, galleryId, idx) {
+      lbGallery = galleries[galleryId] || [img.src];
+      lbIndex = idx;
+      updateLB();
+      document.getElementById('imgLightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLB() {
+      document.getElementById('imgLightbox').classList.remove('open');
+      document.body.style.overflow = activeModal ? 'hidden' : '';
+    }
+    function lbNav(dir) {
+      lbIndex = (lbIndex + dir + lbGallery.length) % lbGallery.length;
+      updateLB();
+    }
+    function updateLB() {
+      document.getElementById('lbImg').src = lbGallery[lbIndex];
+      document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + lbGallery.length;
+    }
+    document.getElementById('imgLightbox').addEventListener('click', e => {
+      if (e.target === document.getElementById('imgLightbox')) closeLB();
+    });
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('imgLightbox').classList.contains('open')) {
+        if (e.key === 'Escape') closeLB();
+        if (e.key === 'ArrowRight') lbNav(1);
+        if (e.key === 'ArrowLeft')  lbNav(-1);
+      } else if (e.key === 'Escape' && activeModal) {
+        closeModal(activeModal);
+      }
+    });
+
+    // ── Orçamento ──
+    const backdrop = document.getElementById('quoteBackdrop');
+    const openQ = () => { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; };
+    const closeQ = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
+
+    ['openQuote','openQuoteModal1','openQuoteModal2','openQuoteModal3','openQuoteModal4','openQuoteModal5'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', openQ);
+    });
+    document.getElementById('closeQuote').addEventListener('click', closeQ);
+    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeQ(); });
+
+    document.getElementById('quoteForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name     = document.getElementById('qName').value.trim();
+      const email    = document.getElementById('qEmail').value.trim();
+      const cat      = document.getElementById('qCategory').value;
+      const desc     = document.getElementById('qDesc').value.trim();
+      const deadline = document.getElementById('qDeadline').value.trim();
+      if (!name || !email || !desc) { alert('Preenche Nome, Email e Descrição.'); return; }
+      const subject = encodeURIComponent(`Pedido de orçamento — ${cat}`);
+      const body    = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\nCategoria: ${cat}\nPrazo: ${deadline || 'N/A'}\n\nDescrição:\n${desc}`);
+      window.location.href = `mailto:effen3d_design@outlook.com?subject=${subject}&body=${body}`;
+      closeQ();
+    });
+
+    // ── Fade-up ──
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.product-card').forEach(el => {
+      el.classList.add('fade-up');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
+
