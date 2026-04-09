@@ -356,8 +356,8 @@
         <button class="product-modal-close" onclick="closeModal('netos')">×</button>
       </div>
       <div class="product-modal-gallery">
-        <img src="images/lightbox2.png" alt="Neto's Barbershop 1" onclick="openLB(this, 'netos', 0)">
-        <img src="images/lightbox3.png" alt="Neto's Barbershop 2" onclick="openLB(this, 'netos', 1)">
+        <img src="images/lightbox2.png" alt="Neto's Barbershop 1" onclick="openLB('netos', 0)">
+        <img src="images/lightbox3.png" alt="Neto's Barbershop 2" onclick="openLB('netos', 1)">
       </div>
       <div class="product-modal-footer">
         <p>Lightbox personalizado · Impressão 3D multicolor</p>
@@ -374,9 +374,9 @@
         <button class="product-modal-close" onclick="closeModal('mercearia')">×</button>
       </div>
       <div class="product-modal-gallery">
-        <img src="images/lightbox4.png" alt="Mercearia M 1" onclick="openLB(this, 'mercearia', 0)">
-        <img src="images/lightbox5.png" alt="Mercearia M 2" onclick="openLB(this, 'mercearia', 1)">
-        <img src="images/lightbox6.png" alt="Mercearia M 3" onclick="openLB(this, 'mercearia', 2)">
+        <img src="images/lightbox4.png" alt="Mercearia M 1" onclick="openLB('mercearia', 0)">
+        <img src="images/lightbox5.png" alt="Mercearia M 2" onclick="openLB('mercearia', 1)">
+        <img src="images/lightbox6.png" alt="Mercearia M 3" onclick="openLB('mercearia', 2)">
       </div>
       <div class="product-modal-footer">
         <p>Lightbox personalizado · Impressão 3D multicolor</p>
@@ -393,9 +393,9 @@
         <button class="product-modal-close" onclick="closeModal('lmoliveira')">×</button>
       </div>
       <div class="product-modal-gallery">
-        <img src="images/lightbox7.png" alt="L.M.Oliveira 1" onclick="openLB(this, 'lmoliveira', 0)">
-        <img src="images/lightbox8.png" alt="L.M.Oliveira 2" onclick="openLB(this, 'lmoliveira', 1)">
-        <img src="images/lightbox9.png" alt="L.M.Oliveira 3" onclick="openLB(this, 'lmoliveira', 2)">
+        <img src="images/lightbox7.png" alt="L.M.Oliveira 1" onclick="openLB('lmoliveira', 0)">
+        <img src="images/lightbox8.png" alt="L.M.Oliveira 2" onclick="openLB('lmoliveira', 1)">
+        <img src="images/lightbox9.png" alt="L.M.Oliveira 3" onclick="openLB('lmoliveira', 2)">
       </div>
       <div class="product-modal-footer">
         <p>Placa de piloto personalizada · Impressão 3D multicolor</p>
@@ -412,8 +412,8 @@
         <button class="product-modal-close" onclick="closeModal('tempest')">×</button>
       </div>
       <div class="product-modal-gallery">
-        <img src="images/lightbox10.png" alt="Andre Tempest 1" onclick="openLB(this, 'tempest', 0)">
-        <img src="images/lightbox11.png" alt="Andre Tempest 2" onclick="openLB(this, 'tempest', 1)">
+        <img src="images/lightbox10.png" alt="Andre Tempest 1" onclick="openLB('tempest', 0)">
+        <img src="images/lightbox11.png" alt="Andre Tempest 2" onclick="openLB('tempest', 1)">
       </div>
       <div class="product-modal-footer">
         <p>Lightbox de piloto personalizado · Impressão 3D multicolor</p>
@@ -430,10 +430,10 @@
         <button class="product-modal-close" onclick="closeModal('matilda')">×</button>
       </div>
       <div class="product-modal-gallery">
-        <img src="images/lightbox12.png" alt="Matilda 1" onclick="openLB(this, 'matilda', 0)">
-        <img src="images/lightbox13.png" alt="Matilda 2" onclick="openLB(this, 'matilda', 1)">
-        <img src="images/lightbox14.png" alt="Matilda 3" onclick="openLB(this, 'matilda', 2)">
-        <img src="images/lightbox15.png" alt="Matilda 4" onclick="openLB(this, 'matilda', 3)">
+        <img src="images/lightbox12.png" alt="Matilda 1" onclick="openLB('matilda', 0)">
+        <img src="images/lightbox13.png" alt="Matilda 2" onclick="openLB('matilda', 1)">
+        <img src="images/lightbox14.png" alt="Matilda 3" onclick="openLB('matilda', 2)">
+        <img src="images/lightbox15.png" alt="Matilda 4" onclick="openLB('matilda', 3)">
       </div>
       <div class="product-modal-footer">
         <p>Nome 3D personalizado · Impressão 3D bicolor</p>
@@ -450,9 +450,9 @@
         <button class="product-modal-close" onclick="closeModal('bpf')">×</button>
       </div>
       <div class="product-modal-gallery">
-        <img src="images/lightbox-bpf-1.jpg" alt="BPF 1" onclick="openLB(this, 'bpf', 0)">
-        <img src="images/lightbox-bpf-2.jpg" alt="BPF 2" onclick="openLB(this, 'bpf', 1)">
-        <img src="images/lightbox-bpf-3.jpg" alt="BPF 3" onclick="openLB(this, 'bpf', 2)">
+        <img src="images/lightbox-bpf-1.jpg" alt="BPF 1" onclick="openLB('bpf', 0)">
+        <img src="images/lightbox-bpf-2.jpg" alt="BPF 2" onclick="openLB('bpf', 1)">
+        <img src="images/lightbox-bpf-3.jpg" alt="BPF 3" onclick="openLB('bpf', 2)">
       </div>
       <div class="product-modal-footer">
         <p>Logo BPF Team Race · Impressão 3D multicolor</p>
@@ -565,8 +565,8 @@
     };
     let lbGallery = [], lbIndex = 0;
 
-    function openLB(img, galleryId, idx) {
-      lbGallery = galleries[galleryId] || [img.src];
+    function openLB(galleryId, idx) {
+      lbGallery = galleries[galleryId] || [];
       lbIndex = idx;
       updateLB();
       document.getElementById('imgLightbox').classList.add('open');
