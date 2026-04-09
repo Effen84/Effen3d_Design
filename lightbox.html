@@ -330,6 +330,18 @@
           </div>
         </div>
 
+        <!-- Produto 6: BPF Team Race -->
+        <div class="product-card" onclick="openModal('bpf')">
+          <div class="product-thumb">
+            <img src="images/lightbox-bpf-1.jpg" alt="BPF Team Race" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">BPF Team Race</p>
+            <p class="product-count">3 fotos</p>
+          </div>
+        </div>
+
       </div><!-- /products-grid -->
     </div>
   </section>
@@ -430,6 +442,25 @@
     </div>
   </div>
 
+  <!-- BPF Team Race -->
+  <div class="product-modal" id="modal-bpf">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">BPF Team Race</span>
+        <button class="product-modal-close" onclick="closeModal('bpf')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/lightbox-bpf-1.jpg" alt="BPF 1" onclick="openLB(this, 'bpf', 0)">
+        <img src="images/lightbox-bpf-2.jpg" alt="BPF 2" onclick="openLB(this, 'bpf', 1)">
+        <img src="images/lightbox-bpf-3.jpg" alt="BPF 3" onclick="openLB(this, 'bpf', 2)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Logo BPF Team Race · Impressão 3D multicolor</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal6">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ══ IMAGE LIGHTBOX ══ -->
   <div class="img-lightbox" id="imgLightbox">
     <button class="img-lightbox-close" onclick="closeLB()">×</button>
@@ -446,7 +477,7 @@
       <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
       <div class="footer-links">
         <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:effen3d_design@outlook.com">Email</a>
+        <a href="/cdn-cgi/l/email-protection#f0959696959ec394af94958399979eb09f85849c9f9f9bde939f9d">Email</a>
         <a href="https://wa.me/351928372914" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
@@ -480,7 +511,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
   <script>
     // ── Header scroll ──
     const header = document.getElementById('header');
@@ -529,7 +560,8 @@
       mercearia:  ['images/lightbox4.png','images/lightbox5.png','images/lightbox6.png'],
       lmoliveira: ['images/lightbox7.png','images/lightbox8.png','images/lightbox9.png'],
       tempest:    ['images/lightbox10.png','images/lightbox11.png'],
-      matilda:    ['images/lightbox12.png','images/lightbox13.png','images/lightbox14.png','images/lightbox15.png']
+      matilda:    ['images/lightbox12.png','images/lightbox13.png','images/lightbox14.png','images/lightbox15.png'],
+      bpf:        ['images/lightbox-bpf-1.jpg','images/lightbox-bpf-2.jpg','images/lightbox-bpf-3.jpg']
     };
     let lbGallery = [], lbIndex = 0;
 
@@ -570,7 +602,7 @@
     const openQ = () => { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; };
     const closeQ = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
 
-    ['openQuote','openQuoteModal1','openQuoteModal2','openQuoteModal3','openQuoteModal4','openQuoteModal5'].forEach(id => {
+    ['openQuote','openQuoteModal1','openQuoteModal2','openQuoteModal3','openQuoteModal4','openQuoteModal5','openQuoteModal6'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('click', openQ);
     });
@@ -595,11 +627,4 @@
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.product-card').forEach(el => {
-      el.classList.add('fade-up');
-      observer.observe(el);
-    });
-  </script>
-</body>
-</html>
-
+    d
