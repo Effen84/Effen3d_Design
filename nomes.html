@@ -298,6 +298,30 @@
           </div>
         </div>
 
+        <!-- Produto 4: Nome com Letra - Cristiano -->
+        <div class="product-card" onclick="openModal('cristiano')">
+          <div class="product-thumb">
+            <img src="images/nomes-letra-cristiano-1.jpg" alt="Nome com Letra Grande — Cristiano" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Nome com Letra Grande</p>
+            <p class="product-count">4 fotos</p>
+          </div>
+        </div>
+
+        <!-- Produto 5: Nome com Letra - Tiago -->
+        <div class="product-card" onclick="openModal('tiago')">
+          <div class="product-thumb">
+            <img src="images/nomes-letra-tiago-1.jpg" alt="Nome com Letra Grande — Tiago" loading="lazy">
+            <div class="product-overlay"><span>Ver fotos</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">Nome com Letra Grande</p>
+            <p class="product-count">4 fotos</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -366,6 +390,46 @@
     </div>
   </div>
 
+  <!-- Nome com Letra - Cristiano -->
+  <div class="product-modal" id="modal-cristiano">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">Nome com Letra Grande — Cristiano</span>
+        <button class="product-modal-close" onclick="closeModal('cristiano')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/nomes-letra-cristiano-1.jpg" alt="Cristiano 1" onclick="openLB('cristiano', 0)">
+        <img src="images/nomes-letra-cristiano-2.jpg" alt="Cristiano 2" onclick="openLB('cristiano', 1)">
+        <img src="images/nomes-letra-cristiano-3.jpg" alt="Cristiano 3" onclick="openLB('cristiano', 2)">
+        <img src="images/nomes-letra-cristiano-4.jpg" alt="Cristiano 4" onclick="openLB('cristiano', 3)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Nome com letra grande personalizada · Impressão 3D bicolor dourado/branco</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal4">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nome com Letra - Tiago -->
+  <div class="product-modal" id="modal-tiago">
+    <div class="product-modal-inner">
+      <div class="product-modal-header">
+        <span class="product-modal-title">Nome com Letra Grande — Tiago</span>
+        <button class="product-modal-close" onclick="closeModal('tiago')">×</button>
+      </div>
+      <div class="product-modal-gallery">
+        <img src="images/nomes-letra-tiago-1.jpg" alt="Tiago 1" onclick="openLB('tiago', 0)">
+        <img src="images/nomes-letra-tiago-2.jpg" alt="Tiago 2" onclick="openLB('tiago', 1)">
+        <img src="images/nomes-letra-tiago-3.jpg" alt="Tiago 3" onclick="openLB('tiago', 2)">
+        <img src="images/nomes-letra-tiago-4.jpg" alt="Tiago 4" onclick="openLB('tiago', 3)">
+      </div>
+      <div class="product-modal-footer">
+        <p>Nome com letra grande personalizada · Impressão 3D bicolor vermelho/verde</p>
+        <button type="button" class="btn btn-red" id="openQuoteModal5">Quero um igual</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ══ IMAGE LIGHTBOX ══ -->
   <div class="img-lightbox" id="imgLightbox">
     <button class="img-lightbox-close" onclick="closeLB()">×</button>
@@ -382,7 +446,7 @@
       <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
       <div class="footer-links">
         <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:effen3d_design@outlook.com">Email</a>
+        <a href="/cdn-cgi/l/email-protection#e2878484878cd186bd8687918b858ca28d97968e8d8d89cc818d8f">Email</a>
         <a href="https://wa.me/351928372914" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
@@ -417,7 +481,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
   <script>
     // ── Header scroll ──
     const header = document.getElementById('header');
@@ -463,7 +527,9 @@
     const galleries = {
       iman:        ['images/nomes-iman-1.png','images/nomes-iman-2.png','images/nomes-iman-3.png','images/nomes-iman-4.png','images/nomes-iman-5.png'],
       portachaves: ['images/porta-chaves-1.png','images/porta-chaves-2.png','images/porta-chaves-3.png','images/porta-chaves-4.png','images/porta-chaves-5.png','images/porta-chaves-6.png','images/porta-chaves-7.png'],
-      nomesgrandes:['images/nomes-grandes-1.png','images/nomes-grandes-2.png']
+      nomesgrandes:['images/nomes-grandes-1.png','images/nomes-grandes-2.png'],
+      cristiano:   ['images/nomes-letra-cristiano-1.jpg','images/nomes-letra-cristiano-2.jpg','images/nomes-letra-cristiano-3.jpg','images/nomes-letra-cristiano-4.jpg'],
+      tiago:       ['images/nomes-letra-tiago-1.jpg','images/nomes-letra-tiago-2.jpg','images/nomes-letra-tiago-3.jpg','images/nomes-letra-tiago-4.jpg']
     };
     let lbGallery = [], lbIndex = 0;
 
@@ -503,7 +569,7 @@
     const backdrop = document.getElementById('quoteBackdrop');
     const openQ = () => { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; };
     const closeQ = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
-    ['openQuote','openQuoteModal1','openQuoteModal2','openQuoteModal3'].forEach(id => {
+    ['openQuote','openQuoteModal1','openQuoteModal2','openQuoteModal3','openQuoteModal4','openQuoteModal5'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.addEventListener('click', openQ);
     });
@@ -527,11 +593,4 @@
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.product-card').forEach(el => {
-      el.classList.add('fade-up');
-      observer.observe(el);
-    });
-  </script>
-</body>
-</html>
-
+    d
