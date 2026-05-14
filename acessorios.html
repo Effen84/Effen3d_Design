@@ -1,64 +1,91 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Acessórios — Effen3D Design</title>
-  <meta name="description" content="Acessórios em impressão 3D feitos à medida — suportes, organizadores e muito mais. Effen3D Design, Portugal.">
+
+  <title>Acessórios — Effen Design</title>
+  <meta name="description" content="Acessórios em impressão 3D feitos à medida — suportes, organizadores e muito mais. Effen Design, Portugal.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
+  <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close">×</span>
     <img id="lightboxImg" src="" alt="">
   </div>
 
+  <!-- MODAL PRODUTO -->
   <div id="productModal" class="product-modal">
     <div class="product-modal-inner">
       <div class="product-modal-header">
         <span class="product-modal-title" id="modalTitle"></span>
         <button class="product-modal-close" onclick="closeModal()">×</button>
       </div>
+
       <div class="product-modal-gallery" id="modalGallery"></div>
+
       <div class="product-modal-footer">
         <p>Clica numa foto para ampliar</p>
-        <a href="https://wa.me/351928372914?text=Ol%C3%A1!%20Tenho%20interesse%20neste%20produto%20da%20Effen3D%20Design." target="_blank" class="btn btn-red">Pedir orçamento</a>
+        <a
+          id="modalWhatsapp"
+          href="https://wa.me/351928372914?text=Ol%C3%A1!%20Tenho%20interesse%20neste%20produto%20da%20Effen%20Design."
+          target="_blank"
+          rel="noopener"
+          class="btn-primary"
+        >
+          Pedir orçamento
+        </a>
       </div>
     </div>
   </div>
 
+  <!-- HEADER -->
   <header id="header">
     <a href="index.html" class="header-logo">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
+      <img src="images/logo.png" alt="Effen Design" class="logo-top">
     </a>
+
     <nav class="header-nav">
       <a href="index.html#portfolio">Portefólio</a>
       <a href="index.html#servicos">Serviços</a>
       <a href="index.html#contacto">Contacto</a>
-      <button type="button" class="btn-quote" onclick="window.location='https://wa.me/351928372914'">Pedir orçamento</button>
+      <button type="button" class="btn-quote" onclick="window.location='https://wa.me/351928372914'">
+        Pedir orçamento
+      </button>
     </nav>
+
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </header>
 
+  <!-- CONTEÚDO -->
   <section class="cat-page">
     <div class="section-inner">
-      <p class="section-label"><a href="index.html#portfolio" style="color:var(--red);text-decoration:none;">← Portefólio</a></p>
+      <p class="section-label">
+        <a href="index.html#portfolio" class="back-link">← Voltar ao Portefólio</a>
+      </p>
+
       <h1 class="cat-page-title">🔧 Acessórios</h1>
       <p class="cat-page-sub">Clica num produto para ver todas as fotos</p>
+
       <div class="products-grid" id="productsGrid"></div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
-      <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
+      <img src="images/logo.png" alt="Effen Design" class="footer-logo">
+      <p class="footer-copy">© 2026 Effen Design · Portugal · Todos os direitos reservados</p>
       <div class="footer-links">
         <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
         <a href="mailto:effen3d_design@outlook.com">Email</a>
@@ -67,6 +94,7 @@
     </div>
   </footer>
 
+  <!-- Script -->
   <script>
     const produtos = [
       {
@@ -103,6 +131,7 @@
     ];
 
     const grid = document.getElementById('productsGrid');
+
     produtos.forEach((p, i) => {
       grid.innerHTML += `
         <div class="product-card" onclick="openModal(${i})">
@@ -120,33 +149,66 @@
     function openModal(i) {
       const p = produtos[i];
       document.getElementById('modalTitle').textContent = p.nome;
+
       document.getElementById('modalGallery').innerHTML = p.fotos.map(f =>
         `<img src="${f}" alt="${p.nome}" onclick="openLightbox(this)" loading="lazy">`
       ).join('');
+
+      // Ajusta o link do WhatsApp com o nome do produto (fica mais “loja”)
+      const msg = encodeURIComponent(`Olá! Tenho interesse no produto "${p.nome}" da Effen Design. Pode dizer-me preço e prazos?`);
+      document.getElementById('modalWhatsapp').href = `https://wa.me/351928372914?text=${msg}`;
+
       document.getElementById('productModal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function closeModal() {
       document.getElementById('productModal').classList.remove('open');
       document.body.style.overflow = '';
     }
+
     document.getElementById('productModal').addEventListener('click', e => {
       if (e.target === document.getElementById('productModal')) closeModal();
     });
+
     function openLightbox(img) {
       document.getElementById('lightboxImg').src = img.src;
       document.getElementById('lightbox').style.display = 'flex';
     }
+
     function closeLightbox() {
       document.getElementById('lightbox').style.display = 'none';
     }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeModal();
+        closeLightbox();
+      }
+    });
+
+    // Header scroll
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+
+    // Hamburger
     document.getElementById('hamburger').addEventListener('click', () => {
       document.querySelector('.header-nav').classList.toggle('open');
       document.getElementById('hamburger').classList.toggle('active');
     });
   </script>
+
+  <!-- CSS micro (só para o link voltar premium, sem mexer no teu style.css global) -->
+  <style>
+    .back-link {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+      opacity: .95;
+    }
+  </style>
+
 </body>
 </html>
