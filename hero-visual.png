@@ -1,8 +1,22 @@
+<section id="inicio" class="hero-new">
 
-<h1>Peças Personalizadas em 3D & Laser</h1>
-<p>Design, produção e personalização premium — feitas à tua medida</p>
+  <div class="hero-content">
+    <img src="images/effen-design-logo.png" alt="Effen Design" class="hero-logo">
 
-<a href="https://wa.me/351XXXXXXXXX" class="btn-primary">
-👉 Pedir orçamento
-</a>
+    <h1>Peças Personalizadas em 3D & Laser</h1>
+
+    <p>Design, produção e personalização premium — feitas à tua medida</p>
+
+    <div class="hero-buttons">
+      <a href="https://wa.me/351XXXXXXXXX" class="btn-primary">
+        👉 Pedir orçamento
+      </a>
+
+      <a href="#portfolio" class="btn-secondary">
+        Ver Portfólio
+      </a>
+    </div>
+  </div>
+
+</section>
 
