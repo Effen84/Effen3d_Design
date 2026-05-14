@@ -1,63 +1,116 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Laser — Effen3D Design</title>
-  <meta name="description" content="Gravação laser em madeira, acrílico, alumínio, couro e muito mais. Effen3D Design, Portugal.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="description" content="Gravação laser premium em madeira, acrílico, alumínio, ardósia, couro e muito mais. Personalização por medida — Portugal." />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Laser — Effen3D Design" />
+  <meta property="og:description" content="Gravação laser premium em madeira, acrílico, alumínio, ardósia e couro. Personalização por medida — Portugal." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/effen3d_new.png" />
+  <meta name="theme-color" content="#0b0b0f" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">×</span>
-    <img id="lightboxImg" src="" alt="">
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Fechar" onclick="closeLightbox()">×</button>
+    <img id="lightboxImg" src="" alt="" />
   </div>
 
-  <div id="productModal" class="product-modal">
-    <div class="product-modal-inner">
+  <!-- Product Modal -->
+  <div id="productModal" class="product-modal" aria-hidden="true">
+    <div class="product-modal-inner" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="product-modal-header">
         <span class="product-modal-title" id="modalTitle"></span>
-        <button class="product-modal-close" onclick="closeModal()">×</button>
+        <button class="product-modal-close" type="button" aria-label="Fechar" onclick="closeModal()">×</button>
       </div>
+
       <div class="product-modal-gallery" id="modalGallery"></div>
+
       <div class="product-modal-footer">
         <p>Clica numa foto para ampliar</p>
-        <a href="https://wa.me/351928372914?text=Ol%C3%A1!%20Tenho%20interesse%20neste%20produto%20da%20Effen3D%20Design." target="_blank" class="btn btn-red">Pedir orçamento</a>
+        <a id="modalWhatsApp"
+           href="#"
+           target="_blank"
+           rel="noopener"
+           class="btn btn-red">
+          Pedir orçamento no WhatsApp
+        </a>
       </div>
     </div>
   </div>
 
+  <!-- Header -->
   <header id="header">
-    <a href="index.html" class="header-logo">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
+    <a href="index.html" class="header-logo" aria-label="Voltar à página inicial">
+      <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top" />
     </a>
-    <nav class="header-nav">
+
+    <nav class="header-nav" aria-label="Navegação principal">
       <a href="index.html#portfolio">Portefólio</a>
       <a href="index.html#servicos">Serviços</a>
       <a href="index.html#contacto">Contacto</a>
-      <button type="button" class="btn-quote" onclick="window.location='https://wa.me/351928372914'">Pedir orçamento</button>
+      <button type="button" class="btn-quote" onclick="window.open('https://wa.me/351928372914','_blank')">
+        Pedir orçamento
+      </button>
     </nav>
+
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </header>
 
+  <!-- Premium Hero -->
   <section class="cat-page">
     <div class="section-inner">
-      <p class="section-label"><a href="index.html#portfolio" style="color:var(--red);text-decoration:none;">← Portefólio</a></p>
+
+      <p class="section-label">
+        <a href="index.html#portfolio" style="color:var(--red);text-decoration:none;">← Portefólio</a>
+      </p>
+
       <h1 class="cat-page-title">⚡ Laser</h1>
-      <p class="cat-page-sub">Clica num produto para ver todas as fotos</p>
-      <div class="products-grid" id="productsGrid"></div>
+
+      <p class="cat-page-sub" style="max-width: 780px;">
+        Gravação laser <strong>premium</strong> com personalização por medida.
+        Clica num produto para veres todas as fotos e pedir orçamento direto no WhatsApp.
+      </p>
+
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn btn-red"
+           target="_blank"
+           rel="noopener"
+           href="https://wa.me/351928372914?text=Ol%C3%A1!%20Quero%20um%20or%C3%A7amento%20para%20grava%C3%A7%C3%A3o%20laser.%20Podemos%20falar%3F">
+          Pedir orçamento (geral)
+        </a>
+
+        <a class="btn"
+           href="#produtos"
+           style="text-decoration:none;">
+          Ver produtos
+        </a>
+      </div>
+
+      <div id="produtos" class="products-grid" style="margin-top:26px;" aria-live="polite"></div>
+
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
+      <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo" />
       <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
       <div class="footer-links">
         <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
@@ -67,6 +120,7 @@
   </footer>
 
   <script>
+    // ---------- DATA ----------
     const produtos = [
       { nome: "Tábua de Corte Personalizável", fotos: ["images/laser_tabua_1.png","images/laser_tabua_2.png","images/laser_tabua_3.png"] },
       { nome: "Cartão de Visita Alumínio Personalizável", fotos: ["images/laser_cartao_1.png","images/laser_cartao_2.png","images/laser_cartao_3.png"] },
@@ -74,27 +128,131 @@
       { nome: "Placa de Nomes em Ardósia", fotos: ["images/laser-placa-nomes-1.jpg","images/laser-placa-nomes-2.jpg","images/laser-placa-nomes-3.jpg","images/laser-placa-nomes-4.jpg"] }
     ];
 
-    const grid = document.getElementById('productsGrid');
-    produtos.forEach((p, i) => {
-      grid.innerHTML += `<div class="product-card" onclick="openModal(${i})"><div class="product-thumb"><img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy"><div class="product-overlay"><span>Ver mais</span></div></div><div class="product-info"><p class="product-name">${p.nome}</p><p class="product-count">${p.fotos.length} fotos</p></div></div>`;
-    });
+    const WHATSAPP = "351928372914";
+
+    // Mensagem por produto (dinâmica)
+    function buildWhatsAppLink(productName) {
+      const page = location.href; // link atual (bom para quando estiver online)
+      const msg =
+        `Olá! Tenho interesse no produto: "${productName}". ` +
+        `Queria um orçamento e opções de personalização. ` +
+        `Link: ${page}`;
+      return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+    }
+
+    // ---------- GRID RENDER ----------
+    const grid = document.getElementById("produtos");
+
+    function renderGrid() {
+      grid.innerHTML = "";
+      produtos.forEach((p, i) => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.tabIndex = 0;
+        card.setAttribute("role", "button");
+        card.setAttribute("aria-label", `Abrir ${p.nome}`);
+        card.addEventListener("click", () => openModal(i));
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openModal(i);
+          }
+        });
+
+        card.innerHTML = `
+          <div class="product-thumb">
+            <img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">
+            <div class="product-overlay"><span>Ver mais</span></div>
+          </div>
+          <div class="product-info">
+            <p class="product-name">${p.nome}</p>
+            <p class="product-count">${p.fotos.length} fotos</p>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    renderGrid();
+
+    // ---------- MODAL ----------
+    const modal = document.getElementById("productModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalGallery = document.getElementById("modalGallery");
+    const modalWhatsApp = document.getElementById("modalWhatsApp");
 
     function openModal(i) {
       const p = produtos[i];
-      document.getElementById('modalTitle').textContent = p.nome;
-      document.getElementById('modalGallery').innerHTML = p.fotos.map(f => `<img src="${f}" alt="${p.nome}" onclick="openLightbox(this)" loading="lazy">`).join('');
-      document.getElementById('productModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
+
+      modalTitle.textContent = p.nome;
+
+      modalGallery.innerHTML = p.fotos
+        .map((f) =>
+          `<img src="${f}" alt="${p.nome}" loading="lazy" onclick="openLightboxFromSrc('${f.replace(/'/g, "\\'")}', '${p.nome.replace(/'/g, "\\'")}')">`
+        )
+        .join("");
+
+      modalWhatsApp.href = buildWhatsAppLink(p.nome);
+
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
     }
-    function closeModal() { document.getElementById('productModal').classList.remove('open'); document.body.style.overflow = ''; }
-    document.getElementById('productModal').addEventListener('click', e => { if (e.target === document.getElementById('productModal')) closeModal(); });
-    function openLightbox(img) { document.getElementById('lightboxImg').src = img.src; document.getElementById('lightbox').style.display = 'flex'; }
-    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
-    document.getElementById('hamburger').addEventListener('click', () => { document.querySelector('.header-nav').classList.toggle('open'); document.getElementById('hamburger').classList.toggle('active'); });
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    // Fecha ao clicar no overlay (fora da caixa)
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // ---------- LIGHTBOX ----------
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+
+    function openLightboxFromSrc(src, alt) {
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || "";
+      lightbox.style.display = "flex";
+      lightbox.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = "none";
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+    }
+
+    // Fecha lightbox ao clicar fora da imagem
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // ---------- HEADER / MENU ----------
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 60);
+    });
+
+    const hamburger = document.getElementById("hamburger");
+    hamburger.addEventListener("click", () => {
+      document.querySelector(".header-nav").classList.toggle("open");
+      hamburger.classList.toggle("active");
+    });
+
+    // ---------- ESC KEY ----------
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeModal();
+        closeLightbox();
+      }
+    });
   </script>
+
 </body>
 </html>
-
