@@ -1,22 +1,33 @@
-<section id="inicio" class="hero-new">
 
+<section id="inicio" class="hero">
   <div class="hero-content">
-    <img src="images/effen-design-logo.png" alt="Effen Design" class="hero-logo">
 
-    <h1>Peças Personalizadas em 3D & Laser</h1>
+    <!-- LEFT (texto) -->
+    <div class="hero-left">
+      <span class="badge">⚡ Feito em Portugal · Entrega Nacional</span>
 
-    <p>Design, produção e personalização premium — feitas à tua medida</p>
+      <h1>
+        CRIAMOS<br>
+        O QUE<br>
+        <span>IMAGINAS.</span>
+      </h1>
 
-    <div class="hero-buttons">
-      <a href="https://wa.me/351XXXXXXXXX" class="btn-primary">
-        👉 Pedir orçamento
-      </a>
+      <p>
+        Transformo ideias em peças únicas.<br>
+        Impressão 3D e gravação laser — feito à tua medida.
+      </p>
 
-      <a href="#portfolio" class="btn-secondary">
-        Ver Portfólio
-      </a>
+      <div class="hero-buttons">
+        <a href="#" class="btn-whatsapp">Fala comigo no WhatsApp</a>
+        <a href="#produtos" class="btn-secondary">Ver produtos →</a>
+      </div>
     </div>
+
+    <!-- RIGHT (LOGO GRANDE) -->
+    <div class="hero-right">
+      <img src="images/logo.png" alt="Effen Design Logo">
+    </div>
+
   </div>
-
 </section>
-
+``
