@@ -2,580 +2,452 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Racing — Effen3D Design</title>
-  <meta name="description" content="Peças racing personalizadas em impressão 3D — pistas decorativas, acessórios sim racing — Effen3D Design Portugal.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Racing & Esports | Effen Design</title>
+  <meta name="description" content="Troféus, plaquetas e acessórios para sim racing, Gran Turismo 7 e comunidade motorsport. Feito por quem vive o motorsport." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    .cat-hero {
-      position: relative;
-      height: 340px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: #050505;
+    :root {
+      --gold: #e6b837;
+      --gold-dark: #a88820;
+      --gold-bright: #f5c518;
+      --bg: #080808;
+      --bg2: #0f0f0f;
+      --bg3: #1a1a1a;
+      --white: #f5f5f5;
+      --grey: #888;
+      --border: rgba(255,255,255,0.07);
+      --gold-bright-glow: rgba(245,197,24,0.12);
     }
-    .cat-hero-img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 40%;
-      opacity: 0.35;
-      filter: blur(2px) saturate(1.4);
-    }
-    .cat-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.88) 100%);
-    }
-    .cat-hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-    }
-    .cat-hero-content .section-label { margin-bottom: 12px; }
-    .cat-hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 8vw, 6rem);
-      letter-spacing: .06em;
-      line-height: 1;
-      color: #fff;
-      text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-    }
-    .cat-hero-title span { color: var(--red); }
-    .cat-hero-sub {
-      color: var(--muted);
-      font-size: 1rem;
-      margin-top: 14px;
-      letter-spacing: .02em;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
-    .breadcrumb {
-      padding: 20px 0 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: .8rem;
-      color: var(--muted);
-    }
-    .breadcrumb a { color: var(--muted); transition: color var(--transition); }
-    .breadcrumb a:hover { color: var(--red); }
-    .breadcrumb span { color: #fff; }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 70px; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo-img { height: 50px; width: auto; display: block; transition: transform .2s; }
+    .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
+    .nav-logo-icon { width: 36px; height: 36px; background: var(--gold); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: #fff; }
+    .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); }
+    .nav-logo-text span { color: var(--gold); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--grey); font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a.active { color: var(--gold-bright); }
+    .nav-cta { background: var(--gold); color: #080808; padding: 9px 22px; border-radius: 4px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-decoration: none; text-transform: uppercase; transition: background .2s; }
+    .nav-cta:hover { background: var(--gold-dark); }
 
-    .cat-page { padding: 0 0 100px; background: var(--bg); min-height: 100vh; }
-    .cat-page .section-inner { padding-top: 40px; }
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: flex-end; padding: 0 5vw 80px; position: relative; overflow: hidden; }
+    .hero-video-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(230,184,55,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 80% at 80% 20%, rgba(245,197,24,0.08) 0%, transparent 50%),
+        linear-gradient(180deg, #080808 0%, #120404 50%, #080808 100%);
+    }
+    .hero-speed-lines {
+      position: absolute; inset: 0; z-index: 0;
+      background: repeating-linear-gradient(
+        105deg,
+        transparent 0px, transparent 40px,
+        rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
+      );
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; padding-top: 140px; }
+    .hero-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 12px; color: var(--grey); letter-spacing: 1px; text-transform: uppercase; }
+    .hero-breadcrumb a { color: var(--grey); text-decoration: none; }
+    .hero-breadcrumb span { color: var(--gold-bright); }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.25); padding: 6px 16px; border-radius: 100px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 24px; }
+    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(68px, 11vw, 140px); line-height: 0.88; letter-spacing: 2px; animation: fadeUp .6s ease both; }
+    .hero h1 .line2 { color: var(--gold); display: block; }
+    .hero h1 .line3 { color: var(--gold-bright); display: block; -webkit-text-stroke: 1px var(--gold-bright); color: transparent; }
+    .hero-sub { margin-top: 28px; font-size: 17px; line-height: 1.65; color: var(--grey); max-width: 520px; animation: fadeUp .6s .15s ease both; }
+    .hero-actions { margin-top: 44px; display: flex; flex-wrap: wrap; gap: 16px; animation: fadeUp .6s .25s ease both; }
+    .hero-sponsor { margin-top: 52px; padding: 20px 24px; background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.15); border-radius: 10px; display: inline-flex; align-items: center; gap: 16px; animation: fadeUp .6s .35s ease both; }
+    .hero-sponsor-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-bottom: 4px; }
+    .hero-sponsor-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--gold-bright); letter-spacing: 1px; }
 
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-    .product-modal {
-      display: none;
-      position: fixed; inset: 0;
-      z-index: 9999;
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(10px);
-      overflow-y: auto;
-      padding: 20px;
-    }
-    .product-modal.open { display: block; }
-    .product-modal-inner {
-      max-width: 1000px;
-      margin: 60px auto;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      animation: modalIn .3s ease;
-    }
-    @keyframes modalIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .product-modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 28px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(230,0,0,0.04);
-    }
-    .product-modal-title {
-      font-family: var(--font-display);
-      font-size: 1.9rem;
-      letter-spacing: .05em;
-      color: var(--red);
-    }
-    .product-modal-close {
-      background: none; border: none;
-      color: var(--muted); font-size: 2rem;
-      cursor: pointer; line-height: 1;
-      transition: color var(--transition);
-      padding: 4px 8px;
-    }
-    .product-modal-close:hover { color: #fff; }
-    .product-modal-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-      padding: 20px;
-    }
-    .product-modal-gallery img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 10px;
-      cursor: zoom-in;
-      transition: transform var(--transition), box-shadow var(--transition);
-      border: 1px solid var(--border);
-    }
-    .product-modal-gallery img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-    }
-    .product-modal-footer {
-      padding: 16px 28px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      background: rgba(0,0,0,0.2);
-    }
-    .product-modal-footer p { color: var(--muted); font-size: .85rem; }
+    .btn-wa { display: flex; align-items: center; gap: 10px; background: #25D366; color: #fff; padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 24px rgba(37,211,102,0.3); }
+    .btn-wa:hover { transform: translateY(-2px); }
+    .btn-wa svg { width: 20px; height: 20px; }
+    .btn-red { display: flex; align-items: center; gap: 8px; background: var(--gold); color: #080808; padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform .2s, background .2s; }
+    .btn-red:hover { background: var(--gold-dark); transform: translateY(-2px); }
+    .btn-outline { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); color: var(--white); padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color .2s, color .2s; }
+    .btn-outline:hover { border-color: var(--gold-bright); color: var(--gold-bright); }
 
-    .img-lightbox {
-      display: none;
-      position: fixed; inset: 0;
-      z-index: 10000;
-      background: rgba(0,0,0,0.97);
-      backdrop-filter: blur(12px);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .img-lightbox.open { display: flex; }
-    .img-lightbox img {
-      max-width: 90vw;
-      max-height: 88vh;
-      border-radius: 12px;
-      box-shadow: 0 0 80px rgba(230,0,0,0.2);
-      object-fit: contain;
-    }
-    .img-lightbox-close {
-      position: absolute;
-      top: 20px; right: 32px;
-      font-size: 2.5rem;
-      color: #fff;
-      cursor: pointer;
-      line-height: 1;
-      transition: color var(--transition);
-      background: none; border: none;
-    }
-    .img-lightbox-close:hover { color: var(--red); }
-    .lb-nav {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #fff;
-      font-size: 1.8rem;
-      width: 52px; height: 52px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: background var(--transition), border-color var(--transition);
-      z-index: 1;
-    }
-    .lb-nav:hover { background: var(--red); border-color: var(--red); }
-    .lb-nav.prev { left: 20px; }
-    .lb-nav.next { right: 20px; }
-    .lb-counter {
-      position: absolute;
-      bottom: 20px; left: 50%; transform: translateX(-50%);
-      color: var(--muted);
-      font-size: .8rem;
-      letter-spacing: .1em;
-    }
+    /* SECTIONS */
+    section { padding: 96px 5vw; }
+    .section-tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .section-tag.gold { color: var(--gold-bright); }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 68px); line-height: 0.95; letter-spacing: 1px; }
+    .section-title em { font-style: normal; color: var(--gold); }
+    .section-title em.gold { color: var(--gold-bright); }
+    .section-sub { margin-top: 16px; color: var(--grey); font-size: 16px; line-height: 1.6; max-width: 500px; }
+    .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
 
+    /* PRODUCTS */
+    .products { background: var(--bg2); }
+    .products-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .product-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform .3s, border-color .3s; text-decoration: none; color: inherit; display: block; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(230,184,55,0.35); }
+    .product-img { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 52px; position: relative; }
+    .product-img.trophy { background: radial-gradient(ellipse at center, rgba(245,197,24,0.15) 0%, var(--bg3) 70%); }
+    .product-img.plaque { background: radial-gradient(ellipse at center, rgba(230,184,55,0.12) 0%, var(--bg3) 70%); }
+    .product-img.accessory { background: radial-gradient(ellipse at center, rgba(100,100,255,0.1) 0%, var(--bg3) 70%); }
+    .product-badge { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
+    .product-badge.gold-badge { background: var(--gold-bright); color: #000; }
+    .product-body { padding: 22px; }
+    .product-body h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .product-body p { color: var(--grey); font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .product-price { font-family: 'Space Mono', monospace; font-size: 16px; color: var(--gold-bright); font-weight: 700; }
+    .product-cta { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); transition: color .2s; }
+    .product-card:hover .product-cta { color: var(--gold); }
+
+    /* GT7 SECTION */
+    .gt7 { background: linear-gradient(135deg, #0a0005 0%, #1a0008 50%, #0f0000 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .gt7-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .gt7-logo { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 10vw, 120px); line-height: 0.9; }
+    .gt7-logo .gt { color: var(--gold); }
+    .gt7-logo .seven { color: var(--gold-bright); -webkit-text-stroke: 2px var(--gold-bright); color: transparent; }
+    .gt7-text .section-tag { color: var(--gold-bright); }
+    .gt7-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 58px); line-height: 0.95; margin-bottom: 20px; }
+    .gt7-text h2 em { font-style: normal; color: var(--gold-bright); }
+    .gt7-text p { color: var(--grey); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
+    .gt7-stats { display: flex; gap: 32px; margin: 32px 0; }
+    .gt7-stat { }
+    .gt7-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--gold-bright); line-height: 1; }
+    .gt7-stat-label { font-size: 12px; color: var(--grey); letter-spacing: 1px; text-transform: uppercase; }
+
+    /* COMMUNITY */
+    .community-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .community-card { padding: 32px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg2); transition: border-color .3s; }
+    .community-card:hover { border-color: rgba(230,184,55,0.25); }
+    .community-icon { font-size: 36px; margin-bottom: 20px; }
+    .community-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .community-card p { color: var(--grey); font-size: 14px; line-height: 1.65; }
+
+    /* TROPHIES SHOWCASE */
+    .trophy-showcase { background: var(--bg2); }
+    .trophy-grid { margin-top: 60px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; }
+    .trophy-main { grid-row: span 2; border-radius: 14px; background: radial-gradient(ellipse at center, rgba(245,197,24,0.15) 0%, var(--bg3) 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px; text-align: center; border: 1px solid rgba(245,197,24,0.15); min-height: 360px; }
+    .trophy-main-icon { font-size: 80px; margin-bottom: 20px; }
+    .trophy-main h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--gold-bright); margin-bottom: 12px; }
+    .trophy-main p { color: var(--grey); font-size: 14px; line-height: 1.6; }
+    .trophy-side { border-radius: 12px; background: var(--bg3); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; text-align: center; transition: border-color .3s; }
+    .trophy-side:hover { border-color: rgba(230,184,55,0.25); }
+    .trophy-side-icon { font-size: 40px; margin-bottom: 14px; }
+    .trophy-side h4 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; margin-bottom: 8px; }
+    .trophy-side p { color: var(--grey); font-size: 13px; }
+
+    /* CTA */
+    .cta-section { text-align: center; }
+    .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 88px); line-height: 0.95; margin-bottom: 20px; }
+    .cta-section h2 em { font-style: normal; color: var(--gold-bright); }
+    .cta-section p { color: var(--grey); font-size: 17px; max-width: 480px; margin: 0 auto 40px; line-height: 1.65; }
+    .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* FLOAT */
+    .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 200; width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; animation: waPulse 2s infinite; transition: transform .2s; }
+    .wa-float:hover { transform: scale(1.1); }
+    @keyframes waPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); } }
+
+    footer { background: #050505; border-top: 1px solid var(--border); padding: 40px 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    footer p { font-size: 13px; color: var(--grey); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: var(--grey); text-decoration: none; font-size: 13px; transition: color .2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    @media (max-width: 900px) {
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .gt7-inner { grid-template-columns: 1fr; gap: 36px; }
+      .community-grid { grid-template-columns: 1fr; }
+      .trophy-grid { grid-template-columns: 1fr 1fr; }
+      .trophy-main { grid-row: auto; grid-column: span 2; }
+      .nav-links { display: none; }
+    }
     @media (max-width: 600px) {
-      .cat-hero { height: 260px; }
-      .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
-      .product-modal-gallery { grid-template-columns: 1fr 1fr; }
-      .lb-nav { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .trophy-grid { grid-template-columns: 1fr; }
+      .trophy-main { grid-column: auto; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── Header ── -->
-  <header id="header">
-    <a href="index.html" class="header-logo">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="logo.jpeg" alt="Effen Design" class="nav-logo-img" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#servicos">Serviços</a></li>
+    <li><a href="index.html#bestsellers">Produtos</a></li>
+    <li><a href="lightbox.html">Lightbox</a></li>
+    <li><a href="racing.html" class="active">Racing</a></li>
+    <li><a href="index.html#contacto">Contacto</a></li>
+  </ul>
+  <a class="nav-cta" href="https://wa.me/351928372914?text=Quero%20um%20troféu%20de%20racing!" target="_blank">Encomendar</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-video-bg"></div>
+  <div class="hero-speed-lines"></div>
+  <div class="hero-content">
+    <div class="hero-breadcrumb"><a href="index.html">Home</a> / <span>Racing & Esports</span></div>
+    <div class="hero-tag">🏎️ Especialistas em Sim Racing</div>
+    <h1>
+      FEITO PARA<br>
+      <span class="line2">QUEM VIVE</span><br>
+      <span class="line3">O RACING.</span>
+    </h1>
+    <p class="hero-sub">Troféus, plaquetas e acessórios únicos para campeonatos de sim racing, Gran Turismo 7 e toda a comunidade motorsport portuguesa. Feito por alguém que está na pista contigo.</p>
+    <div class="hero-actions">
+      <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20para%20o%20meu%20campeonato%20de%20racing!" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quero um troféu
+      </a>
+      <a class="btn-outline" href="#produtos">Ver produtos</a>
+    </div>
+    <div class="hero-sponsor">
+      <span style="font-size:32px">🏁</span>
+      <div>
+        <div class="hero-sponsor-label">Orgulhosamente Patrocinador</div>
+        <div class="hero-sponsor-name">BPF TEAM RACE · Gran Turismo 7</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GT7 SECTION -->
+<section class="gt7">
+  <div class="gt7-inner">
+    <div class="gt7-logo">
+      <div class="gt">GRAN</div>
+      <div class="gt">TURISMO</div>
+      <div class="seven">7</div>
+    </div>
+    <div class="gt7-text">
+      <div class="section-tag gold">// Patrocinador oficial</div>
+      <h2>DENTRO DA<br><em>COMUNIDADE.</em></h2>
+      <p>A Effen Design é patrocinadora oficial da BPF Team Race, uma das ligas de Gran Turismo 7 mais ativas de Portugal. Não somos apenas fornecedores — somos parte da comunidade.</p>
+      <p>Isso significa que entendemos o que é importante: troféus que causam impacto, plaquetas com o design certo e peças que fazem as pessoas querer ganhar.</p>
+      <div class="gt7-stats">
+        <div class="gt7-stat">
+          <div class="gt7-stat-num">GT7</div>
+          <div class="gt7-stat-label">Gran Turismo</div>
+        </div>
+        <div class="gt7-stat">
+          <div class="gt7-stat-num">BPF</div>
+          <div class="gt7-stat-label">Team Race</div>
+        </div>
+        <div class="gt7-stat">
+          <div class="gt7-stat-num">🏆</div>
+          <div class="gt7-stat-label">Troféus únicos</div>
+        </div>
+      </div>
+      <a class="btn-red" href="https://bpftr.com" target="_blank">Ver BPF Team Race →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUTOS -->
+<section class="products" id="produtos">
+  <div class="section-tag">// Produtos</div>
+  <h2 class="section-title">PARA O<br><em>TEU CAMPEONATO.</em></h2>
+  <p class="section-sub">Tudo o que a tua liga precisa para ter aquela produção profissional que os pilotos merecem.</p>
+
+  <div class="products-grid">
+    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20troféus%20de%20pódio%20para%20campeonato!" target="_blank">
+      <div class="product-img trophy">
+        🥇
+        <div class="product-badge gold-badge">⭐ Premium</div>
+      </div>
+      <div class="product-body">
+        <h4>Troféus de Pódio</h4>
+        <p>1º, 2º e 3º lugar com design exclusivo. Base personalizável com logo da liga, nome do piloto e época. Em PLA de alta qualidade, acabamento premium.</p>
+        <div class="product-footer">
+          <span class="product-price">A partir de €15/un</span>
+          <span class="product-cta">Pedir →</span>
+        </div>
+      </div>
     </a>
-    <nav class="header-nav">
-      <a href="index.html#portfolio">Portefólio</a>
-      <a href="index.html#servicos">Serviços</a>
-      <a href="index.html#contacto">Contacto</a>
-      <button type="button" class="btn-quote" id="openQuote">Pedir orçamento</button>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
 
-  <!-- ── Hero ── -->
-  <div class="cat-hero">
-    <img src="images/racing-porsche-1.png" alt="Racing Effen3D Design" class="cat-hero-img">
-    <div class="cat-hero-overlay"></div>
-    <div class="cat-hero-content">
-      <p class="section-label">Portefólio</p>
-      <h1 class="cat-hero-title">🏎️ <span>Racing</span></h1>
-      <p class="cat-hero-sub">Pistas decorativas, acessórios sim racing e peças personalizadas</p>
-    </div>
-  </div>
-
-  <!-- ── Conteúdo ── -->
-  <section class="cat-page">
-    <div class="section-inner">
-
-      <div class="breadcrumb">
-        <a href="index.html">Início</a>
-        <span>›</span>
-        <a href="index.html#portfolio">Portefólio</a>
-        <span>›</span>
-        <span>Racing</span>
-      </div>
-
-      <div class="products-grid" style="margin-top: 40px;">
-
-        <!-- Produto 1: Nürburgring -->
-        <div class="product-card" onclick="openModal('nurburgring')">
-          <div class="product-thumb">
-            <img src="images/racing-nurburgring-1.png" alt="Pista Nürburgring" loading="lazy">
-            <div class="product-overlay"><span>Ver fotos</span></div>
-          </div>
-          <div class="product-info">
-            <p class="product-name">Pista Nürburgring</p>
-            <p class="product-count">2 fotos</p>
-          </div>
+    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20plaquetas%20personalizadas%20para%20racing!" target="_blank">
+      <div class="product-img plaque">🏎️</div>
+      <div class="product-body">
+        <h4>Plaquetas Personalizadas</h4>
+        <p>Identificação de piloto, número de corrida, cargo na equipa ou homenagem de época. Gravação laser em alumínio anodizado ou acrílico.</p>
+        <div class="product-footer">
+          <span class="product-price">A partir de €10/un</span>
+          <span class="product-cta">Pedir →</span>
         </div>
+      </div>
+    </a>
 
-        <!-- Produto 2: Spa-Francorchamps -->
-        <div class="product-card" onclick="openModal('spa')">
-          <div class="product-thumb">
-            <img src="images/racing-spa-1.png" alt="Pista Spa-Francorchamps" loading="lazy">
-            <div class="product-overlay"><span>Ver fotos</span></div>
-          </div>
-          <div class="product-info">
-            <p class="product-name">Pista Spa-Francorchamps</p>
-            <p class="product-count">1 foto</p>
-          </div>
+    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20saber%20sobre%20troféu%20de%20campeão!" target="_blank">
+      <div class="product-img trophy">
+        👑
+        <div class="product-badge">🔥 Exclusivo</div>
+      </div>
+      <div class="product-body">
+        <h4>Troféu de Campeão</h4>
+        <p>O troféu principal da época, feito para impressionar. Design único, tamanho maior, base com gravação laser detalhada. Só há um campeão — o troféu tem de o mostrar.</p>
+        <div class="product-footer">
+          <span class="product-price">A partir de €35</span>
+          <span class="product-cta">Pedir →</span>
         </div>
+      </div>
+    </a>
 
-        <!-- Produto 3: Porsche 911 GT3 -->
-        <div class="product-card" onclick="openModal('porsche')">
-          <div class="product-thumb">
-            <img src="images/racing-porsche-1.png" alt="Porsche 911 GT3 Wall Art" loading="lazy">
-            <div class="product-overlay"><span>Ver fotos</span></div>
-          </div>
-          <div class="product-info">
-            <p class="product-name">Porsche 911 GT3 Wall Art</p>
-            <p class="product-count">2 fotos</p>
-          </div>
+    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20um%20troféu%20de%20melhor%20piloto%20da%20época!" target="_blank">
+      <div class="product-img accessory">🏅</div>
+      <div class="product-body">
+        <h4>Prémios Especiais</h4>
+        <p>Melhor Piloto, Mais Consistente, Fair Play, Rookie do Ano. Troféus e medalhas personalizadas para cada prémio especial da tua liga.</p>
+        <div class="product-footer">
+          <span class="product-price">A partir de €12/un</span>
+          <span class="product-cta">Pedir →</span>
         </div>
+      </div>
+    </a>
 
-        <!-- Produto 4: Dashboard Mount -->
-        <div class="product-card" onclick="openModal('dashboard')">
-          <div class="product-thumb">
-            <img src="images/racing-dashboard-1.png" alt="Dashboard Phone/Tablet Mount" loading="lazy">
-            <div class="product-overlay"><span>Ver fotos</span></div>
-          </div>
-          <div class="product-info">
-            <p class="product-name">Dashboard Phone/Tablet Mount</p>
-            <p class="product-count">3 fotos</p>
-          </div>
+    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20acessórios%20personalizados%20para%20sim%20racing!" target="_blank">
+      <div class="product-img accessory">🎮</div>
+      <div class="product-body">
+        <h4>Acessórios de Setup</h4>
+        <p>Suportes, plaquetas de identificação de equipa, decoração para a zona de sim racing. Personalização do teu cockpit com o teu nome e número.</p>
+        <div class="product-footer">
+          <span class="product-price">A partir de €8/un</span>
+          <span class="product-cta">Pedir →</span>
         </div>
+      </div>
+    </a>
 
-        <!-- Produto 5: Pedais Fanatec -->
-        <div class="product-card" onclick="openModal('pedais')">
-          <div class="product-thumb">
-            <img src="images/racing-pedais-1.png" alt="Pedais Fanatec" loading="lazy">
-            <div class="product-overlay"><span>Ver fotos</span></div>
-          </div>
-          <div class="product-info">
-            <p class="product-name">Pedais Fanatec</p>
-            <p class="product-count">2 fotos</p>
-          </div>
+    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20pacote%20completo%20para%20a%20minha%20liga!" target="_blank">
+      <div class="product-img trophy">
+        📦
+        <div class="product-badge gold-badge">Melhor valor</div>
+      </div>
+      <div class="product-body">
+        <h4>Pacote Liga Completo</h4>
+        <p>Tudo o que a tua liga precisa: troféus de pódio + campeão + prémios especiais. Orçamento personalizado com desconto de volume garantido.</p>
+        <div class="product-footer">
+          <span class="product-price">Orçamento sob consulta</span>
+          <span class="product-cta">Pedir →</span>
         </div>
-
       </div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TROPHY SHOWCASE -->
+<section class="trophy-showcase">
+  <div class="section-tag gold">// Coleção de Destaque</div>
+  <h2 class="section-title">TROFÉUS QUE<br><em class="gold">IMPRESSIONAM.</em></h2>
+
+  <div class="trophy-grid">
+    <div class="trophy-main">
+      <div class="trophy-main-icon">🏆</div>
+      <h3>Troféu de Campeão Effen</h3>
+      <p>O nosso design signature para campeonatos. Base hexagonal gravada a laser, corpo em PLA com acabamento metálico, plaqueta personalizada. Feito para durar.</p>
     </div>
-  </section>
-
-  <!-- ══ MODAIS ══ -->
-
-  <!-- Nürburgring -->
-  <div class="product-modal" id="modal-nurburgring">
-    <div class="product-modal-inner">
-      <div class="product-modal-header">
-        <span class="product-modal-title">Pista Nürburgring</span>
-        <button class="product-modal-close" onclick="closeModal('nurburgring')">×</button>
-      </div>
-      <div class="product-modal-gallery">
-        <img src="images/racing-nurburgring-1.png" alt="Nürburgring 1" onclick="openLB('nurburgring', 0)">
-        <img src="images/racing-nurburgring-2.png" alt="Nürburgring 2" onclick="openLB('nurburgring', 1)">
-      </div>
-      <div class="product-modal-footer">
-        <p>Decoração de parede · Pista Nürburgring em impressão 3D</p>
-        <button type="button" class="btn btn-red" id="openQuoteModal1">Quero um igual</button>
-      </div>
+    <div class="trophy-side">
+      <div class="trophy-side-icon">🥇</div>
+      <h4>Pódio Clássico</h4>
+      <p>Trio 1º/2º/3º com alturas diferentes</p>
+    </div>
+    <div class="trophy-side">
+      <div class="trophy-side-icon">🏁</div>
+      <h4>Plaqueta Racing</h4>
+      <p>Alumínio anodizado gravado a laser</p>
+    </div>
+    <div class="trophy-side">
+      <div class="trophy-side-icon">👑</div>
+      <h4>Troféu Custom</h4>
+      <p>Design 100% à medida do cliente</p>
+    </div>
+    <div class="trophy-side">
+      <div class="trophy-side-icon">🎖️</div>
+      <h4>Medalha de Época</h4>
+      <p>Para todos os participantes da liga</p>
     </div>
   </div>
+</section>
 
-  <!-- Spa -->
-  <div class="product-modal" id="modal-spa">
-    <div class="product-modal-inner">
-      <div class="product-modal-header">
-        <span class="product-modal-title">Pista Spa-Francorchamps</span>
-        <button class="product-modal-close" onclick="closeModal('spa')">×</button>
-      </div>
-      <div class="product-modal-gallery">
-        <img src="images/racing-spa-1.png" alt="Spa-Francorchamps" onclick="openLB('spa', 0)">
-      </div>
-      <div class="product-modal-footer">
-        <p>Decoração de parede · Pista Spa-Francorchamps em impressão 3D</p>
-        <button type="button" class="btn btn-red" id="openQuoteModal2">Quero um igual</button>
-      </div>
+<div class="divider"></div>
+
+<!-- COMMUNITY -->
+<section>
+  <div class="section-tag">// Para toda a comunidade</div>
+  <h2 class="section-title">MAIS DO QUE<br><em>TROFÉUS.</em></h2>
+  <p class="section-sub">Apoiamos a comunidade de sim racing portuguesa em tudo o que podemos.</p>
+
+  <div class="community-grid">
+    <div class="community-card">
+      <div class="community-icon">🏎️</div>
+      <h4>Para Ligas e Campeonatos</h4>
+      <p>Organizas um campeonato de GT7, F1, ACC ou outro sim? Contacta-me para um pacote completo de troféus e prémios com desconto de volume. Entrega garantida antes da cerimónia.</p>
+    </div>
+    <div class="community-card">
+      <div class="community-icon">📸</div>
+      <h4>Conteúdo e Visibilidade</h4>
+      <p>Partilhamos os troféus da tua liga no nosso Instagram e TikTok. Mais visibilidade para ti, mais prova de qualidade para nós. Win-win para toda a comunidade.</p>
+    </div>
+    <div class="community-card">
+      <div class="community-icon">🤝</div>
+      <h4>Patrocínio e Parceria</h4>
+      <p>Tens uma liga ativa e queres um parceiro de confiança? Podemos criar um acordo de patrocínio — troféus em troca de exposição. Fala comigo diretamente.</p>
+    </div>
+    <div class="community-card">
+      <div class="community-icon">⚙️</div>
+      <h4>Personalização Total</h4>
+      <p>Logo da liga, cores da equipa, nome do piloto, número de corrida — tudo pode ser incorporado. Cada troféu conta a história de quem o ganhou.</p>
     </div>
   </div>
+</section>
 
-  <!-- Porsche -->
-  <div class="product-modal" id="modal-porsche">
-    <div class="product-modal-inner">
-      <div class="product-modal-header">
-        <span class="product-modal-title">Porsche 911 GT3 Wall Art</span>
-        <button class="product-modal-close" onclick="closeModal('porsche')">×</button>
-      </div>
-      <div class="product-modal-gallery">
-        <img src="images/racing-porsche-1.png" alt="Porsche GT3 1" onclick="openLB('porsche', 0)">
-        <img src="images/racing-porsche-2.png" alt="Porsche GT3 2" onclick="openLB('porsche', 1)">
-      </div>
-      <div class="product-modal-footer">
-        <p>Decoração de parede · Porsche 911 GT3 em impressão 3D</p>
-        <button type="button" class="btn btn-red" id="openQuoteModal3">Quero um igual</button>
-      </div>
-    </div>
+<div class="divider"></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>PRONTO A<br><em>VENCER?</em></h2>
+  <p>Contacta-me hoje. Orçamento gratuito para a tua liga, com ou sem desconto de volume.</p>
+  <div class="cta-row">
+    <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20para%20o%20meu%20campeonato%20de%20sim%20racing!" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pedir orçamento agora
+    </a>
+    <a class="btn-outline" href="index.html">← Voltar ao site</a>
   </div>
+</section>
 
-  <!-- Dashboard -->
-  <div class="product-modal" id="modal-dashboard">
-    <div class="product-modal-inner">
-      <div class="product-modal-header">
-        <span class="product-modal-title">Dashboard Phone/Tablet Mount</span>
-        <button class="product-modal-close" onclick="closeModal('dashboard')">×</button>
-      </div>
-      <div class="product-modal-gallery">
-        <img src="images/racing-dashboard-1.png" alt="Dashboard 1" onclick="openLB('dashboard', 0)">
-        <img src="images/racing-dashboard-2.png" alt="Dashboard 2" onclick="openLB('dashboard', 1)">
-        <img src="images/racing-dashboard-3.png" alt="Dashboard 3" onclick="openLB('dashboard', 2)">
-      </div>
-      <div class="product-modal-footer">
-        <p>Suporte para telemóvel/tablet · Sim Racing · Impressão 3D</p>
-        <button type="button" class="btn btn-red" id="openQuoteModal4">Quero um igual</button>
-      </div>
-    </div>
+<footer>
+  <p>© 2025 Effen Design · Paços de Ferreira · effen-design.pt</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="lightbox.html">Lightbox</a>
+    <a href="https://bpftr.com" target="_blank">BPF Team Race</a>
+    <a href="https://instagram.com/effen3d_design" target="_blank">Instagram</a>
   </div>
+</footer>
 
-  <!-- Pedais Fanatec -->
-  <div class="product-modal" id="modal-pedais">
-    <div class="product-modal-inner">
-      <div class="product-modal-header">
-        <span class="product-modal-title">Pedais Fanatec</span>
-        <button class="product-modal-close" onclick="closeModal('pedais')">×</button>
-      </div>
-      <div class="product-modal-gallery">
-        <img src="images/racing-pedais-1.png" alt="Pedais Fanatec 1" onclick="openLB('pedais', 0)">
-        <img src="images/racing-pedais-2.png" alt="Pedais Fanatec 2" onclick="openLB('pedais', 1)">
-      </div>
-      <div class="product-modal-footer">
-        <p>Modificações e peças para pedais Fanatec · Impressão 3D</p>
-        <button type="button" class="btn btn-red" id="openQuoteModal5">Quero um igual</button>
-      </div>
-    </div>
-  </div>
+<a class="wa-float" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20para%20o%20meu%20campeonato!" target="_blank">
+  <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
-  <!-- ══ IMAGE LIGHTBOX ══ -->
-  <div class="img-lightbox" id="imgLightbox">
-    <button class="img-lightbox-close" onclick="closeLB()">×</button>
-    <button class="lb-nav prev" onclick="lbNav(-1)">‹</button>
-    <img id="lbImg" src="" alt="">
-    <button class="lb-nav next" onclick="lbNav(1)">›</button>
-    <span class="lb-counter" id="lbCounter"></span>
-  </div>
-
-  <!-- ── Footer ── -->
-  <footer>
-    <div class="footer-inner">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
-      <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
-      <div class="footer-links">
-        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:effen3d_design@outlook.com">Email</a>
-        <a href="https://wa.me/351928372914" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ── Modal orçamento ── -->
-  <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
-    <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
-      <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
-      <h3 id="quoteTitle">Pedir orçamento</h3>
-      <form id="quoteForm">
-        <label>Nome* <input type="text" id="qName" required placeholder="O teu nome"></label>
-        <label>Email* <input type="email" id="qEmail" required placeholder="o-teu@email.com"></label>
-        <label>Categoria
-          <select id="qCategory">
-            <option selected>Racing</option>
-            <option>Lightbox / Trabalhos</option>
-            <option>Nomes / Porta-chaves</option>
-            <option>Acessórios</option>
-            <option>Brinquedos</option>
-            <option>Gaming</option>
-            <option>Decoração</option>
-            <option>Gravação Laser</option>
-            <option>Outro</option>
-          </select>
-        </label>
-        <label>Descrição do projeto* <textarea id="qDesc" rows="5" required placeholder="Descreve o que precisas..."></textarea></label>
-        <label>Prazo (opcional) <input type="text" id="qDeadline" placeholder="ex: 2 semanas"></label>
-        <button type="submit" class="btn btn-red" style="width:100%;margin-top:14px;">Enviar pedido</button>
-        <p class="quote-note">Ao enviar, abre o teu email com o pedido preenchido.</p>
-      </form>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script>
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    const hamburger = document.getElementById('hamburger');
-    const nav = document.querySelector('.header-nav');
-    hamburger.addEventListener('click', () => {
-      nav.classList.toggle('open');
-      hamburger.classList.toggle('active');
-    });
-
-    let activeModal = null;
-    function openModal(id) {
-      const m = document.getElementById('modal-' + id);
-      if (!m) return;
-      m.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      activeModal = id;
-    }
-    function closeModal(id) {
-      const m = document.getElementById('modal-' + id);
-      if (!m) return;
-      m.classList.remove('open');
-      document.body.style.overflow = '';
-      activeModal = null;
-    }
-    document.querySelectorAll('.product-modal').forEach(m => {
-      m.addEventListener('click', e => {
-        if (e.target === m) {
-          m.classList.remove('open');
-          document.body.style.overflow = '';
-          activeModal = null;
-        }
-      });
-    });
-
-    const galleries = {
-      nurburgring: ['images/racing-nurburgring-1.png','images/racing-nurburgring-2.png'],
-      spa:         ['images/racing-spa-1.png'],
-      porsche:     ['images/racing-porsche-1.png','images/racing-porsche-2.png'],
-      dashboard:   ['images/racing-dashboard-1.png','images/racing-dashboard-2.png','images/racing-dashboard-3.png'],
-      pedais:      ['images/racing-pedais-1.png','images/racing-pedais-2.png']
-    };
-    let lbGallery = [], lbIndex = 0;
-
-    function openLB(galleryId, idx) {
-      lbGallery = galleries[galleryId] || [];
-      lbIndex = idx;
-      updateLB();
-      document.getElementById('imgLightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLB() {
-      document.getElementById('imgLightbox').classList.remove('open');
-      document.body.style.overflow = activeModal ? 'hidden' : '';
-    }
-    function lbNav(dir) {
-      lbIndex = (lbIndex + dir + lbGallery.length) % lbGallery.length;
-      updateLB();
-    }
-    function updateLB() {
-      document.getElementById('lbImg').src = lbGallery[lbIndex];
-      document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + lbGallery.length;
-    }
-    document.getElementById('imgLightbox').addEventListener('click', e => {
-      if (e.target === document.getElementById('imgLightbox')) closeLB();
-    });
-    document.addEventListener('keydown', e => {
-      if (document.getElementById('imgLightbox').classList.contains('open')) {
-        if (e.key === 'Escape') closeLB();
-        if (e.key === 'ArrowRight') lbNav(1);
-        if (e.key === 'ArrowLeft')  lbNav(-1);
-      } else if (e.key === 'Escape' && activeModal) {
-        closeModal(activeModal);
-      }
-    });
-
-    const backdrop = document.getElementById('quoteBackdrop');
-    const openQ = () => { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; };
-    const closeQ = () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; };
-    ['openQuote','openQuoteModal1','openQuoteModal2','openQuoteModal3','openQuoteModal4','openQuoteModal5'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('click', openQ);
-    });
-    document.getElementById('closeQuote').addEventListener('click', closeQ);
-    backdrop.addEventListener('click', e => { if (e.target === backdrop) closeQ(); });
-    document.getElementById('quoteForm').addEventListener('submit', e => {
-      e.preventDefault();
-      const name     = document.getElementById('qName').value.trim();
-      const email    = document.getElementById('qEmail').value.trim();
-      const cat      = document.getElementById('qCategory').value;
-      const desc     = document.getElementById('qDesc').value.trim();
-      const deadline = document.getElementById('qDeadline').value.trim();
-      if (!name || !email || !desc) { alert('Preenche Nome, Email e Descrição.'); return; }
-      const subject = encodeURIComponent(`Pedido de orçamento — ${cat}`);
-      const body    = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\nCategoria: ${cat}\nPrazo: ${deadline || 'N/A'}\n\nDescrição:\n${desc}`);
-      window.location.href = `mailto:effen3d_design@outlook.com?subject=${subject}&body=${body}`;
-      closeQ();
-    });
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.product-card').forEach(el => {
-      el.classList.add('fade-up');
-      observer.observe(el);
-    });
-  </script>
 </body>
 </html>
-
