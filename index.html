@@ -1,323 +1,149 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Effen3D Design — Impressão 3D Personalizada em Portugal</title>
-  <meta name="description" content="Effen3D Design — Impressão 3D personalizada em Portugal. Criação e produção de peças exclusivas, brinquedos, acessórios, gaming, racing e decoração, feitos à medida para ti.">
-  <meta name="keywords" content="impressão 3D, impressão 3D personalizada, Effen3D Design, impressão 3D Portugal, gravação laser, 3D printing Portugal, Lasergravur Portugal">
-  <meta name="author" content="Effen3D Design">
-  <meta property="og:title" content="Effen3D Design — Impressão 3D Personalizada em Portugal">
-  <meta property="og:description" content="Criação e impressão 3D personalizada — peças únicas, feitas à medida.">
-  <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/effen3d_new.png">
+
+  <title>Effen Design — Custom Laser & 3D</title>
+
+  <meta name="description" content="Effen Design — peças personalizadas em 3D e gravação laser. Criação única e produção premium.">
+  <meta name="keywords" content="impressão 3D, gravação laser, personalização, Effen Design, Portugal">
+  <meta name="author" content="Effen Design">
+
+  <meta property="og:title" content="Effen Design — Custom Laser & 3D">
+  <meta property="og:description" content="Peças únicas, feitas à tua medida.">
+  <meta property="og:image" content="https://effen84.github.io/Effen3d_Design/images/logo.png">
   <meta property="og:url" content="https://effen84.github.io/Effen3d_Design/">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
+
 </head>
+
 <body>
 
-  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <span class="lightbox-close">×</span>
-    <img id="lightboxImg" src="" alt="">
-  </div>
+<!-- HEADER -->
+<header id="header">
+  <a href="#inicio">
+    <img src="images/logo.png" class="logo-top">
+  </a>
 
-  <header id="header">
-    <a href="#inicio" class="header-logo">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="logo-top">
-    </a>
-    <nav class="header-nav">
-      <a href="#portfolio" data-i18n="nav_portfolio">Portefólio</a>
-      <a href="#servicos" data-i18n="nav_services">Serviços</a>
-      <a href="#contacto" data-i18n="nav_contact">Contacto</a>
-      <button type="button" class="btn-quote" id="openQuote" data-i18n="nav_quote">Pedir orçamento</button>
-      <div class="lang-switcher">
-        <button onclick="setLang('pt')" class="lang-btn" id="btn-pt">🇵🇹 PT</button>
-        <button onclick="setLang('en')" class="lang-btn" id="btn-en">🇬🇧 EN</button>
-        <button onclick="setLang('de')" class="lang-btn" id="btn-de">🇩🇪 DE</button>
-      </div>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
+  <nav class="header-nav">
+    <a href="#portfolio">Portefólio</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
 
-  <section id="inicio" class="hero">
-    <div class="hero-bg-grid"></div>
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="hero-eyebrow" data-i18n="hero_eyebrow">Portugal · Impressão 3D &amp; Gravação Laser</p>
-        <h1 class="hero-title" data-i18n="hero_title">Onde a<br><span class="accent">Imaginação</span><br>Ganha Forma.</h1>
-        <p class="hero-sub" data-i18n="hero_sub">Peças únicas, personalizadas e com qualidade. Do modelo à tua mão.</p>
-        <div class="hero-btns">
-          <a href="#portfolio" class="btn btn-red" data-i18n="hero_btn_portfolio">Ver Portefólio</a>
-          <button type="button" class="btn btn-ghost" id="openQuote2" data-i18n="nav_quote">Pedir orçamento</button>
-        </div>
-        <div class="hero-badges">
-          <span class="badge" data-i18n="badge_print">🖨️ Impressão 3D</span>
-          <span class="badge" data-i18n="badge_laser">⚡ Gravação Laser</span>
-          <span class="badge" data-i18n="badge_custom">🎨 Personalizado</span>
-        </div>
-      </div>
-      <div class="hero-visual-wrap">
-        <div class="hero-glow"></div>
-        <img src="images/effen3d_new.png" alt="Effen3D Design Logo" class="hero-visual" loading="eager">
-      </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <span>scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
+<!-- HERO -->
+<section id="inicio" class="hero-new">
 
-  <section id="servicos" class="services">
-    <div class="section-inner">
-      <p class="section-label" data-i18n="services_label">O que fazemos</p>
-      <h2 class="section-title" data-i18n="services_title">Serviços</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">🖨️</div>
-          <h3 data-i18n="s1_title">Impressão 3D</h3>
-          <p data-i18n="s1_desc">Peças em PLA de alta qualidade — decoração, gaming, acessórios, figurines e muito mais. Multicolor e acabamentos metálicos disponíveis.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">⚡</div>
-          <h3 data-i18n="s2_title">Gravação Laser</h3>
-          <p data-i18n="s2_desc">Gravação em madeira, acrílico, alumínio, couro e outros materiais. Presentes personalizados, tábuas de cozinha, canetas, isqueiros e placas.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🎨</div>
-          <h3 data-i18n="s3_title">Design Personalizado</h3>
-          <p data-i18n="s3_desc">Tens uma ideia? Nós tornamos realidade. Trabalhamos a partir de imagens, logos ou conceitos, e criamos a peça do zero para ti.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="hero-content">
 
-  <section class="sponsor-section">
-    <div class="section-inner">
-      <p class="section-label" data-i18n="sponsor_label">Patrocínio Oficial</p>
-      <h2 class="section-title" data-i18n="sponsor_title">Parceiros</h2>
-      <a href="https://www.bpftr.com" target="_blank" rel="noopener" class="sponsor-banner">
-        <div class="sp-lines"><div class="sp-line"></div><div class="sp-line"></div><div class="sp-line"></div><div class="sp-line"></div></div>
-        <div class="sp-corner tl"></div><div class="sp-corner tr"></div><div class="sp-corner bl"></div><div class="sp-corner br"></div>
-        <div class="sp-left">
-          <p class="sp-eyebrow" data-i18n="sponsor_label">Patrocinador Oficial</p>
-          <h3 class="sp-title">Binde Pá Festa<br>Team Race</h3>
-          <p class="sp-sub">Gran Turismo 7 · Portugal</p>
-        </div>
-        <div class="sp-center">
-          <div class="sp-logo-box-wide">
-            <img src="images/effen3d_bpf.png" alt="Effen3D Design x BPF Team Race">
-          </div>
-          <p class="sp-leagues">3.ª Liga Veteranos · 5.ª Liga BPF.TR</p>
-        </div>
-        <div class="sp-right">
-          <span class="sp-btn">
-            Visitar BPF.TR
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-          </span>
-        </div>
+    <img src="images/logo.png" class="hero-logo">
+
+    <h1>Peças Personalizadas em 3D & Laser</h1>
+
+    <p>Design, produção e personalização premium — feitas à tua medida</p>
+
+    <div class="hero-buttons">
+
+      <a href="https://wa.me/351928372914" class="btn-primary">
+        👉 Pedir orçamento
       </a>
-    </div>
-  </section>
 
-  <section id="portfolio" class="portfolio">
-    <div class="section-inner">
-      <p class="section-label" data-i18n="portfolio_label">Os nossos trabalhos</p>
-      <h2 class="section-title" data-i18n="portfolio_title">Portefólio</h2>
-      <div class="cat-grid">
-        <a href="gaming.html" class="cat-card"><div class="cat-icon">🎮</div><span class="cat-name">Gaming</span></a>
-        <a href="racing.html" class="cat-card"><div class="cat-icon">🏎️</div><span class="cat-name">Racing</span></a>
-        <a href="decoracao.html" class="cat-card"><div class="cat-icon">🎨</div><span class="cat-name" data-i18n="cat_decor">Decoração</span></a>
-        <a href="acessorios.html" class="cat-card"><div class="cat-icon">🔧</div><span class="cat-name" data-i18n="cat_acc">Acessórios</span></a>
-        <a href="brinquedos.html" class="cat-card"><div class="cat-icon">🧸</div><span class="cat-name" data-i18n="cat_toys">Brinquedos</span></a>
-        <a href="natal.html" class="cat-card"><div class="cat-icon">🎄</div><span class="cat-name" data-i18n="cat_xmas">Natal</span></a>
-        <a href="laser.html" class="cat-card"><div class="cat-icon">⚡</div><span class="cat-name">Laser</span></a>
-        <a href="lightbox.html" class="cat-card"><div class="cat-icon">💡</div><span class="cat-name" data-i18n="cat_lightbox">Lightbox/Trabalhos</span></a>
-        <a href="nomes.html" class="cat-card"><div class="cat-icon">🔑</div><span class="cat-name" data-i18n="cat_names">Nomes/Porta-chaves</span></a>
-      </div>
-    </div>
-  </section>
+      <a href="#portfolio" class="btn-secondary">
+        Ver Portfólio
+      </a>
 
-  <section id="contacto" class="contact">
-    <div class="section-inner">
-      <p class="section-label" data-i18n="contact_label">Fala connosco</p>
-      <h2 class="section-title" data-i18n="contact_title">Contacto</h2>
-      <p class="contact-sub" data-i18n="contact_sub">Para pedidos personalizados, parcerias ou orçamentos, entra em contacto connosco — respondemos rapidamente!</p>
-      <div class="contact-links">
-        <a href="mailto:effen3d_design@outlook.com" class="contact-item">
-          <img src="images/icon-email.png" alt="Email" class="contact-icon">
-          <span>effen3d_design@outlook.com</span>
-        </a>
-        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener" class="contact-item">
-          <img src="images/icon-instagram.png" alt="Instagram" class="contact-icon">
-          <span>@effen3d_design</span>
-        </a>
-        <a href="https://wa.me/351928372914?text=Ol%C3%A1!%20Vim%20pelo%20site%20Effen3D%20Design%20e%20gostaria%20de%20pedir%20um%20or%C3%A7amento." target="_blank" rel="noopener" class="contact-item contact-whatsapp">
-          <svg class="contact-icon whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          <span>WhatsApp</span>
-        </a>
-      </div>
-      <button type="button" class="btn btn-red" id="openQuote3" style="margin-top:40px;" data-i18n="nav_quote">Pedir orçamento</button>
     </div>
-  </section>
 
-  <footer>
-    <div class="footer-inner">
-      <img src="images/effen3d_new.png" alt="Effen3D Design" class="footer-logo">
-      <p class="footer-copy">© 2025 Effen3D Design · Portugal · Todos os direitos reservados</p>
-      <div class="footer-links">
-        <a href="https://instagram.com/effen3d_design" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:effen3d_design@outlook.com">Email</a>
-        <a href="https://wa.me/351928372914" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://www.bpftr.com" target="_blank" rel="noopener">BPF.TR</a>
-      </div>
-    </div>
-  </footer>
-
-  <div class="quote-backdrop" id="quoteBackdrop" aria-hidden="true">
-    <div class="quote-modal" role="dialog" aria-labelledby="quoteTitle">
-      <button class="quote-close" id="closeQuote" aria-label="Fechar">×</button>
-      <h3 id="quoteTitle" data-i18n="nav_quote">Pedir orçamento</h3>
-      <form id="quoteForm">
-        <label data-i18n="form_name">Nome* <input type="text" id="qName" required placeholder="O teu nome"></label>
-        <label data-i18n="form_email">Email* <input type="email" id="qEmail" required placeholder="o-teu@email.com"></label>
-        <label data-i18n="form_cat">Categoria
-          <select id="qCategory">
-            <option data-i18n="cat_acc">Acessórios</option>
-            <option data-i18n="cat_toys">Brinquedos</option>
-            <option>Gaming</option>
-            <option>Racing</option>
-            <option data-i18n="cat_decor">Decoração</option>
-            <option>Laser</option>
-            <option data-i18n="cat_lightbox">Lightbox/Trabalhos</option>
-            <option data-i18n="form_other">Outro</option>
-          </select>
-        </label>
-        <label data-i18n="form_desc">Descrição do projeto* <textarea id="qDesc" rows="5" required placeholder="Descreve o que precisas..."></textarea></label>
-        <label data-i18n="form_deadline">Prazo (opcional) <input type="text" id="qDeadline" placeholder="ex: 2 semanas"></label>
-        <button type="submit" class="btn btn-red" style="width:100%;margin-top:14px;" data-i18n="form_send">Enviar pedido</button>
-        <p class="quote-note" data-i18n="form_note">Ao enviar, abre o teu email com o pedido preenchido.</p>
-      </form>
-    </div>
   </div>
 
-  <script src="script.js"></script>
-  <script>
-    // ── TRADUÇÕES ──
-    const translations = {
-      pt: {
-        nav_portfolio: "Portefólio", nav_services: "Serviços", nav_contact: "Contacto", nav_quote: "Pedir orçamento",
-        hero_eyebrow: "Portugal · Impressão 3D & Gravação Laser",
-        hero_title: "Onde a<br><span class='accent'>Imaginação</span><br>Ganha Forma.",
-        hero_sub: "Peças únicas, personalizadas e com qualidade. Do modelo à tua mão.",
-        hero_btn_portfolio: "Ver Portefólio",
-        badge_print: "🖨️ Impressão 3D", badge_laser: "⚡ Gravação Laser", badge_custom: "🎨 Personalizado",
-        services_label: "O que fazemos", services_title: "Serviços",
-        s1_title: "Impressão 3D", s1_desc: "Peças em PLA de alta qualidade — decoração, gaming, acessórios, figurines e muito mais. Multicolor e acabamentos metálicos disponíveis.",
-        s2_title: "Gravação Laser", s2_desc: "Gravação em madeira, acrílico, alumínio, couro e outros materiais. Presentes personalizados, tábuas de cozinha, canetas, isqueiros e placas.",
-        s3_title: "Design Personalizado", s3_desc: "Tens uma ideia? Nós tornamos realidade. Trabalhamos a partir de imagens, logos ou conceitos, e criamos a peça do zero para ti.",
-        sponsor_label: "Patrocínio Oficial", sponsor_title: "Parceiros",
-        portfolio_label: "Os nossos trabalhos", portfolio_title: "Portefólio",
-        cat_decor: "Decoração", cat_acc: "Acessórios", cat_toys: "Brinquedos", cat_xmas: "Natal", cat_lightbox: "Lightbox/Trabalhos", cat_names: "Nomes/Porta-chaves",
-        contact_label: "Fala connosco", contact_title: "Contacto",
-        contact_sub: "Para pedidos personalizados, parcerias ou orçamentos, entra em contacto connosco — respondemos rapidamente!",
-        form_name: "Nome*", form_email: "Email*", form_cat: "Categoria", form_desc: "Descrição do projeto*", form_deadline: "Prazo (opcional)", form_send: "Enviar pedido", form_note: "Ao enviar, abre o teu email com o pedido preenchido.", form_other: "Outro"
-      },
-      en: {
-        nav_portfolio: "Portfolio", nav_services: "Services", nav_contact: "Contact", nav_quote: "Request a quote",
-        hero_eyebrow: "Portugal · 3D Printing & Laser Engraving",
-        hero_title: "Where<br><span class='accent'>Imagination</span><br>Takes Shape.",
-        hero_sub: "Unique, personalised pieces made with quality. From the model to your hands.",
-        hero_btn_portfolio: "View Portfolio",
-        badge_print: "🖨️ 3D Printing", badge_laser: "⚡ Laser Engraving", badge_custom: "🎨 Personalised",
-        services_label: "What we do", services_title: "Services",
-        s1_title: "3D Printing", s1_desc: "High-quality PLA pieces — decoration, gaming, accessories, figurines and much more. Multicolour and metallic finishes available.",
-        s2_title: "Laser Engraving", s2_desc: "Engraving on wood, acrylic, aluminium, leather and other materials. Personalised gifts, cutting boards, pens, lighters and plaques.",
-        s3_title: "Custom Design", s3_desc: "Got an idea? We make it real. We work from images, logos or concepts, and create the piece from scratch for you.",
-        sponsor_label: "Official Sponsor", sponsor_title: "Partners",
-        portfolio_label: "Our work", portfolio_title: "Portfolio",
-        cat_decor: "Decoration", cat_acc: "Accessories", cat_toys: "Toys", cat_xmas: "Christmas", cat_lightbox: "Lightbox/Works", cat_names: "Names/Keychains",
-        contact_label: "Get in touch", contact_title: "Contact",
-        contact_sub: "For custom orders, partnerships or quotes, get in touch — we respond quickly!",
-        form_name: "Name*", form_email: "Email*", form_cat: "Category", form_desc: "Project description*", form_deadline: "Deadline (optional)", form_send: "Send request", form_note: "Clicking send will open your email with the request pre-filled.", form_other: "Other"
-      },
-      de: {
-        nav_portfolio: "Portfolio", nav_services: "Leistungen", nav_contact: "Kontakt", nav_quote: "Angebot anfragen",
-        hero_eyebrow: "Portugal · 3D-Druck & Lasergravur",
-        hero_title: "Wo<br><span class='accent'>Fantasie</span><br>Form annimmt.",
-        hero_sub: "Einzigartige, personalisierte Stücke mit Qualität. Vom Modell in deine Hände.",
-        hero_btn_portfolio: "Portfolio ansehen",
-        badge_print: "🖨️ 3D-Druck", badge_laser: "⚡ Lasergravur", badge_custom: "🎨 Personalisiert",
-        services_label: "Was wir tun", services_title: "Leistungen",
-        s1_title: "3D-Druck", s1_desc: "Hochwertige PLA-Stücke — Dekoration, Gaming, Zubehör, Figuren und vieles mehr. Mehrfarbig und metallische Oberflächen verfügbar.",
-        s2_title: "Lasergravur", s2_desc: "Gravur auf Holz, Acryl, Aluminium, Leder und anderen Materialien. Personalisierte Geschenke, Schneidebretter, Stifte, Feuerzeuge und Schilder.",
-        s3_title: "Individuelles Design", s3_desc: "Hast du eine Idee? Wir machen sie real. Wir arbeiten mit Bildern, Logos oder Konzepten und erstellen das Stück von Grund auf für dich.",
-        sponsor_label: "Offizieller Sponsor", sponsor_title: "Partner",
-        portfolio_label: "Unsere Arbeiten", portfolio_title: "Portfolio",
-        cat_decor: "Dekoration", cat_acc: "Zubehör", cat_toys: "Spielzeug", cat_xmas: "Weihnachten", cat_lightbox: "Lightbox/Arbeiten", cat_names: "Namen/Schlüsselanhänger",
-        contact_label: "Kontakt aufnehmen", contact_title: "Kontakt",
-        contact_sub: "Für individuelle Bestellungen, Partnerschaften oder Angebote — wir antworten schnell!",
-        form_name: "Name*", form_email: "E-Mail*", form_cat: "Kategorie", form_desc: "Projektbeschreibung*", form_deadline: "Frist (optional)", form_send: "Anfrage senden", form_note: "Beim Senden öffnet sich deine E-Mail mit der vorausgefüllten Anfrage.", form_other: "Sonstiges"
-      }
-    };
+</section>
 
-    let currentLang = localStorage.getItem('lang') || 'pt';
+<!-- SERVIÇOS -->
+<section id="servicos" class="services">
+  <h2>Serviços</h2>
 
-    function setLang(lang) {
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-      applyTranslations();
-      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('btn-' + lang).classList.add('active');
-    }
+  <div class="services-grid">
 
-    function applyTranslations() {
-      const t = translations[currentLang];
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key] !== undefined) {
-          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-            el.placeholder = t[key];
-          } else {
-            el.innerHTML = t[key];
-          }
-        }
-      });
-    }
+    <div class="service-card">
+      <h3>Impressão 3D</h3>
+      <p>Peças personalizadas em alta qualidade para decoração, gaming e mais.</p>
+    </div>
 
-    // Header scroll
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+    <div class="service-card">
+      <h3>Gravação Laser</h3>
+      <p>Gravação em madeira, acrílico e inox com acabamento premium.</p>
+    </div>
 
-    // Hamburger
-    document.getElementById('hamburger').addEventListener('click', () => {
-      document.querySelector('.header-nav').classList.toggle('open');
-      document.getElementById('hamburger').classList.toggle('active');
-    });
+    <div class="service-card">
+      <h3>Design Personalizado</h3>
+      <p>Tens uma ideia? Criamos do zero e produzimos para ti.</p>
+    </div>
 
-    // Lightbox
-    function openLightbox(img) { document.getElementById('lightboxImg').src = img.src; document.getElementById('lightbox').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-    function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; document.body.style.overflow = ''; }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  </div>
+</section>
 
-    // Quote modal
-    const backdrop = document.getElementById('quoteBackdrop');
-    ['openQuote','openQuote2','openQuote3'].forEach(id => { const el = document.getElementById(id); if (el) el.addEventListener('click', () => { backdrop.classList.add('open'); document.body.style.overflow = 'hidden'; }); });
-    document.getElementById('closeQuote').addEventListener('click', () => { backdrop.classList.remove('open'); document.body.style.overflow = ''; });
-    backdrop.addEventListener('click', e => { if (e.target === backdrop) { backdrop.classList.remove('open'); document.body.style.overflow = ''; } });
+<!-- PORTFOLIO -->
+<section id="portfolio" class="portfolio">
 
-    // Scroll animations
-    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
-    document.querySelectorAll('.service-card, .item, .contact-item, .cat-card').forEach(el => { el.classList.add('fade-up'); observer.observe(el); });
+  <h2>Portfólio</h2>
 
-    // Init language
-    setLang(currentLang);
-  </script>
+  <div class="services-grid">
+
+    <a href="acessorios.html" class="service-card">
+      <h3>Acessórios</h3>
+      <p>Organização e peças úteis personalizadas</p>
+    </a>
+
+    <a href="gaming.html" class="service-card">
+      <h3>Gaming</h3>
+      <p>Setup, sim racing e personalização</p>
+    </a>
+
+    <a href="decoracao.html" class="service-card">
+      <h3>Decoração</h3>
+      <p>Peças únicas para casa</p>
+    </a>
+
+    <a href="laser.html" class="service-card">
+      <h3>Laser</h3>
+      <p>Gravações premium</p>
+    </a>
+
+    <a href="lightbox.html" class="service-card">
+      <h3>Lightbox</h3>
+      <p>Projetos iluminados personalizados</p>
+    </a>
+
+    <a href="racing.html" class="service-card">
+      <h3>Racing</h3>
+      <p>Parcerias e equipas</p>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="contact">
+
+  <h2>Tens uma ideia?</h2>
+  <p>Fala comigo e vamos criar algo único</p>
+
+  <a href="https://wa.me/351928372914">
+    👉 Falar no WhatsApp
+  </a>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Effen Design · Portugal</p>
+</footer>
+
 </body>
 </html>
+``
