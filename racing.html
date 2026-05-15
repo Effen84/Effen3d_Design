@@ -97,34 +97,29 @@
     .products-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .product-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform .3s, border-color .3s; text-decoration: none; color: inherit; display: block; }
     .product-card:hover { transform: translateY(-4px); border-color: rgba(230,184,55,0.35); }
-    .product-img { aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 52px; position: relative; }
-    .product-img.trophy { background: radial-gradient(ellipse at center, rgba(245,197,24,0.15) 0%, var(--bg3) 70%); }
-    .product-img.plaque { background: radial-gradient(ellipse at center, rgba(230,184,55,0.12) 0%, var(--bg3) 70%); }
-    .product-img.accessory { background: radial-gradient(ellipse at center, rgba(100,100,255,0.1) 0%, var(--bg3) 70%); }
-    .product-badge { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
+    .product-img { aspect-ratio: 4/3; position: relative; overflow: hidden; background: var(--bg3); }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .product-card:hover .product-img img { transform: scale(1.05); }
+    .product-badge { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #080808; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; z-index: 2; }
     .product-badge.gold-badge { background: var(--gold-bright); color: #000; }
     .product-body { padding: 22px; }
     .product-body h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 8px; }
     .product-body p { color: var(--grey); font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
-    .product-footer { display: flex; align-items: center; justify-content: space-between; }
-    .product-price { font-family: 'Space Mono', monospace; font-size: 16px; color: var(--gold-bright); font-weight: 700; }
+    .product-footer { display: flex; align-items: center; justify-content: flex-end; }
     .product-cta { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); transition: color .2s; }
     .product-card:hover .product-cta { color: var(--gold); }
 
-    /* GT7 SECTION */
-    .gt7 { background: linear-gradient(135deg, #0a0005 0%, #1a0008 50%, #0f0000 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .gt7-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .gt7-logo { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 10vw, 120px); line-height: 0.9; }
-    .gt7-logo .gt { color: var(--gold); }
-    .gt7-logo .seven { color: var(--gold-bright); -webkit-text-stroke: 2px var(--gold-bright); color: transparent; }
-    .gt7-text .section-tag { color: var(--gold-bright); }
-    .gt7-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 58px); line-height: 0.95; margin-bottom: 20px; }
-    .gt7-text h2 em { font-style: normal; color: var(--gold-bright); }
-    .gt7-text p { color: var(--grey); font-size: 15px; line-height: 1.7; margin-bottom: 16px; }
-    .gt7-stats { display: flex; gap: 32px; margin: 32px 0; }
-    .gt7-stat { }
-    .gt7-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 40px; color: var(--gold-bright); line-height: 1; }
-    .gt7-stat-label { font-size: 12px; color: var(--grey); letter-spacing: 1px; text-transform: uppercase; }
+    /* SPONSORS */
+    .sponsors { background: linear-gradient(135deg, #0a0500 0%, #15100a 50%, #0f0800 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .sponsors-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .sponsor-card { padding: 40px 36px; border: 1px solid rgba(230,184,55,0.2); border-radius: 14px; background: rgba(0,0,0,0.4); transition: transform .3s, border-color .3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+    .sponsor-card:hover { transform: translateY(-4px); border-color: rgba(245,197,24,0.5); }
+    .sponsor-tag { display: inline-flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 16px; }
+    .sponsor-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 4vw, 38px); line-height: 0.95; letter-spacing: 1.5px; margin-bottom: 8px; }
+    .sponsor-card h3 em { font-style: normal; color: var(--gold-bright); display: block; }
+    .sponsor-sub { font-size: 13px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 18px; }
+    .sponsor-card p { color: var(--grey); font-size: 14px; line-height: 1.7; flex: 1; }
+    .sponsor-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; color: var(--gold-bright); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
 
     /* COMMUNITY */
     .community-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
@@ -137,15 +132,21 @@
     /* TROPHIES SHOWCASE */
     .trophy-showcase { background: var(--bg2); }
     .trophy-grid { margin-top: 60px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; }
-    .trophy-main { grid-row: span 2; border-radius: 14px; background: radial-gradient(ellipse at center, rgba(245,197,24,0.15) 0%, var(--bg3) 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px; text-align: center; border: 1px solid rgba(245,197,24,0.15); min-height: 360px; }
-    .trophy-main-icon { font-size: 80px; margin-bottom: 20px; }
-    .trophy-main h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--gold-bright); margin-bottom: 12px; }
-    .trophy-main p { color: var(--grey); font-size: 14px; line-height: 1.6; }
-    .trophy-side { border-radius: 12px; background: var(--bg3); border: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px; text-align: center; transition: border-color .3s; }
-    .trophy-side:hover { border-color: rgba(230,184,55,0.25); }
-    .trophy-side-icon { font-size: 40px; margin-bottom: 14px; }
-    .trophy-side h4 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; margin-bottom: 8px; }
-    .trophy-side p { color: var(--grey); font-size: 13px; }
+    .trophy-main { grid-row: span 2; border-radius: 14px; overflow: hidden; position: relative; border: 1px solid rgba(245,197,24,0.15); min-height: 460px; display: flex; flex-direction: column; justify-content: flex-end; }
+    .trophy-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform .6s; }
+    .trophy-main:hover img { transform: scale(1.05); }
+    .trophy-main::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, transparent 100%); }
+    .trophy-main-content { position: relative; z-index: 2; padding: 36px; }
+    .trophy-main h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--gold-bright); margin-bottom: 12px; letter-spacing: 1px; }
+    .trophy-main p { color: rgba(255,255,255,0.9); font-size: 14px; line-height: 1.6; max-width: 400px; }
+    .trophy-side { border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--border); min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; transition: border-color .3s; }
+    .trophy-side:hover { border-color: rgba(230,184,55,0.4); }
+    .trophy-side img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform .5s; }
+    .trophy-side:hover img { transform: scale(1.08); }
+    .trophy-side::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 60%, transparent 100%); }
+    .trophy-side-content { position: relative; z-index: 2; padding: 20px; }
+    .trophy-side h4 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; margin-bottom: 4px; letter-spacing: 0.5px; color: var(--white); }
+    .trophy-side p { color: rgba(255,255,255,0.8); font-size: 12px; line-height: 1.5; }
 
     /* CTA */
     .cta-section { text-align: center; }
@@ -220,7 +221,7 @@
       <span style="font-size:32px">🏁</span>
       <div>
         <div class="hero-sponsor-label">Orgulhosamente Patrocinador</div>
-        <div class="hero-sponsor-name">BPF TEAM RACE · Gran Turismo 7</div>
+        <div class="hero-sponsor-name">BPF TEAM RACE · NCM NATIONAL CREW MOTORSPORT</div>
       </div>
     </div>
   </div>
@@ -228,35 +229,28 @@
 
 <div class="divider"></div>
 
-<!-- GT7 SECTION -->
-<section class="gt7">
-  <div class="gt7-inner">
-    <div class="gt7-logo">
-      <div class="gt">GRAN</div>
-      <div class="gt">TURISMO</div>
-      <div class="seven">7</div>
-    </div>
-    <div class="gt7-text">
-      <div class="section-tag gold">// Patrocinador oficial</div>
-      <h2>DENTRO DA<br><em>COMUNIDADE.</em></h2>
-      <p>A Effen Design é patrocinadora oficial da BPF Team Race, uma das ligas de Gran Turismo 7 mais ativas de Portugal. Não somos apenas fornecedores — somos parte da comunidade.</p>
-      <p>Isso significa que entendemos o que é importante: troféus que causam impacto, plaquetas com o design certo e peças que fazem as pessoas querer ganhar.</p>
-      <div class="gt7-stats">
-        <div class="gt7-stat">
-          <div class="gt7-stat-num">GT7</div>
-          <div class="gt7-stat-label">Gran Turismo</div>
-        </div>
-        <div class="gt7-stat">
-          <div class="gt7-stat-num">BPF</div>
-          <div class="gt7-stat-label">Team Race</div>
-        </div>
-        <div class="gt7-stat">
-          <div class="gt7-stat-num">🏆</div>
-          <div class="gt7-stat-label">Troféus únicos</div>
-        </div>
-      </div>
-      <a class="btn-red" href="https://bpftr.com" target="_blank">Ver BPF Team Race →</a>
-    </div>
+<!-- SPONSORS SECTION -->
+<section class="sponsors">
+  <div class="section-tag gold">// Patrocínios Oficiais</div>
+  <h2 class="section-title">PARTE DA<br><em class="gold">COMUNIDADE.</em></h2>
+  <p class="section-sub" style="margin-bottom:0">A Effen Design não é apenas fornecedora — somos patrocinadores ativos de duas equipas que vivem o motorsport.</p>
+
+  <div class="sponsors-grid">
+    <a class="sponsor-card" href="https://bpftr.com" target="_blank">
+      <div class="sponsor-tag">🏆 Patrocinador Oficial</div>
+      <h3>BPF<br><em>TEAM RACE</em></h3>
+      <div class="sponsor-sub">Gran Turismo 7</div>
+      <p>Uma das ligas de Gran Turismo 7 mais ativas de Portugal. Fornecemos os troféus e plaquetas que premiam os pilotos da comunidade desde o início.</p>
+      <span class="sponsor-link">Visitar BPF Team Race →</span>
+    </a>
+
+    <a class="sponsor-card" href="#" target="_blank">
+      <div class="sponsor-tag">🏎️ Patrocinador Oficial</div>
+      <h3>NCM<br><em>NATIONAL CREW</em></h3>
+      <div class="sponsor-sub">Motorsport</div>
+      <p>Equipa de motorsport com presença nas mais variadas vertentes da competição. Parceria que reflete o nosso compromisso com o automobilismo nacional.</p>
+      <span class="sponsor-link">Conhecer NCM →</span>
+    </a>
   </div>
 </section>
 
@@ -270,76 +264,82 @@
 
   <div class="products-grid">
     <a class="product-card" href="https://wa.me/351928372914?text=Quero%20troféus%20de%20pódio%20para%20campeonato!" target="_blank">
-      <div class="product-img trophy">
-        🥇
+      <div class="product-img">
+        <img src="images/racing1.png" alt="Troféus de Pódio" loading="lazy" />
         <div class="product-badge gold-badge">⭐ Premium</div>
       </div>
       <div class="product-body">
         <h4>Troféus de Pódio</h4>
         <p>1º, 2º e 3º lugar com design exclusivo. Base personalizável com logo da liga, nome do piloto e época. Em PLA de alta qualidade, acabamento premium.</p>
         <div class="product-footer">
-                    <span class="product-cta">Pedir orçamento →</span>
+          <span class="product-cta">Pedir orçamento →</span>
         </div>
       </div>
     </a>
 
     <a class="product-card" href="https://wa.me/351928372914?text=Quero%20plaquetas%20personalizadas%20para%20racing!" target="_blank">
-      <div class="product-img plaque">🏎️</div>
+      <div class="product-img">
+        <img src="images/racing-dashboard-1.png" alt="Plaquetas Personalizadas" loading="lazy" />
+      </div>
       <div class="product-body">
         <h4>Plaquetas Personalizadas</h4>
         <p>Identificação de piloto, número de corrida, cargo na equipa ou homenagem de época. Gravação laser em alumínio anodizado ou acrílico.</p>
         <div class="product-footer">
-                    <span class="product-cta">Pedir orçamento →</span>
+          <span class="product-cta">Pedir orçamento →</span>
         </div>
       </div>
     </a>
 
     <a class="product-card" href="https://wa.me/351928372914?text=Quero%20saber%20sobre%20troféu%20de%20campeão!" target="_blank">
-      <div class="product-img trophy">
-        👑
+      <div class="product-img">
+        <img src="images/racing2.png" alt="Troféu de Campeão" loading="lazy" />
         <div class="product-badge">🔥 Exclusivo</div>
       </div>
       <div class="product-body">
         <h4>Troféu de Campeão</h4>
         <p>O troféu principal da época, feito para impressionar. Design único, tamanho maior, base com gravação laser detalhada. Só há um campeão — o troféu tem de o mostrar.</p>
         <div class="product-footer">
-                    <span class="product-cta">Pedir orçamento →</span>
+          <span class="product-cta">Pedir orçamento →</span>
         </div>
       </div>
     </a>
 
     <a class="product-card" href="https://wa.me/351928372914?text=Quero%20um%20troféu%20de%20melhor%20piloto%20da%20época!" target="_blank">
-      <div class="product-img accessory">🏅</div>
+      <div class="product-img">
+        <img src="images/racing3.png" alt="Prémios Especiais" loading="lazy" />
+      </div>
       <div class="product-body">
         <h4>Prémios Especiais</h4>
         <p>Melhor Piloto, Mais Consistente, Fair Play, Rookie do Ano. Troféus e medalhas personalizadas para cada prémio especial da tua liga.</p>
         <div class="product-footer">
-                    <span class="product-cta">Pedir orçamento →</span>
+          <span class="product-cta">Pedir orçamento →</span>
         </div>
       </div>
     </a>
 
     <a class="product-card" href="https://wa.me/351928372914?text=Quero%20acessórios%20personalizados%20para%20sim%20racing!" target="_blank">
-      <div class="product-img accessory">🎮</div>
+      <div class="product-img">
+        <img src="images/racing-pedais-1.png" alt="Acessórios de Setup" loading="lazy" />
+      </div>
       <div class="product-body">
         <h4>Acessórios de Setup</h4>
         <p>Suportes, plaquetas de identificação de equipa, decoração para a zona de sim racing. Personalização do teu cockpit com o teu nome e número.</p>
         <div class="product-footer">
-                    <span class="product-cta">Pedir orçamento →</span>
+          <span class="product-cta">Pedir orçamento →</span>
         </div>
       </div>
     </a>
 
     <a class="product-card" href="https://wa.me/351928372914?text=Quero%20pacote%20completo%20para%20a%20minha%20liga!" target="_blank">
-      <div class="product-img trophy">
-        📦
+      <div class="product-img">
+        <img src="images/racing-porsche-1.png" alt="Pacote Liga Completo" loading="lazy" />
         <div class="product-badge gold-badge">Melhor valor</div>
       </div>
       <div class="product-body">
         <h4>Pacote Liga Completo</h4>
         <p>Tudo o que a tua liga precisa: troféus de pódio + campeão + prémios especiais. Orçamento personalizado com desconto de volume garantido.</p>
         <div class="product-footer">
-                    <span class="product-cta">Pedir orçamento →</span>
+          <span class="product-cta">Pedir orçamento →</span>
         </div>
       </div>
     </a>
@@ -355,29 +355,39 @@
 
   <div class="trophy-grid">
     <div class="trophy-main">
-      <div class="trophy-main-icon">🏆</div>
-      <h3>Troféu de Campeão Effen</h3>
-      <p>O nosso design signature para campeonatos. Base hexagonal gravada a laser, corpo em PLA com acabamento metálico, plaqueta personalizada. Feito para durar.</p>
+      <img src="images/racing4.png" alt="Troféu de Campeão Effen" loading="lazy" />
+      <div class="trophy-main-content">
+        <h3>Troféu de Campeão Effen</h3>
+        <p>O nosso design signature para campeonatos. Base hexagonal gravada a laser, corpo em PLA com acabamento metálico, plaqueta personalizada. Feito para durar.</p>
+      </div>
     </div>
     <div class="trophy-side">
-      <div class="trophy-side-icon">🥇</div>
-      <h4>Pódio Clássico</h4>
-      <p>Trio 1º/2º/3º com alturas diferentes</p>
+      <img src="images/racing-nurburgring-1.png" alt="Pódio Clássico" loading="lazy" />
+      <div class="trophy-side-content">
+        <h4>Pódio Clássico</h4>
+        <p>Trio 1º/2º/3º com alturas diferentes</p>
+      </div>
     </div>
     <div class="trophy-side">
-      <div class="trophy-side-icon">🏁</div>
-      <h4>Plaqueta Racing</h4>
-      <p>Alumínio anodizado gravado a laser</p>
+      <img src="images/racing-spa-1.png" alt="Plaqueta Racing" loading="lazy" />
+      <div class="trophy-side-content">
+        <h4>Plaqueta Racing</h4>
+        <p>Alumínio anodizado gravado a laser</p>
+      </div>
     </div>
     <div class="trophy-side">
-      <div class="trophy-side-icon">👑</div>
-      <h4>Troféu Custom</h4>
-      <p>Design 100% à medida do cliente</p>
+      <img src="images/racing5.png" alt="Troféu Custom" loading="lazy" />
+      <div class="trophy-side-content">
+        <h4>Troféu Custom</h4>
+        <p>Design 100% à medida do cliente</p>
+      </div>
     </div>
     <div class="trophy-side">
-      <div class="trophy-side-icon">🎖️</div>
-      <h4>Medalha de Época</h4>
-      <p>Para todos os participantes da liga</p>
+      <img src="images/racing6.png" alt="Medalha de Época" loading="lazy" />
+      <div class="trophy-side-content">
+        <h4>Medalha de Época</h4>
+        <p>Para todos os participantes da liga</p>
+      </div>
     </div>
   </div>
 </section>
