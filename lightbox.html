@@ -107,13 +107,15 @@
     }
     .showcase-card:hover { transform: translateY(-4px); border-color: rgba(79,195,247,0.3); }
     .showcase-img {
-      aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center;
-      font-size: 56px; position: relative; overflow: hidden;
+      aspect-ratio: 3/4; position: relative; overflow: hidden;
+      background: var(--bg3);
     }
-    .showcase-img.blue-glow { background: radial-gradient(ellipse at center, rgba(79,195,247,0.15) 0%, var(--bg3) 70%); }
-    .showcase-img.purple-glow { background: radial-gradient(ellipse at center, rgba(156,39,176,0.15) 0%, var(--bg3) 70%); }
-    .showcase-img.warm-glow { background: radial-gradient(ellipse at center, rgba(255,193,7,0.12) 0%, var(--bg3) 70%); }
-    .showcase-badge { position: absolute; top: 12px; right: 12px; background: rgba(79,195,247,0.2); border: 1px solid rgba(79,195,247,0.4); color: var(--blue); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
+    .showcase-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s;
+    }
+    .showcase-card:hover .showcase-img img { transform: scale(1.05); }
+    .showcase-badge { position: absolute; top: 12px; right: 12px; background: rgba(79,195,247,0.2); border: 1px solid rgba(79,195,247,0.4); color: var(--blue); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; z-index: 2; backdrop-filter: blur(6px); }
     .showcase-body { padding: 20px 22px 24px; }
     .showcase-body h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 8px; }
     .showcase-body p { color: var(--grey); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
@@ -226,85 +228,85 @@
 
   <div class="showcase-grid">
     <div class="showcase-card">
-      <div class="showcase-img blue-glow">
-        💡
+      <div class="showcase-img">
+        <img src="images/lightbox1.png" alt="Lightbox Clássica" loading="lazy" />
         <div class="showcase-badge">Popular</div>
       </div>
       <div class="showcase-body">
         <h4>Lightbox Clássica</h4>
         <p>Base em MDF cortada a laser, fundo em acrílico com gravação personalizada. LED branco quente. Tamanho A5 ou A4.</p>
         <div class="showcase-price">
-                    <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20encomendar%20uma%20lightbox%20clássica!" target="_blank">Encomendar →</a>
+          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20encomendar%20uma%20lightbox%20clássica!" target="_blank">Encomendar →</a>
         </div>
       </div>
     </div>
 
     <div class="showcase-card">
-      <div class="showcase-img purple-glow">
-        🌸
+      <div class="showcase-img">
+        <img src="images/lightbox2.png" alt="Lightbox Casal" loading="lazy" />
         <div class="showcase-badge">Romântico</div>
       </div>
       <div class="showcase-body">
         <h4>Lightbox Casal / Casamento</h4>
         <p>Design especial para casais — nome e data, silhueta ou frase especial. Ideal para aniversários, noivados e casamentos.</p>
         <div class="showcase-price">
-                    <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20de%20casal!" target="_blank">Encomendar →</a>
+          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20de%20casal!" target="_blank">Encomendar →</a>
         </div>
       </div>
     </div>
 
     <div class="showcase-card">
-      <div class="showcase-img warm-glow">
-        🎮
+      <div class="showcase-img">
+        <img src="images/lightbox-bpf-1.jpg" alt="Lightbox Gaming BPF" loading="lazy" />
         <div class="showcase-badge">Gaming</div>
       </div>
       <div class="showcase-body">
         <h4>Lightbox Gaming / Esports</h4>
         <p>Para gamers e fãs de sim racing. Logo da equipa, gamertag, controlador, carro favorito — em LED na parede da setup.</p>
         <div class="showcase-price">
-                    <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20gaming!" target="_blank">Encomendar →</a>
+          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20gaming!" target="_blank">Encomendar →</a>
         </div>
       </div>
     </div>
 
     <div class="showcase-card">
-      <div class="showcase-img blue-glow">
-        🐾
+      <div class="showcase-img">
+        <img src="images/lightbox3.png" alt="Lightbox Pet" loading="lazy" />
         <div class="showcase-badge">Pet Love</div>
       </div>
       <div class="showcase-body">
         <h4>Lightbox Pet Portrait</h4>
         <p>O teu animal de estimação em lightbox. Silhueta ou retrato gravado em acrílico, com o nome do bichinho.</p>
         <div class="showcase-price">
-                    <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20com%20o%20meu%20pet!" target="_blank">Encomendar →</a>
+          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20com%20o%20meu%20pet!" target="_blank">Encomendar →</a>
         </div>
       </div>
     </div>
 
     <div class="showcase-card">
-      <div class="showcase-img purple-glow">
-        🏢
+      <div class="showcase-img">
+        <img src="images/lightbox4.png" alt="Lightbox Empresarial" loading="lazy" />
         <div class="showcase-badge">Corporativo</div>
       </div>
       <div class="showcase-body">
         <h4>Lightbox Empresarial</h4>
         <p>Logo da empresa iluminado para escritório, receção ou montra. Impacto visual garantido. Personalizável em tamanho e cor LED.</p>
         <div class="showcase-price">
-                    <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20orçamento%20para%20lightbox%20empresarial!" target="_blank">Pedir →</a>
+          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20orçamento%20para%20lightbox%20empresarial!" target="_blank">Pedir →</a>
         </div>
       </div>
     </div>
 
     <div class="showcase-card">
-      <div class="showcase-img warm-glow">
-        🌟
+      <div class="showcase-img">
+        <img src="images/lightbox5.png" alt="Lightbox Custom" loading="lazy" />
         <div class="showcase-badge">Custom</div>
       </div>
       <div class="showcase-body">
         <h4>Design Totalmente Livre</h4>
         <p>Tens uma ideia que não está aqui? Manda mensagem. Se conseguires imaginar, eu consigo fazer. Criatividade sem limites.</p>
         <div class="showcase-price">
-                    <a class="order-btn" href="https://wa.me/351928372914?text=Tenho%20uma%20ideia%20para%20uma%20lightbox%20personalizada!" target="_blank">Falar →</a>
+          <a class="order-btn" href="https://wa.me/351928372914?text=Tenho%20uma%20ideia%20para%20uma%20lightbox%20personalizada!" target="_blank">Falar →</a>
         </div>
       </div>
     </div>
