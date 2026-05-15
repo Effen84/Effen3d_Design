@@ -93,7 +93,8 @@
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
-      display: flex; align-items: center;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 60px;
       padding: 120px 5vw 80px;
       position: relative; overflow: hidden;
     }
@@ -113,7 +114,40 @@
       mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
     }
 
-    .hero-content { position: relative; z-index: 1; max-width: 780px; }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; flex: 1; }
+
+    /* HERO LOGO VISUAL */
+    .hero-visual {
+      position: relative; z-index: 1;
+      flex: 1; max-width: 600px;
+      display: flex; align-items: center; justify-content: center;
+      animation: heroLogoIn 1s .3s ease both;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute; inset: -10%; z-index: 0;
+      background: radial-gradient(circle at center, rgba(230,184,55,0.18) 0%, transparent 60%);
+      filter: blur(20px);
+      animation: glowPulse 4s ease-in-out infinite;
+    }
+    .hero-logo-big {
+      position: relative; z-index: 1;
+      width: 100%; height: auto; max-width: 540px;
+      filter: drop-shadow(0 20px 60px rgba(230,184,55,0.25));
+      animation: floatLogo 5s ease-in-out infinite;
+    }
+    @keyframes heroLogoIn {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
 
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
@@ -281,6 +315,11 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 48px; position: relative; overflow: hidden;
     }
+    .bs-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s;
+    }
+    .bs-card:hover .bs-img img { transform: scale(1.05); }
     .bs-badge {
       position: absolute; top: 12px; left: 12px;
       background: var(--gold); color: #fff;
@@ -500,11 +539,18 @@
       .how-step { padding: 32px 0; border-bottom: 1px solid var(--border); }
       .nav-links, .nav-cta { display: none; }
       .nav-burger { display: flex; }
+      /* Hero mobile - stack vertically */
+      .hero { flex-direction: column; gap: 40px; padding: 110px 5vw 60px; }
+      .hero-content { max-width: 100%; }
+      .hero-visual { max-width: 400px; order: -1; margin-bottom: 0; }
+      .hero-logo-big { max-width: 380px; }
     }
 
     @media (max-width: 600px) {
       section { padding: 72px 5vw; }
-      .hero { padding: 110px 5vw 60px; }
+      .hero { padding: 100px 5vw 50px; gap: 30px; }
+      .hero-visual { max-width: 280px; }
+      .hero-logo-big { max-width: 260px; }
       .hero-stats { gap: 28px; }
       .bs-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
@@ -594,6 +640,9 @@
       </div>
     </div>
   </div>
+  <div class="hero-visual">
+    <img src="images/logo.png" alt="Effen Design" class="hero-logo-big" />
+  </div>
 </section>
 
 <div class="divider"></div>
@@ -640,74 +689,90 @@
   <p class="section-sub">Os produtos favoritos dos nossos clientes — qualidade provada, entrega rápida.</p>
 
   <div class="bs-grid">
-    <!-- Card 1 -->
-    <a class="bs-card" href="https://wa.me/351928372914?text=Tenho%20interesse%20nos%20troféus%203D!" target="_blank">
-      <div class="bs-img">🏆<div class="bs-badge">🔥 Top 1</div></div>
-      <div class="bs-body">
-        <h4>Troféus Personalizados 3D</h4>
-        <p>Troféus exclusivos para campeonatos, eventos e giveaways. Totalmente personalizados com nome, logo e data.</p>
-        <div class="bs-footer">
-                    <span class="bs-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Card 2 -->
-    <a class="bs-card" href="https://wa.me/351928372914?text=Quero%20saber%20sobre%20tábuas%20de%20cozinha%20gravadas!" target="_blank">
-      <div class="bs-img">🍖<div class="bs-badge">❤️ Favorito</div></div>
-      <div class="bs-body">
-        <h4>Tábuas de Cozinha Gravadas</h4>
-        <p>Bambu natural com gravação laser personalizada. Ideal para presentes de casamento, aniversário ou Natal.</p>
-        <div class="bs-footer">
-                    <span class="bs-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- Card 3 -->
+    <!-- Card 1: Lightbox -->
     <a class="bs-card" href="lightbox.html">
-      <div class="bs-img">💡<div class="bs-badge">⭐ Novo</div></div>
+      <div class="bs-img">
+        <img src="images/lightbox1.png" alt="Lightbox Personalizada" loading="lazy" />
+        <div class="bs-badge">🔥 Top 1</div>
+      </div>
       <div class="bs-body">
-        <h4>Lightbox Personalizada</h4>
+        <h4>Lightboxes Personalizadas</h4>
         <p>Iluminação LED com design à escolha. Perfeita para decoração de quarto, escritório ou oferta premium.</p>
         <div class="bs-footer">
-                    <span class="bs-cta">Ver →</span>
+          <span class="bs-cta">Ver coleção →</span>
         </div>
       </div>
     </a>
 
-    <!-- Card 4 -->
-    <a class="bs-card" href="https://wa.me/351928372914?text=Tenho%20interesse%20nas%20placas%20em%20ardósia!" target="_blank">
-      <div class="bs-img">🪨</div>
+    <!-- Card 2: Nomes -->
+    <a class="bs-card" href="nomes.html">
+      <div class="bs-img">
+        <img src="images/nomes-iman-1.png" alt="Nomes Personalizados" loading="lazy" />
+        <div class="bs-badge">❤️ Favorito</div>
+      </div>
       <div class="bs-body">
-        <h4>Placas Memoriais em Ardósia</h4>
-        <p>Gravação profunda e duradoura em ardósia natural. Para cemitérios, jardins ou homenagens especiais.</p>
+        <h4>Nomes & Porta-Chaves</h4>
+        <p>Nomes personalizados, porta-chaves com íman, letras grandes. Bicolor ou tricolor à tua escolha.</p>
         <div class="bs-footer">
-                    <span class="bs-cta">Pedir orçamento →</span>
+          <span class="bs-cta">Ver produtos →</span>
         </div>
       </div>
     </a>
 
-    <!-- Card 5 -->
-    <a class="bs-card" href="https://wa.me/351928372914?text=Quero%20porta-chaves%20de%20couro%20personalizado!" target="_blank">
-      <div class="bs-img">🔑</div>
+    <!-- Card 3: Brinquedos -->
+    <a class="bs-card" href="brinquedos.html">
+      <div class="bs-img">
+        <img src="images/brinquedos_mario_1.png" alt="Brinquedos 3D" loading="lazy" />
+        <div class="bs-badge">⭐ Popular</div>
+      </div>
       <div class="bs-body">
-        <h4>Porta-Chaves em Couro</h4>
-        <p>Couro natural gravado a laser com nome, iniciais ou design personalizado. Prenda clássica e elegante.</p>
+        <h4>Brinquedos & Figuras</h4>
+        <p>Personagens icónicas em impressão 3D — Mario, Sonic, Hello Kitty, dragões e muito mais. Únicos.</p>
         <div class="bs-footer">
-                    <span class="bs-cta">Pedir orçamento →</span>
+          <span class="bs-cta">Ver coleção →</span>
         </div>
       </div>
     </a>
 
-    <!-- Card 6 -->
+    <!-- Card 4: Decoração -->
+    <a class="bs-card" href="decoracao.html">
+      <div class="bs-img">
+        <img src="images/decoracao_lithophane_1.png" alt="Decoração 3D" loading="lazy" />
+      </div>
+      <div class="bs-body">
+        <h4>Decoração & Lithophanes</h4>
+        <p>Vasos, letras de parede, quadros lithophane com fotos. Peças únicas para o teu espaço.</p>
+        <div class="bs-footer">
+          <span class="bs-cta">Ver produtos →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 5: Acessórios -->
+    <a class="bs-card" href="acessorios.html">
+      <div class="bs-img">
+        <img src="images/acessorios_headset_mesa_1.png" alt="Acessórios 3D" loading="lazy" />
+      </div>
+      <div class="bs-body">
+        <h4>Acessórios 3D</h4>
+        <p>Suportes para headset, portátil, organizadores, caixas. Funcional e personalizado à tua medida.</p>
+        <div class="bs-footer">
+          <span class="bs-cta">Ver produtos →</span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 6: Racing -->
     <a class="bs-card" href="racing.html">
-      <div class="bs-img">🏎️<div class="bs-badge">🎮 Gaming</div></div>
+      <div class="bs-img">
+        <img src="images/racing1.png" alt="Racing & Esports" loading="lazy" />
+        <div class="bs-badge">🎮 Gaming</div>
+      </div>
       <div class="bs-body">
-        <h4>Acessórios Racing / Sim</h4>
-        <p>Plaquetas, troféus e acessórios para sim racing e esports. Especialistas em Gran Turismo e comunidade racing.</p>
+        <h4>Racing & Esports</h4>
+        <p>Troféus, plaquetas e acessórios para sim racing. Patrocinador oficial da BPF Team Race.</p>
         <div class="bs-footer">
-                    <span class="bs-cta">Ver →</span>
+          <span class="bs-cta">Ver coleção →</span>
         </div>
       </div>
     </a>
