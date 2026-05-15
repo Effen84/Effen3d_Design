@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Racing & Esports | Effen Design</title>
-  <meta name="description" content="Troféus, plaquetas e acessórios para sim racing, Gran Turismo 7 e comunidade motorsport. Feito por quem vive o motorsport." />
+  <meta name="description" content="Troféus, plaquetas, dashboards e acessórios para sim racing, Gran Turismo 7 e comunidade motorsport. Patrocinador BPF Team Race e NCM." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -18,7 +19,6 @@
       --white: #f5f5f5;
       --grey: #888;
       --border: rgba(255,255,255,0.07);
-      --gold-bright-glow: rgba(245,197,24,0.12);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -26,90 +26,54 @@
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
-    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 70px; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-img { height: 50px; width: auto; display: block; transition: transform .2s; }
     .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
-    .nav-logo-icon { width: 36px; height: 36px; background: var(--gold); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: #fff; }
-    .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); }
-    .nav-logo-text span { color: var(--gold); }
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--grey); font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
-    .nav-links a.active { color: var(--gold-bright); }
+    .nav-links a.active { color: var(--gold); }
     .nav-cta { background: var(--gold); color: #080808; padding: 9px 22px; border-radius: 4px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-decoration: none; text-transform: uppercase; transition: background .2s; }
     .nav-cta:hover { background: var(--gold-dark); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
 
-    /* HERO */
-    .hero { min-height: 100vh; display: flex; align-items: flex-end; padding: 0 5vw 80px; position: relative; overflow: hidden; }
-    .hero-video-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(230,184,55,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 80% at 80% 20%, rgba(245,197,24,0.08) 0%, transparent 50%),
-        linear-gradient(180deg, #080808 0%, #120404 50%, #080808 100%);
-    }
-    .hero-speed-lines {
-      position: absolute; inset: 0; z-index: 0;
-      background: repeating-linear-gradient(
-        105deg,
-        transparent 0px, transparent 40px,
-        rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px
-      );
-    }
+    .hero { min-height: 90vh; display: flex; align-items: flex-end; padding: 0 5vw 80px; position: relative; overflow: hidden; }
+    .hero-video-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(230,184,55,0.18) 0%, transparent 60%), radial-gradient(ellipse 40% 80% at 80% 20%, rgba(245,197,24,0.08) 0%, transparent 50%), linear-gradient(180deg, #080808 0%, #120a04 50%, #080808 100%); }
+    .hero-speed-lines { position: absolute; inset: 0; z-index: 0; background: repeating-linear-gradient(105deg, transparent 0px, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px); }
     .hero-content { position: relative; z-index: 1; max-width: 780px; padding-top: 140px; }
-    .hero-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 12px; color: var(--grey); letter-spacing: 1px; text-transform: uppercase; }
-    .hero-breadcrumb a { color: var(--grey); text-decoration: none; }
-    .hero-breadcrumb span { color: var(--gold-bright); }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 12px; color: var(--grey); letter-spacing: 1px; text-transform: uppercase; }
+    .breadcrumb a { color: var(--grey); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--white); }
+    .breadcrumb span { color: var(--gold-bright); }
     .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,197,24,0.1); border: 1px solid rgba(245,197,24,0.25); padding: 6px 16px; border-radius: 100px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 24px; }
-    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(68px, 11vw, 140px); line-height: 0.88; letter-spacing: 2px; animation: fadeUp .6s ease both; }
+    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(68px, 11vw, 130px); line-height: 0.88; letter-spacing: 2px; animation: fadeUp .6s ease both; }
     .hero h1 .line2 { color: var(--gold); display: block; }
     .hero h1 .line3 { color: var(--gold-bright); display: block; -webkit-text-stroke: 1px var(--gold-bright); color: transparent; }
     .hero-sub { margin-top: 28px; font-size: 17px; line-height: 1.65; color: var(--grey); max-width: 520px; animation: fadeUp .6s .15s ease both; }
-    .hero-actions { margin-top: 44px; display: flex; flex-wrap: wrap; gap: 16px; animation: fadeUp .6s .25s ease both; }
-    .hero-sponsor { margin-top: 52px; padding: 20px 24px; background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.15); border-radius: 10px; display: inline-flex; align-items: center; gap: 16px; animation: fadeUp .6s .35s ease both; }
+    .hero-actions { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 16px; animation: fadeUp .6s .25s ease both; }
+    .hero-sponsor { margin-top: 44px; padding: 18px 22px; background: rgba(245,197,24,0.06); border: 1px solid rgba(245,197,24,0.15); border-radius: 10px; display: inline-flex; align-items: center; gap: 16px; animation: fadeUp .6s .35s ease both; }
     .hero-sponsor-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-bottom: 4px; }
-    .hero-sponsor-name { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: var(--gold-bright); letter-spacing: 1px; }
+    .hero-sponsor-name { font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: var(--gold-bright); letter-spacing: 1px; line-height: 1.3; }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
     .btn-wa { display: flex; align-items: center; gap: 10px; background: #25D366; color: #fff; padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 24px rgba(37,211,102,0.3); }
     .btn-wa:hover { transform: translateY(-2px); }
     .btn-wa svg { width: 20px; height: 20px; }
-    .btn-red { display: flex; align-items: center; gap: 8px; background: var(--gold); color: #080808; padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform .2s, background .2s; }
-    .btn-red:hover { background: var(--gold-dark); transform: translateY(-2px); }
     .btn-outline { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); color: var(--white); padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color .2s, color .2s; }
     .btn-outline:hover { border-color: var(--gold-bright); color: var(--gold-bright); }
 
-    /* SECTIONS */
     section { padding: 96px 5vw; }
     .section-tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-    .section-tag.gold { color: var(--gold-bright); }
+    .section-tag.bright { color: var(--gold-bright); }
     .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 68px); line-height: 0.95; letter-spacing: 1px; }
     .section-title em { font-style: normal; color: var(--gold); }
-    .section-title em.gold { color: var(--gold-bright); }
-    .section-sub { margin-top: 16px; color: var(--grey); font-size: 16px; line-height: 1.6; max-width: 500px; }
+    .section-title em.bright { color: var(--gold-bright); }
+    .section-sub { margin-top: 16px; color: var(--grey); font-size: 16px; line-height: 1.6; max-width: 520px; }
     .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
 
-    /* PRODUCTS */
-    .products { background: var(--bg2); }
-    .products-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .product-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform .3s, border-color .3s; text-decoration: none; color: inherit; display: block; }
-    .product-card:hover { transform: translateY(-4px); border-color: rgba(230,184,55,0.35); }
-    .product-img { aspect-ratio: 4/3; position: relative; overflow: hidden; background: var(--bg3); }
-    .product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
-    .product-card:hover .product-img img { transform: scale(1.05); }
-    .product-badge { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #080808; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; z-index: 2; }
-    .product-badge.gold-badge { background: var(--gold-bright); color: #000; }
-    .product-body { padding: 22px; }
-    .product-body h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 8px; }
-    .product-body p { color: var(--grey); font-size: 14px; line-height: 1.6; margin-bottom: 16px; }
-    .product-footer { display: flex; align-items: center; justify-content: flex-end; }
-    .product-cta { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); transition: color .2s; }
-    .product-card:hover .product-cta { color: var(--gold); }
-
-    /* SPONSORS */
     .sponsors { background: linear-gradient(135deg, #0a0500 0%, #15100a 50%, #0f0800 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .sponsors-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1100px; margin-left: auto; margin-right: auto; }
     .sponsor-card { padding: 40px 36px; border: 1px solid rgba(230,184,55,0.2); border-radius: 14px; background: rgba(0,0,0,0.4); transition: transform .3s, border-color .3s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
@@ -121,63 +85,82 @@
     .sponsor-card p { color: var(--grey); font-size: 14px; line-height: 1.7; flex: 1; }
     .sponsor-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; color: var(--gold-bright); font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
 
-    /* COMMUNITY */
-    .community-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    .community-card { padding: 32px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg2); transition: border-color .3s; }
+    .products-inner { max-width: 1400px; margin: 0 auto; }
+    .products-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+    .product-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform .3s, border-color .3s; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(230,184,55,0.35); }
+    .product-thumb { aspect-ratio: 1; overflow: hidden; position: relative; background: var(--bg3); }
+    .product-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .product-card:hover .product-thumb img { transform: scale(1.06); }
+    .product-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.65) 100%); display: flex; align-items: flex-end; padding: 18px; opacity: 0; transition: opacity .3s; }
+    .product-card:hover .product-overlay { opacity: 1; }
+    .product-overlay span { color: var(--gold); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+    .product-info { padding: 20px 22px 22px; }
+    .product-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .product-count { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); }
+
+    .cta-banner { margin-top: 80px; padding: 56px 40px; background: linear-gradient(135deg, var(--bg2) 0%, #1a1505 100%); border: 1px solid rgba(230,184,55,0.18); border-radius: 16px; text-align: center; }
+    .cta-banner h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 48px); letter-spacing: 1px; margin-bottom: 12px; }
+    .cta-banner h3 em { font-style: normal; color: var(--gold-bright); }
+    .cta-banner p { color: var(--grey); font-size: 15px; max-width: 480px; margin: 0 auto 28px; line-height: 1.65; }
+
+    .community { background: var(--bg2); }
+    .community-grid { margin-top: 60px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1100px; margin-left: auto; margin-right: auto; }
+    .community-card { padding: 32px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg); transition: border-color .3s; }
     .community-card:hover { border-color: rgba(230,184,55,0.25); }
     .community-icon { font-size: 36px; margin-bottom: 20px; }
     .community-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 0.5px; margin-bottom: 10px; }
     .community-card p { color: var(--grey); font-size: 14px; line-height: 1.65; }
 
-    /* TROPHIES SHOWCASE */
-    .trophy-showcase { background: var(--bg2); }
-    .trophy-grid { margin-top: 60px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; }
-    .trophy-main { grid-row: span 2; border-radius: 14px; overflow: hidden; position: relative; border: 1px solid rgba(245,197,24,0.15); min-height: 460px; display: flex; flex-direction: column; justify-content: flex-end; }
-    .trophy-main img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform .6s; }
-    .trophy-main:hover img { transform: scale(1.05); }
-    .trophy-main::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 50%, transparent 100%); }
-    .trophy-main-content { position: relative; z-index: 2; padding: 36px; }
-    .trophy-main h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--gold-bright); margin-bottom: 12px; letter-spacing: 1px; }
-    .trophy-main p { color: rgba(255,255,255,0.9); font-size: 14px; line-height: 1.6; max-width: 400px; }
-    .trophy-side { border-radius: 12px; overflow: hidden; position: relative; border: 1px solid var(--border); min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; transition: border-color .3s; }
-    .trophy-side:hover { border-color: rgba(230,184,55,0.4); }
-    .trophy-side img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform .5s; }
-    .trophy-side:hover img { transform: scale(1.08); }
-    .trophy-side::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 60%, transparent 100%); }
-    .trophy-side-content { position: relative; z-index: 2; padding: 20px; }
-    .trophy-side h4 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; margin-bottom: 4px; letter-spacing: 0.5px; color: var(--white); }
-    .trophy-side p { color: rgba(255,255,255,0.8); font-size: 12px; line-height: 1.5; }
-
-    /* CTA */
     .cta-section { text-align: center; }
     .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 88px); line-height: 0.95; margin-bottom: 20px; }
     .cta-section h2 em { font-style: normal; color: var(--gold-bright); }
     .cta-section p { color: var(--grey); font-size: 17px; max-width: 480px; margin: 0 auto 40px; line-height: 1.65; }
     .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-    /* FLOAT */
+    .product-modal { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .product-modal.open { display: flex; }
+    .product-modal-inner { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; max-width: 900px; width: 100%; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; }
+    .product-modal-header { padding: 22px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .product-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; }
+    .product-modal-close { background: none; border: none; color: var(--grey); font-size: 32px; line-height: 1; cursor: pointer; transition: color .2s; padding: 0 4px; }
+    .product-modal-close:hover { color: var(--gold); }
+    .product-modal-gallery { padding: 24px 28px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .product-modal-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; cursor: zoom-in; transition: transform .2s, opacity .2s; background: var(--bg3); }
+    .product-modal-gallery img:hover { transform: scale(1.02); opacity: 0.9; }
+    .product-modal-footer { padding: 20px 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .product-modal-footer p { color: var(--grey); font-size: 13px; }
+
+    .lightbox { position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
+    .lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+    .lightbox-close { position: absolute; top: 24px; right: 32px; color: var(--white); font-size: 48px; cursor: pointer; line-height: 1; transition: color .2s; }
+    .lightbox-close:hover { color: var(--gold); }
+
     .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 200; width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; animation: waPulse 2s infinite; transition: transform .2s; }
     .wa-float:hover { transform: scale(1.1); }
     @keyframes waPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); } }
 
-    footer { background: #050505; border-top: 1px solid var(--border); padding: 40px 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    footer p { font-size: 13px; color: var(--grey); }
+    footer { background: #050505; border-top: 1px solid var(--border); padding: 40px 5vw; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1400px; margin: 0 auto; }
+    .footer-inner p { font-size: 13px; color: var(--grey); }
     .footer-links { display: flex; gap: 24px; }
     .footer-links a { color: var(--grey); text-decoration: none; font-size: 13px; transition: color .2s; }
-    .footer-links a:hover { color: var(--white); }
+    .footer-links a:hover { color: var(--gold); }
+
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 90; background: var(--bg); padding: 100px 5vw 40px; flex-direction: column; gap: 8px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { display: block; padding: 18px 0; border-bottom: 1px solid var(--border); color: var(--white); text-decoration: none; font-size: 20px; font-weight: 500; }
+    .mobile-menu a:hover { color: var(--gold); }
 
     @media (max-width: 900px) {
-      .products-grid { grid-template-columns: 1fr 1fr; }
-      .gt7-inner { grid-template-columns: 1fr; gap: 36px; }
-      .community-grid { grid-template-columns: 1fr; }
-      .trophy-grid { grid-template-columns: 1fr 1fr; }
-      .trophy-main { grid-row: auto; grid-column: span 2; }
-      .nav-links { display: none; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-burger { display: flex; }
+      .sponsors-grid, .community-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
     }
     @media (max-width: 600px) {
       .products-grid { grid-template-columns: 1fr; }
-      .trophy-grid { grid-template-columns: 1fr; }
-      .trophy-main { grid-column: auto; }
+      .cta-banner { padding: 40px 24px; }
     }
   </style>
 </head>
@@ -195,25 +178,32 @@
     <li><a href="index.html#contacto">Contacto</a></li>
   </ul>
   <a class="nav-cta" href="https://wa.me/351928372914?text=Quero%20um%20troféu%20de%20racing!" target="_blank">Encomendar</a>
+  <div class="nav-burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<!-- HERO -->
+<div class="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="index.html#bestsellers">Produtos</a>
+  <a href="lightbox.html">Lightbox</a>
+  <a href="racing.html">Racing</a>
+  <a href="index.html#contacto">Contacto</a>
+  <a href="https://wa.me/351928372914" target="_blank" style="color:#25D366">💬 WhatsApp</a>
+</div>
+
 <section class="hero">
   <div class="hero-video-bg"></div>
   <div class="hero-speed-lines"></div>
   <div class="hero-content">
-    <div class="hero-breadcrumb"><a href="index.html">Home</a> / <span>Racing & Esports</span></div>
+    <div class="breadcrumb"><a href="index.html">Home</a> / <span>Racing & Esports</span></div>
     <div class="hero-tag">🏎️ Especialistas em Sim Racing</div>
-    <h1>
-      FEITO PARA<br>
-      <span class="line2">QUEM VIVE</span><br>
-      <span class="line3">O RACING.</span>
-    </h1>
-    <p class="hero-sub">Troféus, plaquetas e acessórios únicos para campeonatos de sim racing, Gran Turismo 7 e toda a comunidade motorsport portuguesa. Feito por alguém que está na pista contigo.</p>
+    <h1>FEITO PARA<br><span class="line2">QUEM VIVE</span><br><span class="line3">O RACING.</span></h1>
+    <p class="hero-sub">Troféus, plaquetas, dashboards e acessórios únicos para campeonatos de sim racing, Gran Turismo 7 e toda a comunidade motorsport portuguesa. Feito por alguém que está na pista contigo.</p>
     <div class="hero-actions">
-      <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20para%20o%20meu%20campeonato%20de%20racing!" target="_blank">
+      <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20ou%20acessórios%20racing!" target="_blank">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Quero um troféu
+        Falar comigo
       </a>
       <a class="btn-outline" href="#produtos">Ver produtos</a>
     </div>
@@ -229,10 +219,9 @@
 
 <div class="divider"></div>
 
-<!-- SPONSORS SECTION -->
 <section class="sponsors">
-  <div class="section-tag gold">// Patrocínios Oficiais</div>
-  <h2 class="section-title">PARTE DA<br><em class="gold">COMUNIDADE.</em></h2>
+  <div class="section-tag bright">// Patrocínios Oficiais</div>
+  <h2 class="section-title">PARTE DA<br><em class="bright">COMUNIDADE.</em></h2>
   <p class="section-sub" style="margin-bottom:0">A Effen Design não é apenas fornecedora — somos patrocinadores ativos de duas equipas que vivem o motorsport.</p>
 
   <div class="sponsors-grid">
@@ -256,146 +245,28 @@
 
 <div class="divider"></div>
 
-<!-- PRODUTOS -->
-<section class="products" id="produtos">
-  <div class="section-tag">// Produtos</div>
-  <h2 class="section-title">PARA O<br><em>TEU CAMPEONATO.</em></h2>
-  <p class="section-sub">Tudo o que a tua liga precisa para ter aquela produção profissional que os pilotos merecem.</p>
+<section id="produtos">
+  <div class="products-inner">
+    <div class="section-tag">// Coleção</div>
+    <h2 class="section-title">FEITO À<br><em>MEDIDA.</em></h2>
+    <p class="section-sub">Clica num produto para ver todas as fotos e pedir orçamento.</p>
 
-  <div class="products-grid">
-    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20troféus%20de%20pódio%20para%20campeonato!" target="_blank">
-      <div class="product-img">
-        <img src="images/racing1.png" alt="Troféus de Pódio" loading="lazy" />
-        <div class="product-badge gold-badge">⭐ Premium</div>
-      </div>
-      <div class="product-body">
-        <h4>Troféus de Pódio</h4>
-        <p>1º, 2º e 3º lugar com design exclusivo. Base personalizável com logo da liga, nome do piloto e época. Em PLA de alta qualidade, acabamento premium.</p>
-        <div class="product-footer">
-          <span class="product-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
+    <div class="products-grid" id="productsGrid"></div>
 
-    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20plaquetas%20personalizadas%20para%20racing!" target="_blank">
-      <div class="product-img">
-        <img src="images/racing-dashboard-1.png" alt="Plaquetas Personalizadas" loading="lazy" />
-      </div>
-      <div class="product-body">
-        <h4>Plaquetas Personalizadas</h4>
-        <p>Identificação de piloto, número de corrida, cargo na equipa ou homenagem de época. Gravação laser em alumínio anodizado ou acrílico.</p>
-        <div class="product-footer">
-          <span class="product-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20saber%20sobre%20troféu%20de%20campeão!" target="_blank">
-      <div class="product-img">
-        <img src="images/racing2.png" alt="Troféu de Campeão" loading="lazy" />
-        <div class="product-badge">🔥 Exclusivo</div>
-      </div>
-      <div class="product-body">
-        <h4>Troféu de Campeão</h4>
-        <p>O troféu principal da época, feito para impressionar. Design único, tamanho maior, base com gravação laser detalhada. Só há um campeão — o troféu tem de o mostrar.</p>
-        <div class="product-footer">
-          <span class="product-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20um%20troféu%20de%20melhor%20piloto%20da%20época!" target="_blank">
-      <div class="product-img">
-        <img src="images/racing3.png" alt="Prémios Especiais" loading="lazy" />
-      </div>
-      <div class="product-body">
-        <h4>Prémios Especiais</h4>
-        <p>Melhor Piloto, Mais Consistente, Fair Play, Rookie do Ano. Troféus e medalhas personalizadas para cada prémio especial da tua liga.</p>
-        <div class="product-footer">
-          <span class="product-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20acessórios%20personalizados%20para%20sim%20racing!" target="_blank">
-      <div class="product-img">
-        <img src="images/racing-pedais-1.png" alt="Acessórios de Setup" loading="lazy" />
-      </div>
-      <div class="product-body">
-        <h4>Acessórios de Setup</h4>
-        <p>Suportes, plaquetas de identificação de equipa, decoração para a zona de sim racing. Personalização do teu cockpit com o teu nome e número.</p>
-        <div class="product-footer">
-          <span class="product-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
-
-    <a class="product-card" href="https://wa.me/351928372914?text=Quero%20pacote%20completo%20para%20a%20minha%20liga!" target="_blank">
-      <div class="product-img">
-        <img src="images/racing-porsche-1.png" alt="Pacote Liga Completo" loading="lazy" />
-        <div class="product-badge gold-badge">Melhor valor</div>
-      </div>
-      <div class="product-body">
-        <h4>Pacote Liga Completo</h4>
-        <p>Tudo o que a tua liga precisa: troféus de pódio + campeão + prémios especiais. Orçamento personalizado com desconto de volume garantido.</p>
-        <div class="product-footer">
-          <span class="product-cta">Pedir orçamento →</span>
-        </div>
-      </div>
-    </a>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- TROPHY SHOWCASE -->
-<section class="trophy-showcase">
-  <div class="section-tag gold">// Coleção de Destaque</div>
-  <h2 class="section-title">TROFÉUS QUE<br><em class="gold">IMPRESSIONAM.</em></h2>
-
-  <div class="trophy-grid">
-    <div class="trophy-main">
-      <img src="images/racing4.png" alt="Troféu de Campeão Effen" loading="lazy" />
-      <div class="trophy-main-content">
-        <h3>Troféu de Campeão Effen</h3>
-        <p>O nosso design signature para campeonatos. Base hexagonal gravada a laser, corpo em PLA com acabamento metálico, plaqueta personalizada. Feito para durar.</p>
-      </div>
-    </div>
-    <div class="trophy-side">
-      <img src="images/racing-nurburgring-1.png" alt="Pódio Clássico" loading="lazy" />
-      <div class="trophy-side-content">
-        <h4>Pódio Clássico</h4>
-        <p>Trio 1º/2º/3º com alturas diferentes</p>
-      </div>
-    </div>
-    <div class="trophy-side">
-      <img src="images/racing-spa-1.png" alt="Plaqueta Racing" loading="lazy" />
-      <div class="trophy-side-content">
-        <h4>Plaqueta Racing</h4>
-        <p>Alumínio anodizado gravado a laser</p>
-      </div>
-    </div>
-    <div class="trophy-side">
-      <img src="images/racing5.png" alt="Troféu Custom" loading="lazy" />
-      <div class="trophy-side-content">
-        <h4>Troféu Custom</h4>
-        <p>Design 100% à medida do cliente</p>
-      </div>
-    </div>
-    <div class="trophy-side">
-      <img src="images/racing6.png" alt="Medalha de Época" loading="lazy" />
-      <div class="trophy-side-content">
-        <h4>Medalha de Época</h4>
-        <p>Para todos os participantes da liga</p>
-      </div>
+    <div class="cta-banner">
+      <h3>TENS UMA<br>LIGA <em>EM MENTE?</em></h3>
+      <p>Pacotes completos para campeonatos: troféus de pódio + campeão + prémios especiais. Desconto de volume e entrega garantida antes da cerimónia.</p>
+      <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20pacote%20de%20troféus%20para%20a%20minha%20liga." target="_blank" style="display:inline-flex">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir orçamento completo
+      </a>
     </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- COMMUNITY -->
-<section>
+<section class="community">
   <div class="section-tag">// Para toda a comunidade</div>
   <h2 class="section-title">MAIS DO QUE<br><em>TROFÉUS.</em></h2>
   <p class="section-sub">Apoiamos a comunidade de sim racing portuguesa em tudo o que podemos.</p>
@@ -426,12 +297,11 @@
 
 <div class="divider"></div>
 
-<!-- CTA -->
 <section class="cta-section">
   <h2>PRONTO A<br><em>VENCER?</em></h2>
   <p>Contacta-me hoje. Orçamento gratuito para a tua liga, com ou sem desconto de volume.</p>
   <div class="cta-row">
-    <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20para%20o%20meu%20campeonato%20de%20sim%20racing!" target="_blank">
+    <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20para%20o%20meu%20campeonato!" target="_blank">
       <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Pedir orçamento agora
     </a>
@@ -440,18 +310,105 @@
 </section>
 
 <footer>
-  <p>© 2025 Effen Design · Paços de Ferreira · effen-design.pt</p>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="lightbox.html">Lightbox</a>
-    <a href="https://bpftr.com" target="_blank">BPF Team Race</a>
-    <a href="https://instagram.com/Effen_Design" target="_blank">Instagram</a>
+  <div class="footer-inner">
+    <p>© 2026 Effen Design · Paços de Ferreira · effen-design.pt</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="lightbox.html">Lightbox</a>
+      <a href="https://bpftr.com" target="_blank">BPF Team Race</a>
+      <a href="https://instagram.com/Effen_Design" target="_blank">Instagram</a>
+    </div>
   </div>
 </footer>
 
 <a class="wa-float" href="https://wa.me/351928372914?text=Olá!%20Quero%20troféus%20para%20o%20meu%20campeonato!" target="_blank">
   <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">×</span>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<div id="productModal" class="product-modal">
+  <div class="product-modal-inner">
+    <div class="product-modal-header">
+      <span class="product-modal-title" id="modalTitle"></span>
+      <button class="product-modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="product-modal-gallery" id="modalGallery"></div>
+    <div class="product-modal-footer">
+      <p>Clica numa foto para ampliar</p>
+      <a id="modalWhatsapp" href="https://wa.me/351928372914" target="_blank" class="btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir orçamento
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const produtos = [
+    { nome: "Painel Dashboard", fotos: ["images/racing-dashboard-1.png","images/racing-dashboard-2.png","images/racing-dashboard-3.png"] },
+    { nome: "Nürburgring", fotos: ["images/racing-nurburgring-1.png","images/racing-nurburgring-2.png"] },
+    { nome: "Spa-Francorchamps", fotos: ["images/racing-spa-1.png"] },
+    { nome: "Porsche", fotos: ["images/racing-porsche-1.png","images/racing-porsche-2.png"] },
+    { nome: "Pedais Racing", fotos: ["images/racing-pedais-1.png","images/racing-pedais-2.png"] },
+    { nome: "Troféus & Plaquetas", fotos: ["images/racing1.png","images/racing2.png","images/racing3.png","images/racing4.png","images/racing5.png","images/racing6.png","images/racing7.png"] }
+  ];
+
+  const grid = document.getElementById('productsGrid');
+  produtos.forEach((p, i) => {
+    grid.innerHTML += `
+      <div class="product-card" onclick="openModal(${i})">
+        <div class="product-thumb">
+          <img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">
+          <div class="product-overlay"><span>Ver galeria →</span></div>
+        </div>
+        <div class="product-info">
+          <p class="product-name">${p.nome}</p>
+          <p class="product-count">${p.fotos.length} foto${p.fotos.length > 1 ? 's' : ''}</p>
+        </div>
+      </div>`;
+  });
+
+  function openModal(i) {
+    const p = produtos[i];
+    document.getElementById('modalTitle').textContent = p.nome;
+    document.getElementById('modalGallery').innerHTML = p.fotos.map(f =>
+      `<img src="${f}" alt="${p.nome}" onclick="openLightbox(this)" loading="lazy">`
+    ).join('');
+    const msg = encodeURIComponent(`Olá! Tenho interesse no produto "${p.nome}" da Effen Design. Pode dizer-me preço e prazos?`);
+    document.getElementById('modalWhatsapp').href = `https://wa.me/351928372914?text=${msg}`;
+    document.getElementById('productModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('productModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('productModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('productModal')) closeModal();
+  });
+
+  function openLightbox(img) {
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeModal();
+      closeLightbox();
+    }
+  });
+</script>
 
 </body>
 </html>
