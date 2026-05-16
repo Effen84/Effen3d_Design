@@ -11,183 +11,94 @@
     :root {
       --gold: #e6b837;
       --gold-dark: #a88820;
+      --gold-light: #f5d97a;
       --bg: #080808;
-      --bg2: #111111;
+      --bg2: #0f0f0f;
       --bg3: #1a1a1a;
       --white: #f5f5f5;
       --grey: #888;
       --border: rgba(255,255,255,0.07);
-      --blue: #4fc3f7;
-      --blue-glow: rgba(79,195,247,0.15);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--white); font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5vw; height: 70px;
-      background: rgba(8,8,8,0.92); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 70px; background: rgba(8,8,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-img { height: 50px; width: auto; display: block; transition: transform .2s; }
     .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--grey); font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
-    .nav-links a.active { color: var(--blue); }
+    .nav-links a.active { color: var(--gold); }
     .nav-cta { background: var(--gold); color: #080808; padding: 9px 22px; border-radius: 4px; font-size: 13px; font-weight: 600; letter-spacing: 1px; text-decoration: none; text-transform: uppercase; transition: background .2s; }
     .nav-cta:hover { background: var(--gold-dark); }
-
-    /* HERO */
-    .hero {
-      min-height: 70vh; display: flex; align-items: center;
-      padding: 130px 5vw 80px; position: relative; overflow: hidden;
-    }
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 50% 60% at 60% 40%, var(--blue-glow) 0%, transparent 70%),
-        radial-gradient(ellipse 30% 40% at 20% 70%, rgba(230,184,55,0.06) 0%, transparent 60%);
-    }
-    .hero-grid {
-      position: absolute; inset: 0; z-index: 0;
-      background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
-    }
-    .hero-content { position: relative; z-index: 1; max-width: 700px; }
-    .hero-breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 12px; color: var(--grey); letter-spacing: 1px; text-transform: uppercase; }
-    .hero-breadcrumb a { color: var(--grey); text-decoration: none; transition: color .2s; }
-    .hero-breadcrumb a:hover { color: var(--white); }
-    .hero-breadcrumb span { color: var(--blue); }
-    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(58px, 9vw, 110px); line-height: 0.92; letter-spacing: 2px; animation: fadeUp .6s ease both; }
-    .hero h1 em { font-style: normal; color: var(--blue); display: block; }
-    .hero-sub { margin-top: 24px; font-size: 17px; line-height: 1.65; color: var(--grey); max-width: 480px; animation: fadeUp .6s .15s ease both; }
-    .hero-actions { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 16px; animation: fadeUp .6s .25s ease both; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-
-    .btn-wa { display: flex; align-items: center; gap: 10px; background: #25D366; color: #fff; padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 24px rgba(37,211,102,0.3); }
+    .nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .nav-burger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+    .page-hero { padding: 130px 5vw 50px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 50% 60% at 70% 50%, rgba(230,184,55,0.10) 0%, transparent 70%); }
+    .page-hero-inner { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); margin-bottom: 24px; }
+    .breadcrumb a { color: var(--grey); text-decoration: none; transition: color .2s; }
+    .breadcrumb a:hover { color: var(--white); }
+    .breadcrumb span { color: var(--gold); }
+    .page-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(230,184,55,0.1); border: 1px solid rgba(230,184,55,0.25); padding: 6px 16px; border-radius: 100px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .page-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 9vw, 110px); line-height: 0.92; letter-spacing: 2px; }
+    .page-title em { font-style: normal; color: var(--gold); }
+    .page-sub { margin-top: 18px; color: var(--grey); font-size: 16px; line-height: 1.6; max-width: 480px; }
+    .products-section { padding: 40px 5vw 100px; }
+    .products-inner { max-width: 1400px; margin: 0 auto; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 22px; }
+    .product-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer; transition: transform .3s, border-color .3s; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(230,184,55,0.35); }
+    .product-thumb { aspect-ratio: 1; overflow: hidden; position: relative; background: var(--bg3); }
+    .product-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .product-card:hover .product-thumb img { transform: scale(1.06); }
+    .product-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.65) 100%); display: flex; align-items: flex-end; justify-content: flex-start; padding: 18px; opacity: 0; transition: opacity .3s; }
+    .product-card:hover .product-overlay { opacity: 1; }
+    .product-overlay span { color: var(--gold); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+    .product-info { padding: 20px 22px 22px; }
+    .product-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .product-count { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); }
+    .cta-banner { margin-top: 80px; padding: 56px 40px; background: linear-gradient(135deg, var(--bg2) 0%, #1a1505 100%); border: 1px solid rgba(230,184,55,0.18); border-radius: 16px; text-align: center; }
+    .cta-banner h3 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 4vw, 48px); letter-spacing: 1px; margin-bottom: 12px; }
+    .cta-banner h3 em { font-style: normal; color: var(--gold); }
+    .cta-banner p { color: var(--grey); font-size: 15px; max-width: 460px; margin: 0 auto 28px; line-height: 1.65; }
+    .btn-wa { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: #fff; padding: 15px 28px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: transform .2s, box-shadow .2s; box-shadow: 0 4px 24px rgba(37,211,102,0.3); }
     .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.45); }
     .btn-wa svg { width: 20px; height: 20px; }
-    .btn-outline { display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); color: var(--white); padding: 15px 26px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: border-color .2s, color .2s; }
-    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
-
-    /* SECTIONS */
-    section { padding: 96px 5vw; }
-    .section-tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
-    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 6vw, 68px); line-height: 0.95; letter-spacing: 1px; }
-    .section-title em { font-style: normal; color: var(--blue); }
-    .section-sub { margin-top: 16px; color: var(--grey); font-size: 16px; line-height: 1.6; max-width: 500px; }
-    .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); }
-
-    /* SHOWCASE */
-    .showcase-grid {
-      margin-top: 60px;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-    }
-    .showcase-card {
-      border-radius: 12px; overflow: hidden;
-      border: 1px solid var(--border); background: var(--bg2);
-      transition: transform .3s, border-color .3s;
-      cursor: pointer;
-    }
-    .showcase-card:hover { transform: translateY(-4px); border-color: rgba(79,195,247,0.3); }
-    .showcase-img {
-      aspect-ratio: 3/4; position: relative; overflow: hidden;
-      background: var(--bg3);
-    }
-    .showcase-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .5s;
-    }
-    .showcase-card:hover .showcase-img img { transform: scale(1.05); }
-    .showcase-badge { position: absolute; top: 12px; right: 12px; background: rgba(79,195,247,0.2); border: 1px solid rgba(79,195,247,0.4); color: var(--blue); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; z-index: 2; backdrop-filter: blur(6px); }
-    .showcase-body { padding: 20px 22px 24px; }
-    .showcase-body h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 8px; }
-    .showcase-body p { color: var(--grey); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
-    .showcase-price { display: flex; align-items: center; justify-content: space-between; }
-    .order-btn { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); transition: color .2s; text-decoration: none; }
-    .showcase-card:hover .order-btn { color: var(--blue); }
-
-    /* FEATURES */
-    .features { background: var(--bg2); }
-    .features-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    .feature-item { display: flex; gap: 20px; padding: 28px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; }
-    .feature-icon { font-size: 32px; flex-shrink: 0; }
-    .feature-item h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 8px; }
-    .feature-item p { color: var(--grey); font-size: 14px; line-height: 1.65; }
-
-    /* PERSONALIZAÇÃO */
-    .custom-steps { margin-top: 56px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
-    .custom-steps::before { content: ''; position: absolute; top: 30px; left: 12.5%; right: 12.5%; height: 1px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
-    .custom-step { text-align: center; padding: 0 20px; }
-    .custom-num { width: 60px; height: 60px; border-radius: 50%; background: var(--bg2); border: 2px solid var(--blue); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--blue); margin: 0 auto 20px; position: relative; z-index: 1; }
-    .custom-step h4 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; margin-bottom: 8px; }
-    .custom-step p { color: var(--grey); font-size: 13px; line-height: 1.6; }
-
-    /* FAQ */
-    .faq-list { margin-top: 48px; display: flex; flex-direction: column; gap: 12px; max-width: 760px; }
-    .faq-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-    .faq-q { width: 100%; background: var(--bg2); border: none; color: var(--white); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 500; cursor: pointer; text-align: left; transition: background .2s; }
-    .faq-q:hover { background: var(--bg3); }
-    .faq-icon { font-size: 20px; color: var(--blue); flex-shrink: 0; transition: transform .3s; }
-    .faq-a { display: none; padding: 0 24px 20px; color: var(--grey); font-size: 14px; line-height: 1.7; background: var(--bg2); }
-    .faq-item.open .faq-a { display: block; }
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
-
-    /* CTA BOTTOM */
-    .cta-section { background: var(--bg2); text-align: center; }
-    .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 88px); line-height: 0.95; margin-bottom: 20px; }
-    .cta-section h2 em { font-style: normal; color: var(--blue); }
-    .cta-section p { color: var(--grey); font-size: 17px; max-width: 460px; margin: 0 auto 40px; line-height: 1.65; }
-    .cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-    /* FLOAT */
+    .product-modal { position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; padding: 20px; }
+    .product-modal.open { display: flex; }
+    .product-modal-inner { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; max-width: 900px; width: 100%; max-height: 90vh; overflow: hidden; display: flex; flex-direction: column; }
+    .product-modal-header { padding: 22px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .product-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 1px; }
+    .product-modal-close { background: none; border: none; color: var(--grey); font-size: 32px; line-height: 1; cursor: pointer; transition: color .2s; padding: 0 4px; }
+    .product-modal-close:hover { color: var(--gold); }
+    .product-modal-gallery { padding: 24px 28px; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .product-modal-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; cursor: zoom-in; transition: transform .2s, opacity .2s; background: var(--bg3); }
+    .product-modal-gallery img:hover { transform: scale(1.02); opacity: 0.9; }
+    .product-modal-footer { padding: 20px 28px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .product-modal-footer p { color: var(--grey); font-size: 13px; }
+    .lightbox { position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; padding: 40px; cursor: zoom-out; }
+    .lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+    .lightbox-close { position: absolute; top: 24px; right: 32px; color: var(--white); font-size: 48px; cursor: pointer; line-height: 1; transition: color .2s; }
+    .lightbox-close:hover { color: var(--gold); }
     .wa-float { position: fixed; bottom: 28px; right: 28px; z-index: 200; width: 58px; height: 58px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); text-decoration: none; animation: waPulse 2s infinite; transition: transform .2s; }
     .wa-float:hover { transform: scale(1.1); }
     @keyframes waPulse { 0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); } }
-
-    /* FOOTER */
-    footer { background: #050505; border-top: 1px solid var(--border); padding: 40px 5vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-    footer p { font-size: 13px; color: var(--grey); }
+    footer { background: #050505; border-top: 1px solid var(--border); padding: 40px 5vw; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; max-width: 1400px; margin: 0 auto; }
+    .footer-inner p { font-size: 13px; color: var(--grey); }
     .footer-links { display: flex; gap: 24px; }
     .footer-links a { color: var(--grey); text-decoration: none; font-size: 13px; transition: color .2s; }
-    .footer-links a:hover { color: var(--white); }
-
-    /* LIGHTBOX OVERLAY */
-    .lb-overlay {
-      position: fixed; inset: 0; z-index: 500;
-      background: rgba(0,0,0,0.95);
-      display: none; align-items: center; justify-content: center;
-      padding: 40px; cursor: zoom-out;
-    }
-    .lb-overlay.open { display: flex; }
-    .lb-overlay img { max-width: 100%; max-height: 100%; border-radius: 6px; object-fit: contain; }
-    .lb-close {
-      position: absolute; top: 20px; right: 28px;
-      color: var(--white); font-size: 48px; cursor: pointer;
-      line-height: 1; transition: color .2s; user-select: none;
-    }
-    .lb-close:hover { color: var(--blue); }
-    .showcase-img img { cursor: zoom-in; }
-
-    @media (max-width: 900px) {
-      .showcase-grid { grid-template-columns: 1fr 1fr; }
-      .features-grid { grid-template-columns: 1fr; }
-      .custom-steps { grid-template-columns: 1fr 1fr; gap: 24px; }
-      .custom-steps::before { display: none; }
-      .nav-links { display: none; }
-    }
-    @media (max-width: 600px) {
-      .showcase-grid { grid-template-columns: 1fr; }
-      .custom-steps { grid-template-columns: 1fr; }
-    }
+    .footer-links a:hover { color: var(--gold); }
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 90; background: var(--bg); padding: 100px 5vw 40px; flex-direction: column; gap: 8px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { display: block; padding: 18px 0; border-bottom: 1px solid var(--border); color: var(--white); text-decoration: none; font-size: 20px; font-weight: 500; }
+    .mobile-menu a:hover { color: var(--gold); }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .nav-burger { display: flex; } .products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+    @media (max-width: 600px) { .products-grid { grid-template-columns: 1fr; } .page-hero { padding: 110px 5vw 30px; } .cta-banner { padding: 40px 24px; } }
   </style>
 </head>
 <body>
@@ -197,312 +108,61 @@
     <img src="images/logo.png" alt="Effen Design" class="nav-logo-img" />
   </a>
   <ul class="nav-links">
+    <li><a href="index.html#portfolio">Portefólio</a></li>
     <li><a href="index.html#servicos">Serviços</a></li>
-    <li><a href="index.html#bestsellers">Produtos</a></li>
     <li><a href="lightbox.html" class="active">Lightbox</a></li>
     <li><a href="racing.html">Racing</a></li>
     <li><a href="index.html#contacto">Contacto</a></li>
   </ul>
-  <a class="nav-cta" href="https://wa.me/351928372914?text=Quero%20encomendar%20uma%20lightbox!" target="_blank">Encomendar</a>
+  <a class="nav-cta" href="https://wa.me/351928372914?text=Olá!%20Quero%20encomendar%20uma%20lightbox!">Orçamento</a>
+  <div class="nav-burger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-breadcrumb">
-      <a href="index.html">Home</a> / <span>Lightboxes</span>
+<div class="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="index.html#portfolio">Portefólio</a>
+  <a href="lightbox.html">Lightbox</a>
+  <a href="racing.html">Racing</a>
+  <a href="index.html#contacto">Contacto</a>
+  <a href="https://wa.me/351928372914" target="_blank" style="color:#25D366">💬 WhatsApp</a>
+</div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> / <a href="index.html#portfolio">Portefólio</a> / <span>Lightbox</span>
     </div>
-    <h1>ILUMINA<br>O TEU<br><em>ESPAÇO.</em></h1>
-    <p class="hero-sub">Lightboxes personalizadas com LED — decoração única para quarto, escritório, sala de jogos ou prenda que nunca se esquece.</p>
-    <div class="hero-actions">
+    <div class="page-tag">💡 Categoria</div>
+    <h1 class="page-title">COLEÇÃO<br><em>LIGHTBOX.</em></h1>
+    <p class="page-sub">Lightboxes e peças 3D iluminadas — logos, escudos, personagens e muito mais. Clica num produto para ver todas as fotos.</p>
+  </div>
+</section>
+
+<section class="products-section">
+  <div class="products-inner">
+    <div class="products-grid" id="productsGrid"></div>
+    <div class="cta-banner">
+      <h3>TENS UMA<br>IDEIA <em>ESPECIAL?</em></h3>
+      <p>Faço qualquer logo, escudo, personagem ou design em 3D multicolor. Manda a tua ideia e respondo em 24h.</p>
       <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20encomendar%20uma%20lightbox%20personalizada!" target="_blank">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Encomendar Lightbox
+        Pedir orçamento
       </a>
-      <a class="btn-outline" href="#showcase">Ver modelos</a>
     </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- SHOWCASE -->
-<section id="showcase">
-  <div class="section-tag">// Modelos</div>
-  <h2 class="section-title">COLEÇÃO<br><em>LIGHTBOX.</em></h2>
-  <p class="section-sub">Todos os modelos são personalizáveis — nome, frase, logotipo ou design próprio.</p>
-
-  <div class="showcase-grid">
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox1.png" alt="Lightbox Clássica" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Popular</div>
-      </div>
-      <div class="showcase-body">
-        <h4>Lightbox</h4>
-        <p>Base em MDF cortada a laser, fundo em acrílico com gravação personalizada. LED branco quente. Tamanho A5 ou A4.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20encomendar%20uma%20lightbox%20clássica!" target="_blank">Encomendar →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox2.png" alt="Lightbox Casal" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Romântico</div>
-      </div>
-      <div class="showcase-body">
-        <h4>Lightbox</h4>
-        <p>Design especial para casais — nome e data, silhueta ou frase especial. Ideal para aniversários, noivados e casamentos.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20de%20casal!" target="_blank">Encomendar →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox-bpf-1.jpg" alt="Lightbox Gaming BPF" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Gaming</div>
-      </div>
-      <div class="showcase-body">
-        <h4>Lightbox</h4>
-        <p>Para gamers e fãs de sim racing. Logo da equipa, gamertag, controlador, carro favorito — em LED na parede da setup.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20gaming!" target="_blank">Encomendar →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox3.png" alt="Lightbox Pet" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Pet Love</div>
-      </div>
-      <div class="showcase-body">
-        <h4>Lightbox</h4>
-        <p>O teu animal de estimação em lightbox. Silhueta ou retrato gravado em acrílico, com o nome do bichinho.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20lightbox%20com%20o%20meu%20pet!" target="_blank">Encomendar →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox4.png" alt="Lightbox Empresarial" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Corporativo</div>
-      </div>
-      <div class="showcase-body">
-        <h4>Lightbox</h4>
-        <p>Logo da empresa iluminado para escritório, receção ou montra. Impacto visual garantido. Personalizável em tamanho e cor LED.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20orçamento%20para%20lightbox%20empresarial!" target="_blank">Pedir →</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox5.png" alt="Lightbox Custom" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Custom</div>
-      </div>
-      <div class="showcase-body">
-        <h4>Lightbox</h4>
-        <p>Tens uma ideia que não está aqui? Manda mensagem. Se conseguires imaginar, eu consigo fazer. Criatividade sem limites.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Tenho%20uma%20ideia%20para%20uma%20lightbox%20personalizada!" target="_blank">Falar →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- NCM LIGHTBOX -->
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox_ncm_01.jpg" alt="NCM Lightbox" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Racing</div>
-      </div>
-      <div class="showcase-body">
-        <h4>NCM Lightbox</h4>
-        <p>Lightbox oficial da Nacional Crew Motorsport. Logo em impressão 3D multicolor com iluminação LED — peça de coleção para fãs de sim racing.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20NCM%20Lightbox!" target="_blank">Encomendar →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- FC PORTO CAMPEÃO -->
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox_fcporto_01.jpg" alt="FC Porto Campeão" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">FC Porto</div>
-      </div>
-      <div class="showcase-body">
-        <h4>FC Porto Campeão</h4>
-        <p>Placa comemorativa do título do FC Porto — lobo bicolor azul e branco em impressão 3D multicolor, com base preta e logo em relevo. Peça de coleção para adeptos.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20placa%20FC%20Porto%20Campeão!" target="_blank">Encomendar →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- FC PAÇOS DE FERREIRA -->
-    <div class="showcase-card">
-      <div class="showcase-img">
-        <img src="images/lightbox_fcpf_01.jpg" alt="Logo FC Paços de Ferreira" loading="lazy" onclick="openLb(this)" />
-        <div class="showcase-badge">Futebol</div>
-      </div>
-      <div class="showcase-body">
-        <h4>Logo FC Paços de Ferreira</h4>
-        <p>Escudo do FC Paços de Ferreira em impressão 3D multicolor — verde, vermelho, amarelo e preto com detalhe perfeito. Peça de decoração para adeptos castores.</p>
-        <div class="showcase-price">
-          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20um%20logo%20FC%20Paços%20de%20Ferreira!" target="_blank">Encomendar →</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- FEATURES -->
-<section class="features">
-  <div class="section-tag">// Porquê escolher</div>
-  <h2 class="section-title">QUALIDADE<br><em>GARANTIDA.</em></h2>
-  <div class="features-grid">
-    <div class="feature-item">
-      <div class="feature-icon">⚡</div>
-      <div>
-        <h4>Corte Laser de Precisão</h4>
-        <p>Cada peça é cortada e gravada com o Creality Falcon A1 10W, garantindo bordas perfeitas e gravação nítida em qualquer material.</p>
-      </div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">💡</div>
-      <div>
-        <h4>LED de Alta Qualidade</h4>
-        <p>Fita LED premium incluída. Escolhe entre branco quente, branco frio, RGB ou cor específica — tudo combinado com o teu espaço.</p>
-      </div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">🎨</div>
-      <div>
-        <h4>100% Personalizado</h4>
-        <p>Não há dois iguais. Podes enviar o teu design, logotipo, foto ou simplesmente uma ideia — e eu trato do resto.</p>
-      </div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-icon">📦</div>
-      <div>
-        <h4>Embalagem Segura</h4>
-        <p>Todas as lightboxes são embaladas individualmente para envio seguro. Entrega em mão em Paços de Ferreira ou envio CTT para todo o país.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- COMO PERSONALIZAR -->
-<section>
-  <div class="section-tag">// Personalização</div>
-  <h2 class="section-title">COMO<br><em>PERSONALIZAR.</em></h2>
-  <p class="section-sub">Processo simples, resultado surpreendente.</p>
-
-  <div class="custom-steps">
-    <div class="custom-step">
-      <div class="custom-num">01</div>
-      <h4>Escolhe o Tamanho</h4>
-      <p>A5 (21×15cm), A4 (30×21cm) ou tamanho personalizado</p>
-    </div>
-    <div class="custom-step">
-      <div class="custom-num">02</div>
-      <h4>Define o Design</h4>
-      <p>Envia o texto, logo, frase ou ideia — eu adapto ao formato</p>
-    </div>
-    <div class="custom-step">
-      <div class="custom-num">03</div>
-      <h4>Escolhe a Cor LED</h4>
-      <p>Branco quente, branco frio, RGB multicolor ou cor específica</p>
-    </div>
-    <div class="custom-step">
-      <div class="custom-num">04</div>
-      <h4>Recebe em Casa</h4>
-      <p>Produção em 3-5 dias úteis + envio CTT para todo Portugal</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- FAQ -->
-<section>
-  <div class="section-tag">// FAQ</div>
-  <h2 class="section-title">PERGUNTAS<br><em>FREQUENTES.</em></h2>
-  <div class="faq-list">
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Quanto tempo demora a fazer uma lightbox?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Normalmente entre 3 a 5 dias úteis após confirmação do design e pagamento. Em datas festivas (Natal, Dia dos Namorados) recomendo encomendar com antecedência de 2 semanas.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Posso enviar o meu próprio design?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Sim, com todo o gosto! Aceito ficheiros PNG, JPG, SVG ou PDF. Se não tiveres nada pronto, basta descreveres a ideia e eu faço o design incluído no preço.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        A lightbox funciona com tomada normal?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Sim. Alimentação via USB (cabo incluído), compatível com qualquer carregador USB ou powerbank. Pronto a usar assim que chega.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Fazem encomendas em série para empresas?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Sim! Para encomendas de 5 ou mais unidades tenho preços especiais. Ideal para oferta corporativa, eventos, prémios ou merchandising. Contacta-me para orçamento personalizado.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
-        Fazem envios para fora de Portugal?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a">Sim, envio para toda a Europa. O custo de envio varia consoante o país. Contacta-me antes de encomendar para calcular o portes exatos para a tua localização.</div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- CTA FINAL -->
-<section class="cta-section">
-  <h2>PRONTO A<br><em>ILUMINAR?</em></h2>
-  <p>Fala comigo hoje. Orçamento gratuito, resposta em menos de 24 horas.</p>
-  <div class="cta-row">
-    <a class="btn-wa" href="https://wa.me/351928372914?text=Olá!%20Quero%20encomendar%20uma%20lightbox%20personalizada!" target="_blank">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Encomendar via WhatsApp
-    </a>
-    <a class="btn-outline" href="index.html">← Voltar ao site</a>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Effen Design · Paços de Ferreira · effen-design.pt</p>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="racing.html">Racing</a>
-    <a href="https://instagram.com/Effen_Design" target="_blank">Instagram</a>
+  <div class="footer-inner">
+    <p>© 2026 Effen Design · Paços de Ferreira · effen-design.pt</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="https://instagram.com/Effen_Design" target="_blank">Instagram</a>
+      <a href="mailto:effen3d_design@outlook.com">Email</a>
+      <a href="https://wa.me/351928372914" target="_blank">WhatsApp</a>
+    </div>
   </div>
 </footer>
 
@@ -510,23 +170,89 @@
   <svg viewBox="0 0 24 24" fill="white" style="width:28px;height:28px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
-<!-- LIGHTBOX OVERLAY -->
-<div id="lbOverlay" class="lb-overlay" onclick="closeLb()">
-  <span class="lb-close">×</span>
-  <img id="lbImg" src="" alt="" onclick="event.stopPropagation()" />
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">×</span>
+  <img id="lightboxImg" src="" alt="" />
+</div>
+
+<div id="productModal" class="product-modal">
+  <div class="product-modal-inner">
+    <div class="product-modal-header">
+      <span class="product-modal-title" id="modalTitle"></span>
+      <button class="product-modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="product-modal-gallery" id="modalGallery"></div>
+    <div class="product-modal-footer">
+      <p>Clica numa foto para ampliar</p>
+      <a id="modalWhatsapp" href="https://wa.me/351928372914" target="_blank" class="btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pedir orçamento
+      </a>
+    </div>
+  </div>
 </div>
 
 <script>
-  function openLb(img) {
-    document.getElementById('lbImg').src = img.src;
-    document.getElementById('lbOverlay').classList.add('open');
+  const produtos = [
+    { nome: "Lightbox Clássica", fotos: ["images/lightbox1.png"] },
+    { nome: "Lightbox Casal", fotos: ["images/lightbox2.png"] },
+    { nome: "Lightbox Gaming BPF", fotos: ["images/lightbox-bpf-1.jpg"] },
+    { nome: "Lightbox Pet", fotos: ["images/lightbox3.png"] },
+    { nome: "Lightbox Empresarial", fotos: ["images/lightbox4.png"] },
+    { nome: "Lightbox Custom", fotos: ["images/lightbox5.png"] },
+    { nome: "NCM Lightbox", fotos: ["images/lightbox_ncm_01.jpg","images/lightbox_ncm_02.jpg","images/lightbox_ncm_03.jpg"] },
+    { nome: "FC Porto Campeão", fotos: ["images/lightbox_fcporto_01.jpg","images/lightbox_fcporto_02.jpg","images/lightbox_fcporto_03.jpg","images/lightbox_fcporto_04.jpg","images/lightbox_fcporto_05.jpg"] },
+    { nome: "Logo FC Paços de Ferreira", fotos: ["images/lightbox_fcpf_01.jpg","images/lightbox_fcpf_02.jpg","images/lightbox_fcpf_03.jpg"] }
+  ];
+
+  const grid = document.getElementById('productsGrid');
+  produtos.forEach((p, i) => {
+    grid.innerHTML += `
+      <div class="product-card" onclick="openModal(${i})">
+        <div class="product-thumb">
+          <img src="${p.fotos[0]}" alt="${p.nome}" loading="lazy">
+          <div class="product-overlay"><span>Ver galeria →</span></div>
+        </div>
+        <div class="product-info">
+          <p class="product-name">${p.nome}</p>
+          <p class="product-count">${p.fotos.length} foto${p.fotos.length > 1 ? 's' : ''}</p>
+        </div>
+      </div>`;
+  });
+
+  function openModal(i) {
+    const p = produtos[i];
+    document.getElementById('modalTitle').textContent = p.nome;
+    document.getElementById('modalGallery').innerHTML = p.fotos.map(f =>
+      `<img src="${f}" alt="${p.nome}" onclick="openLightbox(this)" loading="lazy">`
+    ).join('');
+    const msg = encodeURIComponent(`Olá! Tenho interesse no produto "${p.nome}" da Effen Design. Pode dizer-me preço e prazos?`);
+    document.getElementById('modalWhatsapp').href = `https://wa.me/351928372914?text=${msg}`;
+    document.getElementById('productModal').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-  function closeLb() {
-    document.getElementById('lbOverlay').classList.remove('open');
+
+  function closeModal() {
+    document.getElementById('productModal').classList.remove('open');
     document.body.style.overflow = '';
   }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+  document.getElementById('productModal').addEventListener('click', e => {
+    if (e.target === document.getElementById('productModal')) closeModal();
+  });
+
+  function openLightbox(img) {
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeLightbox(); }
+  });
 </script>
 
 </body>
