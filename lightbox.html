@@ -37,14 +37,6 @@
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo-img { height: 50px; width: auto; display: block; transition: transform .2s; }
     .nav-logo:hover .nav-logo-img { transform: scale(1.05); }
-    .nav-logo-icon {
-      width: 36px; height: 36px; background: var(--gold);
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: #fff;
-    }
-    .nav-logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); }
-    .nav-logo-text span { color: var(--gold); }
     .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
     .nav-links a { text-decoration: none; color: var(--grey); font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
@@ -120,7 +112,6 @@
     .showcase-body h4 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 0.5px; margin-bottom: 8px; }
     .showcase-body p { color: var(--grey); font-size: 14px; line-height: 1.6; margin-bottom: 14px; }
     .showcase-price { display: flex; align-items: center; justify-content: space-between; }
-    .price { font-family: 'Space Mono', monospace; font-size: 16px; color: var(--blue); font-weight: 700; }
     .order-btn { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); transition: color .2s; text-decoration: none; }
     .showcase-card:hover .order-btn { color: var(--blue); }
 
@@ -310,6 +301,22 @@
         </div>
       </div>
     </div>
+
+    <!-- NCM LIGHTBOX -->
+    <div class="showcase-card">
+      <div class="showcase-img">
+        <img src="images/lightbox_ncm_01.jpg" alt="NCM Lightbox" loading="lazy" />
+        <div class="showcase-badge">Racing</div>
+      </div>
+      <div class="showcase-body">
+        <h4>NCM Lightbox</h4>
+        <p>Lightbox oficial da Nacional Crew Motorsport. Logo em impressão 3D multicolor com iluminação LED — peça de coleção para fãs de sim racing.</p>
+        <div class="showcase-price">
+          <a class="order-btn" href="https://wa.me/351928372914?text=Quero%20uma%20NCM%20Lightbox!" target="_blank">Encomendar →</a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -444,7 +451,7 @@
 </section>
 
 <footer>
-  <p>© 2025 Effen Design · Paços de Ferreira · effen-design.pt</p>
+  <p>© 2026 Effen Design · Paços de Ferreira · effen-design.pt</p>
   <div class="footer-links">
     <a href="index.html">Home</a>
     <a href="racing.html">Racing</a>
