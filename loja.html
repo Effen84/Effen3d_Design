@@ -57,6 +57,9 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 </header>
 
 <main>
+<div style="display:flex;justify-content:flex-end;margin-bottom:15px">
+<input id="search" oninput="searchProducts()" placeholder="Pesquisar produtos..." style="width:min(360px,100%);background:#111;border:1px solid var(--border);color:#fff;border-radius:30px;padding:11px 16px;font-size:12px;outline:none">
+</div>
 <div class="filters" id="filters"></div>
 <div class="grid" id="products"></div>
 </main>
@@ -132,12 +135,21 @@ document.getElementById('products').innerHTML=list.map(p=>`
 <div class="visual ${p.image?'':'noimg'}">${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:p.icon}</div>
 <div class="info"><div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p>
 <div class="bottom"><div class="price">${p.price!==null?euro(p.price):'<small>Preço</small> Sob orçamento'}</div>
-<button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div></div>
+<div style="display:flex;align-items:center;gap:8px">
+<a href="produto.html?id=${p.id}" style="font-size:10px;color:var(--grey);text-transform:uppercase;letter-spacing:.5px">Ver produto</a>
+<button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button>
+</div></div></div>
 </article>`).join('');
+}
+function searchProducts(){
+ const q=document.getElementById('search').value.trim().toLowerCase();
+ const active=document.querySelector('.filter.active')?.textContent||'Todos';
+ const base=active==='Todos'?products:products.filter(p=>p.cat===active);
+ renderProducts(base.filter(p=>(p.name+' '+p.cat+' '+p.desc).toLowerCase().includes(q)));
 }
 function filter(cat,el){
 document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');
-renderProducts(cat==='Todos'?products:products.filter(p=>p.cat===cat));
+const q=document.getElementById('search')?.value.trim().toLowerCase()||''; const base=cat==='Todos'?products:products.filter(p=>p.cat===cat); renderProducts(q?base.filter(p=>(p.name+' '+p.cat+' '+p.desc).toLowerCase().includes(q)):base);
 }
 function openProduct(id){
 selectedProduct=products.find(x=>x.id===id);
