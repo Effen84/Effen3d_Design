@@ -9,36 +9,51 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#e6b837;--bg:#080808;--bg2:#111;--bg3:#171717;--white:#f5f5f5;--grey:#8d8d8d;--border:rgba(255,255,255,.08)}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif}
-a{text-decoration:none;color:inherit}button{font:inherit}
-nav{height:70px;position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(8,8,8,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-.logo{height:48px}.navlinks{display:flex;gap:25px;list-style:none}.navlinks a{font-size:12px;text-transform:uppercase;letter-spacing:1.3px;color:var(--grey)}.navlinks a:hover{color:var(--gold)}
-.cartbtn{border:1px solid rgba(230,184,55,.45);background:transparent;color:var(--white);padding:9px 15px;border-radius:5px;cursor:pointer}.cartbtn b{color:var(--gold)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif}a{text-decoration:none;color:inherit}button{font:inherit}
+nav{min-height:70px;position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(8,8,8,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);gap:15px}
+.logo{height:48px}.navlinks{display:flex;gap:18px;list-style:none;align-items:center}.navlinks a{font-size:10px;text-transform:uppercase;letter-spacing:1.1px;color:var(--grey);white-space:nowrap}.navlinks a:hover{color:var(--gold)}
+.navright{display:flex;align-items:center;gap:9px}.quote-nav{border:1px solid rgba(230,184,55,.55);background:var(--gold);color:#111;padding:9px 12px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;white-space:nowrap}
+.cartbtn{border:1px solid rgba(230,184,55,.45);background:transparent;color:var(--white);padding:9px 13px;border-radius:5px;cursor:pointer;white-space:nowrap;font-size:11px}.cartbtn b{color:var(--gold)}
 .hero{padding:95px 5vw 60px;text-align:center;background:radial-gradient(ellipse 60% 60% at 50% 20%,rgba(230,184,55,.13),transparent 70%)}
 .kicker{font:11px 'Space Mono';letter-spacing:3px;color:var(--gold);text-transform:uppercase}.hero h1{font:clamp(58px,8vw,94px)/.9 'Bebas Neue';margin:12px 0}.hero h1 span{color:var(--gold)}.hero p{max-width:720px;margin:auto;color:var(--grey);line-height:1.7}
 main{max-width:1400px;margin:auto;padding:25px 5vw 100px}.filters{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 35px}.filter{border:1px solid var(--border);background:var(--bg2);color:var(--grey);padding:9px 15px;border-radius:30px;cursor:pointer;font-size:12px}.filter.active,.filter:hover{color:#fff;border-color:var(--gold);background:rgba(230,184,55,.1)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.25s}.product:hover{transform:translateY(-4px);border-color:rgba(230,184,55,.35)}
-.visual{height:190px;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:58px;overflow:hidden}.visual img{width:100%;height:100%;object-fit:cover;display:block}.info{padding:20px}.cat{font:9px 'Space Mono';letter-spacing:2px;color:var(--gold);text-transform:uppercase}.product h2{font:27px 'Bebas Neue';margin:7px 0}.product p{color:var(--grey);font-size:13px;line-height:1.55;min-height:62px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}.price{font-weight:700}.price small{display:block;color:var(--grey);font-weight:400;font-size:10px}.add{border:0;background:var(--gold);color:#fff;padding:9px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer}.add.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.3)}
-.empty{display:none;padding:50px;text-align:center;color:var(--grey);grid-column:1/-1}
+.visual{height:190px;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:58px;overflow:hidden}.visual img{width:100%;height:100%;object-fit:cover;display:block}.visual.noimg{font-size:52px}
+.info{padding:20px}.cat{font:9px 'Space Mono';letter-spacing:2px;color:var(--gold);text-transform:uppercase}.product h2{font:27px 'Bebas Neue';margin:7px 0}.product p{color:var(--grey);font-size:13px;line-height:1.55;min-height:62px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}.price{font-weight:700}.price small{display:block;color:var(--grey);font-weight:400;font-size:10px}.add{border:0;background:var(--gold);color:#fff;padding:9px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer}.add.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.3)}
 .cart{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);z-index:100;background:#0d0d0d;border-left:1px solid var(--border);transform:translateX(105%);transition:.25s;padding:25px;box-shadow:-20px 0 50px rgba(0,0,0,.4)}.cart.open{transform:translateX(0)}
-.carthead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:18px}.carthead h2{font:34px 'Bebas Neue'}.close{background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.cartitems{padding:18px 0;overflow:auto;max-height:62vh}.item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}.item strong{display:block}.item span{font-size:12px;color:var(--grey)}.remove{background:none;border:0;color:#b9b9b9;cursor:pointer}.total{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;font-weight:700}.checkout{display:block;width:100%;margin-top:18px;background:var(--gold);color:#fff;border:0;padding:14px;border-radius:5px;font-weight:700;cursor:pointer}.note{color:var(--grey);font-size:11px;line-height:1.5;margin-top:10px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{position:relative;width:min(620px,100%);max-height:90vh;overflow:auto;background:#111;border:1px solid rgba(230,184,55,.25);border-radius:12px;padding:30px}.modalclose{position:absolute;right:18px;top:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}.modalcat{font:10px 'Space Mono';color:var(--gold);letter-spacing:2px;text-transform:uppercase}.modalbox h2{font:42px 'Bebas Neue';margin:5px 35px 5px 0}.modalbox>p{color:var(--grey);font-size:14px;line-height:1.6;margin-bottom:20px}.options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:15px}.option label,.upload,.customtext{display:block;color:#ddd;font-size:12px}.option select,.customtext textarea{width:100%;margin-top:7px;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:11px}.upload{border:1px dashed rgba(230,184,55,.35);padding:15px;border-radius:7px;margin-top:12px}.upload input{display:block;margin-top:10px;width:100%}.upload span{display:block;color:var(--grey);margin-top:7px;font-size:11px}.customtext{margin-top:14px}.customtext textarea{min-height:90px;resize:vertical}.modalbottom{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px}.modalbottom #mprice{font-weight:700}.modalnote{color:#777;font-size:10px;line-height:1.5;margin-top:12px}@media(max-width:600px){.options{grid-template-columns:1fr}.modalbox{padding:22px}.modalbottom{align-items:stretch;flex-direction:column}}
+.carthead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:18px}.carthead h2{font:34px 'Bebas Neue'}.close{background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.cartitems{padding:18px 0;overflow:auto;max-height:54vh}.item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}.item strong{display:block}.item span{font-size:12px;color:var(--grey);line-height:1.5}.remove{background:none;border:0;color:#b9b9b9;cursor:pointer}.total{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;font-weight:700}.checkout{display:block;width:100%;margin-top:18px;background:var(--gold);color:#fff;border:0;padding:14px;border-radius:5px;font-weight:700;cursor:pointer}.note{color:var(--grey);font-size:11px;line-height:1.5;margin-top:10px}
 .customer{border-top:1px solid var(--border);margin-top:18px;padding-top:16px}.customer h3{font:22px 'Bebas Neue';margin-bottom:10px}.customer input,.customer select,.customer textarea{display:block;width:100%;margin:8px 0;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:10px;font-size:12px}.customer textarea{min-height:65px;resize:vertical}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{position:relative;width:min(650px,100%);max-height:90vh;overflow:auto;background:#111;border:1px solid rgba(230,184,55,.25);border-radius:12px;padding:30px}.modalclose{position:absolute;right:18px;top:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}.modalcat{font:10px 'Space Mono';color:var(--gold);letter-spacing:2px;text-transform:uppercase}.modalbox h2{font:42px 'Bebas Neue';margin:5px 35px 5px 0}.modalbox>p{color:var(--grey);font-size:14px;line-height:1.6;margin-bottom:20px}.options{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:15px}.option label,.upload,.customtext{display:block;color:#ddd;font-size:12px}.option select,.customtext textarea{width:100%;margin-top:7px;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:11px}.upload{border:1px dashed rgba(230,184,55,.35);padding:15px;border-radius:7px;margin-top:12px}.upload input{display:block;margin-top:10px;width:100%}.upload span{display:block;color:var(--grey);margin-top:7px;font-size:11px}.customtext{margin-top:14px}.customtext textarea{min-height:90px;resize:vertical}.modalbottom{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px}.modalbottom #mprice{font-weight:700}.modalnote{color:#777;font-size:10px;line-height:1.5;margin-top:12px}
 footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;color:var(--grey);font-size:12px}
-@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:800px){.navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}.visual{height:170px}}
+@media(max-width:1200px){.navlinks{gap:12px}.navlinks a{font-size:9px}.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.quote-nav{display:none}.navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.visual{height:190px}.options{grid-template-columns:1fr}.modalbox{padding:22px}.modalbottom{align-items:stretch;flex-direction:column}.hero{padding-top:65px}.hero h1{font-size:60px}}
 </style>
 </head>
 <body>
+
 <nav>
 <a href="index.html"><img src="images/logo.png" class="logo" alt="Effen Design"></a>
-<ul class="navlinks"><li><a href="index.html">Início</a></li><li><a href="loja.html">Loja</a></li><li><a href="lightbox.html">Lightbox</a></li><li><a href="racing.html">Racing</a></li><li><a href="index.html#contacto">Contacto</a></li></ul>
+<ul class="navlinks">
+<li><a href="index.html">Início</a></li>
+<li><a href="loja.html">Loja</a></li>
+<li><a href="personalizados.html">Personalizados</a></li>
+<li><a href="dtf.html">DTF</a></li>
+<li><a href="sublimacao.html">Sublimação</a></li>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="racing.html">Racing</a></li>
+<li><a href="index.html#contacto">Contacto</a></li>
+</ul>
+<div class="navright">
+<a class="quote-nav" href="personalizados.html">Pedir orçamento</a>
 <button class="cartbtn" onclick="toggleCart()">🛒 Carrinho <b id="count">0</b></button>
+</div>
 </nav>
 
 <header class="hero">
 <div class="kicker">Effen Design · Loja</div>
 <h1>ESCOLHE. <span>PERSONALIZA.</span> CRIA.</h1>
-<p>Catálogo Effen Design com produtos reais do nosso portefólio. Os artigos com preço definido podem avançar para encomenda; os restantes ficam preparados para orçamento.</p>
+<p>Produtos personalizados, impressão 3D, laser, DTF, sublimação, Lightbox e Racing. Escolhe um produto e começa já a preparar a tua encomenda.</p>
 </header>
 
 <main>
@@ -47,44 +62,41 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 </main>
 
 <div class="modal" id="productModal">
-  <div class="modalbox">
-    <button class="modalclose" onclick="closeProduct()">×</button>
-    <div class="modalcat" id="mcat"></div>
-    <h2 id="mname"></h2>
-    <p id="mdesc"></p>
-    <div class="options" id="options"></div>
-    <label class="upload">Ficheiro / imagem (opcional)
-      <input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.svg" onchange="filePicked()">
-      <span id="filename">PNG, JPG, JPEG, PDF ou SVG</span>
-    </label>
-    <label class="customtext">Texto / nome / instruções
-      <textarea id="customtext" placeholder="Ex.: Nome, frase, cor pretendida, posição do logo..."></textarea>
-    </label>
-    <div class="modalbottom">
-      <div id="mprice"></div>
-      <button class="add" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
-    </div>
-    <div class="modalnote">O ficheiro fica associado ao pedido nesta sessão. O envio efetivo do ficheiro para produção será ligado ao sistema de encomendas numa fase seguinte.</div>
-  </div>
+<div class="modalbox">
+<button class="modalclose" onclick="closeProduct()">×</button>
+<div class="modalcat" id="mcat"></div>
+<h2 id="mname"></h2>
+<p id="mdesc"></p>
+<div class="options" id="options"></div>
+<label class="upload">Ficheiro / imagem (opcional)
+<input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.svg" onchange="filePicked()">
+<span id="filename">PNG, JPG, JPEG, PDF ou SVG</span>
+</label>
+<label class="customtext">Texto / nome / instruções
+<textarea id="customtext" placeholder="Ex.: Nome, frase, cor pretendida, posição do logo..."></textarea>
+</label>
+<div class="modalbottom">
+<div><div id="mprice"></div><div id="mstatus" style="color:#8d8d8d;font-size:10px;margin-top:4px"></div></div>
+<button class="add" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
+</div>
+<div class="modalnote">O ficheiro fica associado ao pedido nesta sessão. Nesta fase, o nome do ficheiro é enviado no pedido; o upload real será ligado ao sistema de encomendas posteriormente.</div>
+</div>
 </div>
 
 <aside class="cart" id="cart">
-<div class="carthead"><h2>CARRINHO</h2><button class="close" onclick="toggleCart()">×</button></div>
+<div class="carthead"><h2>CARRINHO</h2><button class="close" onclick="toggleCart(false)">×</button></div>
 <div class="cartitems" id="cartitems"></div>
 <div class="total"><span>Total</span><span id="total">0,00 €</span></div>
 <div class="customer">
-  <h3>DADOS DA ENCOMENDA</h3>
-  <input id="custName" placeholder="Nome *">
-  <input id="custPhone" placeholder="Telefone / WhatsApp *">
-  <input id="custEmail" placeholder="Email (opcional)" type="email">
-  <select id="delivery">
-    <option value="Levantamento em Paços de Ferreira">Levantamento em Paços de Ferreira</option>
-    <option value="Envio — portes a confirmar">Envio — portes a confirmar</option>
-  </select>
-  <textarea id="custNotes" placeholder="Notas adicionais"></textarea>
+<h3>DADOS DA ENCOMENDA</h3>
+<input id="custName" placeholder="Nome *">
+<input id="custPhone" placeholder="Telefone / WhatsApp *">
+<input id="custEmail" placeholder="Email (opcional)" type="email">
+<select id="delivery"><option>Levantamento em Paços de Ferreira</option><option>Envio — portes a confirmar</option></select>
+<textarea id="custNotes" placeholder="Notas adicionais"></textarea>
 </div>
 <button class="checkout" onclick="checkout()">ENVIAR ENCOMENDA POR WHATSAPP</button>
-<div class="note">Os preços apresentados dependem da configuração do produto. Antes de produzir, a Effen Design confirma o pedido.</div>
+<div class="note">Antes de produzir, a Effen Design confirma a configuração e o valor final do pedido.</div>
 </aside>
 
 <footer>© Effen Design · Impressão 3D · Laser · DTF · Sublimação · Personalização</footer>
@@ -92,128 +104,102 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <script>
 const products=[
 {id:1,cat:'Sublimação',name:'Caneca Personalizada',icon:'☕',image:null,price:7,desc:'Caneca personalizada com imagem, nome ou mensagem.',quote:false},
-{id:2,cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',image:null,price:null,desc:'T-shirt com estampagem DTF. Escolhe tamanho, cor e localização.',quote:true},
+{id:2,cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',image:null,price:null,desc:'T-shirt com estampagem DTF. Escolhe tamanho, localização e quantidade.',quote:true},
 {id:3,cat:'DTF',name:'Sweatshirt Personalizada',icon:'🧥',image:null,price:null,desc:'Sweatshirt personalizada para uso individual, equipas ou empresas.',quote:true},
 {id:4,cat:'Impressão 3D',name:'Nome 3D',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:null,desc:'Nome personalizado em impressão 3D. Cores e medidas sob consulta.',quote:true},
 {id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:null,desc:'Porta-chaves personalizado com nome, logo ou desenho.',quote:true},
 {id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
 {id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
-{id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Trofés personalizados para pilotos, equipas e campeonatos.',quote:true},
+{id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos.',quote:true},
 {id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
-{id:10,cat:'Personalizados',name:'Projeto Especial',icon:'✨',image:'images/effen3d_new.png',price:null,desc:'Tens uma ideia que não aparece no catálogo? Nós analisamos o projeto.',quote:true}
- ,{id:11,cat:'Gaming',name:'Acessório Gaming',icon:'🎮',image:'images/gaming_comando_1.png',price:null,desc:'Acessórios personalizados para setup, gaming e organização.',quote:true}
-,{id:12,cat:'Decoração',name:'Vaso Decorativo',icon:'🏺',image:'images/vaso moderno.png',price:null,desc:'Peças decorativas em impressão 3D para casa e escritório.',quote:true}
-,{id:13,cat:'Natal',name:'Decoração de Natal',icon:'🎄',image:'images/Natal1.png',price:null,desc:'Peças e presentes personalizados para a época natalícia.',quote:true}
-,{id:14,cat:'Brinquedos',name:'Peça Personalizada',icon:'🧸',image:'images/brinquedos_mario_1.png',price:null,desc:'Modelos e peças em impressão 3D para oferecer ou colecionar.',quote:true}
+{id:10,cat:'Personalizados',name:'Projeto Especial',icon:'✨',image:'images/effen3d_new.png',price:null,desc:'Tens uma ideia que não aparece no catálogo? Nós analisamos o projeto.',quote:true},
+{id:11,cat:'Gaming',name:'Acessório Gaming',icon:'🎮',image:'images/gaming_comando_1.png',price:null,desc:'Acessórios personalizados para setup, gaming e organização.',quote:true},
+{id:12,cat:'Decoração',name:'Vaso Decorativo',icon:'🏺',image:'images/vaso moderno.png',price:null,desc:'Peças decorativas em impressão 3D para casa e escritório.',quote:true},
+{id:13,cat:'Natal',name:'Decoração de Natal',icon:'🎄',image:'images/Natal1.png',price:null,desc:'Peças e presentes personalizados para a época natalícia.',quote:true},
+{id:14,cat:'Brinquedos',name:'Peça Personalizada',icon:'🧸',image:'images/brinquedos_mario_1.png',price:null,desc:'Modelos e peças em impressão 3D para oferecer ou colecionar.',quote:true}
 ];
 
-let cart=JSON.parse(localStorage.getItem('effenCart')||'[]');
+let cart=JSON.parse(localStorage.getItem('effenCart')||'[]'),selectedProduct=null;
 const euro=n=>n.toLocaleString('pt-PT',{style:'currency',currency:'EUR'});
 const cats=['Todos',...new Set(products.map(p=>p.cat))];
 
 function renderFilters(){
- document.getElementById('filters').innerHTML=cats.map((c,i)=>`<button class="filter ${i===0?'active':''}" onclick="filter('${c}',this)">${c}</button>`).join('');
+document.getElementById('filters').innerHTML=cats.map((c,i)=>`<button class="filter ${i===0?'active':''}" onclick="filter('${c}',this)">${c}</button>`).join('');
 }
 function renderProducts(list=products){
- document.getElementById('products').innerHTML=list.map(p=>`
- <article class="product">
-  <div class="visual">${p.image?`<img src="${p.image}" alt="${p.name}">`:p.icon}</div><div class="info">
-   <div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p>
-   <div class="bottom"><div class="price">${p.price!==null?euro(p.price):'<small>Preço</small> Sob orçamento'}</div>
-   <button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div>
-  </div>
- </article>`).join('');
+document.getElementById('products').innerHTML=list.map(p=>`
+<article class="product">
+<div class="visual ${p.image?'':'noimg'}">${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:p.icon}</div>
+<div class="info"><div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p>
+<div class="bottom"><div class="price">${p.price!==null?euro(p.price):'<small>Preço</small> Sob orçamento'}</div>
+<button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div></div>
+</article>`).join('');
 }
 function filter(cat,el){
- document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');
- renderProducts(cat==='Todos'?products:products.filter(p=>p.cat===cat));
+document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');
+renderProducts(cat==='Todos'?products:products.filter(p=>p.cat===cat));
 }
-let selectedProduct=null;
 function openProduct(id){
- selectedProduct=products.find(x=>x.id===id);
- document.getElementById('mcat').textContent=selectedProduct.cat;
- document.getElementById('mname').textContent=selectedProduct.name;
- document.getElementById('mdesc').textContent=selectedProduct.desc;
- document.getElementById('mprice').textContent=selectedProduct.price!==null?euro(selectedProduct.price):'Sob orçamento';
- const opts=document.getElementById('options');
- let fields='';
- if(selectedProduct.cat==='DTF') fields='<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option>Frente</option><option>Costas</option><option>Frente + Costas</option></select></label></div>';
- else if(selectedProduct.cat==='Sublimação') fields='<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optPos"><option>1</option><option>2</option><option>5</option><option>10+</option></select></label></div>';
- else if(selectedProduct.cat==='Impressão 3D') fields='<div class="option"><label>Cor<select id="optSize"><option>A definir</option><option>Preto</option><option>Branco</option><option>Dourado</option><option>Vermelho</option></select></label></div><div class="option"><label>Quantidade<select id="optPos"><option>1</option><option>2</option><option>5</option><option>10+</option></select></label></div>';
- else fields='<div class="option"><label>Quantidade<select id="optSize"><option>1</option><option>2</option><option>5</option><option>10+</option></select></label></div><div class="option"><label>Preferência<select id="optPos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label></div>';
- opts.innerHTML=fields;
- document.getElementById('file').value='';
- document.getElementById('filename').textContent='PNG, JPG, JPEG, PDF ou SVG';
- document.getElementById('customtext').value='';
- document.getElementById('productModal').classList.add('open');
+selectedProduct=products.find(x=>x.id===id);
+document.getElementById('mcat').textContent=selectedProduct.cat;
+document.getElementById('mname').textContent=selectedProduct.name;
+document.getElementById('mdesc').textContent=selectedProduct.desc;
+document.getElementById('mprice').textContent=selectedProduct.price!==null?euro(selectedProduct.price):'Sob orçamento';
+let f='';
+if(selectedProduct.id===1)f=`<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+else if(selectedProduct.cat==='DTF')f=`<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option>Frente</option><option>Costas</option><option>Frente + Costas</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+else if(selectedProduct.cat==='Sublimação')f=`<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+else if(selectedProduct.cat==='Impressão 3D')f=`<div class="option"><label>Cor<select id="optSize"><option>A definir</option><option>Preto</option><option>Branco</option><option>Dourado</option><option>Vermelho</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+else f=`<div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div><div class="option"><label>Preferência<select id="optPos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label></div>`;
+document.getElementById('options').innerHTML=f;
+const updateModalPrice=()=>{
+ const q=parseInt(document.getElementById('optQty')?.value||'1',10)||1;
+ const status=document.getElementById('mstatus');
+ if(selectedProduct.price!==null){
+   document.getElementById('mprice').textContent=euro(selectedProduct.price*q);
+   status.textContent=q>1?`${q} unidades · ${euro(selectedProduct.price)} / unidade`:'1 unidade · preço definido';
+ }else{
+   document.getElementById('mprice').textContent='Sob orçamento';
+   status.textContent='Configura o pedido e envia-nos o pedido de orçamento';
+ }
+};
+document.getElementById('optQty')?.addEventListener('change',updateModalPrice);
+updateModalPrice();
+document.getElementById('file').value='';document.getElementById('filename').textContent='PNG, JPG, JPEG, PDF ou SVG';document.getElementById('customtext').value='';
+document.getElementById('productModal').classList.add('open');
 }
 function closeProduct(){document.getElementById('productModal').classList.remove('open');selectedProduct=null}
 function filePicked(){const f=document.getElementById('file').files[0];document.getElementById('filename').textContent=f?f.name:'PNG, JPG, JPEG, PDF ou SVG'}
 function confirmProduct(){
- if(!selectedProduct)return;
- const size=document.getElementById('optSize')?.value||'';
- const pos=document.getElementById('optPos')?.value||'';
- const text=document.getElementById('customtext').value.trim();
- const file=document.getElementById('file').files[0]?.name||'';
- const key=Date.now();
- cart.push({id:selectedProduct.id,qty:1,options:{size,pos,text,file},key});
- save();renderCart();closeProduct();toggleCart(true);
+if(!selectedProduct)return;
+const size=document.getElementById('optSize')?.value||'',pos=document.getElementById('optPos')?.value||'',qty=parseInt(document.getElementById('optQty')?.value||'1',10)||1,text=document.getElementById('customtext').value.trim(),file=document.getElementById('file').files[0]?.name||'';
+cart.push({id:selectedProduct.id,qty,unitPrice:selectedProduct.price,options:{size,pos,text,file},key:Date.now()});
+save();renderCart();closeProduct();toggleCart(true);
 }
-function remove(key){
- cart=cart.filter(x=>x.key!==key);
- save();renderCart();
-}
+function remove(key){cart=cart.filter(x=>x.key!==key);save();renderCart()}
 function save(){localStorage.setItem('effenCart',JSON.stringify(cart))}
 function renderCart(){
- const box=document.getElementById('cartitems');
- document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
- box.innerHTML=cart.length?cart.map(x=>{
-   const p=products.find(y=>y.id===x.id);
-   const details=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
-   return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${p.price!==null?euro(p.price):'sob orçamento'}</span>${details?`<span style="display:block;margin-top:5px">${details}</span>`:''}</div><button class="remove" onclick="remove(${x.key})">remover</button></div>`
- }).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
- const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+(p.price===null?0:p.price*x.qty)},0);
- document.getElementById('total').textContent=euro(total);
+document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
+document.getElementById('cartitems').innerHTML=cart.length?cart.map(x=>{
+const p=products.find(y=>y.id===x.id),d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
+return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${((x.unitPrice??p.price)!==null)?euro(x.unitPrice??p.price):'sob orçamento'}</span>${d?`<span style="display:block;margin-top:5px">${d}</span>`:''}</div><button class="remove" onclick="remove(${x.key})">remover</button></div>`;
+}).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
+const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+((x.unitPrice??p.price)===null?0:(x.unitPrice??p.price)*x.qty)},0);
+document.getElementById('total').textContent=euro(total);
 }
-function toggleCart(force){document.getElementById('cart').classList.toggle('open',force===true?true:undefined)}
+function toggleCart(force){const c=document.getElementById('cart');if(force===true)c.classList.add('open');else if(force===false)c.classList.remove('open');else c.classList.toggle('open')}
 function checkout(){
- if(!cart.length){alert('O carrinho está vazio.');return}
- const name=document.getElementById('custName').value.trim();
- const phone=document.getElementById('custPhone').value.trim();
- const email=document.getElementById('custEmail').value.trim();
- const delivery=document.getElementById('delivery').value;
- const notes=document.getElementById('custNotes').value.trim();
- if(!name||!phone){alert('Preenche pelo menos o nome e o telefone/WhatsApp.');return}
- const lines=cart.map(x=>{
-   const p=products.find(y=>y.id===x.id);
-   const d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' | '):'';
-   return `- ${p.name} x${x.qty}${d?' — '+d:''}${p.price!==null?' — '+euro(p.price*x.qty):' — pedir orçamento'}`;
- }).join('\n');
- const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+(p.price===null?0:p.price*x.qty)},0);
- const msg=[
- 'Olá! Quero fazer uma encomenda na Effen Design.',
- '',
- 'CLIENTE',
- 'Nome: '+name,
- 'Telefone: '+phone,
- email?'Email: '+email:'',
- 'Entrega: '+delivery,
- '',
- 'PRODUTOS',
- lines,
- '',
- 'Total dos produtos com preço definido: '+euro(total),
- notes?'Notas: '+notes:''
- ].filter(Boolean).join('\n');
- window.open('https://wa.me/351928372914?text='+encodeURIComponent(msg),'_blank');
+if(!cart.length){alert('O carrinho está vazio.');return}
+const name=document.getElementById('custName').value.trim(),phone=document.getElementById('custPhone').value.trim(),email=document.getElementById('custEmail').value.trim(),delivery=document.getElementById('delivery').value,notes=document.getElementById('custNotes').value.trim();
+if(!name||!phone){alert('Preenche pelo menos o nome e o telefone/WhatsApp.');return}
+const lines=cart.map(x=>{const p=products.find(y=>y.id===x.id),d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' | '):'';return `- ${p.name} x${x.qty}${d?' — '+d:''}${((x.unitPrice??p.price)!==null)?' — '+euro((x.unitPrice??p.price)*x.qty):' — pedir orçamento'}`}).join('\n');
+const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+((x.unitPrice??p.price)===null?0:(x.unitPrice??p.price)*x.qty)},0);
+const msg=['Olá! Quero fazer uma encomenda na Effen Design.','','CLIENTE','Nome: '+name,'Telefone: '+phone,email?'Email: '+email:'','Entrega: '+delivery,'','PRODUTOS',lines,'','Total dos produtos com preço definido: '+euro(total),notes?'Notas: '+notes:''].filter(Boolean).join('\n');
+window.open('https://wa.me/351928372914?text='+encodeURIComponent(msg),'_blank');
 }
-['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{
- const el=document.getElementById(id);
- const saved=localStorage.getItem('effen_'+id);
- if(saved!==null)el.value=saved;
- el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value));
-});
+['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{const el=document.getElementById(id),saved=localStorage.getItem('effen_'+id);if(saved!==null)el.value=saved;el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value))});
 renderFilters();renderProducts();renderCart();
 </script>
+<!-- Effen Design Loja V7 -->
 </body>
 </html>
