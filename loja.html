@@ -23,6 +23,7 @@ main{max-width:1400px;margin:auto;padding:25px 5vw 100px}.filters{display:flex;g
 .cart{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);z-index:100;background:#0d0d0d;border-left:1px solid var(--border);transform:translateX(105%);transition:.25s;padding:25px;box-shadow:-20px 0 50px rgba(0,0,0,.4)}.cart.open{transform:translateX(0)}
 .carthead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:18px}.carthead h2{font:34px 'Bebas Neue'}.close{background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.cartitems{padding:18px 0;overflow:auto;max-height:62vh}.item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}.item strong{display:block}.item span{font-size:12px;color:var(--grey)}.remove{background:none;border:0;color:#b9b9b9;cursor:pointer}.total{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;font-weight:700}.checkout{display:block;width:100%;margin-top:18px;background:var(--gold);color:#fff;border:0;padding:14px;border-radius:5px;font-weight:700;cursor:pointer}.note{color:var(--grey);font-size:11px;line-height:1.5;margin-top:10px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{position:relative;width:min(620px,100%);max-height:90vh;overflow:auto;background:#111;border:1px solid rgba(230,184,55,.25);border-radius:12px;padding:30px}.modalclose{position:absolute;right:18px;top:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}.modalcat{font:10px 'Space Mono';color:var(--gold);letter-spacing:2px;text-transform:uppercase}.modalbox h2{font:42px 'Bebas Neue';margin:5px 35px 5px 0}.modalbox>p{color:var(--grey);font-size:14px;line-height:1.6;margin-bottom:20px}.options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:15px}.option label,.upload,.customtext{display:block;color:#ddd;font-size:12px}.option select,.customtext textarea{width:100%;margin-top:7px;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:11px}.upload{border:1px dashed rgba(230,184,55,.35);padding:15px;border-radius:7px;margin-top:12px}.upload input{display:block;margin-top:10px;width:100%}.upload span{display:block;color:var(--grey);margin-top:7px;font-size:11px}.customtext{margin-top:14px}.customtext textarea{min-height:90px;resize:vertical}.modalbottom{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px}.modalbottom #mprice{font-weight:700}.modalnote{color:#777;font-size:10px;line-height:1.5;margin-top:12px}@media(max-width:600px){.options{grid-template-columns:1fr}.modalbox{padding:22px}.modalbottom{align-items:stretch;flex-direction:column}}
+.customer{border-top:1px solid var(--border);margin-top:18px;padding-top:16px}.customer h3{font:22px 'Bebas Neue';margin-bottom:10px}.customer input,.customer select,.customer textarea{display:block;width:100%;margin:8px 0;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:10px;font-size:12px}.customer textarea{min-height:65px;resize:vertical}
 footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;color:var(--grey);font-size:12px}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:800px){.navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}.visual{height:170px}}
 </style>
@@ -71,6 +72,17 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <div class="carthead"><h2>CARRINHO</h2><button class="close" onclick="toggleCart()">×</button></div>
 <div class="cartitems" id="cartitems"></div>
 <div class="total"><span>Total</span><span id="total">0,00 €</span></div>
+<div class="customer">
+  <h3>DADOS DA ENCOMENDA</h3>
+  <input id="custName" placeholder="Nome *">
+  <input id="custPhone" placeholder="Telefone / WhatsApp *">
+  <input id="custEmail" placeholder="Email (opcional)" type="email">
+  <select id="delivery">
+    <option value="Levantamento em Paços de Ferreira">Levantamento em Paços de Ferreira</option>
+    <option value="Envio — portes a confirmar">Envio — portes a confirmar</option>
+  </select>
+  <textarea id="custNotes" placeholder="Notas adicionais"></textarea>
+</div>
 <button class="checkout" onclick="checkout()">ENVIAR ENCOMENDA POR WHATSAPP</button>
 <div class="note">Os preços apresentados dependem da configuração do produto. Antes de produzir, a Effen Design confirma o pedido.</div>
 </aside>
@@ -161,16 +173,42 @@ function renderCart(){
 }
 function toggleCart(force){document.getElementById('cart').classList.toggle('open',force===true?true:undefined)}
 function checkout(){
- if(!cart.length)return;
+ if(!cart.length){alert('O carrinho está vazio.');return}
+ const name=document.getElementById('custName').value.trim();
+ const phone=document.getElementById('custPhone').value.trim();
+ const email=document.getElementById('custEmail').value.trim();
+ const delivery=document.getElementById('delivery').value;
+ const notes=document.getElementById('custNotes').value.trim();
+ if(!name||!phone){alert('Preenche pelo menos o nome e o telefone/WhatsApp.');return}
  const lines=cart.map(x=>{
    const p=products.find(y=>y.id===x.id);
    const d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' | '):'';
-   return `- ${p.name} x${x.qty}${d?' — '+d:''}${p.price!==null?' — '+euro(p.price*x.qty):' — pedir orçamento'}`
- }).join('%0A');
+   return `- ${p.name} x${x.qty}${d?' — '+d:''}${p.price!==null?' — '+euro(p.price*x.qty):' — pedir orçamento'}`;
+ }).join('\n');
  const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+(p.price===null?0:p.price*x.qty)},0);
- const text=`Olá! Quero fazer uma encomenda na Effen Design:%0A${encodeURIComponent(lines).replace(/%250A/g,'%0A')}%0A%0ATotal dos produtos com preço definido: ${encodeURIComponent(euro(total))}`;
- window.open('https://wa.me/351928372914?text='+text,'_blank');
+ const msg=[
+ 'Olá! Quero fazer uma encomenda na Effen Design.',
+ '',
+ 'CLIENTE',
+ 'Nome: '+name,
+ 'Telefone: '+phone,
+ email?'Email: '+email:'',
+ 'Entrega: '+delivery,
+ '',
+ 'PRODUTOS',
+ lines,
+ '',
+ 'Total dos produtos com preço definido: '+euro(total),
+ notes?'Notas: '+notes:''
+ ].filter(Boolean).join('\n');
+ window.open('https://wa.me/351928372914?text='+encodeURIComponent(msg),'_blank');
 }
+['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{
+ const el=document.getElementById(id);
+ const saved=localStorage.getItem('effen_'+id);
+ if(saved!==null)el.value=saved;
+ el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value));
+});
 renderFilters();renderProducts();renderCart();
 </script>
 </body>
