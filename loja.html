@@ -65,8 +65,9 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <div class="modalbox">
 <button class="modalclose" onclick="closeProduct()">×</button>
 <div class="modalcat" id="mcat"></div>
+<div id="mvisual" style="height:230px;margin:12px 0 18px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:64px"></div>
 <h2 id="mname"></h2>
-<p id="mdesc"></p>
+<p id="mdesc"></p><div id="mref" style="font:9px Space Mono;color:#666;letter-spacing:1px;margin:-10px 0 18px"></div>
 <div class="options" id="options"></div>
 <label class="upload">Ficheiro / imagem (opcional)
 <input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.svg" onchange="filePicked()">
@@ -76,7 +77,7 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <textarea id="customtext" placeholder="Ex.: Nome, frase, cor pretendida, posição do logo..."></textarea>
 </label>
 <div class="modalbottom">
-<div id="mprice"></div>
+<div><small style="display:block;color:var(--grey);font-size:10px">Preço</small><div id="mprice"></div></div>
 <button class="add" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
 </div>
 <div class="modalnote">O ficheiro fica associado ao pedido nesta sessão. Nesta fase, o nome do ficheiro é enviado no pedido; o upload real será ligado ao sistema de encomendas posteriormente.</div>
@@ -130,9 +131,9 @@ const products=[
 {id:4,cat:'Impressão 3D',name:'Nome com íman',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:2,desc:'Nome com íman — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
 {id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:2,desc:'Porta-chaves personalizado — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
 {id:15,cat:'Impressão 3D',name:'Nome em letra grande',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:10,desc:'Nome em letra grande — 10 €. Cores e tamanhos diferentes sob consulta.',quote:false},
-{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
-{id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
-{id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos.',quote:true},
+{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração. Personalização, tamanho e acabamento sob orçamento.',quote:true},
+{id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais. Tamanho, cor e configuração sob orçamento.',quote:true},
+{id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos. Modelo, medidas e acabamento sob orçamento.',quote:true},
 {id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
 {id:10,cat:'Personalizados',name:'Projeto Especial',icon:'✨',image:'images/effen3d_new.png',price:null,desc:'Tens uma ideia que não aparece no catálogo? Nós analisamos o projeto.',quote:true},
 {id:11,cat:'Gaming',name:'Acessório Gaming',icon:'🎮',image:'images/gaming_comando_1.png',price:null,desc:'Acessórios personalizados para setup, gaming e organização.',quote:true},
@@ -171,7 +172,9 @@ applySearch();
 function openProduct(id){
 selectedProduct=products.find(x=>x.id===id);
 document.getElementById('mcat').textContent=selectedProduct.cat;
+document.getElementById('mvisual').innerHTML=selectedProduct.image?`<img src="${selectedProduct.image}" alt="${selectedProduct.name}" style="width:100%;height:100%;object-fit:cover;display:block">`:selectedProduct.icon;
 document.getElementById('mname').textContent=selectedProduct.name;
+document.getElementById('mref').textContent='REF. EFF-'+String(selectedProduct.id).padStart(3,'0');
 document.getElementById('mdesc').textContent=selectedProduct.desc;
 document.getElementById('mprice').textContent=selectedProduct.price!==null?euro(selectedProduct.price):'Sob orçamento';
 let f='';
