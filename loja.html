@@ -167,8 +167,9 @@ document.getElementById('mname').textContent=selectedProduct.name;
 document.getElementById('mdesc').textContent=selectedProduct.desc;
 document.getElementById('mprice').textContent=selectedProduct.price!==null?euro(selectedProduct.price):'Sob orçamento';
 let f='';
-if(selectedProduct.cat==='DTF')f=`<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option>Frente</option><option>Costas</option><option>Frente + Costas</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
-else if(selectedProduct.cat==='Sublimação')f=`<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+if(selectedProduct.id===1)f=`<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+else if(selectedProduct.cat==='DTF')f=`<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Cor da peça<select id="optColor"><option>Preto</option><option>Branco</option><option>Cinzento</option><option>Outra — indicar nas notas</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option>Frente</option><option>Costas</option><option>Frente + Costas</option></select></label></div><div class="option"><label>Tamanho da estampagem<select id="optPrint"><option>Pequena</option><option>Média</option><option>Grande</option><option>A definir</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+else if(selectedProduct.cat==='Sublimação')f=`<div class="option"><label>Tipo de personalização<select id="optSize"><option value="1 imagem" data-price="7">1 imagem — 7,00 €</option><option value="caneca completa" data-price="10">Caneca completa — 10,00 €</option></select></label></div><div class="option"><label>Acabamento<select id="optFinish"><option>Standard</option><option>A definir</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
 else if(selectedProduct.cat==='Impressão 3D')f=`<div class="option"><label>Cor<select id="optSize"><option>A definir</option><option>Preto</option><option>Branco</option><option>Dourado</option><option>Vermelho</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
 else f=`<div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div><div class="option"><label>Preferência<select id="optPos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label></div>`;
 document.getElementById('options').innerHTML=f;
@@ -180,7 +181,7 @@ function filePicked(){const f=document.getElementById('file').files[0];document.
 function confirmProduct(){
 if(!selectedProduct)return;
 const size=document.getElementById('optSize')?.value||'',pos=document.getElementById('optPos')?.value||'',color=document.getElementById('optColor')?.value||'',print=document.getElementById('optPrint')?.value||'',finish=document.getElementById('optFinish')?.value||'',qty=parseInt(document.getElementById('optQty')?.value||'1',10)||1,text=document.getElementById('customtext').value.trim(),file=document.getElementById('file').files[0]?.name||'';
-cart.push({id:selectedProduct.id,qty,options:{size,pos,color,print,finish,text,file},key:Date.now()});
+const selectedOpt=document.getElementById('optSize')?.selectedOptions?.[0]; const unitPrice=selectedProduct.id===1 ? parseFloat(selectedOpt?.dataset.price||'7') : selectedProduct.price; cart.push({id:selectedProduct.id,qty,unitPrice,options:{size,pos,color,print,finish,text,file},key:Date.now()});
 save();renderCart();closeProduct();toggleCart(true);
 }
 function remove(key){cart=cart.filter(x=>x.key!==key);save();renderCart()}
@@ -189,9 +190,9 @@ function renderCart(){
 document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
 document.getElementById('cartitems').innerHTML=cart.length?cart.map(x=>{
 const p=products.find(y=>y.id===x.id),d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
-return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${p.price!==null?euro(p.price):'sob orçamento'}</span>${d?`<span style="display:block;margin-top:5px">${d}</span>`:''}</div><button class="remove" onclick="remove(${x.key})">remover</button></div>`;
+return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${x.unitPrice!==null&&x.unitPrice!==undefined?euro(x.unitPrice):'sob orçamento'}</span>${d?`<span style="display:block;margin-top:5px">${d}</span>`:''}</div><button class="remove" onclick="remove(${x.key})">remover</button></div>`;
 }).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
-const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+(p.price===null?0:p.price*x.qty)},0);
+const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+((x.unitPrice!==null&&x.unitPrice!==undefined)?x.unitPrice*x.qty:(p.price===null?0:p.price*x.qty))},0);
 document.getElementById('total').textContent=euro(total);
 }
 function toggleCart(force){const c=document.getElementById('cart');if(force===true)c.classList.add('open');else if(force===false)c.classList.remove('open');else c.classList.toggle('open')}
@@ -218,14 +219,14 @@ document.getElementById('reviewQuote').style.display=quoteItems.length?'block':'
 document.getElementById('reviewTotal').textContent=euro(orderTotal());
 document.getElementById('reviewItems').innerHTML=cart.map(x=>{
  const p=products.find(y=>y.id===x.id),u=x.unitPrice??p.price;
- const d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
+ const d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
  return `<div class="reviewrow"><div><strong>${p.name}</strong><div class="reviewmeta">${x.qty} unidade(s)${d?' · '+d:''}</div></div><strong>${u===null?'Orçamento':euro(u*x.qty)}</strong></div>`;
 }).join('');
 window._orderReference=reference;
 window._orderCustomer=c;
 window._orderLines=cart.map(x=>{
  const p=products.find(y=>y.id===x.id),u=x.unitPrice??p.price;
- const d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' | '):'';
+ const d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' | '):'';
  return `- ${p.name} x${x.qty}${d?' — '+d:''}${u!==null?' — '+euro(u*x.qty):' — pedir orçamento'}`;
 }).join('\n');
 document.getElementById('reviewModal').classList.add('open');
