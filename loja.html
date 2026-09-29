@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Effen Design Loja V13 -->
 <!-- Effen Design Loja V12 -->
 <html lang="pt">
 <head>
@@ -37,7 +38,10 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 .v12catalog-note strong{color:#e6b837}
 </style>
 
-</head>
+<style id="v13-orders-css">
+.v13-orderbox{margin-top:18px;padding:16px;border:1px solid rgba(230,184,55,.2);border-radius:10px;background:rgba(255,255,255,.02)}
+.v13-orderbox h4{margin:0 0 8px;color:#e6b837}.v13-orderref{font-family:"Space Mono",monospace;color:#fff}.v13-status{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:6px;background:rgba(230,184,55,.12);color:#e6b837;font-size:.75rem}
+</style></head>
 <body>
 
 <nav>
@@ -131,7 +135,7 @@ Alguns artigos estão <strong>sob orçamento</strong>. O total apresentado acima
 </div>
 </div>
 <div class="lightboxview" id="imageLightbox" onclick="closeLightbox(event)"><button class="lightboxclose" onclick="closeLightbox(event)">×</button><button class="lightboxnav lightboxprev" onclick="galleryMove(-1,event)">‹</button><img id="lightboxImage" src="" alt=""><button class="lightboxnav lightboxnext" onclick="galleryMove(1,event)">›</button></div>
-<footer>© Effen Design · Impressão 3D · Laser · DTF · Sublimação · Personalização</footer>
+<footer>© Effen Design · Impressão 3D · Laser · DTF · Sublimação · Personalização<div class="v13-orderbox" id="orderLookupBox"><h4>Consultar encomenda</h4><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="orderLookup" type="text" placeholder="Ex.: EFF-260929-1234" style="flex:1;min-width:220px"><button type="button" onclick="lookupOrder()">Consultar</button></div><div id="orderResult"></div></div></footer>
 
 <script>
 /* EFFEN DESIGN — LOJA V11 */
@@ -398,5 +402,14 @@ async function syncCatalogFromSheet(){
 window.addEventListener("DOMContentLoaded",syncCatalogFromSheet);
 </script>
 
-</body>
+<script id="v13-orders">
+const ORDER_STATUS=["Recebida","Paga","Em produção","Pronta","Enviada","Concluída"];
+function generateOrderRef(){const d=new Date(),s=d.getFullYear().toString().slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0"),r=Math.floor(1000+Math.random()*9000);return `EFF-${s}-${r}`;}
+function getOrders(){try{return JSON.parse(localStorage.getItem("effen_orders")||"[]")}catch(e){return[]}}
+function saveOrders(x){localStorage.setItem("effen_orders",JSON.stringify(x))}
+function createLocalOrder(cart,customer,total){const order={ref:generateOrderRef(),createdAt:new Date().toISOString(),status:"Recebida",customer:customer||{},items:(cart||[]).map(x=>({id:x.id,name:x.name,quantity:x.quantity||1,price:x.unitPrice??x.price??null,options:x.options||{}})),total:Number(total)||0};const a=getOrders();a.unshift(order);saveOrders(a);return order;}
+function updateOrderStatus(ref,status){if(!ORDER_STATUS.includes(status))return false;const a=getOrders(),i=a.findIndex(o=>o.ref===String(ref).trim().toUpperCase());if(i<0)return false;a[i].status=status;a[i].updatedAt=new Date().toISOString();saveOrders(a);return true;}
+function findOrder(ref){return getOrders().find(o=>o.ref===String(ref).trim().toUpperCase())||null;}
+function lookupOrder(){const i=document.getElementById("orderLookup"),e=document.getElementById("orderResult"),o=i?findOrder(i.value):null;if(!e)return;e.innerHTML=o?`<div class="v13-orderbox"><h4>Encomenda <span class="v13-orderref">${o.ref}</span><span class="v13-status">${o.status}</span></h4><div style="color:#aaa;font-size:.82rem">Criada em ${new Date(o.createdAt).toLocaleString("pt-PT")}</div><div style="margin-top:8px">${o.items.length} artigo(s) · ${o.total.toFixed(2).replace(".",",")} €</div></div>`:'<span style="color:#aaa">Encomenda não encontrada neste dispositivo.</span>';}
+</script></body>
 </html>
