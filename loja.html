@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Effen Design Loja V12 -->
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
@@ -30,6 +31,12 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 @media(max-width:900px){.quote-nav{display:none}.navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.grid{grid-template-columns:1fr}.visual{height:190px}.options{grid-template-columns:1fr}.modalbox{padding:22px}.modalbottom{align-items:stretch;flex-direction:column}.hero{padding-top:65px}.hero h1{font-size:60px}}
 .reviewrow{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px}.reviewrow:last-child{border-bottom:0}.reviewmeta{color:var(--grey);font-size:10px;line-height:1.5;margin-top:3px}</style>
+
+<style id="v12-catalog-css">
+.v12catalog-note{max-width:1100px;margin:18px auto 0;padding:12px 16px;border:1px solid rgba(230,184,55,.22);background:rgba(230,184,55,.04);border-radius:10px;font-size:.82rem;color:#aaa}
+.v12catalog-note strong{color:#e6b837}
+</style>
+
 </head>
 <body>
 
@@ -58,7 +65,8 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 </header>
 
 <main>
-<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 5px"><input id="searchBox" type="search" placeholder="Pesquisar produtos..." style="flex:1;min-width:220px;background:#111;border:1px solid var(--border);color:#fff;border-radius:30px;padding:11px 16px;font-size:12px"></div><div class="filters" id="filters"></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 5px"><input id="searchBox" type="search" placeholder="Pesquisar produtos..." style="flex:1;min-width:220px;background:#111;border:1px solid var(--border);color:#fff;border-radius:30px;padding:11px 16px;font-size:12px"></div><div class="v12catalog-note" id="catalogStatus"><strong>Catálogo:</strong> preços e produtos podem ser sincronizados a partir de uma folha de gestão.</div>
+<div class="filters" id="filters"></div>
 <div class="grid" id="products"></div>
 </main>
 
@@ -324,5 +332,71 @@ closeReview();
 document.getElementById('searchBox')?.addEventListener('input',applySearch);
 renderFilters();renderProducts();renderCart();
 </script>
+
+<script id="v12-catalog-sync">
+/*
+ EFFEN DESIGN — V12
+ Gestão externa opcional via Google Sheets publicado como CSV.
+ Para ativar: definir SHEET_CSV_URL abaixo.
+ Colunas esperadas:
+ id,cat,name,icon,image,price,desc,quote
+ images pode ser uma coluna opcional com caminhos separados por ;
+*/
+const SHEET_CSV_URL = "";
+const CATALOG_VERSION = "V12";
+
+function parseCSVLine(line){
+  const out=[]; let cur="", quoted=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i], next=line[i+1];
+    if(ch === '"' && quoted && next === '"'){ cur+='"'; i++; continue; }
+    if(ch === '"'){ quoted=!quoted; continue; }
+    if(ch === ',' && !quoted){ out.push(cur.trim()); cur=""; }
+    else cur+=ch;
+  }
+  out.push(cur.trim());
+  return out;
+}
+function parseCSV(text){
+  const lines=text.replace(/\r/g,"").split("\n").filter(x=>x.trim());
+  if(!lines.length) return [];
+  const headers=parseCSVLine(lines[0]).map(x=>x.toLowerCase());
+  return lines.slice(1).map(line=>{
+    const vals=parseCSVLine(line), o={};
+    headers.forEach((h,i)=>o[h]=vals[i] ?? "");
+    return o;
+  });
+}
+function normaliseCatalogRow(r){
+  const price=(r.price==="" || r.price==null) ? null : Number(String(r.price).replace(",","."));
+  const images=(r.images||"").split(";").map(x=>x.trim()).filter(Boolean);
+  return {
+    id:Number(r.id), cat:r.cat||"Personalizados", name:r.name||"Produto",
+    icon:r.icon||"✨", image:r.image||null, images,
+    price:Number.isFinite(price)?price:null, desc:r.desc||"",
+    quote:String(r.quote).toLowerCase()==="true"
+  };
+}
+async function syncCatalogFromSheet(){
+  if(!SHEET_CSV_URL) return;
+  const status=document.getElementById("catalogStatus");
+  try{
+    const res=await fetch(SHEET_CSV_URL,{cache:"no-store"});
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const rows=parseCSV(await res.text()).map(normaliseCatalogRow).filter(x=>Number.isFinite(x.id));
+    if(!rows.length) throw new Error("A folha não devolveu produtos.");
+    // The existing page defines `products`; update it in place so all V11
+    // rendering/cart/modal logic keeps working.
+    products.splice(0,products.length,...rows);
+    if(typeof renderProducts==="function") renderProducts();
+    if(status) status.innerHTML="<strong>Catálogo:</strong> sincronizado com a folha de gestão.";
+  }catch(err){
+    if(status) status.innerHTML="<strong>Catálogo:</strong> a usar os dados locais. Verifique o endereço da folha.";
+    console.warn("Effen Design V12 catalog sync:",err);
+  }
+}
+window.addEventListener("DOMContentLoaded",syncCatalogFromSheet);
+</script>
+
 </body>
 </html>
