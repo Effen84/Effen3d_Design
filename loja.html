@@ -18,7 +18,7 @@ nav{height:70px;position:sticky;top:0;z-index:50;display:flex;align-items:center
 .kicker{font:11px 'Space Mono';letter-spacing:3px;color:var(--gold);text-transform:uppercase}.hero h1{font:clamp(58px,8vw,94px)/.9 'Bebas Neue';margin:12px 0}.hero h1 span{color:var(--gold)}.hero p{max-width:720px;margin:auto;color:var(--grey);line-height:1.7}
 main{max-width:1400px;margin:auto;padding:25px 5vw 100px}.filters{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 35px}.filter{border:1px solid var(--border);background:var(--bg2);color:var(--grey);padding:9px 15px;border-radius:30px;cursor:pointer;font-size:12px}.filter.active,.filter:hover{color:#fff;border-color:var(--gold);background:rgba(230,184,55,.1)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.25s}.product:hover{transform:translateY(-4px);border-color:rgba(230,184,55,.35)}
-.visual{height:190px;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:58px}.info{padding:20px}.cat{font:9px 'Space Mono';letter-spacing:2px;color:var(--gold);text-transform:uppercase}.product h2{font:27px 'Bebas Neue';margin:7px 0}.product p{color:var(--grey);font-size:13px;line-height:1.55;min-height:62px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}.price{font-weight:700}.price small{display:block;color:var(--grey);font-weight:400;font-size:10px}.add{border:0;background:var(--gold);color:#fff;padding:9px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer}.add.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.3)}
+.visual{height:190px;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:58px;overflow:hidden}.visual img{width:100%;height:100%;object-fit:cover;display:block}.info{padding:20px}.cat{font:9px 'Space Mono';letter-spacing:2px;color:var(--gold);text-transform:uppercase}.product h2{font:27px 'Bebas Neue';margin:7px 0}.product p{color:var(--grey);font-size:13px;line-height:1.55;min-height:62px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}.price{font-weight:700}.price small{display:block;color:var(--grey);font-weight:400;font-size:10px}.add{border:0;background:var(--gold);color:#fff;padding:9px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer}.add.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.3)}
 .empty{display:none;padding:50px;text-align:center;color:var(--grey);grid-column:1/-1}
 .cart{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);z-index:100;background:#0d0d0d;border-left:1px solid var(--border);transform:translateX(105%);transition:.25s;padding:25px;box-shadow:-20px 0 50px rgba(0,0,0,.4)}.cart.open{transform:translateX(0)}
 .carthead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:18px}.carthead h2{font:34px 'Bebas Neue'}.close{background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.cartitems{padding:18px 0;overflow:auto;max-height:62vh}.item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}.item strong{display:block}.item span{font-size:12px;color:var(--grey)}.remove{background:none;border:0;color:#b9b9b9;cursor:pointer}.total{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;font-weight:700}.checkout{display:block;width:100%;margin-top:18px;background:var(--gold);color:#fff;border:0;padding:14px;border-radius:5px;font-weight:700;cursor:pointer}.note{color:var(--grey);font-size:11px;line-height:1.5;margin-top:10px}
@@ -38,7 +38,7 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <header class="hero">
 <div class="kicker">Effen Design · Loja</div>
 <h1>ESCOLHE. <span>PERSONALIZA.</span> CRIA.</h1>
-<p>Uma primeira versão do catálogo online Effen Design. Os produtos com preço definido podem avançar para encomenda; os restantes ficam preparados para orçamento.</p>
+<p>Catálogo Effen Design com produtos reais do nosso portefólio. Os artigos com preço definido podem avançar para encomenda; os restantes ficam preparados para orçamento.</p>
 </header>
 
 <main>
@@ -91,16 +91,20 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 
 <script>
 const products=[
-{id:1,cat:'Sublimação',name:'Caneca Personalizada',icon:'☕',price:7,desc:'Caneca personalizada com imagem, nome ou mensagem.',quote:false},
-{id:2,cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',price:null,desc:'T-shirt com estampagem DTF. Escolhe tamanho, cor e localização.',quote:true},
-{id:3,cat:'DTF',name:'Sweatshirt Personalizada',icon:'🧥',price:null,desc:'Sweatshirt personalizada para uso individual, equipas ou empresas.',quote:true},
-{id:4,cat:'Impressão 3D',name:'Nome 3D',icon:'🔤',price:null,desc:'Nome personalizado em impressão 3D. Cores e medidas sob consulta.',quote:true},
-{id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',price:null,desc:'Porta-chaves personalizado com nome, logo ou desenho.',quote:true},
-{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
-{id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
-{id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',price:null,desc:'Trofés personalizados para pilotos, equipas e campeonatos.',quote:true},
-{id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
-{id:10,cat:'Personalizados',name:'Projeto Especial',icon:'✨',price:null,desc:'Tens uma ideia que não aparece no catálogo? Nós analisamos o projeto.',quote:true}
+{id:1,cat:'Sublimação',name:'Caneca Personalizada',icon:'☕',image:null,price:7,desc:'Caneca personalizada com imagem, nome ou mensagem.',quote:false},
+{id:2,cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',image:null,price:null,desc:'T-shirt com estampagem DTF. Escolhe tamanho, cor e localização.',quote:true},
+{id:3,cat:'DTF',name:'Sweatshirt Personalizada',icon:'🧥',image:null,price:null,desc:'Sweatshirt personalizada para uso individual, equipas ou empresas.',quote:true},
+{id:4,cat:'Impressão 3D',name:'Nome 3D',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:null,desc:'Nome personalizado em impressão 3D. Cores e medidas sob consulta.',quote:true},
+{id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:null,desc:'Porta-chaves personalizado com nome, logo ou desenho.',quote:true},
+{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
+{id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
+{id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Trofés personalizados para pilotos, equipas e campeonatos.',quote:true},
+{id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
+{id:10,cat:'Personalizados',name:'Projeto Especial',icon:'✨',image:'images/effen3d_new.png',price:null,desc:'Tens uma ideia que não aparece no catálogo? Nós analisamos o projeto.',quote:true}
+ ,{id:11,cat:'Gaming',name:'Acessório Gaming',icon:'🎮',image:'images/gaming_comando_1.png',price:null,desc:'Acessórios personalizados para setup, gaming e organização.',quote:true}
+,{id:12,cat:'Decoração',name:'Vaso Decorativo',icon:'🏺',image:'images/vaso moderno.png',price:null,desc:'Peças decorativas em impressão 3D para casa e escritório.',quote:true}
+,{id:13,cat:'Natal',name:'Decoração de Natal',icon:'🎄',image:'images/Natal1.png',price:null,desc:'Peças e presentes personalizados para a época natalícia.',quote:true}
+,{id:14,cat:'Brinquedos',name:'Peça Personalizada',icon:'🧸',image:'images/brinquedos_mario_1.png',price:null,desc:'Modelos e peças em impressão 3D para oferecer ou colecionar.',quote:true}
 ];
 
 let cart=JSON.parse(localStorage.getItem('effenCart')||'[]');
@@ -113,7 +117,7 @@ function renderFilters(){
 function renderProducts(list=products){
  document.getElementById('products').innerHTML=list.map(p=>`
  <article class="product">
-  <div class="visual">${p.icon}</div><div class="info">
+  <div class="visual">${p.image?`<img src="${p.image}" alt="${p.name}">`:p.icon}</div><div class="info">
    <div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p>
    <div class="bottom"><div class="price">${p.price!==null?euro(p.price):'<small>Preço</small> Sob orçamento'}</div>
    <button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div>
