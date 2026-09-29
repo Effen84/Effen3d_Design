@@ -125,11 +125,12 @@ Alguns artigos estão <strong>sob orçamento</strong>. O total apresentado acima
 <script>
 const products=[
 {id:1,cat:'Sublimação',name:'Caneca Personalizada',icon:'☕',image:null,price:7,desc:'Caneca personalizada com imagem, nome ou mensagem.',quote:false},
-{id:2,cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',image:null,price:null,desc:'T-shirt com estampagem DTF. Escolhe tamanho, localização e quantidade.',quote:true},
-{id:3,cat:'DTF',name:'Sweatshirt Personalizada',icon:'🧥',image:null,price:null,desc:'Sweatshirt personalizada para uso individual, equipas ou empresas.',quote:true},
-{id:4,cat:'Impressão 3D',name:'Nome 3D',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:null,desc:'Nome personalizado em impressão 3D. Cores e medidas sob consulta.',quote:true},
-{id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:null,desc:'Porta-chaves personalizado com nome, logo ou desenho.',quote:true},
-{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
+{id:2,cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',image:null,price:8,desc:'T-shirt DTF: símbolo pequeno 8 €, estampagem grande à frente ou costas 10 €. Outras opções sob consulta.',quote:false},
+{id:3,cat:'DTF',name:'Sweatshirt Personalizada',icon:'🧥',image:null,price:16,desc:'Sweatshirt DTF: símbolo pequeno 16 €, estampagem grande à frente ou costas 18 €. Outras opções sob consulta.',quote:false},
+{id:4,cat:'Impressão 3D',name:'Nome com íman',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:2,desc:'Nome com íman — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
+{id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:2,desc:'Porta-chaves personalizado — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
+{id:15,cat:'Impressão 3D',name:'Nome em letra grande',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:10,desc:'Nome em letra grande — 10 €. Cores e tamanhos diferentes sob consulta.',quote:false},
+id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
 {id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
 {id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos.',quote:true},
 {id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
@@ -168,7 +169,7 @@ document.getElementById('mdesc').textContent=selectedProduct.desc;
 document.getElementById('mprice').textContent=selectedProduct.price!==null?euro(selectedProduct.price):'Sob orçamento';
 let f='';
 if(selectedProduct.id===1)f=`<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
-else if(selectedProduct.cat==='DTF')f=`<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Cor da peça<select id="optColor"><option>Preto</option><option>Branco</option><option>Cinzento</option><option>Outra — indicar nas notas</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option>Frente</option><option>Costas</option><option>Frente + Costas</option></select></label></div><div class="option"><label>Tamanho da estampagem<select id="optPrint"><option>Pequena</option><option>Média</option><option>Grande</option><option>A definir</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
+else if(selectedProduct.cat==='DTF')f=`<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Cor da peça<select id="optColor"><option>Preto</option><option>Branco</option><option>Cinzento</option><option>Outra — indicar nas notas</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option value="Pequeno">Símbolo pequeno</option><option value="Frente grande">Frente grande</option><option value="Costas grande">Costas grande</option><option value="Frente + Costas">Frente + Costas — sob consulta</option></select></label></div><div class="option"><label>Tamanho da estampagem<select id="optPrint"><option>Pequena</option><option>Grande</option><option>A definir</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
 else if(selectedProduct.cat==='Sublimação')f=`<div class="option"><label>Tipo de personalização<select id="optSize"><option value="1 imagem" data-price="7">1 imagem — 7,00 €</option><option value="caneca completa" data-price="10">Caneca completa — 10,00 €</option></select></label></div><div class="option"><label>Acabamento<select id="optFinish"><option>Standard</option><option>A definir</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
 else if(selectedProduct.cat==='Impressão 3D')f=`<div class="option"><label>Cor<select id="optSize"><option>A definir</option><option>Preto</option><option>Branco</option><option>Dourado</option><option>Vermelho</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
 else f=`<div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div><div class="option"><label>Preferência<select id="optPos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label></div>`;
@@ -181,7 +182,14 @@ function filePicked(){const f=document.getElementById('file').files[0];document.
 function confirmProduct(){
 if(!selectedProduct)return;
 const size=document.getElementById('optSize')?.value||'',pos=document.getElementById('optPos')?.value||'',color=document.getElementById('optColor')?.value||'',print=document.getElementById('optPrint')?.value||'',finish=document.getElementById('optFinish')?.value||'',qty=parseInt(document.getElementById('optQty')?.value||'1',10)||1,text=document.getElementById('customtext').value.trim(),file=document.getElementById('file').files[0]?.name||'';
-const selectedOpt=document.getElementById('optSize')?.selectedOptions?.[0]; const unitPrice=selectedProduct.id===1 ? parseFloat(selectedOpt?.dataset.price||'7') : selectedProduct.price; cart.push({id:selectedProduct.id,qty,unitPrice,options:{size,pos,color,print,finish,text,file},key:Date.now()});
+const selectedOpt=document.getElementById('optSize')?.selectedOptions?.[0];
+let unitPrice=selectedProduct.id===1 ? parseFloat(selectedOpt?.dataset.price||'7') : selectedProduct.price;
+if(selectedProduct.cat==='DTF'){
+  const loc=document.getElementById('optPos')?.value||'';
+  const small=selectedProduct.id===2?8:16;
+  const large=selectedProduct.id===2?10:18;
+  unitPrice=loc==='Pequeno'?small:(loc==='Frente grande'||loc==='Costas grande'?large:null);
+} cart.push({id:selectedProduct.id,qty,unitPrice,options:{size,pos,color,print,finish,text,file},key:Date.now()});
 save();renderCart();closeProduct();toggleCart(true);
 }
 function remove(key){cart=cart.filter(x=>x.key!==key);save();renderCart()}
