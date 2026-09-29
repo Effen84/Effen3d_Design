@@ -22,6 +22,7 @@ main{max-width:1400px;margin:auto;padding:25px 5vw 100px}.filters{display:flex;g
 .empty{display:none;padding:50px;text-align:center;color:var(--grey);grid-column:1/-1}
 .cart{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);z-index:100;background:#0d0d0d;border-left:1px solid var(--border);transform:translateX(105%);transition:.25s;padding:25px;box-shadow:-20px 0 50px rgba(0,0,0,.4)}.cart.open{transform:translateX(0)}
 .carthead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:18px}.carthead h2{font:34px 'Bebas Neue'}.close{background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.cartitems{padding:18px 0;overflow:auto;max-height:62vh}.item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}.item strong{display:block}.item span{font-size:12px;color:var(--grey)}.remove{background:none;border:0;color:#b9b9b9;cursor:pointer}.total{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;font-weight:700}.checkout{display:block;width:100%;margin-top:18px;background:var(--gold);color:#fff;border:0;padding:14px;border-radius:5px;font-weight:700;cursor:pointer}.note{color:var(--grey);font-size:11px;line-height:1.5;margin-top:10px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{position:relative;width:min(620px,100%);max-height:90vh;overflow:auto;background:#111;border:1px solid rgba(230,184,55,.25);border-radius:12px;padding:30px}.modalclose{position:absolute;right:18px;top:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}.modalcat{font:10px 'Space Mono';color:var(--gold);letter-spacing:2px;text-transform:uppercase}.modalbox h2{font:42px 'Bebas Neue';margin:5px 35px 5px 0}.modalbox>p{color:var(--grey);font-size:14px;line-height:1.6;margin-bottom:20px}.options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:15px}.option label,.upload,.customtext{display:block;color:#ddd;font-size:12px}.option select,.customtext textarea{width:100%;margin-top:7px;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:11px}.upload{border:1px dashed rgba(230,184,55,.35);padding:15px;border-radius:7px;margin-top:12px}.upload input{display:block;margin-top:10px;width:100%}.upload span{display:block;color:var(--grey);margin-top:7px;font-size:11px}.customtext{margin-top:14px}.customtext textarea{min-height:90px;resize:vertical}.modalbottom{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px}.modalbottom #mprice{font-weight:700}.modalnote{color:#777;font-size:10px;line-height:1.5;margin-top:12px}@media(max-width:600px){.options{grid-template-columns:1fr}.modalbox{padding:22px}.modalbottom{align-items:stretch;flex-direction:column}}
 footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;color:var(--grey);font-size:12px}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:800px){.navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.grid{grid-template-columns:1fr}.visual{height:170px}}
 </style>
@@ -43,6 +44,28 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <div class="filters" id="filters"></div>
 <div class="grid" id="products"></div>
 </main>
+
+<div class="modal" id="productModal">
+  <div class="modalbox">
+    <button class="modalclose" onclick="closeProduct()">×</button>
+    <div class="modalcat" id="mcat"></div>
+    <h2 id="mname"></h2>
+    <p id="mdesc"></p>
+    <div class="options" id="options"></div>
+    <label class="upload">Ficheiro / imagem (opcional)
+      <input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.svg" onchange="filePicked()">
+      <span id="filename">PNG, JPG, JPEG, PDF ou SVG</span>
+    </label>
+    <label class="customtext">Texto / nome / instruções
+      <textarea id="customtext" placeholder="Ex.: Nome, frase, cor pretendida, posição do logo..."></textarea>
+    </label>
+    <div class="modalbottom">
+      <div id="mprice"></div>
+      <button class="add" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
+    </div>
+    <div class="modalnote">O ficheiro fica associado ao pedido nesta sessão. O envio efetivo do ficheiro para produção será ligado ao sistema de encomendas numa fase seguinte.</div>
+  </div>
+</div>
 
 <aside class="cart" id="cart">
 <div class="carthead"><h2>CARRINHO</h2><button class="close" onclick="toggleCart()">×</button></div>
@@ -81,7 +104,7 @@ function renderProducts(list=products){
   <div class="visual">${p.icon}</div><div class="info">
    <div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p>
    <div class="bottom"><div class="price">${p.price!==null?euro(p.price):'<small>Preço</small> Sob orçamento'}</div>
-   <button class="add ${p.quote?'quote':''}" onclick="add(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div>
+   <button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div>
   </div>
  </article>`).join('');
 }
@@ -89,26 +112,63 @@ function filter(cat,el){
  document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');
  renderProducts(cat==='Todos'?products:products.filter(p=>p.cat===cat));
 }
-function add(id){
- const p=products.find(x=>x.id===id);const found=cart.find(x=>x.id===id);
- if(found)found.qty++;else cart.push({id:p.id,qty:1});
- save();renderCart();toggleCart(true);
+let selectedProduct=null;
+function openProduct(id){
+ selectedProduct=products.find(x=>x.id===id);
+ document.getElementById('mcat').textContent=selectedProduct.cat;
+ document.getElementById('mname').textContent=selectedProduct.name;
+ document.getElementById('mdesc').textContent=selectedProduct.desc;
+ document.getElementById('mprice').textContent=selectedProduct.price!==null?euro(selectedProduct.price):'Sob orçamento';
+ const opts=document.getElementById('options');
+ let fields='';
+ if(selectedProduct.cat==='DTF') fields='<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option>Frente</option><option>Costas</option><option>Frente + Costas</option></select></label></div>';
+ else if(selectedProduct.cat==='Sublimação') fields='<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optPos"><option>1</option><option>2</option><option>5</option><option>10+</option></select></label></div>';
+ else if(selectedProduct.cat==='Impressão 3D') fields='<div class="option"><label>Cor<select id="optSize"><option>A definir</option><option>Preto</option><option>Branco</option><option>Dourado</option><option>Vermelho</option></select></label></div><div class="option"><label>Quantidade<select id="optPos"><option>1</option><option>2</option><option>5</option><option>10+</option></select></label></div>';
+ else fields='<div class="option"><label>Quantidade<select id="optSize"><option>1</option><option>2</option><option>5</option><option>10+</option></select></label></div><div class="option"><label>Preferência<select id="optPos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label></div>';
+ opts.innerHTML=fields;
+ document.getElementById('file').value='';
+ document.getElementById('filename').textContent='PNG, JPG, JPEG, PDF ou SVG';
+ document.getElementById('customtext').value='';
+ document.getElementById('productModal').classList.add('open');
 }
-function remove(id){cart=cart.filter(x=>x.id!==id);save();renderCart()}
+function closeProduct(){document.getElementById('productModal').classList.remove('open');selectedProduct=null}
+function filePicked(){const f=document.getElementById('file').files[0];document.getElementById('filename').textContent=f?f.name:'PNG, JPG, JPEG, PDF ou SVG'}
+function confirmProduct(){
+ if(!selectedProduct)return;
+ const size=document.getElementById('optSize')?.value||'';
+ const pos=document.getElementById('optPos')?.value||'';
+ const text=document.getElementById('customtext').value.trim();
+ const file=document.getElementById('file').files[0]?.name||'';
+ const key=Date.now();
+ cart.push({id:selectedProduct.id,qty:1,options:{size,pos,text,file},key});
+ save();renderCart();closeProduct();toggleCart(true);
+}
+function remove(key){
+ cart=cart.filter(x=>x.key!==key);
+ save();renderCart();
+}
 function save(){localStorage.setItem('effenCart',JSON.stringify(cart))}
 function renderCart(){
  const box=document.getElementById('cartitems');
  document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
- box.innerHTML=cart.length?cart.map(x=>{const p=products.find(y=>y.id===x.id);return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${p.price!==null?euro(p.price):'sob orçamento'}</span></div><button class="remove" onclick="remove(${p.id})">remover</button></div>`}).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
+ box.innerHTML=cart.length?cart.map(x=>{
+   const p=products.find(y=>y.id===x.id);
+   const details=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
+   return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${p.price!==null?euro(p.price):'sob orçamento'}</span>${details?`<span style="display:block;margin-top:5px">${details}</span>`:''}</div><button class="remove" onclick="remove(${x.key})">remover</button></div>`
+ }).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
  const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+(p.price===null?0:p.price*x.qty)},0);
  document.getElementById('total').textContent=euro(total);
 }
 function toggleCart(force){document.getElementById('cart').classList.toggle('open',force===true?true:undefined)}
 function checkout(){
  if(!cart.length)return;
- const lines=cart.map(x=>{const p=products.find(y=>y.id===x.id);return `- ${p.name} x${x.qty}${p.price!==null?' — '+euro(p.price*x.qty):' — pedir orçamento'}`}).join('%0A');
+ const lines=cart.map(x=>{
+   const p=products.find(y=>y.id===x.id);
+   const d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' | '):'';
+   return `- ${p.name} x${x.qty}${d?' — '+d:''}${p.price!==null?' — '+euro(p.price*x.qty):' — pedir orçamento'}`
+ }).join('%0A');
  const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+(p.price===null?0:p.price*x.qty)},0);
- const text=`Olá! Quero fazer uma encomenda na Effen Design:%0A${lines}%0A%0ATotal dos produtos com preço definido: ${euro(total)}`;
+ const text=`Olá! Quero fazer uma encomenda na Effen Design:%0A${encodeURIComponent(lines).replace(/%250A/g,'%0A')}%0A%0ATotal dos produtos com preço definido: ${encodeURIComponent(euro(total))}`;
  window.open('https://wa.me/351928372914?text='+text,'_blank');
 }
 renderFilters();renderProducts();renderCart();
