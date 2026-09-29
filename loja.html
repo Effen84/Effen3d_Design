@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Effen Design Loja V14 -->
+<!-- Effen Design Loja V14 — Supabase Storage ligado -->
 <!-- Effen Design Loja V13 -->
 <!-- Effen Design Loja V12 -->
 <html lang="pt">
@@ -45,7 +45,7 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 </style><style id="v14-upload-css">
 .v14-upload-status{margin-top:8px;font-size:.82rem;color:#aaa}
 .v14-upload-status.ok{color:#e6b837}.v14-upload-status.err{color:#ff8a8a}
-</style></head>
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
 <body>
 
 <nav>
@@ -97,7 +97,7 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <div><small style="display:block;color:var(--grey);font-size:10px">Preço</small><div id="mprice"></div></div>
 <button class="add" id="modalAction" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
 </div>
-<div class="modalnote">Para produtos sob orçamento, envia as opções e o ficheiro se necessário; a Effen Design confirma o valor antes da produção. O ficheiro fica associado ao pedido nesta sessão. Nesta fase, o nome do ficheiro é enviado no pedido; o upload real será ligado ao sistema de encomendas posteriormente.</div>
+<div class="modalnote">Para produtos sob orçamento, envia as opções e o ficheiro se necessário; a Effen Design confirma o valor antes da produção. O ficheiro fica associado ao pedido nesta sessão. Os ficheiros são enviados para o armazenamento privado da Effen Design quando a encomenda é enviada.</div>
 </div>
 </div>
 
@@ -242,10 +242,16 @@ price=loc==='Pequeno'?small:(loc==='Frente grande'||loc==='Costas grande'?large:
 document.getElementById('mprice').textContent=price!==null?euro(price):'Sob orçamento';
 }
 function closeProduct(){document.getElementById('productModal').classList.remove('open');selectedProduct=null}
-function filePicked(){const f=document.getElementById('file').files[0];document.getElementById('filename').textContent=f?f.name:'PNG, JPG, JPEG, PDF ou SVG'}
-function confirmProduct(){
+function filePicked(){
+const f=document.getElementById('file').files[0];
+document.getElementById('filename').textContent=f?f.name:'PNG, JPG, JPEG, PDF ou SVG';
+if(f){const check=v14FileAllowed(f);if(!check.ok){document.getElementById('filename').textContent=check.msg;document.getElementById('file').value='';}}
+}
+async function confirmProduct(){
 if(!selectedProduct)return;
 const size=document.getElementById('optSize')?.value||'',pos=document.getElementById('optPos')?.value||'',color=document.getElementById('optColor')?.value||'',print=document.getElementById('optPrint')?.value||'',finish=document.getElementById('optFinish')?.value||'',qty=parseInt(document.getElementById('optQty')?.value||'1',10)||1,text=document.getElementById('customtext').value.trim(),file=document.getElementById('file').files[0]?.name||'';
+const selectedFile=document.getElementById('file').files[0]||null;
+if(selectedFile){const chk=v14FileAllowed(selectedFile);if(!chk.ok){v14SetStatus(chk.msg);return;}}
 const selectedOpt=document.getElementById('optSize')?.selectedOptions?.[0];
 let unitPrice=selectedProduct.id===1 ? parseFloat(selectedOpt?.dataset.price||'7') : selectedProduct.price;
 if(selectedProduct.cat==='DTF'){
@@ -253,7 +259,9 @@ if(selectedProduct.cat==='DTF'){
   const small=selectedProduct.id===2?8:16;
   const large=selectedProduct.id===2?10:18;
   unitPrice=loc==='Pequeno'?small:(loc==='Frente grande'||loc==='Costas grande'?large:null);
-} cart.push({id:selectedProduct.id,qty,unitPrice,options:{size,pos,color,print,finish,text,file},key:Date.now()});
+} const cartKey=Date.now();
+cart.push({id:selectedProduct.id,qty,unitPrice,options:{size,pos,color,print,finish,text,file},key:cartKey});
+if(selectedFile) window._effenFiles[cartKey]=selectedFile;
 save();renderCart();closeProduct();toggleCart(true);
 }
 function changeQty(key,delta){
@@ -262,7 +270,7 @@ if(!item)return;
 item.qty=Math.max(1,(item.qty||1)+delta);
 save();renderCart();
 }
-function remove(key){cart=cart.filter(x=>x.key!==key);save();renderCart()}
+function remove(key){delete window._effenFiles?.[key];cart=cart.filter(x=>x.key!==key);save();renderCart()}
 function save(){localStorage.setItem('effenCart',JSON.stringify(cart))}
 function renderCart(){
 const itemCount=cart.reduce((a,x)=>a+(x.qty||0),0);document.getElementById('count').textContent=itemCount;document.getElementById('cartSummary').textContent=itemCount+' '+(itemCount===1?'artigo':'artigos')+' no carrinho';
@@ -310,30 +318,45 @@ window._orderLines=cart.map(x=>{
 document.getElementById('reviewModal').classList.add('open');
 }
 function closeReview(){document.getElementById('reviewModal').classList.remove('open')}
-function sendOrder(){
+async function sendOrder(){
 const c=window._orderCustomer;
-const msg=[
-'Olá! Quero fazer uma encomenda na Effen Design.',
-'',
-'REFERÊNCIA: '+window._orderReference,
-'',
-'CLIENTE',
-'Nome: '+c.name,
-'Telefone: '+c.phone,
-c.email?'Email: '+c.email:'',
-'Entrega: '+c.delivery,
-'',
-'PRODUTOS',
-window._orderLines,
-'',
-'Total dos produtos com preço definido: '+euro(orderTotal()),
-c.notes?'Notas: '+c.notes:''
-].filter(Boolean).join('\n');
-localStorage.setItem('effen_last_order',JSON.stringify({
-reference:window._orderReference,createdAt:new Date().toISOString(),customer:c,cart:cart,total:orderTotal()
-}));
-window.open('https://wa.me/351928372914?text='+encodeURIComponent(msg),'_blank');
-closeReview();
+const ref=window._orderReference;
+const lines=[];
+const uploaded=[];
+v14SetStatus("A preparar a encomenda…",true);
+try{
+  for(const item of cart){
+    const f=window._effenFiles?.[item.key];
+    if(f){
+      const result=await v14UploadFile(f,ref);
+      if(!result || result.localOnly) throw new Error("O ficheiro "+f.name+" não foi enviado para o armazenamento.");
+      item.options=item.options||{};
+      item.options.filePath=result.path;
+      uploaded.push({name:result.name,path:result.path,size:result.size,type:result.type});
+    }
+    const p=products.find(y=>y.id===item.id),u=item.unitPrice??p.price;
+    const d=item.options?[item.options.size,item.options.color?('Cor: '+item.options.color):'',item.options.pos,item.options.print?('Estampagem: '+item.options.print):'',item.options.finish?('Acabamento: '+item.options.finish):'',item.options.text?('Texto: '+item.options.text):'',item.options.file?('Ficheiro: '+item.options.file):''].filter(Boolean).join(' | '):'';
+    lines.push(`- ${p.name} x${item.qty}${d?' — '+d:''}${u!==null?' — '+euro(u*item.qty):' — pedir orçamento'}`);
+  }
+  const order=createLocalOrder(cart,c,orderTotal());
+  order.ref=ref; order.uploads=uploaded; order.status="Recebida";
+  const orders=getOrders(); const oi=orders.findIndex(o=>o.ref===order.ref);
+  if(oi>=0){orders[oi]=order;saveOrders(orders);}
+  const msg=[
+    'Olá! Quero fazer uma encomenda na Effen Design.','',
+    'REFERÊNCIA: '+ref,'','CLIENTE',
+    'Nome: '+c.name,'Telefone: '+c.phone,c.email?'Email: '+c.email:'',
+    'Entrega: '+c.delivery,'','PRODUTOS',lines.join('\n'),'',
+    'Total dos produtos com preço definido: '+euro(orderTotal()),
+    c.notes?'Notas: '+c.notes:''
+  ].filter(Boolean).join('\n');
+  localStorage.setItem('effen_last_order',JSON.stringify({reference:ref,createdAt:new Date().toISOString(),customer:c,cart:cart,total:orderTotal(),uploads:uploaded}));
+  v14SetStatus("Encomenda criada e ficheiro(s) enviado(s). A abrir WhatsApp…",true);
+  window.open('https://wa.me/351928372914?text='+encodeURIComponent(msg),'_blank');
+}catch(err){
+  v14SetStatus("Não foi possível concluir a encomenda: "+(err.message||err),false);
+  return;
+}
 }
 
 ['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{const el=document.getElementById(id),saved=localStorage.getItem('effen_'+id);if(saved!==null)el.value=saved;el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value))});
@@ -416,13 +439,15 @@ function updateOrderStatus(ref,status){if(!ORDER_STATUS.includes(status))return 
 function findOrder(ref){return getOrders().find(o=>o.ref===String(ref).trim().toUpperCase())||null;}
 function lookupOrder(){const i=document.getElementById("orderLookup"),e=document.getElementById("orderResult"),o=i?findOrder(i.value):null;if(!e)return;e.innerHTML=o?`<div class="v13-orderbox"><h4>Encomenda <span class="v13-orderref">${o.ref}</span><span class="v13-status">${o.status}</span></h4><div style="color:#aaa;font-size:.82rem">Criada em ${new Date(o.createdAt).toLocaleString("pt-PT")}</div><div style="margin-top:8px">${o.items.length} artigo(s) · ${o.total.toFixed(2).replace(".",",")} €</div></div>`:'<span style="color:#aaa">Encomenda não encontrada neste dispositivo.</span>';}
 </script><div id="v14UploadStatus" class="v14-upload-status" aria-live="polite"></div><script id="v14-upload">
-const SUPABASE_URL="";
-const SUPABASE_PUBLISHABLE_KEY="";
-const SUPABASE_BUCKET="effen-files";
+const SUPABASE_URL="https://yildftvunxwbiwswdrye.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY="sb_publishable_BAtLej4ur1RD6xG6LsGeRg_LwwIBnVm";
+const SUPABASE_BUCKET="uploads";
 const V14_MAX_FILE_MB=20;
 const V14_ALLOWED_EXT=["png","jpg","jpeg","pdf","svg"];
 function v14FileAllowed(file){if(!file)return{ok:false,msg:"Selecione um ficheiro."};const ext=(file.name.split(".").pop()||"").toLowerCase();if(!V14_ALLOWED_EXT.includes(ext))return{ok:false,msg:"Formato não permitido. Use PNG, JPG, JPEG, PDF ou SVG."};if(file.size>V14_MAX_FILE_MB*1024*1024)return{ok:false,msg:`O ficheiro excede ${V14_MAX_FILE_MB} MB.`};return{ok:true};}
 function v14SetStatus(msg,ok=false){const e=document.getElementById("v14UploadStatus");if(e){e.textContent=msg;e.className="v14-upload-status"+(ok?" ok":" err");}}
 async function v14UploadFile(file,orderRef){const check=v14FileAllowed(file);if(!check.ok){v14SetStatus(check.msg);return null;}if(!SUPABASE_URL||!SUPABASE_PUBLISHABLE_KEY){v14SetStatus("Upload preparado. Falta configurar o armazenamento.");return{localOnly:true,name:file.name};}const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";document.head.appendChild(s);await new Promise((a,b)=>{s.onload=a;s.onerror=b});const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");const path=`orders/${orderRef||"sem-referencia"}/${Date.now()}-${safe}`;v14SetStatus("A enviar ficheiro…",true);const{data,error}=await client.storage.from(SUPABASE_BUCKET).upload(path,file,{contentType:file.type||"application/octet-stream",upsert:false});if(error){v14SetStatus("Não foi possível enviar o ficheiro: "+error.message);return null;}v14SetStatus("Ficheiro enviado com sucesso.",true);return{path:data.path,name:file.name,size:file.size,type:file.type};}
+</script><script id="v14-file-hooks">
+window._effenFiles = window._effenFiles || {};
 </script></body>
 </html>
