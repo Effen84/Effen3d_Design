@@ -57,7 +57,7 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 </header>
 
 <main>
-<div class="filters" id="filters"></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 5px"><input id="searchBox" type="search" placeholder="Pesquisar produtos..." style="flex:1;min-width:220px;background:#111;border:1px solid var(--border);color:#fff;border-radius:30px;padding:11px 16px;font-size:12px"></div><div class="filters" id="filters"></div>
 <div class="grid" id="products"></div>
 </main>
 
@@ -130,7 +130,7 @@ const products=[
 {id:4,cat:'Impressão 3D',name:'Nome com íman',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:2,desc:'Nome com íman — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
 {id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:2,desc:'Porta-chaves personalizado — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
 {id:15,cat:'Impressão 3D',name:'Nome em letra grande',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:10,desc:'Nome em letra grande — 10 €. Cores e tamanhos diferentes sob consulta.',quote:false},
-id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
+{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true}},
 {id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
 {id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos.',quote:true},
 {id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
@@ -154,12 +154,19 @@ document.getElementById('products').innerHTML=list.map(p=>`
 <div class="visual ${p.image?'':'noimg'}">${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:p.icon}</div>
 <div class="info"><div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p>
 <div class="bottom"><div class="price">${p.price!==null?euro(p.price):'<small>Preço</small> Sob orçamento'}</div>
-<button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div></div>
+<div style="display:flex;gap:7px;align-items:center"><button class="add quote" style="padding:9px 10px" onclick="openProduct(${p.id})">Ver produto</button><button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div></div></div>
 </article>`).join('');
+}
+function applySearch(){
+const q=(document.getElementById('searchBox')?.value||'').trim().toLowerCase();
+const active=document.querySelector('.filter.active')?.textContent||'Todos';
+let list=active==='Todos'?products:products.filter(p=>p.cat===active);
+if(q)list=list.filter(p=>(p.name+' '+p.cat+' '+p.desc).toLowerCase().includes(q));
+renderProducts(list);
 }
 function filter(cat,el){
 document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');
-renderProducts(cat==='Todos'?products:products.filter(p=>p.cat===cat));
+applySearch();
 }
 function openProduct(id){
 selectedProduct=products.find(x=>x.id===id);
@@ -174,8 +181,25 @@ else if(selectedProduct.cat==='Sublimação')f=`<div class="option"><label>Tipo 
 else if(selectedProduct.cat==='Impressão 3D')f=`<div class="option"><label>Cor<select id="optSize"><option>A definir</option><option>Preto</option><option>Branco</option><option>Dourado</option><option>Vermelho</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
 else f=`<div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div><div class="option"><label>Preferência<select id="optPos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label></div>`;
 document.getElementById('options').innerHTML=f;
+document.querySelectorAll('#options select').forEach(el=>el.addEventListener('change',updateModalPrice));
+updateModalPrice();
 document.getElementById('file').value='';document.getElementById('filename').textContent='PNG, JPG, JPEG, PDF ou SVG';document.getElementById('customtext').value='';
 document.getElementById('productModal').classList.add('open');
+}
+function updateModalPrice(){
+if(!selectedProduct)return;
+let price=selectedProduct.price;
+if(selectedProduct.id===1){
+const opt=document.getElementById('optSize')?.selectedOptions?.[0];
+price=parseFloat(opt?.dataset.price||'7');
+}
+if(selectedProduct.cat==='DTF'){
+const loc=document.getElementById('optPos')?.value||'';
+const small=selectedProduct.id===2?8:16;
+const large=selectedProduct.id===2?10:18;
+price=loc==='Pequeno'?small:(loc==='Frente grande'||loc==='Costas grande'?large:null);
+}
+document.getElementById('mprice').textContent=price!==null?euro(price):'Sob orçamento';
 }
 function closeProduct(){document.getElementById('productModal').classList.remove('open');selectedProduct=null}
 function filePicked(){const f=document.getElementById('file').files[0];document.getElementById('filename').textContent=f?f.name:'PNG, JPG, JPEG, PDF ou SVG'}
@@ -267,6 +291,7 @@ closeReview();
 }
 
 ['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{const el=document.getElementById(id),saved=localStorage.getItem('effen_'+id);if(saved!==null)el.value=saved;el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value))});
+document.getElementById('searchBox')?.addEventListener('input',applySearch);
 renderFilters();renderProducts();renderCart();
 </script>
 </body>
