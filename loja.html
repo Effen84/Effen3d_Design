@@ -86,7 +86,7 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <aside class="cart" id="cart">
 <div class="carthead"><h2>CARRINHO</h2><button class="close" onclick="toggleCart(false)">×</button></div>
 <div class="cartitems" id="cartitems"></div>
-<div class="total"><span>Total</span><span id="total">0,00 €</span></div>
+<div style="color:var(--grey);font-size:11px;margin-bottom:10px"><span id="cartSummary">0 artigos</span></div><div class="total"><span>Total</span><span id="total">0,00 €</span></div>
 <div class="customer">
 <h3>DADOS DA ENCOMENDA</h3>
 <input id="custName" placeholder="Nome *">
@@ -130,7 +130,7 @@ const products=[
 {id:4,cat:'Impressão 3D',name:'Nome com íman',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:2,desc:'Nome com íman — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
 {id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:2,desc:'Porta-chaves personalizado — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
 {id:15,cat:'Impressão 3D',name:'Nome em letra grande',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:10,desc:'Nome em letra grande — 10 €. Cores e tamanhos diferentes sob consulta.',quote:false},
-{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true}},
+{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
 {id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
 {id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos.',quote:true},
 {id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
@@ -216,13 +216,19 @@ if(selectedProduct.cat==='DTF'){
 } cart.push({id:selectedProduct.id,qty,unitPrice,options:{size,pos,color,print,finish,text,file},key:Date.now()});
 save();renderCart();closeProduct();toggleCart(true);
 }
+function changeQty(key,delta){
+const item=cart.find(x=>x.key===key);
+if(!item)return;
+item.qty=Math.max(1,(item.qty||1)+delta);
+save();renderCart();
+}
 function remove(key){cart=cart.filter(x=>x.key!==key);save();renderCart()}
 function save(){localStorage.setItem('effenCart',JSON.stringify(cart))}
 function renderCart(){
-document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
+const itemCount=cart.reduce((a,x)=>a+(x.qty||0),0);document.getElementById('count').textContent=itemCount;document.getElementById('cartSummary').textContent=itemCount+' '+(itemCount===1?'artigo':'artigos')+' no carrinho';
 document.getElementById('cartitems').innerHTML=cart.length?cart.map(x=>{
 const p=products.find(y=>y.id===x.id),d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
-return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${x.unitPrice!==null&&x.unitPrice!==undefined?euro(x.unitPrice):'sob orçamento'}</span>${d?`<span style="display:block;margin-top:5px">${d}</span>`:''}</div><button class="remove" onclick="remove(${x.key})">remover</button></div>`;
+return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${x.unitPrice!==null&&x.unitPrice!==undefined?euro(x.unitPrice):'sob orçamento'}</span>${d?`<span style="display:block;margin-top:5px">${d}</span>`:''}</div><div style="display:flex;align-items:center;gap:6px"><button class="remove" style="border:1px solid var(--border);border-radius:4px;padding:2px 7px" onclick="changeQty(${x.key},-1)">−</button><span style="min-width:18px;text-align:center">${x.qty}</span><button class="remove" style="border:1px solid var(--border);border-radius:4px;padding:2px 7px" onclick="changeQty(${x.key},1)">+</button><button class="remove" onclick="remove(${x.key})">remover</button></div></div>`;
 }).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
 const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+((x.unitPrice!==null&&x.unitPrice!==undefined)?x.unitPrice*x.qty:(p.price===null?0:p.price*x.qty))},0);
 document.getElementById('total').textContent=euro(total);
