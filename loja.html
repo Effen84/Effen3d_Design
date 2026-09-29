@@ -19,7 +19,7 @@ nav{min-height:70px;position:sticky;top:0;z-index:50;display:flex;align-items:ce
 main{max-width:1400px;margin:auto;padding:25px 5vw 100px}.filters{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 35px}.filter{border:1px solid var(--border);background:var(--bg2);color:var(--grey);padding:9px 15px;border-radius:30px;cursor:pointer;font-size:12px}.filter.active,.filter:hover{color:#fff;border-color:var(--gold);background:rgba(230,184,55,.1)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.25s}.product:hover{transform:translateY(-4px);border-color:rgba(230,184,55,.35)}
 .visual{height:190px;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:58px;overflow:hidden}.visual img{width:100%;height:100%;object-fit:cover;display:block}.visual.noimg{font-size:52px}
-.info{padding:20px}.cat{font:9px 'Space Mono';letter-spacing:2px;color:var(--gold);text-transform:uppercase}.product h2{font:27px 'Bebas Neue';margin:7px 0}.product p{color:var(--grey);font-size:13px;line-height:1.55;min-height:62px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}.price{font-weight:700}.price small{display:block;color:var(--grey);font-weight:400;font-size:10px}.add{border:0;background:var(--gold);color:#fff;padding:9px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer}.add.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.3)}
+.info{padding:20px}.cat{font:9px 'Space Mono';letter-spacing:2px;color:var(--gold);text-transform:uppercase}.product h2{font:27px 'Bebas Neue';margin:7px 0}.product p{color:var(--grey);font-size:13px;line-height:1.55;min-height:62px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}.price{font-weight:700}.price small{display:block;color:var(--grey);font-weight:400;font-size:10px}.pricefrom{display:block;color:var(--grey);font-size:10px;font-weight:400;margin-bottom:2px}.add{border:0;background:var(--gold);color:#fff;padding:9px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer}.add.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.3)}
 .cart{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);z-index:100;background:#0d0d0d;border-left:1px solid var(--border);transform:translateX(105%);transition:.25s;padding:25px;box-shadow:-20px 0 50px rgba(0,0,0,.4)}.cart.open{transform:translateX(0)}
 .carthead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:18px}.carthead h2{font:34px 'Bebas Neue'}.close{background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.cartitems{padding:18px 0;overflow:auto;max-height:54vh}.item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}.item strong{display:block}.item span{font-size:12px;color:var(--grey);line-height:1.5}.remove{background:none;border:0;color:#b9b9b9;cursor:pointer}.total{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;font-weight:700}.checkout{display:block;width:100%;margin-top:18px;background:var(--gold);color:#fff;border:0;padding:14px;border-radius:5px;font-weight:700;cursor:pointer}.note{color:var(--grey);font-size:11px;line-height:1.5;margin-top:10px}
 .customer{border-top:1px solid var(--border);margin-top:18px;padding-top:16px}.customer h3{font:22px 'Bebas Neue';margin-bottom:10px}.customer input,.customer select,.customer textarea{display:block;width:100%;margin:8px 0;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:10px;font-size:12px}.customer textarea{min-height:65px;resize:vertical}
@@ -68,7 +68,7 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <div id="mvisual" style="height:230px;margin:12px 0 18px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:64px"></div>
 <h2 id="mname"></h2>
 <p id="mdesc"></p><div id="mref" style="font:9px Space Mono;color:#666;letter-spacing:1px;margin:-10px 0 18px"></div>
-<div class="options" id="options"></div>
+<div style="font-size:11px;color:var(--grey);margin:-6px 0 12px">Escolhe as opções do produto. O preço atualiza automaticamente quando aplicável.</div><div class="options" id="options"></div>
 <label class="upload">Ficheiro / imagem (opcional)
 <input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.svg" onchange="filePicked()">
 <span id="filename">PNG, JPG, JPEG, PDF ou SVG</span>
@@ -78,9 +78,9 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 </label>
 <div class="modalbottom">
 <div><small style="display:block;color:var(--grey);font-size:10px">Preço</small><div id="mprice"></div></div>
-<button class="add" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
+<button class="add" id="modalAction" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
 </div>
-<div class="modalnote">O ficheiro fica associado ao pedido nesta sessão. Nesta fase, o nome do ficheiro é enviado no pedido; o upload real será ligado ao sistema de encomendas posteriormente.</div>
+<div class="modalnote">Para produtos sob orçamento, envia as opções e o ficheiro se necessário; a Effen Design confirma o valor antes da produção. O ficheiro fica associado ao pedido nesta sessão. Nesta fase, o nome do ficheiro é enviado no pedido; o upload real será ligado ao sistema de encomendas posteriormente.</div>
 </div>
 </div>
 
@@ -154,7 +154,7 @@ document.getElementById('products').innerHTML=list.map(p=>`
 <article class="product">
 <div class="visual ${p.image?'':'noimg'}">${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:p.icon}</div>
 <div class="info"><div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p>
-<div class="bottom"><div class="price">${p.price!==null?euro(p.price):'<small>Preço</small> Sob orçamento'}</div>
+<div class="bottom"><div class="price">${p.price!==null?`<small class="pricefrom">A partir de</small>${euro(p.price)}`:'<small>Preço</small> Sob orçamento'}</div>
 <div style="display:flex;gap:7px;align-items:center"><button class="add quote" style="padding:9px 10px" onclick="openProduct(${p.id})">Ver produto</button><button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Pedir orçamento':'Adicionar'}</button></div></div></div>
 </article>`).join('');
 }
@@ -186,6 +186,7 @@ else f=`<div class="option"><label>Quantidade<select id="optQty"><option>1</opti
 document.getElementById('options').innerHTML=f;
 document.querySelectorAll('#options select').forEach(el=>el.addEventListener('change',updateModalPrice));
 updateModalPrice();
+document.getElementById('modalAction').textContent=selectedProduct.quote?'ADICIONAR AO CARRINHO':'ADICIONAR AO CARRINHO';
 document.getElementById('file').value='';document.getElementById('filename').textContent='PNG, JPG, JPEG, PDF ou SVG';document.getElementById('customtext').value='';
 document.getElementById('productModal').classList.add('open');
 }
