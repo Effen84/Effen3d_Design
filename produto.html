@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Produto | Effen Design</title>
+<meta name="description" content="Produto personalizado Effen Design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e6b837;--bg:#080808;--bg2:#111;--white:#f5f5f5;--grey:#8d8d8d;--border:rgba(255,255,255,.08)}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif}a{color:inherit;text-decoration:none}button{font:inherit}
+nav{min-height:70px;position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(8,8,8,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);gap:15px}
+.logo{height:48px}.links{display:flex;gap:18px;list-style:none;align-items:center}.links a{font-size:10px;text-transform:uppercase;letter-spacing:1.1px;color:var(--grey);white-space:nowrap}.links a:hover{color:var(--gold)}
+.cart{border:1px solid rgba(230,184,55,.45);background:transparent;color:#fff;padding:9px 13px;border-radius:5px;font-size:11px}.cart b{color:var(--gold)}
+main{max-width:1150px;margin:auto;padding:65px 5vw 100px}.back{color:var(--grey);font-size:12px}.back:hover{color:var(--gold)}
+.product{display:grid;grid-template-columns:1fr 1fr;gap:55px;margin-top:28px}.visual{min-height:480px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:90px}.visual img{width:100%;height:100%;object-fit:cover;display:block}
+.cat{font:10px 'Space Mono';color:var(--gold);letter-spacing:2px;text-transform:uppercase}h1{font:clamp(48px,6vw,76px)/.9 'Bebas Neue';margin:10px 0 16px}.desc{color:var(--grey);line-height:1.7;font-size:14px;margin-bottom:25px}
+.price{font-size:24px;font-weight:700;margin-bottom:20px}.price small{display:block;color:var(--grey);font-size:11px;font-weight:400;margin-bottom:4px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:13px}label{font-size:11px;color:#ddd}select,input,textarea{display:block;width:100%;margin-top:7px;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:11px;font-size:12px}textarea{min-height:100px;resize:vertical}
+.upload{margin-top:14px;border:1px dashed rgba(230,184,55,.35);padding:14px;border-radius:7px;color:#ddd;font-size:11px}.upload input{border:0;padding:0;margin-top:10px}.upload span{display:block;color:var(--grey);margin-top:6px}
+.buy{width:100%;margin-top:20px;background:var(--gold);color:#111;border:0;border-radius:5px;padding:15px;font-weight:800;cursor:pointer;text-transform:uppercase}.buy.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.35)}
+.info{margin-top:15px;color:#777;font-size:10px;line-height:1.5}.success{display:none;margin-top:15px;border:1px solid rgba(230,184,55,.3);background:#15120a;padding:12px;border-radius:6px;color:#ddd;font-size:12px}
+footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;color:var(--grey);font-size:12px}
+@media(max-width:800px){.links{display:none}.product{grid-template-columns:1fr;gap:30px}.visual{min-height:340px}.fields{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+<a href="index.html"><img src="images/logo.png" class="logo" alt="Effen Design"></a>
+<ul class="links">
+<li><a href="index.html">Início</a></li><li><a href="loja.html">Loja</a></li><li><a href="personalizados.html">Personalizados</a></li><li><a href="dtf.html">DTF</a></li><li><a href="sublimacao.html">Sublimação</a></li><li><a href="lightbox.html">Lightbox</a></li><li><a href="racing.html">Racing</a></li><li><a href="index.html#contacto">Contacto</a></li>
+</ul>
+<a class="cart" href="loja.html">🛒 Carrinho <b id="count">0</b></a>
+</nav>
+
+<main>
+<a class="back" href="loja.html">← VOLTAR À LOJA</a>
+<section class="product">
+<div class="visual" id="visual"></div>
+<div>
+<div class="cat" id="cat"></div>
+<h1 id="name"></h1>
+<p class="desc" id="desc"></p>
+<div class="price" id="price"></div>
+<div class="fields" id="fields"></div>
+<label class="upload">Ficheiro / imagem
+<input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.svg">
+<span id="filename">PNG, JPG, JPEG, PDF ou SVG</span>
+</label>
+<label style="display:block;margin-top:14px">Texto / nome / instruções
+<textarea id="text" placeholder="Ex.: Nome, frase, cor, posição do logo..."></textarea>
+</label>
+<button class="buy" id="buy" onclick="addProduct()">ADICIONAR AO CARRINHO</button>
+<div class="success" id="success"></div>
+<div class="info">Os produtos com preço definido podem avançar para encomenda. Nos produtos sob orçamento, a configuração é enviada para a Effen Design confirmar o valor final.</div>
+</div>
+</section>
+</main>
+<footer>© Effen Design · Impressão 3D · Laser · DTF · Sublimação · Personalização</footer>
+
+<script>
+const products=[
+{id:1,cat:'Sublimação',name:'Caneca Personalizada',icon:'☕',image:null,price:7,desc:'Caneca personalizada com imagem, nome ou mensagem.',quote:false},
+{id:2,cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',image:null,price:null,desc:'T-shirt com estampagem DTF. Escolhe tamanho, localização e quantidade.',quote:true},
+{id:3,cat:'DTF',name:'Sweatshirt Personalizada',icon:'🧥',image:null,price:null,desc:'Sweatshirt personalizada para uso individual, equipas ou empresas.',quote:true},
+{id:4,cat:'Impressão 3D',name:'Nome 3D',icon:'🔤',image:'images/nomes-letra-cristiano-1.jpg',price:null,desc:'Nome personalizado em impressão 3D. Cores e medidas sob consulta.',quote:true},
+{id:5,cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',price:null,desc:'Porta-chaves personalizado com nome, logo ou desenho.',quote:true},
+{id:6,cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',price:null,desc:'Gravação laser em ardósia para ofertas e decoração.',quote:true},
+{id:7,cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais.',quote:true},
+{id:8,cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos.',quote:true},
+{id:9,cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
+{id:10,cat:'Personalizados',name:'Projeto Especial',icon:'✨',image:'images/effen3d_new.png',price:null,desc:'Tens uma ideia que não aparece no catálogo? Nós analisamos o projeto.',quote:true},
+{id:11,cat:'Gaming',name:'Acessório Gaming',icon:'🎮',image:'images/gaming_comando_1.png',price:null,desc:'Acessórios personalizados para setup, gaming e organização.',quote:true},
+{id:12,cat:'Decoração',name:'Vaso Decorativo',icon:'🏺',image:'images/vaso moderno.png',price:null,desc:'Peças decorativas em impressão 3D para casa e escritório.',quote:true},
+{id:13,cat:'Natal',name:'Decoração de Natal',icon:'🎄',image:'images/Natal1.png',price:null,desc:'Peças e presentes personalizados para a época natalícia.',quote:true},
+{id:14,cat:'Brinquedos',name:'Peça Personalizada',icon:'🧸',image:'images/brinquedos_mario_1.png',price:null,desc:'Modelos e peças em impressão 3D para oferecer ou colecionar.',quote:true}
+];
+const id=parseInt(new URLSearchParams(location.search).get('id')||'1',10);
+const p=products.find(x=>x.id===id)||products[0];
+document.title=p.name+' | Effen Design';
+document.getElementById('cat').textContent=p.cat;
+document.getElementById('name').textContent=p.name;
+document.getElementById('desc').textContent=p.desc;
+document.getElementById('visual').innerHTML=p.image?`<img src="${p.image}" alt="${p.name}">`:p.icon;
+const price=document.getElementById('price');
+price.innerHTML=p.price!==null?`<small>Preço</small>${p.price.toLocaleString('pt-PT',{style:'currency',currency:'EUR'})}`:'<small>Preço</small>Sob orçamento';
+const fields=document.getElementById('fields');
+if(p.id===1) fields.innerHTML=`<label>Personalização<select id="size"><option>Frente</option><option>Frente + verso</option></select></label><label>Quantidade<select id="qty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label>`;
+else if(p.cat==='DTF') fields.innerHTML=`<label>Tamanho<select id="size"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label><label>Localização<select id="pos"><option>Frente</option><option>Costas</option><option>Frente + Costas</option></select></label><label>Quantidade<select id="qty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label>`;
+else fields.innerHTML=`<label>Quantidade<select id="qty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label><label>Preferência<select id="pos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label>`;
+document.getElementById('qty')?.addEventListener('change',updatePrice);
+function updatePrice(){if(p.price===null)return;const q=parseInt(document.getElementById('qty').value||'1',10);price.innerHTML=`<small>Preço</small>${(p.price*q).toLocaleString('pt-PT',{style:'currency',currency:'EUR'})}`;}
+document.getElementById('file').addEventListener('change',e=>document.getElementById('filename').textContent=e.target.files[0]?.name||'PNG, JPG, JPEG, PDF ou SVG');
+function addProduct(){
+ const q=parseInt(document.getElementById('qty')?.value||'1',10)||1;
+ const size=document.getElementById('size')?.value||'',pos=document.getElementById('pos')?.value||'',text=document.getElementById('text').value.trim(),file=document.getElementById('file').files[0]?.name||'';
+ let cart=JSON.parse(localStorage.getItem('effenCart')||'[]');
+ cart.push({id:p.id,qty:q,unitPrice:p.price,options:{size,pos,text,file},key:Date.now()});
+ localStorage.setItem('effenCart',JSON.stringify(cart));
+ document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
+ const s=document.getElementById('success');s.style.display='block';s.textContent='Produto adicionado ao carrinho. Podes continuar a comprar ou abrir o carrinho.';
+}
+document.getElementById('count').textContent=(JSON.parse(localStorage.getItem('effenCart')||'[]')).reduce((a,x)=>a+x.qty,0);
+</script>
+</body>
+</html>
