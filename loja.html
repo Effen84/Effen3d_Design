@@ -179,8 +179,8 @@ function closeProduct(){document.getElementById('productModal').classList.remove
 function filePicked(){const f=document.getElementById('file').files[0];document.getElementById('filename').textContent=f?f.name:'PNG, JPG, JPEG, PDF ou SVG'}
 function confirmProduct(){
 if(!selectedProduct)return;
-const size=document.getElementById('optSize')?.value||'',pos=document.getElementById('optPos')?.value||'',qty=parseInt(document.getElementById('optQty')?.value||'1',10)||1,text=document.getElementById('customtext').value.trim(),file=document.getElementById('file').files[0]?.name||'';
-cart.push({id:selectedProduct.id,qty,options:{size,pos,text,file},key:Date.now()});
+const size=document.getElementById('optSize')?.value||'',pos=document.getElementById('optPos')?.value||'',color=document.getElementById('optColor')?.value||'',print=document.getElementById('optPrint')?.value||'',finish=document.getElementById('optFinish')?.value||'',qty=parseInt(document.getElementById('optQty')?.value||'1',10)||1,text=document.getElementById('customtext').value.trim(),file=document.getElementById('file').files[0]?.name||'';
+cart.push({id:selectedProduct.id,qty,options:{size,pos,color,print,finish,text,file},key:Date.now()});
 save();renderCart();closeProduct();toggleCart(true);
 }
 function remove(key){cart=cart.filter(x=>x.key!==key);save();renderCart()}
@@ -188,7 +188,7 @@ function save(){localStorage.setItem('effenCart',JSON.stringify(cart))}
 function renderCart(){
 document.getElementById('count').textContent=cart.reduce((a,x)=>a+x.qty,0);
 document.getElementById('cartitems').innerHTML=cart.length?cart.map(x=>{
-const p=products.find(y=>y.id===x.id),d=x.options?[x.options.size,x.options.pos,x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
+const p=products.find(y=>y.id===x.id),d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
 return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${p.price!==null?euro(p.price):'sob orçamento'}</span>${d?`<span style="display:block;margin-top:5px">${d}</span>`:''}</div><button class="remove" onclick="remove(${x.key})">remover</button></div>`;
 }).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
 const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+(p.price===null?0:p.price*x.qty)},0);
