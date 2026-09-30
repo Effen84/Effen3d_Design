@@ -1,453 +1,103 @@
 <!DOCTYPE html>
-<!-- Effen Design Loja V14 — Supabase Storage ligado (corrigida) -->
-<!-- Effen Design Loja V13 -->
-<!-- Effen Design Loja V12 -->
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loja | Effen Design</title>
-<meta name="description" content="Loja Effen Design — produtos personalizados, impressão 3D, DTF, sublimação, laser, Lightbox e Racing.">
+<meta name="description" content="Loja Effen Design — impressão 3D, laser, DTF, sublimação, Lightbox, Racing e personalizados.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#e6b837;--bg:#080808;--bg2:#111;--bg3:#171717;--white:#f5f5f5;--grey:#8d8d8d;--border:rgba(255,255,255,.08)}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif}a{text-decoration:none;color:inherit}button{font:inherit}
-nav{min-height:70px;position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;background:rgba(8,8,8,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);gap:15px}
-.logo{height:48px}.navlinks{display:flex;gap:18px;list-style:none;align-items:center}.navlinks a{font-size:10px;text-transform:uppercase;letter-spacing:1.1px;color:var(--grey);white-space:nowrap}.navlinks a:hover{color:var(--gold)}
-.navright{display:flex;align-items:center;gap:9px}.quote-nav{border:1px solid rgba(230,184,55,.55);background:var(--gold);color:#111;padding:9px 12px;border-radius:5px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;white-space:nowrap}
-.cartbtn{border:1px solid rgba(230,184,55,.45);background:transparent;color:var(--white);padding:9px 13px;border-radius:5px;cursor:pointer;white-space:nowrap;font-size:11px}.cartbtn b{color:var(--gold)}
-.hero{padding:95px 5vw 60px;text-align:center;background:radial-gradient(ellipse 60% 60% at 50% 20%,rgba(230,184,55,.13),transparent 70%)}
-.kicker{font:11px 'Space Mono';letter-spacing:3px;color:var(--gold);text-transform:uppercase}.hero h1{font:clamp(58px,8vw,94px)/.9 'Bebas Neue';margin:12px 0}.hero h1 span{color:var(--gold)}.hero p{max-width:720px;margin:auto;color:var(--grey);line-height:1.7}
-main{max-width:1400px;margin:auto;padding:25px 5vw 100px}.filters{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 35px}.filter{border:1px solid var(--border);background:var(--bg2);color:var(--grey);padding:9px 15px;border-radius:30px;cursor:pointer;font-size:12px}.filter.active,.filter:hover{color:#fff;border-color:var(--gold);background:rgba(230,184,55,.1)}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:.25s}.product:hover{transform:translateY(-4px);border-color:rgba(230,184,55,.35)}
-.visual{height:190px;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:58px;overflow:hidden}.visual img{width:100%;height:100%;object-fit:cover;display:block}.visual.noimg{font-size:52px}
-.info{padding:20px}.cat{font:9px 'Space Mono';letter-spacing:2px;color:var(--gold);text-transform:uppercase}.product h2{font:27px 'Bebas Neue';margin:7px 0}.product p{color:var(--grey);font-size:13px;line-height:1.55;min-height:62px}.bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:16px}.price{font-weight:700}.price small{display:block;color:var(--grey);font-weight:400;font-size:10px}.pricefrom{display:block;color:var(--grey);font-size:10px;font-weight:400;margin-bottom:2px}.add{border:0;background:var(--gold);color:#fff;padding:9px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;cursor:pointer}.add.quote{background:#29230f;color:var(--gold);border:1px solid rgba(230,184,55,.3)}
-.cart{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);z-index:100;background:#0d0d0d;border-left:1px solid var(--border);transform:translateX(105%);transition:.25s;padding:25px;box-shadow:-20px 0 50px rgba(0,0,0,.4)}.cart.open{transform:translateX(0)}
-.carthead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:18px}.carthead h2{font:34px 'Bebas Neue'}.close{background:none;border:0;color:#fff;font-size:25px;cursor:pointer}.cartitems{padding:18px 0;overflow:auto;max-height:54vh}.item{display:flex;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}.item strong{display:block}.item span{font-size:12px;color:var(--grey);line-height:1.5}.remove{background:none;border:0;color:#b9b9b9;cursor:pointer}.total{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;font-weight:700}.checkout{display:block;width:100%;margin-top:18px;background:var(--gold);color:#fff;border:0;padding:14px;border-radius:5px;font-weight:700;cursor:pointer}.note{color:var(--grey);font-size:11px;line-height:1.5;margin-top:10px}
-.customer{border-top:1px solid var(--border);margin-top:18px;padding-top:16px}.customer h3{font:22px 'Bebas Neue';margin-bottom:10px}.customer input,.customer select,.customer textarea{display:block;width:100%;margin:8px 0;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:10px;font-size:12px}.customer textarea{min-height:65px;resize:vertical}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{position:relative;width:min(650px,100%);max-height:90vh;overflow:auto;background:#111;border:1px solid rgba(230,184,55,.25);border-radius:12px;padding:30px}.modalclose{position:absolute;right:18px;top:14px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}.modalcat{font:10px 'Space Mono';color:var(--gold);letter-spacing:2px;text-transform:uppercase}.modalbox h2{font:42px 'Bebas Neue';margin:5px 35px 5px 0}.modalbox>p{color:var(--grey);font-size:14px;line-height:1.6;margin-bottom:20px}.options{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:15px}.option label,.upload,.customtext{display:block;color:#ddd;font-size:12px}.option select,.customtext textarea{width:100%;margin-top:7px;background:#191919;border:1px solid var(--border);color:#fff;border-radius:5px;padding:11px}.upload{border:1px dashed rgba(230,184,55,.35);padding:15px;border-radius:7px;margin-top:12px}.upload input{display:block;margin-top:10px;width:100%}.upload span{display:block;color:var(--grey);margin-top:7px;font-size:11px}.customtext{margin-top:14px}.customtext textarea{min-height:90px;resize:vertical}.modalbottom{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-top:20px}.modalbottom #mprice{font-weight:700}.modalnote{color:#777;font-size:10px;line-height:1.5;margin-top:12px}
-footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;color:var(--grey);font-size:12px}
-.gallerywrap{position:relative;width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#161616,#0c0c0c);cursor:zoom-in}.gallerywrap img{width:100%;height:100%;object-fit:contain;display:block}.gallerythumbs{display:flex;gap:7px;overflow-x:auto;margin-top:8px;padding-bottom:3px}.gallerythumbs button{width:54px;height:44px;flex:0 0 auto;padding:0;border:1px solid var(--border);background:#111;border-radius:5px;overflow:hidden;cursor:pointer}.gallerythumbs button.active{border-color:var(--gold)}.gallerythumbs img{width:100%;height:100%;object-fit:cover}.productmeta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.productmeta span{font-family:"Space Mono",monospace;font-size:10px;color:#aaa;border:1px solid var(--border);padding:4px 7px;border-radius:3px}.modalmeta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}.modalmeta span{font-family:"Space Mono",monospace;font-size:10px;color:#aaa;border:1px solid var(--border);padding:4px 7px;border-radius:3px}.galleryhint{color:#777;font-size:10px;margin-top:5px}.lightboxview{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:500;display:none;align-items:center;justify-content:center;padding:30px}.lightboxview.open{display:flex}.lightboxview img{max-width:92vw;max-height:88vh;object-fit:contain}.lightboxclose,.lightboxnav{position:absolute;background:rgba(17,17,17,.85);border:1px solid rgba(230,184,55,.35);color:#fff;border-radius:6px;cursor:pointer}.lightboxclose{right:22px;top:18px;font-size:28px;width:42px;height:42px}.lightboxnav{top:50%;transform:translateY(-50%);font-size:30px;width:48px;height:58px}.lightboxprev{left:18px}.lightboxnext{right:18px}
-@media(max-width:1200px){.navlinks{gap:12px}.navlinks a{font-size:9px}.grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:900px){.quote-nav{display:none}.navlinks{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.visual{height:190px}.options{grid-template-columns:1fr}.modalbox{padding:22px}.modalbottom{align-items:stretch;flex-direction:column}.hero{padding-top:65px}.hero h1{font-size:60px}}
-.reviewrow{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px}.reviewrow:last-child{border-bottom:0}.reviewmeta{color:var(--grey);font-size:10px;line-height:1.5;margin-top:3px}</style>
-
-<style id="v12-catalog-css">
-.v12catalog-note{max-width:1100px;margin:18px auto 0;padding:12px 16px;border:1px solid rgba(230,184,55,.22);background:rgba(230,184,55,.04);border-radius:10px;font-size:.82rem;color:#aaa}
-.v12catalog-note strong{color:#e6b837}
+:root{--gold:#e6b837;--gold-dark:#a88820;--bg:#080808;--bg2:#111;--bg3:#1a1a1a;--white:#f5f5f5;--grey:#888;--border:rgba(255,255,255,.07)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;height:70px;background:rgba(8,8,8,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo-img{height:50px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:30px;list-style:none}
+.nav-links a{color:var(--grey);font-size:13px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-cta{background:var(--gold);color:#fff;padding:9px 22px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.nav-burger span{width:24px;height:2px;background:#fff}
+.hero{padding:150px 5vw 85px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 60% 60% at 50% 30%,rgba(230,184,55,.12),transparent 70%)}
+.hero:after{content:'';position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at center,black 25%,transparent 80%)}
+.tag{position:relative;z-index:1;font:11px 'Space Mono',monospace;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.hero h1{position:relative;z-index:1;font-family:'Bebas Neue';font-size:clamp(54px,8vw,90px);line-height:.95}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{position:relative;z-index:1;max-width:680px;margin:22px auto 0;color:var(--grey);line-height:1.7}
+main{padding:0 5vw 100px;max-width:1400px;margin:auto}
+.section-label{font:11px 'Space Mono',monospace;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.section-title{font-family:'Bebas Neue';font-size:46px;margin-bottom:30px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:34px;min-height:245px;transition:.3s;position:relative;overflow:hidden}
+.card:before{content:'';position:absolute;width:180px;height:180px;right:-90px;top:-90px;background:var(--gold);opacity:.05;border-radius:50%}
+.card:hover{transform:translateY(-4px);border-color:rgba(230,184,55,.35)}
+.icon{font-size:38px;margin-bottom:24px}
+.card h2{font:32px 'Bebas Neue';letter-spacing:1px}
+.card p{color:var(--grey);font-size:14px;line-height:1.6;margin:10px 0 22px}
+.link{color:var(--gold);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+.note{margin-top:60px;padding:40px;text-align:center;border:1px solid rgba(230,184,55,.18);border-radius:14px;background:linear-gradient(135deg,var(--bg2),#1a1505)}
+.note h2{font:38px 'Bebas Neue'}
+.note p{color:var(--grey);margin:10px auto 22px;max-width:650px;line-height:1.6}
+.btn{display:inline-block;background:var(--gold);color:#fff;padding:13px 24px;border-radius:5px;font-weight:600;text-transform:uppercase;font-size:13px}
+footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;color:var(--grey);font-size:13px}
+@media(max-width:1000px){.nav-links,.nav-cta{display:none}.nav-burger{display:flex}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.hero{padding-top:125px}.card{min-height:0}.section-title{font-size:40px}}
 </style>
-
-<style id="v13-orders-css">
-.v13-orderbox{margin-top:18px;padding:16px;border:1px solid rgba(230,184,55,.2);border-radius:10px;background:rgba(255,255,255,.02)}
-.v13-orderbox h4{margin:0 0 8px;color:#e6b837}.v13-orderref{font-family:"Space Mono",monospace;color:#fff}.v13-status{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:6px;background:rgba(230,184,55,.12);color:#e6b837;font-size:.75rem}
-</style><style id="v14-upload-css">
-.v14-upload-status{margin-top:8px;font-size:.82rem;color:#aaa}
-.v14-upload-status.ok{color:#e6b837}.v14-upload-status.err{color:#ff8a8a}
-</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
+</head>
 <body>
-
 <nav>
-<a href="index.html"><img src="images/logo.png" class="logo" alt="Effen Design"></a>
-<ul class="navlinks">
-<li><a href="index.html">Início</a></li>
-<li><a href="loja.html">Loja</a></li>
-<li><a href="personalizados.html">Personalizados</a></li>
-<li><a href="dtf.html">DTF</a></li>
-<li><a href="sublimacao.html">Sublimação</a></li>
+<a href="index.html"><img src="images/logo.png" alt="Effen Design" class="nav-logo-img"></a>
+<ul class="nav-links">
+<li><a class="active" href="loja.html">Loja 🛒</a></li>
+<li><a href="index.html#servicos">Serviços</a></li>
+<li><a href="index.html#bestsellers">Produtos</a></li>
 <li><a href="lightbox.html">Lightbox</a></li>
 <li><a href="racing.html">Racing</a></li>
 <li><a href="index.html#contacto">Contacto</a></li>
 </ul>
-<div class="navright">
-<a class="quote-nav" href="personalizados.html">Pedir orçamento</a>
-<button class="cartbtn" onclick="toggleCart()">🛒 Carrinho <b id="count">0</b></button>
-</div>
+<a class="nav-cta" href="https://wa.me/351928372914?text=Olá!%20Quero%20fazer%20uma%20encomenda." target="_blank">Encomendar</a>
+<div class="nav-burger" aria-label="Abrir menu"><span></span><span></span><span></span></div>
 </nav>
 
 <header class="hero">
-<div class="kicker">Effen Design · Loja</div>
-<h1>ESCOLHE. <span>PERSONALIZA.</span> CRIA.</h1>
-<p>Produtos personalizados, impressão 3D, laser, DTF, sublimação, Lightbox e Racing. Escolhe um produto e começa já a preparar a tua encomenda.</p>
+<div class="tag">Effen Design · Loja</div>
+<h1>ESCOLHE.<br><em>PERSONALIZA.</em><br>CRIA.</h1>
+<p>Escolhe uma categoria e descobre os produtos e serviços Effen Design. A loja será preparada para permitir personalização, upload de ficheiros e encomenda online.</p>
 </header>
 
 <main>
-<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:20px 0 5px"><input id="searchBox" type="search" placeholder="Pesquisar produtos..." style="flex:1;min-width:220px;background:#111;border:1px solid var(--border);color:#fff;border-radius:30px;padding:11px 16px;font-size:12px"></div><div class="v12catalog-note" id="catalogStatus"><strong>Catálogo:</strong> preços e produtos podem ser sincronizados a partir de uma folha de gestão.</div>
-<div class="filters" id="filters"></div>
-<div class="grid" id="products"></div>
+<div class="section-label">Categorias</div>
+<h2 class="section-title">ENCONTRA O QUE PROCURAS</h2>
+
+<div class="grid">
+<a class="card" href="index.html#servicos"><div class="icon">🖨️</div><h2>IMPRESSÃO 3D</h2><p>Nomes, porta-chaves, decoração, gaming, acessórios, racing e troféus.</p><span class="link">Explorar →</span></a>
+<a class="card" href="laser.html"><div class="icon">🔥</div><h2>LASER</h2><p>Ardósia, madeira, acrílico, garrafas, placas e troféus.</p><span class="link">Explorar →</span></a>
+<a class="card" href="dtf.html"><div class="icon">👕</div><h2>DTF</h2><p>T-shirts, sweatshirts, sacos, equipas e empresas.</p><span class="link">Explorar →</span></a>
+<a class="card" href="sublimacao.html"><div class="icon">☕</div><h2>SUBLIMAÇÃO</h2><p>Canecas, garrafas, placas e outros produtos personalizados.</p><span class="link">Explorar →</span></a>
+<a class="card" href="lightbox.html"><div class="icon">💡</div><h2>LIGHTBOX</h2><p>Modelos disponíveis e projetos personalizados.</p><span class="link">Explorar →</span></a>
+<a class="card" href="racing.html"><div class="icon">🏎️</div><h2>RACING & ESPORTS</h2><p>Troféus, pilotos, equipas e soluções para campeonatos.</p><span class="link">Explorar →</span></a>
+<a class="card" href="personalizados.html"><div class="icon">✨</div><h2>PERSONALIZADOS</h2><p>Tens uma ideia? Transformamos o conceito num produto real.</p><span class="link">Pedir projeto →</span></a>
+</div>
+
+<section class="note">
+<h2>NÃO ENCONTRASTE O QUE PROCURAS?</h2>
+<p>Envia-nos a tua ideia. Podemos analisar o projeto, indicar as opções disponíveis e preparar o orçamento.</p>
+<a class="btn" href="https://wa.me/351928372914?text=Olá!%20Tenho%20uma%20ideia%20para%20um%20produto." target="_blank">Pedir orçamento</a>
+</section>
 </main>
 
-<div class="modal" id="productModal">
-<div class="modalbox">
-<button class="modalclose" onclick="closeProduct()">×</button>
-<div class="modalcat" id="mcat"></div>
-<div id="mvisual" style="height:230px;margin:12px 0 18px;border-radius:8px;overflow:hidden;background:linear-gradient(135deg,#161616,#0c0c0c);display:grid;place-items:center;font-size:64px"></div>
-<h2 id="mname"></h2>
-<p id="mdesc"></p><div id="mref" style="font:9px Space Mono;color:#666;letter-spacing:1px;margin:-10px 0 18px"></div>
-<div style="font-size:11px;color:var(--grey);margin:-6px 0 12px">Escolhe as opções do produto. O preço atualiza automaticamente quando aplicável.</div><div class="options" id="options"></div>
-<label class="upload">Ficheiro / imagem (opcional)
-<input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.svg" onchange="filePicked()">
-<span id="filename">PNG, JPG, JPEG, PDF ou SVG</span>
-</label>
-<label class="customtext">Texto / nome / instruções
-<textarea id="customtext" placeholder="Ex.: Nome, frase, cor pretendida, posição do logo..."></textarea>
-</label>
-<div class="modalbottom">
-<div><small style="display:block;color:var(--grey);font-size:10px">Preço</small><div id="mprice"></div></div>
-<button class="add" id="modalAction" onclick="confirmProduct()">ADICIONAR AO CARRINHO</button>
+<footer>© Effen Design · Impressão 3D · Laser · DTF · Sublimação · Personalização<div class="effen-legal-links" style="margin-top:14px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;font-size:11px">
+<a href="termos-e-condicoes.html">Termos e Condições</a>
+<a href="privacidade.html">Privacidade</a>
+<a href="cookies.html">Cookies</a>
+<a href="envios.html">Envios</a>
+<a href="trocas-e-devolucoes.html">Trocas e Devoluções</a>
+<a href="livro-de-reclamacoes.html">Livro de Reclamações</a>
+<a href="informacao-legal.html">Informação Legal</a>
 </div>
-<div class="modalnote">Para produtos sob orçamento, envia as opções e o ficheiro se necessário; a Effen Design confirma o valor antes da produção. O ficheiro fica associado ao pedido nesta sessão. Os ficheiros são enviados para o armazenamento privado da Effen Design quando a encomenda é enviada.</div>
-</div>
-</div>
-
-<aside class="cart" id="cart">
-<div class="carthead"><h2>CARRINHO</h2><button class="close" onclick="toggleCart(false)">×</button></div>
-<div class="cartitems" id="cartitems"></div>
-<div style="color:var(--grey);font-size:11px;margin-bottom:10px"><span id="cartSummary">0 artigos</span></div><div class="total"><span>Total</span><span id="total">0,00 €</span></div>
-<div class="customer">
-<h3>DADOS DA ENCOMENDA</h3>
-<input id="custName" placeholder="Nome *">
-<input id="custPhone" placeholder="Telefone / WhatsApp *">
-<input id="custEmail" placeholder="Email (opcional)" type="email">
-<select id="delivery"><option>Levantamento em Paços de Ferreira</option><option>Envio — portes a confirmar</option></select>
-<textarea id="custNotes" placeholder="Notas adicionais"></textarea>
-</div>
-<button class="checkout" onclick="reviewOrder()">REVER ENCOMENDA</button>
-<div class="note">Antes de produzir, a Effen Design confirma a configuração e o valor final do pedido.</div>
-</aside>
-
-
-<div class="modal" id="reviewModal">
-<div class="modalbox">
-<button class="modalclose" onclick="closeReview()">×</button>
-<div class="modalcat">CONFIRMAÇÃO</div>
-<h2>REVER ENCOMENDA</h2>
-<p id="reviewIntro" style="color:#8d8d8d;font-size:12px;line-height:1.6;margin-bottom:15px"></p>
-<div id="reviewItems" style="border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:10px 0;padding:8px 0"></div>
-<div style="display:flex;justify-content:space-between;font-weight:700;padding:14px 0">
-<span>Total com preço definido</span><span id="reviewTotal">0,00 €</span>
-</div>
-<div id="reviewQuote" style="display:none;background:#15120a;border:1px solid rgba(230,184,55,.25);padding:12px;border-radius:6px;color:#ddd;font-size:11px;line-height:1.5;margin-bottom:14px">
-Alguns artigos estão <strong>sob orçamento</strong>. O total apresentado acima inclui apenas os artigos com preço definido. A Effen Design confirma o valor final antes da produção.
-</div>
-<div style="display:flex;gap:10px">
-<button class="add quote" style="flex:1" onclick="closeReview()">VOLTAR AO CARRINHO</button>
-<button class="add" style="flex:1" onclick="sendOrder()">ENVIAR PEDIDO</button>
-</div>
-<div class="modalnote">Ao enviar, será aberta uma conversa WhatsApp com o resumo da encomenda e os dados fornecidos.</div>
-</div>
-</div>
-<div class="lightboxview" id="imageLightbox" onclick="closeLightbox(event)"><button class="lightboxclose" onclick="closeLightbox(event)">×</button><button class="lightboxnav lightboxprev" onclick="galleryMove(-1,event)">‹</button><img id="lightboxImage" src="" alt=""><button class="lightboxnav lightboxnext" onclick="galleryMove(1,event)">›</button></div>
-<footer>© Effen Design · Impressão 3D · Laser · DTF · Sublimação · Personalização<div class="v13-orderbox" id="orderLookupBox"><h4>Consultar encomenda</h4><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="orderLookup" type="text" placeholder="Ex.: EFF-260929-1234" style="flex:1;min-width:220px"><button type="button" onclick="lookupOrder()">Consultar</button></div><div id="orderResult"></div></div></footer>
-
-<script>
-/* EFFEN DESIGN — LOJA V11 */
-const products=[
-{id:1,ref:'EFF-SUB-CAN-001',production:'Prazo a confirmar',cat:'Sublimação',name:'Caneca Personalizada',icon:'☕',image:null,price:7,desc:'Caneca personalizada com imagem, nome ou mensagem.',quote:false},
-{id:2,ref:'EFF-DTF-TSH-001',production:'Prazo a confirmar',cat:'DTF',name:'T-Shirt Personalizada',icon:'👕',image:null,price:8,desc:'T-shirt DTF: símbolo pequeno 8 €, estampagem grande à frente ou costas 10 €. Outras opções sob consulta.',quote:false},
-{id:3,ref:'EFF-DTF-SWT-001',production:'Prazo a confirmar',cat:'DTF',name:'Sweatshirt Personalizada',icon:'🧥',image:null,price:16,desc:'Sweatshirt DTF: símbolo pequeno 16 €, estampagem grande à frente ou costas 18 €. Outras opções sob consulta.',quote:false},
-{id:4,ref:'EFF-3D-NOM-001',production:'Prazo a confirmar',cat:'Impressão 3D',name:'Nome com íman',icon:'🔤',image:'images/nomes-iman-1.png',images:['images/nomes-iman-1.png','images/nomes-iman-2.png','images/nomes-iman-3.png','images/nomes-iman-4.png','images/nomes-iman-5.png'],price:2,desc:'Nome com íman — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
-{id:5,ref:'EFF-3D-PCH-001',production:'Prazo a confirmar',cat:'Impressão 3D',name:'Porta-chaves Personalizado',icon:'🔑',image:'images/porta-chaves-1.png',images:['images/porta-chaves-1.png','images/porta-chaves-2.png','images/porta-chaves-3.png','images/porta-chaves-4.png','images/porta-chaves-5.png','images/porta-chaves-6.png','images/porta-chaves-7.png'],price:2,desc:'Porta-chaves personalizado — 2 €. Cores e tamanhos diferentes sob consulta.',quote:false},
-{id:15,ref:'EFF-3D-NGR-001',production:'Prazo a confirmar',cat:'Impressão 3D',name:'Nome em letra grande',icon:'🔤',image:'images/nomes-grandes-1.png',images:['images/nomes-grandes-1.png','images/nomes-grandes-2.png'],price:10,desc:'Nome em letra grande — 10 €. Cores e tamanhos diferentes sob consulta.',quote:false},
-{id:6,ref:'EFF-LAS-ARD-001',production:'Prazo a confirmar',cat:'Laser',name:'Ardósia Personalizada',icon:'🪨',image:'images/laser_tabua_01.jpg',images:['images/laser_tabua_01.jpg','images/laser_tabua_02.jpg','images/laser_tabua_03.jpg'],price:null,desc:'Gravação laser em ardósia para ofertas e decoração. Personalização, tamanho e acabamento sob orçamento.',quote:true},
-{id:7,ref:'EFF-LBX-001',production:'Prazo a confirmar',cat:'Lightbox',name:'Lightbox Personalizada',icon:'💡',image:'images/lightbox1.png',images:['images/lightbox1.png','images/lightbox2.png','images/lightbox3.png','images/lightbox4.png','images/lightbox5.png'],price:null,desc:'Lightbox personalizada para nomes, logos, gaming e projetos especiais. Tamanho, cor e configuração sob orçamento.',quote:true},
-{id:8,ref:'EFF-RAC-TRF-001',production:'Prazo a confirmar',cat:'Racing & Esports',name:'Troféu Racing',icon:'🏆',image:'images/racing_trofeus_bpf_01.jpg',images:['images/racing_trofeus_bpf_01.jpg','images/racing_trofeus_bpf_02.jpg','images/racing_trofeus_bpf_03.jpg','images/racing_trofeus_bpf_04.jpg','images/racing_trofeus_bpf_05.jpg'],price:null,desc:'Troféus personalizados para pilotos, equipas e campeonatos. Modelo, medidas e acabamento sob orçamento.',quote:true},
-{id:9,ref:'EFF-SUB-GAR-001',production:'Prazo a confirmar',cat:'Sublimação',name:'Garrafa Personalizada',icon:'🥤',image:null,price:null,desc:'Garrafa personalizada com imagem, nome ou identidade de marca.',quote:true},
-{id:10,ref:'EFF-PER-ESP-001',production:'Prazo a confirmar',cat:'Personalizados',name:'Projeto Especial',icon:'✨',image:null,price:null,desc:'Tens uma ideia que não aparece no catálogo? Nós analisamos o projeto.',quote:true},
-{id:11,ref:'EFF-GAM-001',production:'Prazo a confirmar',cat:'Gaming',name:'Acessório Gaming',icon:'🎮',image:'images/gaming_comando_1.png',images:['images/gaming_comando_1.png','images/gaming_comando_2.png','images/gaming_comando_3.png'],price:null,desc:'Acessórios personalizados para setup, gaming e organização.',quote:true},
-{id:12,ref:'EFF-DEC-VAS-001',production:'Prazo a confirmar',cat:'Decoração',name:'Vaso Decorativo',icon:'🏺',image:'images/decoracao_vaso_1.png',images:['images/decoracao_vaso_1.png','images/decoracao_vaso_2.png','images/decoracao_vaso_3.png'],price:null,desc:'Peças decorativas em impressão 3D para casa e escritório.',quote:true},
-{id:13,ref:'EFF-NAT-001',production:'Prazo a confirmar',cat:'Natal',name:'Decoração de Natal',icon:'🎄',image:'images/Natal1.png',price:null,desc:'Peças e presentes personalizados para a época natalícia.',quote:true},
-{id:14,ref:'EFF-BRI-001',production:'Prazo a confirmar',cat:'Brinquedos',name:'Peça Personalizada',icon:'🧸',image:'images/brinquedos_mario_1.png',images:['images/brinquedos_mario_1.png','images/brinquedos_mario_2.png','images/brinquedos_mario_3.png'],price:null,desc:'Modelos e peças em impressão 3D para oferecer ou colecionar.',quote:true},
-{id:16,ref:'EFF-3D-SAN-001',production:'Prazo a confirmar',cat:'Impressão 3D',name:'Santinhos em 3D',icon:'✝️',image:null,price:20,desc:'Conjunto de santinhos em impressão 3D — 20 €. Acabamentos e cores conforme o projeto.',quote:false},
-{id:17,ref:'EFF-LAS-FIO-001',production:'Prazo a confirmar',cat:'Laser',name:'Fio Personalizado',icon:'📿',image:'images/laser_fio_01.jpg',images:['images/laser_fio_01.jpg'],price:12,desc:'Fio personalizado com gravação laser — 12 €.',quote:false}
-];
-
-let cart=JSON.parse(localStorage.getItem('effenCart')||'[]'),selectedProduct=null;
-const euro=n=>n.toLocaleString('pt-PT',{style:'currency',currency:'EUR'});
-const cats=['Todos',...new Set(products.map(p=>p.cat))];
-
-function renderFilters(){
-document.getElementById('filters').innerHTML=cats.map((c,i)=>`<button class="filter ${i===0?'active':''}" onclick="filter('${c}',this)">${c}</button>`).join('');
-}
-function renderProducts(list=products){
-document.getElementById('products').innerHTML=list.map(p=>`
-<article class="product">
-<div class="visual ${p.image?'':'noimg'}">${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:p.icon}</div>
-<div class="info"><div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p><div class="productmeta"><span>${p.ref}</span><span>${p.quote?'Sob orçamento':'Compra direta'}</span></div>
-<div class="bottom"><div class="price">${p.price!==null?`<small class="pricefrom">A partir de</small>${euro(p.price)}`:'<small>Preço</small> Sob orçamento'}</div>
-<div style="display:flex;gap:7px;align-items:center"><button class="add quote" style="padding:9px 10px" onclick="openProduct(${p.id})">Ver produto</button><button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Adicionar ao pedido':'Adicionar'}</button></div></div></div>
-</article>`).join('');
-}
-function applySearch(){
-const q=(document.getElementById('searchBox')?.value||'').trim().toLowerCase();
-const active=document.querySelector('.filter.active')?.textContent||'Todos';
-let list=active==='Todos'?products:products.filter(p=>p.cat===active);
-if(q)list=list.filter(p=>(p.name+' '+p.cat+' '+p.desc).toLowerCase().includes(q));
-renderProducts(list);
-}
-function filter(cat,el){
-document.querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));el.classList.add('active');
-applySearch();
-}
-function openProduct(id){
-selectedProduct=products.find(x=>x.id===id);
-document.getElementById('mcat').textContent=selectedProduct.cat;
-const gallery=selectedProduct.images?.length?selectedProduct.images:(selectedProduct.image?[selectedProduct.image]:[]);
-window._galleryImages=gallery;window._galleryIndex=0;
-let galleryHtml='';
-if(gallery.length){
-  galleryHtml=`<div class="gallerywrap" onclick="openLightbox()"><img id="mainGalleryImage" src="${gallery[0]}" alt="${selectedProduct.name}"></div>`;
-  if(gallery.length>1){
-    galleryHtml+=`<div class="gallerythumbs">${gallery.map((im,i)=>`<button class="${i===0?'active':''}" onclick="setGallery(${i},event)"><img src="${im}" alt=""></button>`).join('')}</div><div class="galleryhint">Clica na imagem para ampliar · ${gallery.length} fotografias</div>`;
-  }
-}else{galleryHtml=selectedProduct.icon;}
-document.getElementById('mvisual').innerHTML=galleryHtml;
-document.getElementById('mname').textContent=selectedProduct.name;
-document.getElementById('mref').textContent=selectedProduct.ref||('REF. EFF-'+String(selectedProduct.id).padStart(3,'0'));
-document.querySelectorAll('.modalmeta').forEach(el=>el.remove());document.getElementById('mref').parentElement.insertAdjacentHTML('afterend',`<div class="modalmeta"><span>SKU: ${selectedProduct.ref||''}</span><span>${selectedProduct.production||'Prazo a confirmar'}</span></div>`);
-document.getElementById('mdesc').textContent=selectedProduct.desc;
-document.getElementById('mprice').textContent=selectedProduct.price!==null?euro(selectedProduct.price):'Sob orçamento';
-let f='';
-if(selectedProduct.id===1)f=`<div class="option"><label>Personalização<select id="optSize"><option>Frente</option><option>Frente + verso</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
-else if(selectedProduct.cat==='DTF')f=`<div class="option"><label>Tamanho<select id="optSize"><option>XS</option><option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option></select></label></div><div class="option"><label>Cor da peça<select id="optColor"><option>Preto</option><option>Branco</option><option>Cinzento</option><option>Outra — indicar nas notas</option></select></label></div><div class="option"><label>Localização<select id="optPos"><option value="Pequeno">Símbolo pequeno</option><option value="Frente grande">Frente grande</option><option value="Costas grande">Costas grande</option><option value="Frente + Costas">Frente + Costas — sob consulta</option></select></label></div><div class="option"><label>Tamanho da estampagem<select id="optPrint"><option>Pequena</option><option>Grande</option><option>A definir</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
-else if(selectedProduct.cat==='Sublimação')f=`<div class="option"><label>Tipo de personalização<select id="optSize"><option value="1 imagem" data-price="7">1 imagem — 7,00 €</option><option value="caneca completa" data-price="10">Caneca completa — 10,00 €</option></select></label></div><div class="option"><label>Acabamento<select id="optFinish"><option>Standard</option><option>A definir</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
-else if(selectedProduct.cat==='Impressão 3D')f=`<div class="option"><label>Cor<select id="optSize"><option>A definir</option><option>Preto</option><option>Branco</option><option>Dourado</option><option>Vermelho</option></select></label></div><div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div>`;
-else f=`<div class="option"><label>Quantidade<select id="optQty"><option>1</option><option>2</option><option>5</option><option>10</option><option>20</option><option>50</option></select></label></div><div class="option"><label>Preferência<select id="optPos"><option>A definir</option><option>Standard</option><option>Personalizado</option></select></label></div>`;
-document.getElementById('options').innerHTML=f;
-document.querySelectorAll('#options select').forEach(el=>el.addEventListener('change',updateModalPrice));
-updateModalPrice();
-document.getElementById('modalAction').textContent=selectedProduct.quote?'ADICIONAR AO PEDIDO':'ADICIONAR AO CARRINHO';
-document.getElementById('file').value='';document.getElementById('filename').textContent='PNG, JPG, JPEG, PDF ou SVG';document.getElementById('customtext').value='';
-document.getElementById('productModal').classList.add('open');
-}
-function setGallery(index,event){if(event)event.stopPropagation();if(!window._galleryImages?.length)return;window._galleryIndex=(index+window._galleryImages.length)%window._galleryImages.length;const im=window._galleryImages[window._galleryIndex];const main=document.getElementById('mainGalleryImage');if(main)main.src=im;document.querySelectorAll('.gallerythumbs button').forEach((b,i)=>b.classList.toggle('active',i===window._galleryIndex));}
-function openLightbox(){if(!window._galleryImages?.length)return;document.getElementById('lightboxImage').src=window._galleryImages[window._galleryIndex||0];document.getElementById('imageLightbox').classList.add('open');}
-function closeLightbox(event){if(event){const t=event.target;if(t.id!=='imageLightbox'&&t.className!=='lightboxclose')return;event.stopPropagation();}document.getElementById('imageLightbox').classList.remove('open');}
-function galleryMove(delta,event){if(event)event.stopPropagation();if(!window._galleryImages?.length)return;setGallery((window._galleryIndex||0)+delta);document.getElementById('lightboxImage').src=window._galleryImages[window._galleryIndex];}
-document.addEventListener('keydown',e=>{if(!document.getElementById('imageLightbox').classList.contains('open'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowLeft')galleryMove(-1);if(e.key==='ArrowRight')galleryMove(1);});
-function updateModalPrice(){
-if(!selectedProduct)return;
-let price=selectedProduct.price;
-if(selectedProduct.id===1){
-const opt=document.getElementById('optSize')?.selectedOptions?.[0];
-price=parseFloat(opt?.dataset.price||'7');
-}
-if(selectedProduct.cat==='DTF'){
-const loc=document.getElementById('optPos')?.value||'';
-const small=selectedProduct.id===2?8:16;
-const large=selectedProduct.id===2?10:18;
-price=loc==='Pequeno'?small:(loc==='Frente grande'||loc==='Costas grande'?large:null);
-}
-document.getElementById('mprice').textContent=price!==null?euro(price):'Sob orçamento';
-}
-function closeProduct(){document.getElementById('productModal').classList.remove('open');selectedProduct=null}
-function filePicked(){
-const f=document.getElementById('file').files[0];
-document.getElementById('filename').textContent=f?f.name:'PNG, JPG, JPEG, PDF ou SVG';
-if(f){const check=v14FileAllowed(f);if(!check.ok){document.getElementById('filename').textContent=check.msg;document.getElementById('file').value='';}}
-}
-async function confirmProduct(){
-if(!selectedProduct)return;
-const size=document.getElementById('optSize')?.value||'',pos=document.getElementById('optPos')?.value||'',color=document.getElementById('optColor')?.value||'',print=document.getElementById('optPrint')?.value||'',finish=document.getElementById('optFinish')?.value||'',qty=parseInt(document.getElementById('optQty')?.value||'1',10)||1,text=document.getElementById('customtext').value.trim(),file=document.getElementById('file').files[0]?.name||'';
-const selectedFile=document.getElementById('file').files[0]||null;
-if(selectedFile){const chk=v14FileAllowed(selectedFile);if(!chk.ok){v14SetStatus(chk.msg);return;}}
-const selectedOpt=document.getElementById('optSize')?.selectedOptions?.[0];
-let unitPrice=selectedProduct.id===1 ? parseFloat(selectedOpt?.dataset.price||'7') : selectedProduct.price;
-if(selectedProduct.cat==='DTF'){
-  const loc=document.getElementById('optPos')?.value||'';
-  const small=selectedProduct.id===2?8:16;
-  const large=selectedProduct.id===2?10:18;
-  unitPrice=loc==='Pequeno'?small:(loc==='Frente grande'||loc==='Costas grande'?large:null);
-} const cartKey=Date.now();
-cart.push({id:selectedProduct.id,qty,unitPrice,options:{size,pos,color,print,finish,text,file},key:cartKey});
-if(selectedFile) window._effenFiles[cartKey]=selectedFile;
-save();renderCart();closeProduct();toggleCart(true);
-}
-function changeQty(key,delta){
-const item=cart.find(x=>x.key===key);
-if(!item)return;
-item.qty=Math.max(1,(item.qty||1)+delta);
-save();renderCart();
-}
-function remove(key){delete window._effenFiles?.[key];cart=cart.filter(x=>x.key!==key);save();renderCart()}
-function save(){localStorage.setItem('effenCart',JSON.stringify(cart))}
-function renderCart(){
-const itemCount=cart.reduce((a,x)=>a+(x.qty||0),0);document.getElementById('count').textContent=itemCount;document.getElementById('cartSummary').textContent=itemCount+' '+(itemCount===1?'artigo':'artigos')+' no carrinho';
-document.getElementById('cartitems').innerHTML=cart.length?cart.map(x=>{
-const p=products.find(y=>y.id===x.id),d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
-return `<div class="item"><div><strong>${p.name}</strong><span>${x.qty} × ${x.unitPrice!==null&&x.unitPrice!==undefined?euro(x.unitPrice):'sob orçamento'}</span>${d?`<span style="display:block;margin-top:5px">${d}</span>`:''}</div><div style="display:flex;align-items:center;gap:6px"><button class="remove" style="border:1px solid var(--border);border-radius:4px;padding:2px 7px" onclick="changeQty(${x.key},-1)">−</button><span style="min-width:18px;text-align:center">${x.qty}</span><button class="remove" style="border:1px solid var(--border);border-radius:4px;padding:2px 7px" onclick="changeQty(${x.key},1)">+</button><button class="remove" onclick="remove(${x.key})">remover</button></div></div>`;
-}).join(''):'<p style="color:#888">O carrinho está vazio.</p>';
-const total=cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+((x.unitPrice!==null&&x.unitPrice!==undefined)?x.unitPrice*x.qty:(p.price===null?0:p.price*x.qty))},0);
-document.getElementById('total').textContent=euro(total);
-}
-function toggleCart(force){const c=document.getElementById('cart');if(force===true)c.classList.add('open');else if(force===false)c.classList.remove('open');else c.classList.toggle('open')}
-function orderTotal(){
-return cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);const u=x.unitPrice??p.price;return a+(u===null?0:u*x.qty)},0);
-}
-function customerData(){
-return {
-name:document.getElementById('custName').value.trim(),
-phone:document.getElementById('custPhone').value.trim(),
-email:document.getElementById('custEmail').value.trim(),
-delivery:document.getElementById('delivery').value,
-notes:document.getElementById('custNotes').value.trim()
-};
-}
-function reviewOrder(){
-if(!cart.length){alert('O carrinho está vazio.');return}
-const c=customerData();
-if(!c.name||!c.phone){alert('Preenche pelo menos o nome e o telefone/WhatsApp.');return}
-const reference='EFF-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+String(Date.now()).slice(-5);
-document.getElementById('reviewIntro').textContent=`Referência ${reference} · ${c.name} · ${c.delivery}`;
-const quoteItems=cart.filter(x=>(x.unitPrice??products.find(y=>y.id===x.id).price)===null);
-document.getElementById('reviewQuote').style.display=quoteItems.length?'block':'none';
-document.getElementById('reviewTotal').textContent=euro(orderTotal());
-document.getElementById('reviewItems').innerHTML=cart.map(x=>{
- const p=products.find(y=>y.id===x.id),u=x.unitPrice??p.price;
- const d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' · '):'';
- return `<div class="reviewrow"><div><strong>${p.name}</strong><div class="reviewmeta">${x.qty} unidade(s)${d?' · '+d:''}</div></div><strong>${u===null?'Orçamento':euro(u*x.qty)}</strong></div>`;
-}).join('');
-window._orderReference=reference;
-window._orderCustomer=c;
-window._orderLines=cart.map(x=>{
- const p=products.find(y=>y.id===x.id),u=x.unitPrice??p.price;
- const d=x.options?[x.options.size,x.options.color?('Cor: '+x.options.color):'',x.options.pos,x.options.print?('Estampagem: '+x.options.print):'',x.options.finish?('Acabamento: '+x.options.finish):'',x.options.text?('Texto: '+x.options.text):'',x.options.file?('Ficheiro: '+x.options.file):''].filter(Boolean).join(' | '):'';
- return `- ${p.name} x${x.qty}${d?' — '+d:''}${u!==null?' — '+euro(u*x.qty):' — pedir orçamento'}`;
-}).join('\n');
-document.getElementById('reviewModal').classList.add('open');
-}
-function closeReview(){document.getElementById('reviewModal').classList.remove('open')}
-async function sendOrder(){
-const c=window._orderCustomer;
-const ref=window._orderReference;
-const lines=[];
-const uploaded=[];
-v14SetStatus("A preparar a encomenda…",true);
-try{
-  for(const item of cart){
-    const f=window._effenFiles?.[item.key];
-    if(f){
-      const result=await v14UploadFile(f,ref);
-      if(!result || result.localOnly) throw new Error("O ficheiro "+f.name+" não foi enviado para o armazenamento.");
-      item.options=item.options||{};
-      item.options.filePath=result.path;
-      uploaded.push({name:result.name,path:result.path,size:result.size,type:result.type});
-    }
-    const p=products.find(y=>y.id===item.id),u=item.unitPrice??p.price;
-    const d=item.options?[item.options.size,item.options.color?('Cor: '+item.options.color):'',item.options.pos,item.options.print?('Estampagem: '+item.options.print):'',item.options.finish?('Acabamento: '+item.options.finish):'',item.options.text?('Texto: '+item.options.text):'',item.options.file?('Ficheiro: '+item.options.file):''].filter(Boolean).join(' | '):'';
-    lines.push(`- ${p.name} x${item.qty}${d?' — '+d:''}${u!==null?' — '+euro(u*item.qty):' — pedir orçamento'}`);
-  }
-  const order=createLocalOrder(cart,c,orderTotal());
-  order.ref=ref; order.uploads=uploaded; order.status="Recebida";
-  const orders=getOrders(); const oi=orders.findIndex(o=>o.ref===order.ref);
-  if(oi>=0){orders[oi]=order;saveOrders(orders);}
-  const msg=[
-    'Olá! Quero fazer uma encomenda na Effen Design.','',
-    'REFERÊNCIA: '+ref,'','CLIENTE',
-    'Nome: '+c.name,'Telefone: '+c.phone,c.email?'Email: '+c.email:'',
-    'Entrega: '+c.delivery,'','PRODUTOS',lines.join('\n'),'',
-    'Total dos produtos com preço definido: '+euro(orderTotal()),
-    c.notes?'Notas: '+c.notes:''
-  ].filter(Boolean).join('\n');
-  localStorage.setItem('effen_last_order',JSON.stringify({reference:ref,createdAt:new Date().toISOString(),customer:c,cart:cart,total:orderTotal(),uploads:uploaded}));
-  v14SetStatus("Encomenda criada e ficheiro(s) enviado(s). A abrir WhatsApp…",true);
-  window.open('https://wa.me/351928372914?text='+encodeURIComponent(msg),'_blank');
-}catch(err){
-  v14SetStatus("Não foi possível concluir a encomenda: "+(err.message||err),false);
-  return;
-}
-}
-
-['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{const el=document.getElementById(id),saved=localStorage.getItem('effen_'+id);if(saved!==null)el.value=saved;el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value))});
-document.getElementById('searchBox')?.addEventListener('input',applySearch);
-renderFilters();renderProducts();renderCart();
-</script>
-
-<script id="v12-catalog-sync">
-/*
- EFFEN DESIGN — V12
- Gestão externa opcional via Google Sheets publicado como CSV.
- Para ativar: definir SHEET_CSV_URL abaixo.
- Colunas esperadas:
- id,cat,name,icon,image,price,desc,quote
- images pode ser uma coluna opcional com caminhos separados por ;
-*/
-const SHEET_CSV_URL = "";
-const CATALOG_VERSION = "V12";
-
-function parseCSVLine(line){
-  const out=[]; let cur="", quoted=false;
-  for(let i=0;i<line.length;i++){
-    const ch=line[i], next=line[i+1];
-    if(ch === '"' && quoted && next === '"'){ cur+='"'; i++; continue; }
-    if(ch === '"'){ quoted=!quoted; continue; }
-    if(ch === ',' && !quoted){ out.push(cur.trim()); cur=""; }
-    else cur+=ch;
-  }
-  out.push(cur.trim());
-  return out;
-}
-function parseCSV(text){
-  const lines=text.replace(/\r/g,"").split("\n").filter(x=>x.trim());
-  if(!lines.length) return [];
-  const headers=parseCSVLine(lines[0]).map(x=>x.toLowerCase());
-  return lines.slice(1).map(line=>{
-    const vals=parseCSVLine(line), o={};
-    headers.forEach((h,i)=>o[h]=vals[i] ?? "");
-    return o;
-  });
-}
-function normaliseCatalogRow(r){
-  const price=(r.price==="" || r.price==null) ? null : Number(String(r.price).replace(",","."));
-  const images=(r.images||"").split(";").map(x=>x.trim()).filter(Boolean);
-  return {
-    id:Number(r.id), cat:r.cat||"Personalizados", name:r.name||"Produto",
-    icon:r.icon||"✨", image:r.image||null, images,
-    price:Number.isFinite(price)?price:null, desc:r.desc||"",
-    quote:String(r.quote).toLowerCase()==="true"
-  };
-}
-async function syncCatalogFromSheet(){
-  if(!SHEET_CSV_URL) return;
-  const status=document.getElementById("catalogStatus");
-  try{
-    const res=await fetch(SHEET_CSV_URL,{cache:"no-store"});
-    if(!res.ok) throw new Error("HTTP "+res.status);
-    const rows=parseCSV(await res.text()).map(normaliseCatalogRow).filter(x=>Number.isFinite(x.id));
-    if(!rows.length) throw new Error("A folha não devolveu produtos.");
-    // The existing page defines `products`; update it in place so all V11
-    // rendering/cart/modal logic keeps working.
-    products.splice(0,products.length,...rows);
-    if(typeof renderProducts==="function") renderProducts();
-    if(status) status.innerHTML="<strong>Catálogo:</strong> sincronizado com a folha de gestão.";
-  }catch(err){
-    if(status) status.innerHTML="<strong>Catálogo:</strong> a usar os dados locais. Verifique o endereço da folha.";
-    console.warn("Effen Design V12 catalog sync:",err);
-  }
-}
-window.addEventListener("DOMContentLoaded",syncCatalogFromSheet);
-</script>
-
-<script id="v13-orders">
-const ORDER_STATUS=["Recebida","Paga","Em produção","Pronta","Enviada","Concluída"];
-function generateOrderRef(){const d=new Date(),s=d.getFullYear().toString().slice(-2)+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0"),r=Math.floor(1000+Math.random()*9000);return `EFF-${s}-${r}`;}
-function getOrders(){try{return JSON.parse(localStorage.getItem("effen_orders")||"[]")}catch(e){return[]}}
-function saveOrders(x){localStorage.setItem("effen_orders",JSON.stringify(x))}
-function createLocalOrder(cart,customer,total){const order={ref:generateOrderRef(),createdAt:new Date().toISOString(),status:"Recebida",customer:customer||{},items:(cart||[]).map(x=>({id:x.id,name:x.name,quantity:x.quantity||1,price:x.unitPrice??x.price??null,options:x.options||{}})),total:Number(total)||0};const a=getOrders();a.unshift(order);saveOrders(a);return order;}
-function updateOrderStatus(ref,status){if(!ORDER_STATUS.includes(status))return false;const a=getOrders(),i=a.findIndex(o=>o.ref===String(ref).trim().toUpperCase());if(i<0)return false;a[i].status=status;a[i].updatedAt=new Date().toISOString();saveOrders(a);return true;}
-function findOrder(ref){return getOrders().find(o=>o.ref===String(ref).trim().toUpperCase())||null;}
-function lookupOrder(){const i=document.getElementById("orderLookup"),e=document.getElementById("orderResult"),o=i?findOrder(i.value):null;if(!e)return;e.innerHTML=o?`<div class="v13-orderbox"><h4>Encomenda <span class="v13-orderref">${o.ref}</span><span class="v13-status">${o.status}</span></h4><div style="color:#aaa;font-size:.82rem">Criada em ${new Date(o.createdAt).toLocaleString("pt-PT")}</div><div style="margin-top:8px">${o.items.length} artigo(s) · ${o.total.toFixed(2).replace(".",",")} €</div></div>`:'<span style="color:#aaa">Encomenda não encontrada neste dispositivo.</span>';}
-</script><div id="v14UploadStatus" class="v14-upload-status" aria-live="polite"></div><script id="v14-upload">
-const SUPABASE_URL="https://yildftvunxwbiwswdrye.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY="sb_publishable_BAtLej4ur1RD6xG6LsGeRg_LwwIBnVm";
-const SUPABASE_BUCKET="uploads";
-const V14_MAX_FILE_MB=20;
-const V14_ALLOWED_EXT=["png","jpg","jpeg","pdf","svg"];
-function v14FileAllowed(file){if(!file)return{ok:false,msg:"Selecione um ficheiro."};const ext=(file.name.split(".").pop()||"").toLowerCase();if(!V14_ALLOWED_EXT.includes(ext))return{ok:false,msg:"Formato não permitido. Use PNG, JPG, JPEG, PDF ou SVG."};if(file.size>V14_MAX_FILE_MB*1024*1024)return{ok:false,msg:`O ficheiro excede ${V14_MAX_FILE_MB} MB.`};return{ok:true};}
-function v14SetStatus(msg,ok=false){const e=document.getElementById("v14UploadStatus");if(e){e.textContent=msg;e.className="v14-upload-status"+(ok?" ok":" err");}}
-async function v14UploadFile(file,orderRef){const check=v14FileAllowed(file);if(!check.ok){v14SetStatus(check.msg);return null;}if(!SUPABASE_URL||!SUPABASE_PUBLISHABLE_KEY){v14SetStatus("Upload preparado. Falta configurar o armazenamento.");return{localOnly:true,name:file.name};}if(!window.supabase){const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";document.head.appendChild(s);await new Promise((a,b)=>{s.onload=a;s.onerror=b});}const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");const path=`orders/${orderRef||"sem-referencia"}/${Date.now()}-${safe}`;v14SetStatus("A enviar ficheiro…",true);const{data,error}=await client.storage.from(SUPABASE_BUCKET).upload(path,file,{contentType:file.type||"application/octet-stream",upsert:false});if(error){v14SetStatus("Não foi possível enviar o ficheiro: "+error.message);return null;}v14SetStatus("Ficheiro enviado com sucesso.",true);return{path:data.path,name:file.name,size:file.size,type:file.type};}
-</script><script id="v14-file-hooks">
-window._effenFiles = window._effenFiles || {};
-</script></body>
+</footer>
+</body>
 </html>
