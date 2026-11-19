@@ -1,6 +1,6 @@
-/* EFFEN DESIGN — CATEGORIAS V19.1
-   Corrige a associação dos produtos existentes às categorias e subcategorias.
-   Não altera preços, carrinho, checkout, uploads, Supabase ou Eupago.
+/* EFFEN DESIGN — CATEGORIAS V19.2
+   Corrige a associação de TODOS os produtos da página Gravação Laser à categoria Laser.
+   Mantém preços, carrinho, checkout, uploads, Supabase e Eupago.
 */
 (() => {
   "use strict";
@@ -9,6 +9,89 @@
     console.error("Effen Design: catálogo não encontrado.");
     return;
   }
+
+  // Corrige os dois produtos laser já existentes no catálogo.
+  const tabua = products.find(p => p.id === 6);
+  if (tabua) {
+    Object.assign(tabua, {
+      ref: "EFF-LAS-MAD-001",
+      cat: "Laser",
+      name: "Tábua Pequena Personalizável",
+      icon: "🪵",
+      image: "images/laser_tabua_01.jpg",
+      images: ["images/laser_tabua_01.jpg", "images/laser_tabua_02.jpg", "images/laser_tabua_03.jpg"],
+      desc: "Tábua pequena em madeira com gravação laser personalizada. Texto, imagem e acabamento sob orçamento.",
+      price: null,
+      quote: true
+    });
+  }
+
+  const fio = products.find(p => p.id === 17);
+  if (fio) {
+    Object.assign(fio, {
+      cat: "Laser",
+      name: "Fio Personalizável",
+      image: "images/laser_fio_01.jpg",
+      images: [
+        "images/laser_fio_01.jpg", "images/laser_fio_02.jpg",
+        "images/laser_fio_03.jpg", "images/laser_fio_04.jpg",
+        "images/laser_fio_05.jpg", "images/laser_fio_06.jpg"
+      ],
+      desc: "Fio personalizado com gravação laser. Modelo e personalização sob consulta."
+    });
+  }
+
+  // Produtos que já existem na galeria Gravação Laser, mas ainda não estavam na Loja.
+  const laserProducts = [
+    {
+      id: 18, ref: "EFF-LAS-LEM-001", production: "Prazo a confirmar",
+      cat: "Laser", subcat: "Personalizados", name: "Lembranças Personalizadas",
+      icon: "🎁", image: "images/laser_lembrancas_01.jpg",
+      images: [
+        "images/laser_lembrancas_01.jpg", "images/laser_lembrancas_02.jpg",
+        "images/laser_lembrancas_03.jpg", "images/laser_lembrancas_04.jpg",
+        "images/laser_lembrancas_05.jpg", "images/laser_lembrancas_06.jpg",
+        "images/laser_lembrancas_07.jpg", "images/laser_lembrancas_08.jpg"
+      ],
+      price: null,
+      desc: "Lembranças personalizadas com gravação laser. Ideal para eventos, celebrações e ofertas.",
+      quote: true
+    },
+    {
+      id: 19, ref: "EFF-LAS-CAR-001", production: "Prazo a confirmar",
+      cat: "Laser", subcat: "Personalizados", name: "Cartão de Visita em Alumínio",
+      icon: "💳", image: "images/laser_cartao_1.png",
+      images: ["images/laser_cartao_1.png", "images/laser_cartao_2.png", "images/laser_cartao_3.png"],
+      price: null,
+      desc: "Cartão de visita em alumínio com gravação laser personalizada. Acabamento e quantidade sob orçamento.",
+      quote: true
+    },
+    {
+      id: 20, ref: "EFF-LAS-PCH-001", production: "Prazo a confirmar",
+      cat: "Laser", subcat: "Personalizados", name: "Porta-Chaves Personalizável",
+      icon: "🔑", image: "images/laser_portachaves_1.png",
+      images: ["images/laser_portachaves_1.png", "images/laser_portachaves_2.png", "images/laser_portachaves_3.png"],
+      price: null,
+      desc: "Porta-chaves personalizado com gravação laser. Imagem, texto e acabamento sob consulta.",
+      quote: true
+    },
+    {
+      id: 21, ref: "EFF-LAS-ARD-002", production: "Prazo a confirmar",
+      cat: "Laser", subcat: "Ardósia", name: "Placa de Nomes em Ardósia",
+      icon: "🪨", image: "images/laser-placa-nomes-1.jpg",
+      images: [
+        "images/laser-placa-nomes-1.jpg", "images/laser-placa-nomes-2.jpg",
+        "images/laser-placa-nomes-3.jpg", "images/laser-placa-nomes-4.jpg"
+      ],
+      price: null,
+      desc: "Placa de nomes em ardósia com gravação laser personalizada. Texto, desenho e dimensões sob orçamento.",
+      quote: true
+    }
+  ];
+
+  laserProducts.forEach(item => {
+    if (!products.some(p => p.id === item.id)) products.push(item);
+  });
 
   const taxonomy = [
     { name: "Todos", subs: [] },
@@ -20,15 +103,13 @@
     { name: "Personalizados", subs: ["Presentes", "Empresas", "Eventos", "Projetos especiais"] }
   ];
 
-  // Associação explícita dos produtos atualmente existentes no loja.html.
-  // A categoria principal e a subcategoria são ambas definidas aqui.
   const productMap = {
     1:  { cat: "Sublimação", subcat: "Canecas" },
     2:  { cat: "DTF", subcat: "T-shirts" },
     3:  { cat: "DTF", subcat: "Sweatshirts" },
     4:  { cat: "Impressão 3D", subcat: "Nomes" },
     5:  { cat: "Impressão 3D", subcat: "Porta-chaves" },
-    6:  { cat: "Laser", subcat: "Ardósia" },
+    6:  { cat: "Laser", subcat: "Madeira" },
     7:  { cat: "Impressão 3D", subcat: "Lightbox" },
     8:  { cat: "Impressão 3D", subcat: "Troféus" },
     9:  { cat: "Sublimação", subcat: "Garrafas" },
@@ -39,10 +120,14 @@
     14: { cat: "Impressão 3D", subcat: "Brinquedos" },
     15: { cat: "Impressão 3D", subcat: "Nomes" },
     16: { cat: "Impressão 3D", subcat: "Santinhos em 3D" },
-    17: { cat: "Laser", subcat: "Personalizados" }
+    17: { cat: "Laser", subcat: "Personalizados" },
+    18: { cat: "Laser", subcat: "Personalizados" },
+    19: { cat: "Laser", subcat: "Personalizados" },
+    20: { cat: "Laser", subcat: "Personalizados" },
+    21: { cat: "Laser", subcat: "Ardósia" }
   };
 
-  products.forEach((p) => {
+  products.forEach(p => {
     const mapped = productMap[p.id];
     if (mapped) {
       p.cat = mapped.cat;
@@ -76,7 +161,7 @@
 
   function currentProducts() {
     const q = (document.getElementById("searchBox")?.value || "").trim().toLowerCase();
-    return products.filter((p) => {
+    return products.filter(p => {
       const categoryMatch = activeCategory === "Todos" || p.cat === activeCategory;
       const subcategoryMatch = !activeSubcategory || p.subcat === activeSubcategory;
       const queryMatch = !q || [p.name, p.cat, p.subcat, p.desc].filter(Boolean).join(" ").toLowerCase().includes(q);
@@ -85,20 +170,20 @@
   }
 
   function render() {
-    const selected = taxonomy.find((item) => item.name === activeCategory);
-    const mainHtml = taxonomy.map((item) =>
+    const selected = taxonomy.find(item => item.name === activeCategory);
+    const mainHtml = taxonomy.map(item =>
       `<button type="button" data-v191-cat="${item.name}" class="${activeCategory === item.name ? "active" : ""}">${item.name}</button>`
     ).join("");
 
     const subHtml = selected && selected.subs.length
-      ? `<div class="v191-sub-title">Explorar ${activeCategory}</div><div class="v191-sub-filters">${selected.subs.map((sub) =>
+      ? `<div class="v191-sub-title">Explorar ${activeCategory}</div><div class="v191-sub-filters">${selected.subs.map(sub =>
           `<button type="button" data-v191-sub="${sub}" class="${activeSubcategory === sub ? "active" : ""}">${sub}</button>`
         ).join("")}</div>`
       : "";
 
     filters.innerHTML = `<div class="v191-main-filters">${mainHtml}</div>${subHtml}`;
 
-    filters.querySelectorAll("[data-v191-cat]").forEach((button) => {
+    filters.querySelectorAll("[data-v191-cat]").forEach(button => {
       button.addEventListener("click", () => {
         activeCategory = button.dataset.v191Cat;
         activeSubcategory = "";
@@ -106,7 +191,7 @@
       });
     });
 
-    filters.querySelectorAll("[data-v191-sub]").forEach((button) => {
+    filters.querySelectorAll("[data-v191-sub]").forEach(button => {
       button.addEventListener("click", () => {
         activeSubcategory = activeSubcategory === button.dataset.v191Sub ? "" : button.dataset.v191Sub;
         render();
@@ -134,13 +219,13 @@
   const params = new URLSearchParams(window.location.search);
   const requestedCategory = params.get("categoria");
   const requestedSubcategory = params.get("subcategoria");
-  if (taxonomy.some((item) => item.name === requestedCategory)) {
+  if (taxonomy.some(item => item.name === requestedCategory)) {
     activeCategory = requestedCategory;
-    if (requestedSubcategory && taxonomy.find((item) => item.name === activeCategory)?.subs.includes(requestedSubcategory)) {
+    if (requestedSubcategory && taxonomy.find(item => item.name === activeCategory)?.subs.includes(requestedSubcategory)) {
       activeSubcategory = requestedSubcategory;
     }
   }
 
   render();
-  console.info("Effen Design V19.1: categorias associadas.", products.map(p => ({id:p.id,name:p.name,cat:p.cat,subcat:p.subcat})));
+  console.info("Effen Design V19.2: produtos laser associados.", products.filter(p => p.cat === "Laser"));
 })();
