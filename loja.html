@@ -241,7 +241,7 @@ document.getElementById('products').innerHTML=list.map(p=>`
 <div class="visual ${p.image?'':'noimg'}">${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:p.icon}</div>
 <div class="info"><div class="cat">${p.cat}</div><h2>${p.name}</h2><p>${p.desc}</p><div class="productmeta"><span>${p.ref}</span><span>${p.quote?'Sob orçamento':'Compra direta'}</span></div>
 <div class="bottom"><div class="price">${p.price!==null?`<small class="pricefrom">A partir de</small>${euro(p.price)}`:'<small>Preço</small> Sob orçamento'}</div>
-<div style="display:flex;gap:7px;align-items:center"><button class="add quote" style="padding:9px 10px" onclick="openProduct(${p.id})">Ver produto</button><button class="add ${p.quote?'quote':''}" onclick="openProduct(${p.id})">${p.quote?'Adicionar ao pedido':'Adicionar'}</button></div></div></div>
+<div style="display:flex;gap:7px;align-items:center"><button class="add quote" style="padding:9px 10px" onclick="openProduct(${JSON.stringify(p.id)})">Ver produto</button><button class="add ${p.quote?'quote':''}" onclick="openProduct(${JSON.stringify(p.id)})">${p.quote?'Adicionar ao pedido':'Adicionar'}</button></div></div></div>
 </article>`).join('');
 }
 function applySearch(){
@@ -456,7 +456,46 @@ try{
 
 ['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{const el=document.getElementById(id),saved=localStorage.getItem('effen_'+id);if(saved!==null)el.value=saved;el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value))});
 document.getElementById('searchBox')?.addEventListener('input',applySearch);
-renderFilters();renderProducts();renderCart();
+renderFilters();
+renderProducts();
+renderCart();
+
+// Carregar produtos adicionais do Supabase
+async function carregarProdutosSupabase(){
+  try{
+    const {data,error}=await client
+      .from('products')
+      .select('*')
+      .eq('active',true);
+
+    if(error) throw error;
+
+    if(data && data.length){
+      const novos=data.map(p=>({
+        id:'supabase-'+p.id,
+        ref:'ED-'+p.id,
+        name:p.name,
+        cat:p.category,
+        subcategory:p.subcategory,
+        desc:p.description||'',
+        price:p.quote_only?null:p.price,
+        quote:p.quote_only,
+        image:p.images?.[0]||null,
+        images:p.images||[],
+        active:p.active
+      }));
+
+      products.push(...novos);
+      cats.splice(0,cats.length,'Todos',...new Set(products.map(p=>p.cat)));
+      renderFilters();
+      applySearch();
+    }
+  }catch(error){
+    console.error('Erro ao carregar produtos:',error);
+  }
+}
+
+carregarProdutosSupabase();
 
   // MENU MOVEL EFFEN DESIGN
 (()=>{
