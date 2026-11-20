@@ -34,6 +34,57 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 @media(max-width:600px){.grid{grid-template-columns:1fr}.visual{height:190px}.options{grid-template-columns:1fr}.modalbox{padding:22px}.modalbottom{align-items:stretch;flex-direction:column}.hero{padding-top:65px}.hero h1{font-size:60px}}
 .reviewrow{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px}.reviewrow:last-child{border-bottom:0}.reviewmeta{color:var(--grey);font-size:10px;line-height:1.5;margin-top:3px}</style>
 
+  /* MENU MOVEL EFFEN DESIGN */
+.mobile-menu-toggle{
+display:none;
+border:1px solid rgba(230,184,55,.45);
+background:transparent;
+color:var(--gold);
+padding:9px 11px;
+border-radius:5px;
+font-size:12px;
+font-weight:700;
+cursor:pointer;
+align-items:center;
+gap:7px;
+}
+.mobile-menu-toggle span{
+font:10px 'Space Mono',monospace;
+letter-spacing:1px;
+}
+.mobile-menu-panel{
+position:absolute;
+top:100%;
+left:0;
+right:0;
+padding:12px 5vw 18px;
+background:#080808;
+border-bottom:1px solid rgba(230,184,55,.25);
+z-index:60;
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:7px;
+}
+.mobile-menu-panel[hidden]{display:none}
+.mobile-menu-panel a{
+padding:12px;
+border:1px solid var(--border);
+border-radius:6px;
+color:#ddd;
+font-size:12px;
+}
+.mobile-menu-panel .mobile-menu-quote{
+grid-column:1/-1;
+background:var(--gold);
+color:#111;
+text-align:center;
+font-weight:700;
+}
+@media(max-width:900px){
+.mobile-menu-toggle{display:flex}
+nav{position:sticky}
+}
+
 <style id="v12-catalog-css">
 .v12catalog-note{max-width:1100px;margin:18px auto 0;padding:12px 16px;border:1px solid rgba(230,184,55,.22);background:rgba(230,184,55,.04);border-radius:10px;font-size:.82rem;color:#aaa}
 .v12catalog-note strong{color:#e6b837}
@@ -60,7 +111,19 @@ footer{border-top:1px solid var(--border);padding:35px 5vw;text-align:center;col
 <li><a href="racing.html">Racing</a></li>
 <li><a href="index.html#contacto">Contacto</a></li>
 </ul>
-<div class="navright">
+<button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenuPanel">☰ <span>MENU</span></button>
+<div class="mobile-menu-panel" id="mobileMenuPanel" hidden>
+<a href="index.html">Início</a>
+<a href="loja.html">Loja</a>
+<a href="personalizados.html">Personalizados</a>
+<a href="dtf.html">DTF</a>
+<a href="sublimacao.html">Sublimação</a>
+<a href="lightbox.html">Lightbox</a>
+<a href="racing.html">Racing</a>
+<a href="index.html#contacto">Contacto</a>
+<a class="mobile-menu-quote" href="personalizados.html">Pedir orçamento</a>
+</div>
+  <div class="navright">
 <a class="quote-nav" href="personalizados.html">Pedir orçamento</a>
 <button class="cartbtn" onclick="toggleCart()">🛒 Carrinho <b id="count">0</b></button>
 </div>
@@ -392,6 +455,37 @@ try{
 ['custName','custPhone','custEmail','delivery','custNotes'].forEach(id=>{const el=document.getElementById(id),saved=localStorage.getItem('effen_'+id);if(saved!==null)el.value=saved;el.addEventListener('input',()=>localStorage.setItem('effen_'+id,el.value))});
 document.getElementById('searchBox')?.addEventListener('input',applySearch);
 renderFilters();renderProducts();renderCart();
+
+  // MENU MOVEL EFFEN DESIGN
+(()=>{
+  const toggle=document.getElementById('mobileMenuToggle');
+  const panel=document.getElementById('mobileMenuPanel');
+  if(!toggle||!panel)return;
+
+  const close=()=>{
+    panel.hidden=true;
+    toggle.setAttribute('aria-expanded','false');
+    toggle.innerHTML='☰ <span>MENU</span>';
+  };
+
+  const open=()=>{
+    panel.hidden=false;
+    toggle.setAttribute('aria-expanded','true');
+    toggle.innerHTML='× <span>FECHAR</span>';
+  };
+
+  toggle.addEventListener('click',()=>{
+    panel.hidden ? open() : close();
+  });
+
+  panel.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click',close);
+  });
+
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape')close();
+  });
+})();
 </script>
 
 <script id="v12-catalog-sync">
