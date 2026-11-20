@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Administração | Effen Design</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--gold:#e6b837;--bg:#080808;--panel:#141414;--line:#303030;--muted:#aaa}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f5f5f5;font-family:Arial,sans-serif}
+header{padding:16px 5%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+header strong{font-size:22px;color:var(--gold)}
+main{max-width:1100px;margin:30px auto;padding:0 16px}
+h1,h2{color:var(--gold)}
+button,.btn{padding:11px 15px;border:1px solid var(--line);border-radius:6px;background:#222;color:white;cursor:pointer;font-weight:bold}
+button.gold{background:var(--gold);color:#111;border-color:var(--gold)}
+button.danger{color:#ff9999}
+input,select,textarea{width:100%;padding:12px;background:#090909;color:white;border:1px solid #444;border-radius:6px}
+label{display:block;font-size:13px;margin:14px 0 6px;color:#ccc}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:20px;margin:18px 0}
+#login{max-width:430px;margin:10vh auto}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.product{background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.product img{width:100%;height:170px;object-fit:cover;background:#222}
+.product div{padding:12px}
+.product p,.muted{color:var(--muted);font-size:13px}
+.actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.actions button{flex:1;padding:9px 6px;font-size:12px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hidden{display:none!important}
+.status{padding:12px;margin:12px 0;border-radius:6px;background:#222;color:#ddd;white-space:pre-wrap}
+.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.preview img{width:75px;height:75px;object-fit:cover;border-radius:5px}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.row{grid-template-columns:1fr}header{padding:12px}.product img{height:120px}}
+</style>
+</head>
+<body>
+<header>
+ <strong>EFFEN DESIGN · ADMIN</strong>
+ <div><a class="btn" href="loja.html">Ver loja</a> <button id="logout" class="hidden">Sair</button></div>
+</header>
+
+<main>
+<section id="login" class="card">
+ <h1>Área reservada</h1>
+ <p class="muted">Inicia sessão para gerir os produtos.</p>
+ <form id="loginForm">
+  <label>Email</label>
+  <input id="email" type="email" required autocomplete="username">
+  <label>Palavra-passe</label>
+  <input id="password" type="password" required autocomplete="current-password">
+  <p><button class="gold" type="submit">Entrar</button></p>
+ </form>
+ <div id="loginStatus" class="status hidden"></div>
+</section>
+
+<section id="dashboard" class="hidden">
+ <h1>Gestão de produtos</h1>
+ <p class="muted">Adiciona, altera, publica ou oculta produtos na loja.</p>
+ <div class="card">
+  <button id="newProduct" class="gold">+ Adicionar produto</button>
+  <p id="counts" class="muted"></p>
+ </div>
+
+ <section id="editor" class="card hidden">
+  <h2 id="formTitle">Novo produto</h2>
+  <form id="productForm">
+   <input id="productId" type="hidden">
+   <div class="row">
+    <div><label>Nome do produto *</label><input id="name" required maxlength="120"></div>
+    <div><label>Preço (€)</label><input id="price" type="number" min="0" step="0.01"></div>
+   </div>
+   <div class="row">
+    <div><label>Categoria *</label>
+     <select id="category" required>
+      <option value="">Selecionar categoria</option>
+      <option>Impressão 3D</option><option>Laser</option>
+      <option>Autocolantes</option><option>DTF</option>
+      <option>Sublimação</option><option>Personalizados</option>
+     </select>
+    </div>
+    <div><label>Subcategoria</label><input id="subcategory" placeholder="Ex.: Lightbox, Madeira, Racing"></div>
+   </div>
+   <label>Descrição</label><textarea id="description" rows="4"></textarea>
+   <label>Fotografias (podes selecionar várias)</label>
+   <input id="images" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+   <div id="preview" class="preview"></div>
+   <p><label><input id="quoteOnly" type="checkbox" style="width:auto"> Sob orçamento</label></p>
+   <p><label><input id="active" type="checkbox" checked style="width:auto"> Visível na loja</label></p>
+   <div class="actions">
+    <button class="gold" id="save" type="submit">Guardar produto</button>
+    <button id="cancel" type="button">Cancelar</button>
+   </div>
+  </form>
+  <div id="formStatus" class="status hidden"></div>
+ </section>
+
+ <div class="card">
+  <input id="search" placeholder="Pesquisar produtos...">
+  <p></p>
+  <select id="filter">
+   <option value="all">Todos os produtos</option>
+   <option value="active">Visíveis</option>
+   <option value="hidden">Ocultos</option>
+  </select>
+ </div>
+ <div id="products" class="grid"></div>
+</section>
+</main>
+
+<script>
+(function(){
+const URL='https://yildftvunxwbiwswdrye.supabase.co';
+const KEY='sb_publishable_BAtLej4ur1RD6xG6LsGeRg_LwwIBnVm';
+const ADMIN='4a6cf49e-59d4-43af-b6ed-4a365b419b19';
+const BUCKET='product-images';
+const db=window.supabase.createClient(URL,KEY);
+const $=id=>document.getElementById(id);
+let products=[];
+let currentImages=[];
+
+function status(id,message,error=false){
+ const el=$(id);el.textContent=message;
+ el.className='status'+(error?' error':'');
+ el.classList.remove('hidden');
+}
+function escapeHTML(value){
+ return String(value??'').replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
+}
+function showDashboard(user){
+ if(user&&user.id===ADMIN){
+  $('login').classList.add('hidden');
+  $('dashboard').classList.remove('hidden');
+  $('logout').classList.remove('hidden');
+  loadProducts();
+ }else{
+  $('login').classList.remove('hidden');
+  $('dashboard').classList.add('hidden');
+  $('logout').classList.add('hidden');
+ }
+}
+async function checkLogin(){
+ const {data}=await db.auth.getSession();
+ if(data.session){
+  if(data.session.user.id!==ADMIN){
+   await db.auth.signOut();
+   status('loginStatus','Esta conta não tem acesso de administrador.',true);
+  }else showDashboard(data.session.user);
+ }
+}
+$('loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const btn=e.submitter;btn.disabled=true;btn.textContent='A entrar...';
+ const {data,error}=await db.auth.signInWithPassword({
+  email:$('email').value.trim(),password:$('password').value
+ });
+ btn.disabled=false;btn.textContent='Entrar';
+ if(error){status('loginStatus','Erro no login: '+error.message,true);return;}
+ if(!data.user||data.user.id!==ADMIN){
+  await db.auth.signOut();
+  status('loginStatus','Esta conta não tem autorização.',true);return;
+ }
+ showDashboard(data.user);
+});
+$('logout').addEventListener('click',async()=>{
+ await db.auth.signOut();showDashboard(null);
+});
+db.auth.onAuthStateChange((_event,session)=>{
+ if(!session)showDashboard(null);
+});
+
+async function loadProducts(){
+ $('products').innerHTML='<p class="muted">A carregar...</p>';
+ const {data,error}=await db.from('products').select('*').order('created_at',{ascending:false});
+ if(error){$('products').textContent='Erro: '+error.message;return;}
+ products=data||[];render();
+}
+function render(){
+ $('counts').textContent=products.length+' produtos · '+products.filter(p=>p.active).length+' visíveis · '+products.filter(p=>!p.active).length+' ocultos';
+ const q=$('search').value.toLowerCase();
+ const f=$('filter').value;
+ const list=products.filter(p=>
+  (f==='all'||(f==='active'?p.active:!p.active))&&
+  [p.name,p.category,p.subcategory,p.description].join(' ').toLowerCase().includes(q)
+ );
+ if(!list.length){$('products').innerHTML='<p class="muted">Não foram encontrados produtos.</p>';return;}
+ $('products').innerHTML=list.map(p=>{
+  const img=Array.isArray(p.images)?p.images[0]:'';
+  const price=p.quote_only?'Sob orçamento':(p.price===null?'Preço por definir':Number(p.price).toFixed(2)+' €');
+  return `<article class="product">
+   <img src="${escapeHTML(img)}" alt="">
+   <div><strong>${escapeHTML(p.name)}</strong>
+   <p>${escapeHTML(p.category)} ${p.subcategory?'· '+escapeHTML(p.subcategory):''}</p>
+   <p>${price} · ${p.active?'Visível':'Oculto'}</p>
+   <div class="actions">
+    <button data-edit="${p.id}">Editar</button>
+    <button data-toggle="${p.id}">${p.active?'Ocultar':'Publicar'}</button>
+    <button class="danger" data-delete="${p.id}">Eliminar</button>
+   </div></div></article>`;
+ }).join('');
+}
+function openEditor(p){
+ $('productForm').reset();
+ $('productId').value=p?.id||'';
+ $('name').value=p?.name||'';
+ $('price').value=p?.price??'';
+ $('category').value=p?.category||'';
+ $('subcategory').value=p?.subcategory||'';
+ $('description').value=p?.description||'';
+ $('quoteOnly').checked=!!p?.quote_only;
+ $('active').checked=p?p.active:true;
+ $('price').disabled=!!p?.quote_only;
+ currentImages=Array.isArray(p?.images)?p.images.slice():[];
+ $('images').value='';
+ preview();
+ $('formTitle').textContent=p?'Editar produto':'Novo produto';
+ $('editor').classList.remove('hidden');
+ $('editor').scrollIntoView({behavior:'smooth'});
+}
+function closeEditor(){
+ $('editor').classList.add('hidden');
+ $('productForm').reset();currentImages=[];
+}
+function preview(){
+ $('preview').innerHTML=currentImages.map((url,i)=>
+  `<div><img src="${escapeHTML(url)}"><button type="button" data-remove="${i}">Remover</button></div>`
+ ).join('');
+}
+$('newProduct').addEventListener('click',()=>openEditor(null));
+$('cancel').addEventListener('click',closeEditor);
+$('quoteOnly').addEventListener('change',()=>{
+ $('price').disabled=$('quoteOnly').checked;
+ if($('quoteOnly').checked)$('price').value='';
+});
+$('preview').addEventListener('click',e=>{
+ const b=e.target.closest('[data-remove]');if(!b)return;
+ currentImages.splice(Number(b.dataset.remove),1);preview();
+});
+$('products').addEventListener('click',async e=>{
+ const edit=e.target.closest('[data-edit]');
+ const toggle=e.target.closest('[data-toggle]');
+ const del=e.target.closest('[data-delete]');
+ if(edit){openEditor(products.find(p=>p.id===edit.dataset.edit));return;}
+ if(toggle){
+  const p=products.find(p=>p.id===toggle.dataset.toggle);
+  const {error}=await db.from('products').update({active:!p.active,updated_at:new Date().toISOString()}).eq('id',p.id);
+  if(error)alert(error.message);else loadProducts();
+ }
+ if(del){
+  const p=products.find(p=>p.id===del.dataset.delete);
+  if(!confirm('Eliminar '+p.name+'?'))return;
+  const {error}=await db.from('products').delete().eq('id',p.id);
+  if(error)alert(error.message);else loadProducts();
+ }
+});
+async function uploadImages(files){
+ const urls=[];
+ for(const file of files){
+  if(!/^image\/(jpeg|png|webp|gif)$/.test(file.type))throw new Error('Formato inválido: '+file.name);
+  if(file.size>8*1024*1024)throw new Error(file.name+' ultrapassa 8 MB.');
+  const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const path=ADMIN+'/'+crypto.randomUUID()+'.'+ext;
+  const {error}=await db.storage.from(BUCKET).upload(path,file,{contentType:file.type});
+  if(error)throw error;
+  urls.push(db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl);
+ }
+ return urls;
+}
+$('productForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const btn=$('save');btn.disabled=true;btn.textContent='A guardar...';
+ try{
+  const files=Array.from($('images').files||[]);
+  const uploaded=files.length?await uploadImages(files):[];
+  const quote=$('quoteOnly').checked;
+  const payload={
+   name:$('name').value.trim(),
+   description:$('description').value.trim()||null,
+   category:$('category').value,
+   subcategory:$('subcategory').value.trim()||null,
+   price:quote||$('price').value===''?null:Number($('price').value),
+   quote_only:quote,
+   images:currentImages.concat(uploaded),
+   active:$('active').checked,
+   updated_at:new Date().toISOString()
+  };
+  const id=$('productId').value;
+  const result=id
+   ?await db.from('products').update(payload).eq('id',id)
+   :await db.from('products').insert(payload);
+  if(result.error)throw result.error;
+  status('formStatus','Produto guardado com sucesso!');
+  await loadProducts();
+  setTimeout(closeEditor,700);
+ }catch(err){status('formStatus','Erro: '+err.message,true);}
+ finally{btn.disabled=false;btn.textContent='Guardar produto';}
+});
+$('search').addEventListener('input',render);
+$('filter').addEventListener('change',render);
+checkLogin();
+})();
+</script>
+</body>
+</html>
