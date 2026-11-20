@@ -495,7 +495,7 @@ async function carregarProdutosSupabase(){
   }
 }
 
-carregarProdutosSupabase();
+
 
   // MENU MOVEL EFFEN DESIGN
 (()=>{
@@ -637,7 +637,8 @@ function lookupOrder(){const i=document.getElementById("orderLookup"),e=document
 </script><div id="v14UploadStatus" class="v14-upload-status" aria-live="polite"></div><script id="v14-upload">
 const SUPABASE_URL="https://yildftvunxwbiwswdrye.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_BAtLej4ur1RD6xG6LsGeRg_LwwIBnVm";
-const SUPABASE_BUCKET="uploads";
+const SUPABASE_BUCKET="uploads";const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+window.effenSupabaseClient=client;
 const V14_MAX_FILE_MB=20;
 const V14_ALLOWED_EXT=["png","jpg","jpeg","pdf","svg"];
 function v14FileAllowed(file){if(!file)return{ok:false,msg:"Selecione um ficheiro."};const ext=(file.name.split(".").pop()||"").toLowerCase();if(!V14_ALLOWED_EXT.includes(ext))return{ok:false,msg:"Formato não permitido. Use PNG, JPG, JPEG, PDF ou SVG."};if(file.size>V14_MAX_FILE_MB*1024*1024)return{ok:false,msg:`O ficheiro excede ${V14_MAX_FILE_MB} MB.`};return{ok:true};}
