@@ -86,7 +86,45 @@ label{display:block;font-size:13px;margin:14px 0 6px;color:#ccc}
     </div>
     <div><label>Subcategoria</label><input id="subcategory" placeholder="Ex.: Lightbox, Madeira, Racing"></div>
    </div>
-   <label>Descrição</label><textarea id="description" rows="4"></textarea>
+  <section id="clothingFields" class="card hidden">
+    <h3>Configuração de vestuário</h3>
+
+    <div class="row">
+        <div>
+            <label>Modelo de venda</label>
+            <select id="salesMode">
+                <option value="both">Pronto + Personalizado</option>
+                <option value="ready">Pronto a vender</option>
+                <option value="custom">Personalizado por encomenda</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Gestão de stock</label>
+            <select id="stockMode">
+                <option value="none">Sem stock controlado</option>
+                <option value="own">Stock próprio</option>
+                <option value="supplier">Fornecedor</option>
+                <option value="mixed">Misto</option>
+            </select>
+        </div>
+    </div>
+
+    <label>Tamanhos disponíveis</label>
+    <input id="sizes" placeholder="XS, S, M, L, XL, XXL">
+
+    <label>Cores disponíveis</label>
+    <input id="colors" placeholder="Preto, Branco, Azul">
+
+    <label>Métodos de personalização</label>
+    <input id="printMethods" placeholder="DTF, Sublimação, Bordado">
+
+    <label>
+        <input id="customizationEnabled" type="checkbox"
+        style="width:auto">
+        Permitir personalização pelo cliente
+    </label>
+</section> <label>Descrição</label><textarea id="description" rows="4"></textarea>
    <label>Fotografias (podes selecionar várias)</label>
    <input id="images" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
    <div id="preview" class="preview"></div>
@@ -361,6 +399,24 @@ function openEditor(p){
  $('price').value=p?.price??'';
  $('category').value=p?.category||'';
  $('subcategory').value=p?.subcategory||'';
+ $('clothingFields').classList.toggle(
+    'hidden',
+    $('category').value !== 'Vestuário'
+);
+ $('salesMode').value=p?.sales_mode||'both';
+$('stockMode').value=p?.stock_mode||'none';
+
+$('sizes').value=Array.isArray(p?.sizes)
+    ?p.sizes.join(', '):'';
+
+$('colors').value=Array.isArray(p?.colors)
+    ?p.colors.join(', '):'';
+
+$('printMethods').value=Array.isArray(p?.print_methods)
+    ?p.print_methods.join(', '):'';
+
+$('customizationEnabled').checked=
+    !!p?.customization_enabled;
  $('description').value=p?.description||'';
  $('quoteOnly').checked=!!p?.quote_only;
  $('active').checked=p?p.active:true;
@@ -382,6 +438,12 @@ function preview(){
  ).join('');
 }
 $('newProduct').addEventListener('click',()=>openEditor(null));
+ $('category').addEventListener('change',()=>{
+    $('clothingFields').classList.toggle(
+        'hidden',
+        $('category').value !== 'Vestuário'
+    );
+});
 $('cancel').addEventListener('click',closeEditor);
 $('quoteOnly').addEventListener('change',()=>{
  $('price').disabled=$('quoteOnly').checked;
@@ -433,6 +495,23 @@ $('productForm').addEventListener('submit',async e=>{
    description:$('description').value.trim()||null,
    category:$('category').value,
    subcategory:$('subcategory').value.trim()||null,
+   sales_mode:$('category').value==='Vestuário'
+    ?$('salesMode').value:null,
+
+stock_mode:$('category').value==='Vestuário'
+    ?$('stockMode').value:null,
+
+sizes:$('category').value==='Vestuário'
+    ?$('sizes').value.split(',').map(v=>v.trim()).filter(Boolean):[],
+
+colors:$('category').value==='Vestuário'
+    ?$('colors').value.split(',').map(v=>v.trim()).filter(Boolean):[],
+
+print_methods:$('category').value==='Vestuário'
+    ?$('printMethods').value.split(',').map(v=>v.trim()).filter(Boolean):[],
+
+customization_enabled:$('category').value==='Vestuário'
+    ?$('customizationEnabled').checked:false,
    price:quote||$('price').value===''?null:Number($('price').value),
    quote_only:quote,
    images:currentImages.concat(uploaded),
