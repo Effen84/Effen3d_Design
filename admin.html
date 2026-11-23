@@ -228,34 +228,107 @@ async function loadOrders(){
 }
 
 function renderOrders(){
-  $('orderCounts').textContent=orders.length+' encomendas registadas';
 
-  const search=$('orderSearch').value.toLowerCase();
-  const filter=$('paymentFilter').value;
+function renderOrders(){
+  $('orderCounts').textContent =
+    orders.length + ' encomendas registadas';
 
-  const filtered=orders.filter(o=>{
-    const text=[o.reference,o.customer_name,o.customer_email]
-      .join(' ').toLowerCase();
+  const search = $('orderSearch').value.toLowerCase();
+  const filter = $('paymentFilter').value;
 
-    const paid=String(o.payment_status||'').toLowerCase()==='paid';
+  const filtered = orders.filter(o => {
+    const text = [
+      o.reference,
+      o.customer_name,
+      o.customer_email,
+      o.customer_phone
+    ].join(' ').toLowerCase();
+
+    const paymentStatus =
+      String(o.payment_status || '').toLowerCase();
+
+    const paid = ['paid','paga'].includes(paymentStatus);
 
     return text.includes(search) &&
-      (filter==='all' ||
-       (filter==='paid' && paid) ||
-       (filter==='pending' && !paid));
+      (filter === 'all' ||
+       (filter === 'paid' && paid) ||
+       (filter === 'pending' && !paid));
   });
 
-  $('ordersList').innerHTML=filtered.map(o=>`
-    <div class="card" style="margin-top:12px;padding:15px">
-      <h3>${escapeHTML(o.reference||'Sem referência')}</h3>
-      <p>${escapeHTML(o.customer_name||'')}</p>
-      <p>${Number(o.total||0).toFixed(2)} €</p>
-      <p>Pagamento: ${escapeHTML(o.payment_method||'Não definido')}</p>
-      <strong>${String(o.payment_status||'').toLowerCase()==='paid'?'PAGO':'PENDENTE'}</strong>
-      <p>Estado: ${escapeHTML(o.status||'Recebida')}</p>
-    </div>
-  `).join('') || '<p>Não existem encomendas.</p>';
+  $('ordersList').innerHTML = filtered.map(o => {
+    const items = Array.isArray(o.items) ? o.items : [];
+
+    const itemsHTML = items.length
+      ? items.map(item => {
+          const name = typeof item === 'string'
+            ? item
+            : item.name || item.title || item.product_name || 'Produto';
+
+          const quantity = typeof item === 'object'
+            ? Number(item.quantity || item.qty || 1)
+            : 1;
+
+          return `<li>${escapeHTML(name)} — ${quantity} un.</li>`;
+        }).join('')
+      : '<li>Sem produtos detalhados.</li>';
+
+    const paid = ['paid','paga'].includes(
+      String(o.payment_status || '').toLowerCase()
+    );
+
+    const date = o.created_at
+      ? new Date(o.created_at).toLocaleString('pt-PT')
+      : 'Não disponível';
+
+    return `
+      <div class="card" style="margin-top:12px;padding:18px">
+
+        <h3>${escapeHTML(o.reference || 'Sem referência')}</h3>
+
+        <p><strong>Cliente:</strong>
+          ${escapeHTML(o.customer_name || '')}</p>
+
+        <p><strong>Telefone:</strong>
+          ${escapeHTML(o.customer_phone || 'Não indicado')}</p>
+
+        <p><strong>Email:</strong>
+          ${escapeHTML(o.customer_email || 'Não indicado')}</p>
+
+        <p><strong>Total:</strong>
+          ${Number(o.total || 0).toFixed(2)} €</p>
+
+        <p><strong>Pagamento:</strong>
+          ${escapeHTML(o.payment_method || 'Não definido')}</p>
+
+        <p><strong>Estado do pagamento:</strong>
+          <strong>${paid ? 'PAGO' : 'PENDENTE'}</strong>
+        </p>
+
+        <p><strong>Estado da encomenda:</strong>
+          ${escapeHTML(o.status || 'Recebida')}</p>
+
+        <p><strong>Data:</strong> ${escapeHTML(date)}</p>
+
+        <details style="margin-top:15px">
+          <summary style="cursor:pointer;color:#e9b92e">
+            Ver detalhes da encomenda
+          </summary>
+
+          <h4>Produtos</h4>
+          <ul>${itemsHTML}</ul>
+
+          <p><strong>Entrega:</strong>
+            ${escapeHTML(o.delivery || 'Não indicada')}</p>
+
+          <p><strong>Notas:</strong>
+            ${escapeHTML(o.notes || 'Sem notas')}</p>
+        </details>
+
+      </div>
+    `;
+  }).join('') || '<p>Não existem encomendas.</p>';
 }
+
  function render(){
  $('counts').textContent=products.length+' produtos · '+products.filter(p=>p.active).length+' visíveis · '+products.filter(p=>!p.active).length+' ocultos';
  const q=$('search').value.toLowerCase();
