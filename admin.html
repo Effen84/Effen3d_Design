@@ -229,7 +229,6 @@ async function loadOrders(){
 
 function renderOrders(){
 
-function renderOrders(){
   $('orderCounts').textContent =
     orders.length + ' encomendas registadas';
 
@@ -449,7 +448,7 @@ $('productForm').addEventListener('submit',async e=>{
  }catch(err){status('formStatus','Erro: '+err.message,true);}
  finally{btn.disabled=false;btn.textContent='Guardar produto';}
 });
-$$('orderSearch').addEventListener('input',renderOrders);
+$('orderSearch').addEventListener('input',renderOrders);
 $('paymentFilter').addEventListener('change',renderOrders);
 $('refreshOrders').addEventListener('click',loadOrders);
 checkLogin();
