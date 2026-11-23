@@ -108,6 +108,34 @@ label{display:block;font-size:13px;margin:14px 0 6px;color:#ccc}
   </select>
  </div>
  <div id="products" class="grid"></div>
+<section id="ordersPanel" class="card">
+  <h1>Gestão de encomendas</h1>
+  <p class="muted">Acompanha encomendas e pagamentos da Effen Design.</p>
+
+  <div class="row">
+    <div>
+      <label>Pesquisar encomendas</label>
+      <input id="orderSearch" placeholder="Referência, cliente ou email">
+    </div>
+    <div>
+      <label>Estado do pagamento</label>
+      <select id="paymentFilter">
+        <option value="all">Todos</option>
+        <option value="paid">Pagos</option>
+        <option value="pending">Pendentes</option>
+      </select>
+    </div>
+  </div>
+
+  <p id="orderCounts" class="muted"></p>
+
+  <button type="button" id="refreshOrders" class="gold">
+    Atualizar encomendas
+  </button>
+
+  <div id="ordersStatus" class="status hidden"></div>
+  <div id="ordersList"></div>
+</section>
 </section>
 </main>
 
@@ -120,6 +148,7 @@ const BUCKET='product-images';
 const db=window.supabase.createClient(URL,KEY);
 const $=id=>document.getElementById(id);
 let products=[];
+ let orders=[];
 let currentImages=[];
 
 function status(id,message,error=false){
@@ -138,6 +167,7 @@ function showDashboard(user){
   $('dashboard').classList.remove('hidden');
   $('logout').classList.remove('hidden');
   loadProducts();
+  loadOrders();
  }else{
   $('login').classList.remove('hidden');
   $('dashboard').classList.add('hidden');
@@ -180,7 +210,53 @@ async function loadProducts(){
  if(error){$('products').textContent='Erro: '+error.message;return;}
  products=data||[];render();
 }
-function render(){
+async function loadOrders(){
+  $('ordersList').innerHTML='<p>A carregar encomendas...</p>';
+
+  const {data,error}=await db
+    .from('orders')
+    .select('*')
+    .order('created_at',{ascending:false});
+
+  if(error){
+    $('ordersList').textContent='Erro ao carregar encomendas: '+error.message;
+    return;
+  }
+
+  orders=data||[];
+  renderOrders();
+}
+
+function renderOrders(){
+  $('orderCounts').textContent=orders.length+' encomendas registadas';
+
+  const search=$('orderSearch').value.toLowerCase();
+  const filter=$('paymentFilter').value;
+
+  const filtered=orders.filter(o=>{
+    const text=[o.reference,o.customer_name,o.customer_email]
+      .join(' ').toLowerCase();
+
+    const paid=String(o.payment_status||'').toLowerCase()==='paid';
+
+    return text.includes(search) &&
+      (filter==='all' ||
+       (filter==='paid' && paid) ||
+       (filter==='pending' && !paid));
+  });
+
+  $('ordersList').innerHTML=filtered.map(o=>`
+    <div class="card" style="margin-top:12px;padding:15px">
+      <h3>${escapeHTML(o.reference||'Sem referência')}</h3>
+      <p>${escapeHTML(o.customer_name||'')}</p>
+      <p>${Number(o.total||0).toFixed(2)} €</p>
+      <p>Pagamento: ${escapeHTML(o.payment_method||'Não definido')}</p>
+      <strong>${String(o.payment_status||'').toLowerCase()==='paid'?'PAGO':'PENDENTE'}</strong>
+      <p>Estado: ${escapeHTML(o.status||'Recebida')}</p>
+    </div>
+  `).join('') || '<p>Não existem encomendas.</p>';
+}
+ function render(){
  $('counts').textContent=products.length+' produtos · '+products.filter(p=>p.active).length+' visíveis · '+products.filter(p=>!p.active).length+' ocultos';
  const q=$('search').value.toLowerCase();
  const f=$('filter').value;
@@ -300,8 +376,9 @@ $('productForm').addEventListener('submit',async e=>{
  }catch(err){status('formStatus','Erro: '+err.message,true);}
  finally{btn.disabled=false;btn.textContent='Guardar produto';}
 });
-$('search').addEventListener('input',render);
-$('filter').addEventListener('change',render);
+$$('orderSearch').addEventListener('input',renderOrders);
+$('paymentFilter').addEventListener('change',renderOrders);
+$('refreshOrders').addEventListener('click',loadOrders);
 checkLogin();
 })();
 </script>
